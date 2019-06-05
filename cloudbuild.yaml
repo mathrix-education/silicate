@@ -21,6 +21,9 @@ steps:
   - id: 'cloud-run:deploy'
     waitFor: ['docker:push']
     name: 'gcr.io/cloud-builders/gcloud'
-    args: ['beta', 'run', 'deploy', 'mtx-silicate-demo', '--image', 'gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+    args: ['beta', 'run',
+           'deploy', 'mtx-silicate-demo',
+           '--image', 'gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA',
+           '--region', 'us-central1']
 images: ['gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']
