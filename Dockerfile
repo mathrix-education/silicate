@@ -4,7 +4,7 @@ STOPSIGNAL SIGTERM
 
 WORKDIR /var/www
 
-RUN apk add -U nginx
+RUN apk add -U nginx bash
 
 COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx/vhost.conf /etc/nginx/conf.d/default.conf
