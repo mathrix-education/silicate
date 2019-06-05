@@ -9,7 +9,7 @@ steps:
     entrypoint: 'yarn'
     args: ['run', 'ng', 'build', '--aot']
   - id: 'docker:build'
-    waitFor: ['ng:build --aot']
+    waitFor: ['ng:build']
     name: 'gcr.io/cloud-builders/docker'
     args: ['build',
            '-t', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA',
@@ -19,6 +19,7 @@ steps:
     name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
   - id: 'cloud-run:deploy'
+    waitFor: ['docker:push']
     name: 'gcr.io/cloud-builders/gcloud'
     args: ['beta', 'run', 'deploy', 'mtx-silicate-demo', '--image', 'gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
 images: ['gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
