@@ -35,6 +35,8 @@ import {SilicateHelpers} from '../../silicate.helpers';
 export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() debug = false;
   @Input() canEdit = false;
+  @Input() additionalBricks: any[] = [];
+
   @Output() editableChange = new EventEmitter<boolean>();
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
@@ -126,6 +128,8 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
     this.proxies.map((proxy, proxyIndex) => {
       this.toolbarSubscriptions.push(
         proxy.brickRef.instance.toolbar.subscribe((toolbarComponent) => {
+          SilicateHelpers.debug('[wrapper] received toolbar event');
+
           const factory = this.componentFactory.resolveComponentFactory(toolbarComponent);
           this.toolbar.clear();
           this.toolbarRef = this.toolbar.createComponent(factory);

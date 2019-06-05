@@ -1,17 +1,15 @@
-import {EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
-import {TextBrick} from '../text-brick/text-brick';
+import {BrickDeclaration} from './brick-declaration';
 
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
+  static declaration: BrickDeclaration;
+
   @Input() editable;
+
   @Output() brickChange = new EventEmitter<T>();
   @Output() toolbar = new EventEmitter<any>();
   @Output() enter = new EventEmitter();
-
-  /**
-   * The component toolbar, of any.
-   */
-  toolbarComponent = null;
 
   static empty() {
     return {};
@@ -35,8 +33,14 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
   @HostListener('click')
   @HostListener('focus')
   onFocus() {
-    if (this.toolbarComponent !== null) {
-      this.toolbar.emit(this.toolbarComponent);
+    /**
+     * Trick to get the current statically-defined toolbar
+     * @link https://stackoverflow.com/a/36643177/3728261
+     */
+    const constructor: any = this.constructor;
+
+    if (constructor.declaration.toolbar !== null) {
+      this.toolbar.emit(constructor.declaration.toolbar);
     }
   }
 

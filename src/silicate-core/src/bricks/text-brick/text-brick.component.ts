@@ -10,8 +10,15 @@ import {SilicateHelpers} from '../../silicate.helpers';
   styleUrls: ['./text-brick.component.scss']
 })
 export class TextBrickComponent extends BaseBrickComponent<TextBrick> implements TextBrick, OnInit {
+  static declaration = {
+    kind: 'text',
+    name: 'Texte',
+    icon: 'notes',
+    component: TextBrickComponent,
+    toolbar: TextBrickToolbarComponent
+  };
+
   @ViewChild('wrapper', {static: true}) wrapper: ElementRef;
-  toolbarComponent = TextBrickToolbarComponent;
 
   // Brick data
   kind: 'text';

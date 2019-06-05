@@ -3,6 +3,7 @@ import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {ImageBrick} from './image-brick';
 import {MatDialog} from '@angular/material';
 import {ImageBrickDialogComponent} from './image-brick-dialog.component';
+import {BrickDeclaration} from '../base-brick/brick-declaration';
 
 @Component({
   selector: 'mtx-image-brick',
@@ -10,6 +11,14 @@ import {ImageBrickDialogComponent} from './image-brick-dialog.component';
   styleUrls: ['./image-brick.component.scss']
 })
 export class ImageBrickComponent extends BaseBrickComponent implements ImageBrick, OnInit {
+  static declaration: BrickDeclaration = {
+    kind: 'image',
+    name: 'Image',
+    icon: 'image',
+    component: ImageBrickComponent,
+    toolbar: null
+  };
+
   alt: string;
   kind: 'image';
   src: string;
