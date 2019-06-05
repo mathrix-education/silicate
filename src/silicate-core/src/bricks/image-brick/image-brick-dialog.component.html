@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Choix de l'image</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>URL de l'image</mat-label>
+    <input type="url"
+           placeholder="https://placehold.it/400x150"
+           matInput
+           [(ngModel)]="data.src">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Texte alternatif</mat-label>
+    <input type="text"
+           placeholder="Description"
+           matInput
+           [(ngModel)]="data.alt">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annuler</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Sauvegarder</button>
+</div>

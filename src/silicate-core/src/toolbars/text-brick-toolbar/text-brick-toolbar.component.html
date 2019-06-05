@@ -1,0 +1,17 @@
+<div fxLayoutGap="15px">
+  <mat-form-field>
+    <mat-select [(ngModel)]="componentRef.instance.style">
+      <mat-option value="normal">Normal</mat-option>
+      <mat-option value="secondary-title">Titre</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-button-toggle-group #format="matButtonToggleGroup">
+    <mat-button-toggle value="bold" aria-label="Bold" (click)="componentRef.instance.wrap('strong')">
+      <mat-icon>format_bold</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="italic" aria-label="Italic" (click)="componentRef.instance.wrap('em')">
+      <mat-icon>format_italic</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
