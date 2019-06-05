@@ -1,0 +1,25 @@
+steps:
+  - id: 'yarn:install'
+    name: 'node:11-alpine'
+    entrypoint: 'yarn'
+    args: ['install']
+  - id: 'ng:build'
+    name: 'node:11-alpine'
+    waitFor: ['yarn:install']
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', '--aot']
+  - id: 'docker:build'
+    waitFor: ['ng:build --aot']
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build',
+           '-t', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA',
+           '.']
+  - id: 'docker:push'
+    waitFor: ['docker:build']
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+  - id: 'cloud-run:deploy'
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: ['beta', 'run', 'deploy', 'mtx-silicate-demo', '--image', 'gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+images: ['gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+tags: ['silicate', 'demo']
