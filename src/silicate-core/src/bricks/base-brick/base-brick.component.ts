@@ -14,7 +14,7 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
 
   protected dirty = false;
   protected original: any | T = null;
-  protected model: any | T = {};
+  model: any | T = {};
 
   get hydrated() {
     return this.original !== null;
