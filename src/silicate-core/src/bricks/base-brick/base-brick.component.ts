@@ -1,4 +1,4 @@
-import {EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 import {BrickDeclaration} from './brick-declaration';
 
@@ -7,19 +7,30 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
 
   @Input() editable;
 
+  /** Called when the brick data change */
   @Output() brickChange = new EventEmitter<T>();
   @Output() toolbar = new EventEmitter<any>();
   @Output() enter = new EventEmitter();
+
+  protected dirty = false;
+  protected original: any | T = null;
+  protected model: any | T = {};
+
+  get hydrated() {
+    return this.original !== null;
+  }
 
   static empty() {
     return {};
   }
 
   assign(data: T) {
-    if (data !== null && typeof data === 'object') {
-      Object.keys(data).forEach(key => {
-        this[key] = data[key];
-      });
+    if (!this.hydrated) {
+      this.original = data;
+      this.model = data;
+    } else if (JSON.stringify(this.model) !== JSON.stringify(data)) {
+      this.model = data;
+      this.dirty = true;
     }
   }
 
@@ -43,6 +54,4 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
       this.toolbar.emit(constructor.declaration.toolbar);
     }
   }
-
-  abstract serialize();
 }

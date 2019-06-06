@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {ImageBrick} from './image-brick';
 import {MatDialog} from '@angular/material';
@@ -10,7 +10,7 @@ import {BrickDeclaration} from '../base-brick/brick-declaration';
   templateUrl: './image-brick.component.html',
   styleUrls: ['./image-brick.component.scss']
 })
-export class ImageBrickComponent extends BaseBrickComponent implements ImageBrick, OnInit {
+export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   static declaration: BrickDeclaration = {
     kind: 'image',
     name: 'Image',
@@ -19,23 +19,16 @@ export class ImageBrickComponent extends BaseBrickComponent implements ImageBric
     toolbar: null
   };
 
-  alt: string;
-  kind: 'image';
-  src: string;
+  constructor(private matDialog: MatDialog) {
+    super();
+  }
 
   static empty(): ImageBrick {
     return {
       kind: 'image',
       src: 'https://placehold.it/450x200',
-      alt: null
+      alt: 'Texte alternatif'
     };
-  }
-
-  constructor(private matDialog: MatDialog) {
-    super();
-  }
-
-  ngOnInit() {
   }
 
   openDialog() {
@@ -49,15 +42,14 @@ export class ImageBrickComponent extends BaseBrickComponent implements ImageBric
     });
 
     dialogRef.afterClosed().subscribe((data: ImageBrick) => {
-      this.assign(data);
+      if (this.dirty) {
+        this.assign(data);
+        this.brickChange.emit(this.serialize());
+      }
     });
   }
 
   serialize() {
-    return {
-      kind: this.kind,
-      src: this.src,
-      alt: this.alt
-    };
+    return this.model;
   }
 }

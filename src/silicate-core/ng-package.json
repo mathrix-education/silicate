@@ -7,6 +7,7 @@
   "whitelistedNonPeerDependencies": [
     "@angular/cdk",
     "@angular/material",
-    "@angular/flex-layout"
+    "@angular/flex-layout",
+    "@ng-stack/contenteditable"
   ]
 }

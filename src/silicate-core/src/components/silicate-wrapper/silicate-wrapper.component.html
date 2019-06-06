@@ -2,12 +2,12 @@
   <mat-card-content *ngIf="canEdit"
                     class="silicate-toolbar"
                     fxLayout="row"
-                    fxLayoutGap="16px"
-                    fxLayoutAlign="start center">
-    <button mat-button [matMenuTriggerFor]="menu">Fichier</button>
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="16px">
+    <button [matMenuTriggerFor]="menu" mat-button>Fichier</button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onNewBrick()">
+      <button (click)="onNewBrick()" mat-menu-item>
         <mat-icon>add</mat-icon>
         <span>Nouveau bloc (Ctrl+N)</span>
       </button>
@@ -25,26 +25,26 @@
   </mat-card-content>
 </mat-card>
 
-<div class="wall"
-     cdkDropList
-     fxFlex
-     fxLayout="column"
+<div (cdkDropListDropped)="onDrag($event)"
      [cdkDropListDisabled]="!editable"
-     (cdkDropListDropped)="onDrag($event)">
-  <div *ngFor="let brick of data; let i = index; trackBy: trackByFn"
-       class="brick-container"
+     cdkDropList
+     class="wall"
+     fxFlex
+     fxLayout="column">
+  <div *ngFor="let brick of data; let i = index"
        cdkDrag
+       class="brick-container"
        fxLayout="row"
-       fxLayoutGap="8px"
-       fxLayoutAlign="center center">
-    <mat-icon cdkDragHandle fxFlex *ngIf="editable">drag_indicator</mat-icon>
+       fxLayoutAlign="center center"
+       fxLayoutGap="8px">
+    <mat-icon *ngIf="editable" cdkDragHandle fxFlex>drag_indicator</mat-icon>
 
-    <mtx-silicate-proxy class="example-box"
-                        fxFlex="grow"
+    <mtx-silicate-proxy (delete)="onDelete(i)"
+                        [(brick)]="model.data[i]"
                         [additionalBricks]="additionalBricks"
                         [editable]="editable"
-                        (delete)="onDelete(i)"
-                        [(brick)]="data[i]">
+                        class="example-box"
+                        fxFlex="grow">
     </mtx-silicate-proxy>
   </div>
 </div>

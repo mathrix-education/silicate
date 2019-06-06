@@ -4,9 +4,11 @@ import {componentDeclarations, entryComponentsDeclarations} from './silicate.com
 import {
   MatButtonModule,
   MatButtonToggleModule,
-  MatCardModule, MatDialogModule,
+  MatCardModule,
+  MatDialogModule,
   MatFormFieldModule,
-  MatIconModule, MatInputModule,
+  MatIconModule,
+  MatInputModule,
   MatMenuModule,
   MatSelectModule,
   MatSlideToggleModule,
@@ -18,15 +20,17 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
-import { SilicateDebugComponent } from './components/silicate-debug/silicate-debug.component';
+import {ContenteditableModule} from '@ng-stack/contenteditable';
+import { UnsafeHtmlPipe } from './pipes/unsafe-html.pipe';
 
 @NgModule({
   entryComponents: [...entryComponentsDeclarations],
-  declarations: [...componentDeclarations, SilicateDebugComponent],
+  declarations: [...componentDeclarations, UnsafeHtmlPipe],
   imports: [
     CommonModule,
-    FormsModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ContenteditableModule,
     FlexLayoutModule,
     MatCardModule,
     MatToolbarModule,
@@ -40,7 +44,6 @@ import { SilicateDebugComponent } from './components/silicate-debug/silicate-deb
     MatDialogModule,
     MatInputModule,
     DragDropModule,
-    FormsModule
   ],
   providers: [
     JsonPipe

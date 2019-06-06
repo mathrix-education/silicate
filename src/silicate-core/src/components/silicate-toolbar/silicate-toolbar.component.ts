@@ -7,7 +7,7 @@ import {Component, ComponentFactoryResolver, ComponentRef, Input, OnChanges, OnI
 })
 export class SilicateToolbarComponent implements OnInit, OnChanges {
   @Input() toolbarComponent = null;
-  @ViewChild('toolbar', { static: true }) toolbar;
+  @ViewChild('toolbar', {static: true}) toolbar;
   toolbarRef: ComponentRef<any>;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {

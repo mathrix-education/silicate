@@ -1,6 +1,7 @@
 <div fxLayoutAlign="center center">
-  <ng-container *ngIf="!src">
-    <button mat-button (click)="openDialog()">Choisir l'image</button>
+  <ng-container *ngIf="!model.src">
+    <button (click)="openDialog()" mat-button>Choisir l'image</button>
   </ng-container>
-  <img *ngIf="src" [src]="src" [alt]="alt" (click)="openDialog()">
+
+  <img (click)="openDialog()" *ngIf="model.src" [alt]="model.alt" [src]="model.src">
 </div>

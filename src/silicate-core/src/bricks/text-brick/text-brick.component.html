@@ -1,1 +1,7 @@
-<div #wrapper [contentEditable]="editable" [className]="style" [innerHtml]="content"></div>
+<div #wrapper
+     [(ngModel)]="content"
+     [className]="style"
+     [contenteditable]="editable"
+     name="content"
+     propValueAccessor="innerHTML">
+</div>

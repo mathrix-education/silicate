@@ -16,12 +16,11 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {TextBrick} from '../../bricks/text-brick/text-brick';
 import {BaseBrickToolbarComponent} from '../../toolbars/base-brick-toolbar/base-brick-toolbar.component';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 import {Subscription} from 'rxjs';
-import {SilicateHelpers} from '../../silicate.helpers';
+import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 
 /**
  * Type explicit declared in Object literals:
@@ -40,11 +39,11 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   @Output() editableChange = new EventEmitter<boolean>();
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
-  @ViewChild('wall', {read: ViewContainerRef, static: false}) wall;
-  @ViewChild('toolbar', {read: ViewContainerRef, static: true}) toolbar;
+  @ViewChild('wall', {read: ViewContainerRef, static: false}) wall: ViewContainerRef;
+  @ViewChild('toolbar', {read: ViewContainerRef, static: false}) toolbar: ViewContainerRef;
   @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
-  private model: {
+  model: {
     editable: boolean,
     data: BaseBrick[]
   } = {
@@ -57,10 +56,6 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   brickChangesSubscriptions: Subscription[] = [];
 
   constructor(private componentFactory: ComponentFactoryResolver) {
-  }
-
-  trackByFn(index: any, item: any) {
-    return index;
   }
 
   /*
@@ -105,11 +100,15 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.editable !== undefined) {
+    if (changes.hasOwnProperty('editable')) {
       if (changes.editable.currentValue === false) {
         this.toolbar.clear();
         this.unsubscribe();
-      } else {
+      }
+    }
+
+    if (changes.hasOwnProperty('data')) {
+      if (this.proxies !== undefined) {
         this.subscribe();
       }
     }
@@ -128,9 +127,8 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
     this.proxies.map((proxy, proxyIndex) => {
       this.toolbarSubscriptions.push(
         proxy.brickRef.instance.toolbar.subscribe((toolbarComponent) => {
-          SilicateHelpers.debug('[wrapper] received toolbar event');
 
-          const factory = this.componentFactory.resolveComponentFactory(toolbarComponent);
+          const factory = this.componentFactory.resolveComponentFactory<BaseBrickToolbarComponent>(toolbarComponent);
           this.toolbar.clear();
           this.toolbarRef = this.toolbar.createComponent(factory);
           this.toolbarRef.instance.componentRef = proxy.brickRef;
@@ -139,12 +137,13 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
 
       this.brickChangesSubscriptions.push(
         proxy.brickRef.instance.brickChange.subscribe((brick: BaseBrick) => {
-          this.data[proxyIndex] = brick;
+          // proxy.brickRef.instance.assign(brick);
+          this.model.data[proxyIndex] = brick;
+          this.dataChange.emit(this.model.data);
         })
       );
     });
 
-    SilicateHelpers.debug('[wrapper] subscriptions updated');
     return this;
   }
 
@@ -155,7 +154,6 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
     this.toolbarSubscriptions.forEach(s => s.unsubscribe());
     this.brickChangesSubscriptions.forEach(s => s.unsubscribe());
 
-    SilicateHelpers.debug('[wrapper] subscriptions destroyed');
     return this;
   }
 
@@ -163,11 +161,7 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
    * Append a new brick too the current content
    */
   onNewBrick() {
-    this.data.push({
-      kind: 'text',
-      style: 'normal',
-      content: 'Texte...'
-    } as TextBrick);
+    this.data.push(TextBrickComponent.empty());
 
     setTimeout(() => this.subscribe()); // We need to wait a tick
   }
@@ -177,6 +171,7 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
    */
   onDrag($event: CdkDragDrop<any>) {
     moveItemInArray(this.data, $event.previousIndex, $event.currentIndex);
+
     this.subscribe();
   }
 

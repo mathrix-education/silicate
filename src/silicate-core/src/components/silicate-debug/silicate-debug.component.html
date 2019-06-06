@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
     <h5>Debug</h5>
-    <pre [innerHTML]="debug"></pre>
+    <pre [innerHTML]="debug | json | unsafeHtml"></pre>
   </mat-card-content>
 </mat-card>

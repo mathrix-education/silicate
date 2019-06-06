@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TextBrick} from './text-brick';
 import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
@@ -9,7 +9,7 @@ import {SilicateHelpers} from '../../silicate.helpers';
   templateUrl: './text-brick.component.html',
   styleUrls: ['./text-brick.component.scss']
 })
-export class TextBrickComponent extends BaseBrickComponent<TextBrick> implements TextBrick, OnInit {
+export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
   static declaration = {
     kind: 'text',
     name: 'Texte',
@@ -18,12 +18,28 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> implements
     toolbar: TextBrickToolbarComponent
   };
 
-  @ViewChild('wrapper', {static: true}) wrapper: ElementRef;
+  @ViewChild('wrapper', {static: true}) wrapper: ElementRef<HTMLDivElement>;
 
-  // Brick data
-  kind: 'text';
-  styleValue: string;
-  contentValue: string;
+  get style() {
+    return this.model.style;
+  }
+
+  set style(style: string) {
+    this.model.style = style;
+    this.brickChange.emit(this.model);
+  }
+
+  get content() {
+    return this.model.content;
+  }
+
+  set content(content: string) {
+    // Sanitize content
+    this.model.content = SilicateHelpers.strip(content, '<strong><em>')
+      .replace(/&nbsp;/g, ' ')
+      .trim();
+    this.brickChange.emit(this.model);
+  }
 
   static empty(): TextBrick {
     return {
@@ -31,33 +47,6 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> implements
       style: 'normal',
       content: 'Texte...'
     };
-  }
-
-  get style() {
-    return this.styleValue;
-  }
-
-  set style(style: string) {
-    this.styleValue = style;
-    this.brickChange.emit(this.serialize());
-  }
-
-  get content() {
-    return this.contentValue;
-  }
-
-  set content(content: string) {
-    // Sanitize content
-    this.contentValue = SilicateHelpers.strip(content, '<strong><em>').trim();
-    this.brickChange.emit(this.serialize());
-  }
-
-  ngOnInit() {
-  }
-
-  @HostListener('paste')
-  onPaste() {
-    setTimeout(() => this.content = this.wrapper.nativeElement.innerHTML);
   }
 
   /**
@@ -78,13 +67,5 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> implements
     }
 
     this.content = this.wrapper.nativeElement.innerHTML;
-  }
-
-  serialize(): TextBrick {
-    return {
-      kind: this.kind,
-      style: this.style,
-      content: this.content
-    };
   }
 }

@@ -4,7 +4,8 @@ import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 export class BaseBrickToolbarComponent<T extends BaseBrickComponent = BaseBrickComponent> implements OnInit {
   componentRef: ComponentRef<T>;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

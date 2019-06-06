@@ -236,6 +236,13 @@
   dependencies:
     tslib "^1.9.0"
 
+"@ng-stack/contenteditable@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ng-stack/contenteditable/-/contenteditable-1.0.1.tgz#aa30fc22ed028525e3c253787e897f0a70595265"
+  integrity sha512-foL2bLwIPiyLDj6EvdpGrtrC2+6kkU6/OBwppMkZ0RqlKRCnnoJvy/zngv2L55nYqe2TApfJuWGg/BBNArU2Zg==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"

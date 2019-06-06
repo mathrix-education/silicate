@@ -2,22 +2,22 @@
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>URL de l'image</mat-label>
-    <input type="url"
-           placeholder="https://placehold.it/400x150"
+    <input [(ngModel)]="data.src"
            matInput
-           [(ngModel)]="data.src">
+           placeholder="https://placehold.it/400x150"
+           type="url">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Texte alternatif</mat-label>
-    <input type="text"
-           placeholder="Description"
+    <input [(ngModel)]="data.alt"
            matInput
-           [(ngModel)]="data.alt">
+           placeholder="Description"
+           type="text">
   </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="dialogRef.close()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Sauvegarder</button>
+  <button (click)="dialogRef.close()" mat-button>Annuler</button>
+  <button [mat-dialog-close]="data" cdkFocusInitial mat-button>Sauvegarder</button>
 </div>

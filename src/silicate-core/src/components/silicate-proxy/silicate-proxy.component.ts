@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {SilicateHelpers} from '../../silicate.helpers';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
 import {BrickDeclaration} from '../../bricks/base-brick/brick-declaration';
@@ -95,7 +94,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     this.wrapper.clear(); // Remove any content in the wrapper
     this.brickRef.destroy(); // Destroy the Brick reference if it exists.
 
-    SilicateHelpers.debug('[proxy] cleared');
   }
 
   /**
@@ -103,7 +101,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    */
   render() {
     if (!this.initialized) {
-      return; // Do not render if not initialiazed
+      return; // Do not render if not initialized
     }
 
     if (this.brickRef) {
@@ -129,6 +127,5 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
     this.icon = brickDeclaration.icon;
 
-    SilicateHelpers.debug('[proxy] render ' + this.brickRef.instance.constructor.name);
   }
 }

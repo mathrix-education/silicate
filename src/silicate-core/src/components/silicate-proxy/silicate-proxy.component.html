@@ -1,19 +1,19 @@
 <div fxLayout="row"
-     fxLayoutGap="0px"
-     fxLayoutAlign="center center">
+     fxLayoutAlign="center center"
+     fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
-    <button *ngFor="let brickDeclaration of brickDeclarations; let i = index"
-            mat-menu-item
+    <button (click)="brick = brickDeclarations[i].component.empty()"
+            *ngFor="let brickDeclaration of brickDeclarations; let i = index"
             [disabled]="icon === brickDeclarations[i].icon"
-            (click)="brick = brickDeclarations[i].component.empty()">
+            mat-menu-item>
       <mat-icon>{{ brickDeclarations[i].icon }}</mat-icon>
       {{ brickDeclarations[i].name }}
     </button>
   </mat-menu>
 
   <button *ngIf="editable"
-          mat-icon-button
-          [matMenuTriggerFor]="brickType">
+          [matMenuTriggerFor]="brickType"
+          mat-icon-button>
     <mat-icon>{{ icon }}</mat-icon>
   </button>
 
@@ -21,7 +21,7 @@
     <ng-template #wrapper></ng-template>
   </div>
 
-  <button *ngIf="editable" mat-icon-button (click)="clear()">
+  <button (click)="clear()" *ngIf="editable" mat-icon-button>
     <mat-icon>delete</mat-icon>
   </button>
 </div>
