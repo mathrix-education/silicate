@@ -25,6 +25,12 @@
       ],
       "silicate-core/*": [
         "dist/silicate/*"
+      ],
+      "silicate-video": [
+        "dist/silicate-video"
+      ],
+      "silicate-video/*": [
+        "dist/silicate-video/*"
       ]
     }
   }

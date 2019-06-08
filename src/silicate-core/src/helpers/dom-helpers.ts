@@ -68,7 +68,7 @@ export class DomHelpers {
        * If the elementRef is not set (we are creating a link), we will first create a link with an improbable, identifiable href
        * then we will update it with the right href and target. Thus, we avoid collision problems.
        */
-      const tmpHref = 'http://nolink';
+      const tmpHref = 'silicate://nolink';
       // We create link with the tmpHref with an improbable href.
       document.execCommand('createLink', false, tmpHref);
       const nativeLinkElement = document.querySelector(`a[href="${tmpHref}"]`);

@@ -5,8 +5,8 @@
   "defaultProject": "silicate-app",
   "projects": {
     "silicate-app": {
-      "root": "",
-      "sourceRoot": "app",
+      "root": "app",
+      "sourceRoot": "app/app",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -92,8 +92,8 @@
       }
     },
     "silicate-core": {
-      "root": "",
-      "sourceRoot": "src/silicate-core",
+      "root": "src/silicate-core",
+      "sourceRoot": ".",
       "projectType": "library",
       "prefix": "mtx",
       "architect": {

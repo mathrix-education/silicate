@@ -1,0 +1,9 @@
+<div fxLayout="row">
+  <div [contenteditable]="editable"
+       (blur)="editable && refreshStrings()"
+       [(ngModel)]="minutesStr"></div>
+  <span>:</span>
+  <div [contenteditable]="editable"
+       (blur)="editable && refreshStrings()"
+       [(ngModel)]="secondsStr"></div>
+</div>

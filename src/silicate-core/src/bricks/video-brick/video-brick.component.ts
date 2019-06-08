@@ -3,6 +3,7 @@ import {VideoBrick} from './video-brick';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {YTPlayerComponent} from 'angular-youtube-player';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
 
 @Component({
   selector: 'mtx-video-brick',
@@ -15,7 +16,7 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
     name: 'Vidéo',
     icon: 'movie',
     component: VideoBrickComponent,
-    toolbar: null
+    toolbar: TextBrickToolbarComponent
   };
 
   @ViewChild('youtubePlayer', {static: false}) youtubePlayer: YTPlayerComponent;

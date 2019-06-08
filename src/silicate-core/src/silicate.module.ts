@@ -24,6 +24,8 @@ import {ContenteditableModule} from '@ng-stack/contenteditable';
 import { VideoBrickComponent } from './bricks/video-brick/video-brick.component';
 import {YTPlayerModule} from 'angular-youtube-player';
 import { VideoTimestampPipe } from './pipes/video-timestamp.pipe';
+import { VideoBrickAnchorComponent } from './bricks/video-brick/video-brick-anchor/video-brick-anchor.component';
+import { VimeoPlayerComponent } from './bricks/video-brick/vimeo-player/vimeo-player.component';
 
 @NgModule({
   entryComponents: [...entryComponentsDeclarations],

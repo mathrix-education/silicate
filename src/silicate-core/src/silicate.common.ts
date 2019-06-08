@@ -12,6 +12,8 @@ import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dial
 import {ElementRef} from '@angular/core';
 import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
 import {VideoTimestampPipe} from './pipes/video-timestamp.pipe';
+import {VideoBrickAnchorComponent} from './bricks/video-brick/video-brick-anchor/video-brick-anchor.component';
+import {VimeoPlayerComponent} from './bricks/video-brick/vimeo-player/vimeo-player.component';
 
 export interface Link {
   elementRef: ElementRef<Element>;
@@ -28,12 +30,15 @@ export const entryComponentsDeclarations: any[] = [
   ImageBrickComponent,
   // VideoBrick
   VideoBrickComponent,
+  VideoBrickAnchorComponent,
   // Dialog
   ImageBrickDialogComponent,
   LinkDialogComponent
 ];
 export const componentDeclarations: any[] = [
   ...entryComponentsDeclarations,
+  // Video
+  VimeoPlayerComponent,
   // Components
   SilicateToolbarComponent,
   SilicateDebugComponent,

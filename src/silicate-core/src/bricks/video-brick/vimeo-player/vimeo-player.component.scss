@@ -1,0 +1,5 @@
+div, :host ::ng-deep iframe {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}

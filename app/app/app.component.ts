@@ -12,6 +12,12 @@ export class AppComponent {
   fixture = [
     {
       kind: 'video',
+      type: 'vimeo',
+      videoId: '76979871',
+      summary: []
+    },
+    {
+      kind: 'video',
       type: 'youtube',
       videoId: 'BsyfRX4x8RY',
       summary: [
@@ -24,7 +30,7 @@ export class AppComponent {
           title: 'Un petit jeu'
         },
         {
-          timestamp: 599,
+          timestamp: 399,
           title: 'Les limites à connaître'
         }
       ]

@@ -5,7 +5,16 @@
         <mat-spinner></mat-spinner>
       </div>
 
-      <lib-ytplayer #youtubePlayer [videoId]="videoId" (ready)="loading = false"></lib-ytplayer>
+      <ng-container [ngSwitch]="type">
+        <lib-ytplayer *ngSwitchCase="'youtube'"
+                      #youtubePlayer [videoId]="videoId"
+                      (ready)="loading = false"></lib-ytplayer>
+        <mtx-vimeo-player
+          *ngSwitchCase="'vimeo'"
+          [videoId]="videoId"
+          (ready)="loading = false">
+        </mtx-vimeo-player>
+      </ng-container>
     </div>
   </div>
 
@@ -49,19 +58,19 @@
              fxLayoutAlign="center center">
           <mat-icon *ngIf="editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
-          <div>{{ summary[i].timestamp | videoTimestamp }}</div>
+          <mtx-video-brick-anchor [editable]="editable" [(timestamp)]="summary[i].timestamp"></mtx-video-brick-anchor>
           <div fxFlex="grow" [contenteditable]="editable" [(ngModel)]="summary[i].title"></div>
           <mat-icon *ngIf="editable" (click)="summary.splice(i, 1)">delete</mat-icon>
         </div>
       </mat-card-content>
 
-      <mat-card-actions>
+      <mat-card-actions *ngIf="editable">
         <button mat-button (click)="summary.push({
           timestamp: 0,
           title: 'Nouvelle ancre'
-        })">Ajouter une ancre</button>
+        })">Ajouter une ancre
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
-
