@@ -8,6 +8,7 @@
     "@angular/cdk",
     "@angular/material",
     "@angular/flex-layout",
-    "@ng-stack/contenteditable"
+    "@ng-stack/contenteditable",
+    "angular-youtube-player"
   ]
 }
