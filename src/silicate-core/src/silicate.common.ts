@@ -9,8 +9,10 @@ import {SilicateDebugComponent} from './components/silicate-debug/silicate-debug
 import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
 import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
+import {ElementRef} from '@angular/core';
 
 export interface Link {
+  elementRef: ElementRef<Element>;
   href: string;
   target: '_blank' | '_self';
 }

@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Link} from '../../silicate.common';
+import {DomHelpers} from '../../helpers/dom-helpers';
 
 @Component({
   selector: 'mtx-link-dialog',
@@ -8,15 +9,27 @@ import {Link} from '../../silicate.common';
   styleUrls: ['./link-dialog.component.scss']
 })
 export class LinkDialogComponent implements OnInit {
-  data: Link = {
-    href: 'https://mathrix.fr',
-    target: '_blank'
-  };
-
-  constructor(public dialogRef: MatDialogRef<LinkDialogComponent>) {
+  constructor(
+    public dialogRef: MatDialogRef<LinkDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Link
+  ) {
+    console.log(this.data.elementRef);
   }
 
   ngOnInit() {
+    if (
+      !this.data
+      || this.data === null
+      || this.data === undefined
+      || Object.keys(this.data).includes('href')
+    ) {
+
+    }
   }
 
+  process() {
+    console.log(this.data.elementRef);
+    DomHelpers.insertLink(this.data);
+    this.dialogRef.close();
+  }
 }

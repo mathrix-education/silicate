@@ -3,7 +3,6 @@ import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 import {BaseBrickToolbarComponent} from '../base-brick-toolbar/base-brick-toolbar.component';
 import {MatDialog} from '@angular/material';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
-import {Link} from '../../silicate.common';
 import {DomHelpers} from '../../helpers/dom-helpers';
 
 @Component({
@@ -17,10 +16,14 @@ export class TextBrickToolbarComponent extends BaseBrickToolbarComponent<TextBri
   }
 
   openLinkDialog() {
-    const dialogRef = this.dialog.open(LinkDialogComponent);
-    dialogRef.afterClosed().subscribe((data: Link) => {
-      console.log(Object.keys(data));
-      DomHelpers.insertLink(data);
+    DomHelpers.saveSelection();
+
+    this.dialog.open(LinkDialogComponent, {
+      width: '400px',
+      data: {
+        href: 'https://mathrix.fr',
+        target: '_blank'
+      }
     });
   }
 }

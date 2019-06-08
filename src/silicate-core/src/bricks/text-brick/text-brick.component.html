@@ -2,6 +2,7 @@
      [(ngModel)]="content"
      [className]="style"
      [contenteditable]="editable"
+     (click)="onClick($event)"
      name="content"
      propValueAccessor="innerHTML">
 </div>

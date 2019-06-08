@@ -3,6 +3,8 @@ import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TextBrick} from './text-brick';
 import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
 import {DomHelpers} from '../../helpers/dom-helpers';
+import {MatDialog} from '@angular/material';
+import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 
 @Component({
   selector: 'mtx-text-brick',
@@ -19,6 +21,10 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
   };
 
   @ViewChild('wrapper', {static: true}) wrapper: ElementRef<HTMLDivElement>;
+
+  constructor(private dialog: MatDialog) {
+    super();
+  }
 
   get style() {
     return this.model.style;
@@ -45,6 +51,27 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
       style: 'normal',
       content: 'Texte...'
     };
+  }
+
+  onClick($event) {
+    if (!this.editable) {
+      return;
+    }
+
+    const targetLink = $event.target.closest('a');
+
+    if (targetLink !== null) {
+      const link = {
+        elementRef: new ElementRef(targetLink),
+        href: targetLink.getAttribute('href'),
+        target: targetLink.getAttribute('target')
+      };
+
+      this.dialog.open(LinkDialogComponent, {
+        width: '400px',
+        data: link
+      });
+    }
   }
 
   /**
