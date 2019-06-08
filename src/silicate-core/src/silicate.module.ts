@@ -8,8 +8,8 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
-  MatMenuModule,
+  MatInputModule, MatListModule,
+  MatMenuModule, MatProgressSpinnerModule,
   MatSelectModule,
   MatSlideToggleModule,
   MatToolbarModule
@@ -21,6 +21,9 @@ import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-w
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
+import { VideoBrickComponent } from './bricks/video-brick/video-brick.component';
+import {YTPlayerModule} from 'angular-youtube-player';
+import { VideoTimestampPipe } from './pipes/video-timestamp.pipe';
 
 @NgModule({
   entryComponents: [...entryComponentsDeclarations],
@@ -42,7 +45,10 @@ import {ContenteditableModule} from '@ng-stack/contenteditable';
     MatSlideToggleModule,
     MatDialogModule,
     MatInputModule,
+    MatProgressSpinnerModule,
+    MatListModule,
     DragDropModule,
+    YTPlayerModule
   ],
   providers: [
     JsonPipe

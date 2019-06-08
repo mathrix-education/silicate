@@ -10,6 +10,8 @@ import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
 import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
 import {ElementRef} from '@angular/core';
+import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
+import {VideoTimestampPipe} from './pipes/video-timestamp.pipe';
 
 export interface Link {
   elementRef: ElementRef<Element>;
@@ -24,6 +26,8 @@ export const entryComponentsDeclarations: any[] = [
   TextBrickToolbarComponent,
   // ImageBrick
   ImageBrickComponent,
+  // VideoBrick
+  VideoBrickComponent,
   // Dialog
   ImageBrickDialogComponent,
   LinkDialogComponent
@@ -36,6 +40,7 @@ export const componentDeclarations: any[] = [
   SilicateWrapperComponent,
   // Pipes
   SafeHtmlPipe,
-  UnsafeHtmlPipe
+  UnsafeHtmlPipe,
+  VideoTimestampPipe
 ];
 

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {TextBrick} from '../../src/silicate-core/src/bricks/text-brick/text-brick';
 import {ImageBrick} from '../../src/silicate-core/src/bricks/image-brick/image-brick';
+import {VideoBrick} from '../../src/silicate-core/src/bricks/video-brick/video-brick';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,25 @@ import {ImageBrick} from '../../src/silicate-core/src/bricks/image-brick/image-b
 })
 export class AppComponent {
   fixture = [
+    {
+      kind: 'video',
+      type: 'youtube',
+      videoId: 'BsyfRX4x8RY',
+      summary: [
+        {
+          timestamp: 34,
+          title: 'Comprendre',
+        },
+        {
+          timestamp: 89,
+          title: 'Un petit jeu'
+        },
+        {
+          timestamp: 599,
+          title: 'Les limites à connaître'
+        }
+      ]
+    } as VideoBrick,
     {
       kind: 'text',
       style: 'secondary-title',
