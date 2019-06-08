@@ -162,7 +162,6 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
    */
   onNewBrick() {
     this.data.push(TextBrickComponent.empty());
-
     setTimeout(() => this.subscribe()); // We need to wait a tick
   }
 
@@ -171,11 +170,12 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
    */
   onDrag($event: CdkDragDrop<any>) {
     moveItemInArray(this.data, $event.previousIndex, $event.currentIndex);
-
-    this.subscribe();
+    setTimeout(() => this.subscribe());
   }
 
   onDelete(index: number) {
     this.data.splice(index, 1);
+    console.log(this.data);
+    setTimeout(() => this.subscribe());
   }
 }

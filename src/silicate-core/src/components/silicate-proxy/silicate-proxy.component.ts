@@ -93,7 +93,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   clear() {
     this.wrapper.clear(); // Remove any content in the wrapper
     this.brickRef.destroy(); // Destroy the Brick reference if it exists.
-
   }
 
   /**
@@ -126,6 +125,10 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     });
 
     this.icon = brickDeclaration.icon;
+  }
 
+  onDelete() {
+    this.clear();
+    this.delete.emit();
   }
 }

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Configuration du lien</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>URL du lien</mat-label>
+      <input [(ngModel)]="data.href"
+             matInput
+             placeholder="https://placehold.it/400x150"
+             type="url">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Comportement</mat-label>
+      <mat-select [(value)]="data.target">
+        <mat-option value="_blank">Ouvrir dans un nouvel onglet</mat-option>
+        <mat-option value="_self">Ouvrir dans l'onglet courant</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button (click)="dialogRef.close()" mat-button>Annuler</button>
+  <button [mat-dialog-close]="data" cdkFocusInitial mat-button>Sauvegarder</button>
+</div>

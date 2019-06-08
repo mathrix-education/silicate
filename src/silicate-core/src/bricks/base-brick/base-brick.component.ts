@@ -3,7 +3,7 @@ import {BaseBrick} from './base-brick';
 import {BrickDeclaration} from './brick-declaration';
 
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
-  static declaration: BrickDeclaration;
+  static declaration: BrickDeclaration = {} as BrickDeclaration;
 
   @Input() editable;
 
@@ -11,10 +11,9 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
   @Output() brickChange = new EventEmitter<T>();
   @Output() toolbar = new EventEmitter<any>();
   @Output() enter = new EventEmitter();
-
+  model: any | T = {};
   protected dirty = false;
   protected original: any | T = null;
-  model: any | T = {};
 
   get hydrated() {
     return this.original !== null;

@@ -21,11 +21,10 @@ import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-w
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
-import { UnsafeHtmlPipe } from './pipes/unsafe-html.pipe';
 
 @NgModule({
   entryComponents: [...entryComponentsDeclarations],
-  declarations: [...componentDeclarations, UnsafeHtmlPipe],
+  declarations: [...componentDeclarations],
   imports: [
     CommonModule,
     BrowserAnimationsModule,

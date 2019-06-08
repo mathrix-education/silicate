@@ -3,14 +3,12 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {SilicateModule} from '../../src/silicate-core/src/silicate.module';
-import {TestComponent} from './components/test/test.component';
 import {FormsModule} from '@angular/forms';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TestComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
