@@ -9,7 +9,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
-  MatMenuModule, MatProgressSpinnerModule,
+  MatMenuModule, MatProgressSpinnerModule, MatRippleModule,
   MatSelectModule,
   MatSlideToggleModule,
   MatToolbarModule
@@ -47,6 +47,7 @@ import { VideoTimestampPipe } from './pipes/video-timestamp.pipe';
     MatInputModule,
     MatProgressSpinnerModule,
     MatListModule,
+    MatRippleModule,
     DragDropModule,
     YTPlayerModule
   ],
