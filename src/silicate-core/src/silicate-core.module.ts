@@ -7,7 +7,7 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
-  MatDialogModule,
+  MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -48,6 +48,7 @@ import {componentDeclarations, entryComponentsDeclarations} from './silicate.com
     MatProgressSpinnerModule,
     MatListModule,
     MatRippleModule,
+    MatExpansionModule,
     DragDropModule
   ],
   providers: [

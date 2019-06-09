@@ -19,6 +19,7 @@ import {
 import {Subscription} from 'rxjs';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
+import {hasChanged} from '../../helpers/functions';
 import {BaseBrickToolbarComponent} from '../../toolbars/base-brick-toolbar/base-brick-toolbar.component';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 
@@ -100,14 +101,14 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('editable')) {
+    if (hasChanged(changes, 'editable')) {
       if (changes.editable.currentValue === false) {
         this.toolbar.clear();
         this.unsubscribe();
       }
     }
 
-    if (changes.hasOwnProperty('data')) {
+    if (hasChanged(changes, 'data')) {
       if (this.proxies !== undefined) {
         this.subscribe();
       }
@@ -158,7 +159,7 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   }
 
   /**
-   * Append a new brick too the current content
+   * Append a new brick too the current content.
    */
   onNewBrick() {
     this.data.push(TextBrickComponent.empty());
@@ -166,16 +167,18 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
   }
 
   /**
-   * Material CDK Drag'n'Drop handler
+   * Material CDK Drag'n'Drop handler.
    */
   onDrag($event: CdkDragDrop<any>) {
     moveItemInArray(this.data, $event.previousIndex, $event.currentIndex);
     setTimeout(() => this.subscribe());
   }
 
+  /**
+   * Delete a brick.
+   */
   onDelete(index: number) {
     this.data.splice(index, 1);
-    console.log(this.data);
     setTimeout(() => this.subscribe());
   }
 }

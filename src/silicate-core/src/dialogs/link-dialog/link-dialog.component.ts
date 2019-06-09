@@ -13,7 +13,6 @@ export class LinkDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<LinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Link
   ) {
-    console.log(this.data.elementRef);
   }
 
   ngOnInit() {

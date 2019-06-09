@@ -1,9 +1,15 @@
 import {ElementRef} from '@angular/core';
 import {Link} from '../silicate.common';
 
+/**
+ * Helpers to format the DOM.
+ */
 export class DomHelpers {
   static rangeBuffer: Range = null;
 
+  /**
+   * Check if we already have saved a selection.
+   */
   static hasSavedSelection(): boolean {
     return DomHelpers.rangeBuffer !== null;
   }
@@ -38,6 +44,7 @@ export class DomHelpers {
   }
 
   /**
+   * Strip the HTML inside a string, except some.
    * @link https://stackoverflow.com/a/31259386/3728261
    */
   static stripHtml(rawHtml: string, allowedTags: string) {
@@ -56,7 +63,7 @@ export class DomHelpers {
   }
 
   /**
-   * Insert a link in a brick
+   * Insert a link in a brick.
    */
   static insertLink(link: Link) {
     if (DomHelpers.hasSavedSelection()) {

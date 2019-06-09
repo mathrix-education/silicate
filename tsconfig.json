@@ -37,6 +37,12 @@
       ],
       "silicate-videos/*": [
         "dist/silicate-videos/*"
+      ],
+      "silicate-latex": [
+        "dist/silicate-latex"
+      ],
+      "silicate-latex/*": [
+        "dist/silicate-latex/*"
       ]
     }
   }

@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {TextBrick} from '../../src/silicate-core/src/bricks/text-brick/text-brick';
-import {ImageBrick} from '../../src/silicate-core/src/bricks/image-brick/image-brick';
-import {VideoBrick} from '../../src/silicate-videos/src/components/video-brick/video-brick';
+import {EquationBrickComponent} from '../../src/silicate-latex/src/components/equation-brick/equation-brick.component';
 import {VideoBrickComponent} from '../../src/silicate-videos/src/components/video-brick/video-brick.component';
 
 @Component({
@@ -15,7 +13,12 @@ export class AppComponent {
       kind: 'video',
       type: 'vimeo',
       videoId: '76979871',
-      summary: []
+      summary: [
+        {
+          timestamp: 15,
+          title: 'Ancre à 15 secondes'
+        }
+      ]
     },
     {
       kind: 'video',
@@ -35,44 +38,49 @@ export class AppComponent {
           title: 'Les limites à connaître'
         }
       ]
-    } as VideoBrick,
+    },
     {
       kind: 'text',
       style: 'secondary-title',
       content: 'Bienvenue sur l\'éditeur Silicate !'
-    } as TextBrick,
+    },
     {
       kind: 'text',
       style: 'normal',
-      content: 'Ceci est un text simple.'
-    } as TextBrick,
+      content: 'Ceci est un texte simple.'
+    },
     {
       kind: 'text',
       style: 'normal',
       content: 'Ceci est un texte enrichi avec du <strong>gras</strong> et de l\'<em>italique</em>.'
-    } as TextBrick,
+    },
     {
       kind: 'text',
       style: 'normal',
       content: 'Ceci est un bloc image sans valeur associée : il y a donc un bouton !'
-    } as TextBrick,
+    },
     {
       kind: 'image',
       src: null,
       alt: null
-    } as ImageBrick,
+    },
     {
       kind: 'text',
       style: 'normal',
       content: 'Ceci est un bloc image avec une URL définie. L\'image peut être modifié par simple clic !'
-    } as TextBrick,
+    },
     {
       kind: 'image',
       src: 'https://placehold.it/800x120',
       alt: null
-    } as ImageBrick,
+    },
+    {
+      kind: 'equation',
+      content: '\\zeta(s)=\\frac{1}{\\Gamma(s)}\\int_0^{\\infty}\\frac{x^{s-1}}{e^x-1}\\mathrm{d}x'
+    }
   ];
   additionalBricks = [
-    VideoBrickComponent
+    VideoBrickComponent,
+    EquationBrickComponent
   ];
 }

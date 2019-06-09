@@ -1,6 +1,14 @@
 <mat-card>
   <mat-card-content>
-    <h5>Debug</h5>
-    <pre [innerHTML]="debug | json | unsafeHtml"></pre>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Debug</mat-panel-title>
+        <mat-panel-description>
+          Cliquer pour voir les informations de debug
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <pre [innerHTML]="debug | json | unsafeHtml"></pre>
+    </mat-expansion-panel>
   </mat-card-content>
 </mat-card>

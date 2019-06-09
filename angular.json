@@ -5,7 +5,7 @@
   "defaultProject": "silicate-app",
   "projects": {
     "silicate-app": {
-      "root": "",
+      "root": "app",
       "sourceRoot": "app",
       "projectType": "application",
       "prefix": "app",
@@ -147,6 +147,38 @@
             "tsConfig": [
               "src/silicate-videos/tsconfig.lib.json",
               "src/silicate-videos/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "silicate-latex": {
+      "projectType": "library",
+      "root": "src/silicate-latex",
+      "sourceRoot": "src/silicate-latex/src",
+      "prefix": "mtx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "src/silicate-latex/tsconfig.lib.json",
+            "project": "src/silicate-latex/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/silicate-latex/tsconfig.lib.json",
+              "src/silicate-latex/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

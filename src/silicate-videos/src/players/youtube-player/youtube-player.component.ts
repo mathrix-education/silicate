@@ -13,10 +13,7 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
   @ViewChild('player', {static: true}) player: ElementRef<HTMLDivElement>;
   @Output() ready = new EventEmitter();
 
-  youtubePlayer;
-
-  constructor() {
-  }
+  youtubePlayer: YT.Player;
 
   ngOnInit() {
     if (typeof (YT) === 'undefined' || typeof (YT.Player) === 'undefined') {
@@ -30,6 +27,10 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
     window.onYouTubePlayerAPIReady = () => {
       this.youtubePlayer = new YT.Player(this.player.nativeElement, {
         videoId: this.videoId,
+        playerVars: {
+          modestbranding: YT.ModestBranding.Modest,
+          rel: YT.RelatedVideos.Hide
+        },
         events: {
           onReady: () => this.ready.emit()
         }

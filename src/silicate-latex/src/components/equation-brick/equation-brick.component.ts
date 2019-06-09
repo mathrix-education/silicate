@@ -1,0 +1,40 @@
+import {Component, OnInit} from '@angular/core';
+import {BaseBrickComponent} from '../../../../silicate-core/src/bricks/base-brick/base-brick.component';
+import {EquationBrick} from './equation-brick';
+
+@Component({
+  selector: 'mtx-equation-brick',
+  templateUrl: './equation-brick.component.html',
+  styleUrls: ['./equation-brick.component.scss']
+})
+export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements OnInit {
+  static declaration = {
+    kind: 'equation',
+    name: 'Équation',
+    icon: 'functions',
+    component: EquationBrickComponent,
+    toolbar: null
+  };
+
+  /**
+   * Default equation.
+   */
+  static empty() {
+    return {
+      kind: 'equation',
+      content: 'f(x) = x^2'
+    };
+  }
+
+  ngOnInit() {
+  }
+
+  get content() {
+    return this.model.content;
+  }
+
+  set content(content: string) {
+    this.model.content = content;
+    this.brickChange.emit(this.model);
+  }
+}

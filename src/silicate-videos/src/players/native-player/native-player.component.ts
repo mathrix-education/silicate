@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'mtx-native-player',
@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./native-player.component.scss']
 })
 export class NativePlayerComponent implements OnInit {
+  @ViewChild('player', {static: false}) player: HTMLVideoElement;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

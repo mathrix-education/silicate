@@ -23,6 +23,11 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
   @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
   @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;
 
+  mappings = {
+    youtube: 'YouTube',
+    vimeo: 'Vimeo'
+  };
+
   loading = true;
 
   get type() {

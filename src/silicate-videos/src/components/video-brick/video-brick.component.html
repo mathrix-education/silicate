@@ -31,7 +31,7 @@
           <mat-label>Source</mat-label>
           <mat-select [(value)]="type">
             <mat-option value="youtube">YouTube</mat-option>
-            <mat-option value="vimeo">Video</mat-option>
+            <mat-option value="vimeo">Vimeo</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -67,10 +67,10 @@
       </mat-card-content>
 
       <mat-card-actions *ngIf="editable">
-        <button mat-button (click)="summary.push({
-          timestamp: 0,
-          title: 'Nouvelle ancre'
-        })">Ajouter une ancre
+        <button mat-flat-button
+                color="primary"
+                (click)="summary.push({timestamp: 0, title: 'Nouvelle ancre'})">
+          Ajouter une ancre
         </button>
       </mat-card-actions>
     </mat-card>
