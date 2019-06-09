@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {TextBrick} from '../../src/silicate-core/src/bricks/text-brick/text-brick';
 import {ImageBrick} from '../../src/silicate-core/src/bricks/image-brick/image-brick';
-import {VideoBrick} from '../../src/silicate-core/src/bricks/video-brick/video-brick';
+import {VideoBrick} from '../../src/silicate-videos/src/components/video-brick/video-brick';
+import {VideoBrickComponent} from '../../src/silicate-videos/src/components/video-brick/video-brick.component';
 
 @Component({
   selector: 'app-root',
@@ -70,5 +71,8 @@ export class AppComponent {
       src: 'https://placehold.it/800x120',
       alt: null
     } as ImageBrick,
+  ];
+  additionalBricks = [
+    VideoBrickComponent
   ];
 }

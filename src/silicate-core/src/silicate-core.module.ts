@@ -1,6 +1,8 @@
-import {NgModule} from '@angular/core';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CommonModule, JsonPipe} from '@angular/common';
-import {componentDeclarations, entryComponentsDeclarations} from './silicate.common';
+import {NgModule} from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatButtonToggleModule,
@@ -8,24 +10,20 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule,
-  MatMenuModule, MatProgressSpinnerModule, MatRippleModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatRippleModule,
   MatSelectModule,
   MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
-import {FormsModule} from '@angular/forms';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
-import { VideoBrickComponent } from './bricks/video-brick/video-brick.component';
-import {YTPlayerModule} from 'angular-youtube-player';
-import { VideoTimestampPipe } from './pipes/video-timestamp.pipe';
-import { VideoBrickAnchorComponent } from './bricks/video-brick/video-brick-anchor/video-brick-anchor.component';
-import { VimeoPlayerComponent } from './bricks/video-brick/vimeo-player/vimeo-player.component';
+import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
+import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
+import {componentDeclarations, entryComponentsDeclarations} from './silicate.common';
 
 @NgModule({
   entryComponents: [...entryComponentsDeclarations],
@@ -50,8 +48,7 @@ import { VimeoPlayerComponent } from './bricks/video-brick/vimeo-player/vimeo-pl
     MatProgressSpinnerModule,
     MatListModule,
     MatRippleModule,
-    DragDropModule,
-    YTPlayerModule
+    DragDropModule
   ],
   providers: [
     JsonPipe
@@ -61,5 +58,5 @@ import { VimeoPlayerComponent } from './bricks/video-brick/vimeo-player/vimeo-pl
     SilicateProxyComponent
   ]
 })
-export class SilicateModule {
+export class SilicateCoreModule {
 }

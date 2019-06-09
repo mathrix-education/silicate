@@ -6,9 +6,11 @@
       </div>
 
       <ng-container [ngSwitch]="type">
-        <lib-ytplayer *ngSwitchCase="'youtube'"
-                      #youtubePlayer [videoId]="videoId"
-                      (ready)="loading = false"></lib-ytplayer>
+        <mtx-youtube-player
+          *ngSwitchCase="'youtube'"
+          [videoId]="videoId"
+          (ready)="loading = false">
+        </mtx-youtube-player>
         <mtx-vimeo-player
           *ngSwitchCase="'vimeo'"
           [videoId]="videoId"
@@ -48,7 +50,7 @@
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutGap="8px" cdkDropList (cdkDropListDropped)="onDrag($event)">
-        <div *ngFor="let s of summary; let i = index" (click)="goToTimestamp(summary[i].timestamp)"
+        <div *ngFor="let s of summary; let i = index" (click)="setTime(summary[i].timestamp)"
              cdkDrag
              class="video-anchor-container"
              matRipple

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VideoBrickAnchorComponent } from './video-brick-anchor.component';
+import { NativePlayerComponent } from './native-player.component';
 
-describe('VideoBrickAnchorComponent', () => {
-  let component: VideoBrickAnchorComponent;
-  let fixture: ComponentFixture<VideoBrickAnchorComponent>;
+describe('NativePlayerComponent', () => {
+  let component: NativePlayerComponent;
+  let fixture: ComponentFixture<NativePlayerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VideoBrickAnchorComponent ]
+      declarations: [ NativePlayerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VideoBrickAnchorComponent);
+    fixture = TestBed.createComponent(NativePlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

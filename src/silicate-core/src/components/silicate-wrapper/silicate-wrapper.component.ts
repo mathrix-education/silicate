@@ -1,3 +1,4 @@
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {
   AfterViewInit,
   Component,
@@ -15,12 +16,11 @@ import {
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {BaseBrickToolbarComponent} from '../../toolbars/base-brick-toolbar/base-brick-toolbar.component';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 import {Subscription} from 'rxjs';
+import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
+import {BaseBrickToolbarComponent} from '../../toolbars/base-brick-toolbar/base-brick-toolbar.component';
+import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 
 /**
  * Type explicit declared in Object literals:

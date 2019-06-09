@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
-import {BaseBrickToolbarComponent} from '../base-brick-toolbar/base-brick-toolbar.component';
 import {MatDialog} from '@angular/material';
+import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 import {DomHelpers} from '../../helpers/dom-helpers';
+import {BaseBrickToolbarComponent} from '../base-brick-toolbar/base-brick-toolbar.component';
 
 @Component({
   selector: 'mtx-text-brick-toolbar',

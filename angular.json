@@ -5,8 +5,8 @@
   "defaultProject": "silicate-app",
   "projects": {
     "silicate-app": {
-      "root": "app",
-      "sourceRoot": "app/app",
+      "root": "",
+      "sourceRoot": "app",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -92,10 +92,15 @@
       }
     },
     "silicate-core": {
-      "root": "src/silicate-core",
-      "sourceRoot": ".",
       "projectType": "library",
+      "root": "src/silicate-core",
+      "sourceRoot": "src/silicate-core/src",
       "prefix": "mtx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -110,6 +115,38 @@
             "tsConfig": [
               "src/silicate-core/tsconfig.lib.json",
               "src/silicate-core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "silicate-videos": {
+      "projectType": "library",
+      "root": "src/silicate-videos",
+      "sourceRoot": "src/silicate-videos/src",
+      "prefix": "mtx",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "src/silicate-videos/tsconfig.lib.json",
+            "project": "src/silicate-videos/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/silicate-videos/tsconfig.lib.json",
+              "src/silicate-videos/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

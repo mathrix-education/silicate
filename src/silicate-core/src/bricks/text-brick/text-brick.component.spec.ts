@@ -1,5 +1,5 @@
-import {TextBrickComponent} from './text-brick.component';
 import {TextBrick} from './text-brick';
+import {TextBrickComponent} from './text-brick.component';
 
 // Mocks
 let instance: TextBrickComponent;

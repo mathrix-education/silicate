@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Link} from '../../silicate.common';
 import {DomHelpers} from '../../helpers/dom-helpers';
+import {Link} from '../../silicate.common';
 
 @Component({
   selector: 'mtx-link-dialog',

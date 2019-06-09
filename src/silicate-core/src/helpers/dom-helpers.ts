@@ -1,5 +1,5 @@
-import {Link} from '../silicate.common';
 import {ElementRef} from '@angular/core';
+import {Link} from '../silicate.common';
 
 export class DomHelpers {
   static rangeBuffer: Range = null;

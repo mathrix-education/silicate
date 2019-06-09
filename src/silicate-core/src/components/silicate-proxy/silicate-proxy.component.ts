@@ -13,12 +13,11 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
-import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
+import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {BrickDeclaration} from '../../bricks/base-brick/brick-declaration';
-import {VideoBrickComponent} from '../../bricks/video-brick/video-brick.component';
+import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
+import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 
 @Component({
   selector: 'mtx-silicate-proxy',
@@ -40,8 +39,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    */
   bricks: any[] = [
     TextBrickComponent,
-    ImageBrickComponent,
-    VideoBrickComponent
+    ImageBrickComponent
   ];
   brickDeclarations: BrickDeclaration[] = [];
 

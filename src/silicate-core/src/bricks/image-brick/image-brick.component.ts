@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {ImageBrick} from './image-brick';
 import {MatDialog} from '@angular/material';
-import {BrickDeclaration} from '../base-brick/brick-declaration';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
+import {BaseBrickComponent} from '../base-brick/base-brick.component';
+import {BrickDeclaration} from '../base-brick/brick-declaration';
+import {ImageBrick} from './image-brick';
 
 @Component({
   selector: 'mtx-image-brick',

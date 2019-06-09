@@ -5,7 +5,7 @@ import {BrickDeclaration} from './brick-declaration';
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
   static declaration: BrickDeclaration = {} as BrickDeclaration;
 
-  @Input() editable;
+  @Input() editable: boolean;
 
   /** Called when the brick data change */
   @Output() brickChange = new EventEmitter<T>();

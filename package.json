@@ -24,12 +24,13 @@
     "@angular/router": "~8.0.0",
     "@ng-stack/contenteditable": "^1.0.1",
     "@types/vimeo__player": "^2.6.2",
+    "@types/youtube-player": "^5.5.1",
     "@vimeo/player": "^2.9.1",
-    "angular-youtube-player": "^1.0.2",
     "core-js": "^2.5.4",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",
+    "youtube-player": "^5.5.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

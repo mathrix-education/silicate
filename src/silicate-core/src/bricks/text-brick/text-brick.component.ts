@@ -1,10 +1,10 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {TextBrick} from './text-brick';
-import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
-import {DomHelpers} from '../../helpers/dom-helpers';
 import {MatDialog} from '@angular/material';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
+import {DomHelpers} from '../../helpers/dom-helpers';
+import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
+import {BaseBrickComponent} from '../base-brick/base-brick.component';
+import {TextBrick} from './text-brick';
 
 @Component({
   selector: 'mtx-text-brick',

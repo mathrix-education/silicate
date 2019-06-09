@@ -1,9 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {VideoBrick} from './video-brick';
-import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {YTPlayerComponent} from 'angular-youtube-player';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {BaseBrickComponent} from '../../../../silicate-core/src/bricks/base-brick/base-brick.component';
+import {VideoPlayer} from '../../players/video-player';
+import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
+import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';
+import {VideoBrick} from './video-brick';
 
 @Component({
   selector: 'mtx-video-brick',
@@ -16,10 +17,11 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
     name: 'Vidéo',
     icon: 'movie',
     component: VideoBrickComponent,
-    toolbar: TextBrickToolbarComponent
+    toolbar: null
   };
 
-  @ViewChild('youtubePlayer', {static: false}) youtubePlayer: YTPlayerComponent;
+  @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
+  @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;
 
   loading = true;
 
@@ -39,7 +41,6 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
   set videoId(videoId: string) {
     this.model.videoId = videoId;
     this.brickChange.emit(this.model);
-    this.youtubePlayer.loadVideoById(this.model.videoId);
   }
 
   get summary() {
@@ -58,15 +59,22 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
     moveItemInArray(this.summary, $event.previousIndex, $event.currentIndex);
   }
 
-  /**
-   * Go to a given timestamp. This is far from satisfying, since we need to reload the YouTube player.
-   */
-  goToTimestamp(timestamp: number) {
+  get player(): VideoPlayer {
+    switch (this.type) {
+      case 'vimeo':
+        return this.vimeoPlayer;
+      case 'youtube':
+        return this.youtubePlayer;
+      default:
+        return null;
+    }
+  }
+
+  setTime(seconds: number): void {
     if (this.editable) {
       return;
     }
 
-    this.youtubePlayer.cueVideoById(this.videoId, timestamp);
-    this.youtubePlayer.play();
+    this.player.setTime(seconds);
   }
 }
