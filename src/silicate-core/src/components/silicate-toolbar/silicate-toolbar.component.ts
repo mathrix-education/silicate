@@ -13,7 +13,7 @@ export class SilicateToolbarComponent implements OnInit {
   @HostBinding('style.top.px') y: number;
 
   constructor(
-    private toolbar: ToolbarService,
+    public toolbar: ToolbarService,
     private selection: SelectionService,
     private elementRef: ElementRef<HTMLElement>
   ) {
