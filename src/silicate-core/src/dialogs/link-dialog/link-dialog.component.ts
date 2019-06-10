@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject} from '@angular/core';
+import {Component, ElementRef, Inject, Renderer2} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {SelectionService} from '../../services/selection/selection.service';
 
@@ -13,6 +13,7 @@ export class LinkDialogComponent {
   target = '_blank';
 
   constructor(
+    private renderer2: Renderer2,
     private selection: SelectionService,
     public dialogRef: MatDialogRef<LinkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
@@ -44,14 +45,19 @@ export class LinkDialogComponent {
       this.elementRef = new ElementRef<HTMLLinkElement>(nativeLinkElement);
     }
 
-    this.elementRef.nativeElement.setAttribute('href', this.href);
-    this.elementRef.nativeElement.setAttribute('target', this.target);
+    this.renderer2.setAttribute(this.elementRef.nativeElement, 'href', this.href);
+    this.renderer2.setAttribute(this.elementRef.nativeElement, 'target', this.target);
+
     this.dialogRef.close();
   }
 
   unlink() {
-    const e = this.elementRef.nativeElement;
-    e.outerHTML = e.innerHTML;
+    this.renderer2.setProperty(
+      this.elementRef.nativeElement,
+      'outerHTML',
+      this.elementRef.nativeElement.innerHTML
+    );
+
     this.dialogRef.close();
   }
 }

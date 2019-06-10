@@ -58,11 +58,14 @@ export class ToolbarService {
 
   link(): void {
     this.selection.saveSelection();
-    this.dialog.open(LinkDialogComponent, {
-      width: '400px',
-      data: {
-        href: 'https://mathrix.fr'
-      }
-    });
+    this.dialog
+      .open(LinkDialogComponent, {
+        width: '400px',
+        data: {
+          href: 'https://mathrix.fr'
+        }
+      })
+      .afterClosed()
+      .subscribe(() => this.component.refresh());
   }
 }

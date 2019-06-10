@@ -1,4 +1,15 @@
-import {Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 import {SelectionService} from '../../services/selection/selection.service';
@@ -10,12 +21,14 @@ import {ToolbarService} from '../../services/toolbar/toolbar.service';
   templateUrl: './silicate-editable.component.html',
   styleUrls: ['./silicate-editable.component.scss'],
 })
-export class SilicateEditableComponent {
+export class SilicateEditableComponent implements AfterViewInit {
   private static readonly MAX_ID = 999999;
   private static readonly MIN_ID = 100000;
 
+  @Input() placeholder: string;
   @Output() contentChange = new EventEmitter<string>();
   @Output() enter = new EventEmitter<KeyboardEvent>();
+  @Output() delete = new EventEmitter<KeyboardEvent>();
 
   @HostBinding('id') id: string;
 
@@ -26,6 +39,7 @@ export class SilicateEditableComponent {
   };
 
   constructor(
+    private renderer2: Renderer2,
     public silicate: SilicateService,
     public selection: SelectionService,
     private toolbar: ToolbarService,
@@ -53,7 +67,7 @@ export class SilicateEditableComponent {
   }
 
   refresh() {
-    this.model.content = this.wrapper.nativeElement.innerHTML;
+    this.content = this.wrapper.nativeElement.innerHTML;
   }
 
   @HostListener('focus')
@@ -64,6 +78,13 @@ export class SilicateEditableComponent {
   @HostListener('keydown.enter', ['$event'])
   onEnter($event: KeyboardEvent) {
     this.enter.emit($event);
+  }
+
+  @HostListener('keydown.backspace', ['$event'])
+  onKeydown($event: KeyboardEvent) {
+    if (this.content === null || this.content.length === 0) {
+      this.delete.emit($event);
+    }
   }
 
   @HostListener('document:selectionchange', ['$event'])
@@ -94,11 +115,25 @@ export class SilicateEditableComponent {
         target: targetLink.getAttribute('target')
       };
 
-      this.dialog.open(LinkDialogComponent, {
-        width: '400px',
-        data: link
-      });
+      this.dialog
+        .open(LinkDialogComponent, {
+          width: '400px',
+          data: link
+        })
+        .afterClosed()
+        .subscribe(() => this.refresh());
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.placeholder) {
+      this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
+    }
+  }
+
+  focus() {
+    // TODO: place the caret at the end of the element
+    this.wrapper.nativeElement.focus();
   }
 
   /**

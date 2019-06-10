@@ -1,4 +1,8 @@
-<div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="center center">
+<div
+  fxLayout.lt-sm="column"
+  fxLayout.gt-md="row"
+  fxLayoutGap="16px"
+  fxLayoutAlign.gt-md="center center">
   <div fxFlex="grow">
     <div class="player-handler ratio ratio-16-9">
       <div *ngIf="loading" class="spinner-handler">
@@ -20,7 +24,10 @@
     </div>
   </div>
 
-  <div fxFlex="30%" fxLayout="column" fxLayoutGap="16px">
+  <div fxFlex.lt-sm="grow"
+       fxFlex.gt-md="30%"
+       fxLayout="column"
+       fxLayoutGap="16px">
     <mat-card *ngIf="silicate.editable">
       <mat-card-header>
         <mat-card-header>Options de la vidéo</mat-card-header>
@@ -49,11 +56,14 @@
         <mat-card-title>Sommaire</mat-card-title>
       </mat-card-header>
 
-      <mat-card-content fxLayout="column" fxLayoutGap="8px" cdkDropList (cdkDropListDropped)="onDrag($event)">
+      <mat-card-content fxLayout="column"
+                        fxLayoutGap="8px"
+                        cdkDropList
+                        [cdkDropListDisabled]="!silicate.editable"
+                        (cdkDropListDropped)="onDrag($event)">
         <div *ngFor="let s of summary; let i = index" (click)="!silicate.editable && setTime(summary[i].timestamp)"
              cdkDrag
              class="video-anchor-container"
-             matRipple
              fxFlex="grow"
              fxLayout="row"
              fxLayoutGap="16px"
