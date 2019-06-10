@@ -7,7 +7,7 @@ steps:
     name: 'node:11-alpine'
     waitFor: ['yarn:install']
     entrypoint: 'yarn'
-    args: ['run', 'ng', 'build', '--aot']
+    args: ['run', 'ng', 'build', '--aot', '--prod']
   - id: 'docker:build'
     waitFor: ['ng:build']
     name: 'gcr.io/cloud-builders/docker'
@@ -21,9 +21,13 @@ steps:
   - id: 'cloud-run:deploy'
     waitFor: ['docker:push']
     name: 'gcr.io/cloud-builders/gcloud'
-    args: ['beta', 'run',
-           'deploy', 'mtx-silicate-demo',
-           '--image', 'gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA',
-           '--region', 'us-central1']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        sleep 10
+        gcloud beta run deploy mtx-silicate-demo \
+          --image gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA
+          --region us-central1
 images: ['gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']

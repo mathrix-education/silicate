@@ -3,7 +3,6 @@ import {MatDialog} from '@angular/material';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {BrickDeclaration} from '../base-brick/brick-declaration';
 import {ImageBrick} from './image-brick';
 
 @Component({
@@ -12,13 +11,9 @@ import {ImageBrick} from './image-brick';
   styleUrls: ['./image-brick.component.scss']
 })
 export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
-  static declaration: BrickDeclaration = {
-    kind: 'image',
-    name: 'Image',
-    icon: 'image',
-    component: ImageBrickComponent,
-    toolbar: null
-  };
+  static readonly kind = 'image';
+  static readonly icon = 'image';
+  static readonly displayName = 'Image';
 
   constructor(
     public silicate: SilicateService,

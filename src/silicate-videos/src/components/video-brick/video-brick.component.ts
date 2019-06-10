@@ -13,13 +13,9 @@ import {VideoBrick} from './video-brick';
   styleUrls: ['./video-brick.component.scss']
 })
 export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implements OnInit {
-  static declaration = {
-    kind: 'video',
-    name: 'Vidéo',
-    icon: 'movie',
-    component: VideoBrickComponent,
-    toolbar: null
-  };
+  static readonly kind = 'video';
+  static readonly icon = 'movie';
+  static readonly displayName = 'Vidéo';
 
   @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
   @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;

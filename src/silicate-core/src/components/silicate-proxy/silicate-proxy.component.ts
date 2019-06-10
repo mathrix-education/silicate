@@ -10,9 +10,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {BrickDeclaration} from '../../bricks/base-brick/brick-declaration';
-import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
-import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 
 @Component({
@@ -25,15 +22,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
 
   initialized = false;
-  /**
-   * The components registered in the proxy.
-   */
-  bricks: any[] = [
-    TextBrickComponent,
-    ImageBrickComponent
-  ];
-  brickDeclarations: BrickDeclaration[] = [];
-  icon = 'settings';
   brickRef: ComponentRef<T>;
 
   constructor(
@@ -42,10 +30,20 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   ) {
   }
 
+  get icon() {
+    try {
+      return this.silicate.getIcon(this.silicate.data[this.index].kind);
+    } catch (e) {
+      return 'settings';
+    }
+  }
+
+  get bricks() {
+    return Object.values(this.silicate.bricksMappings);
+  }
+
   ngOnInit() {
     this.initialized = true;
-    // @ts-ignore
-    this.brickDeclarations = this.silicate.bricks.map(b => b.declaration);
     this.render();
   }
 
@@ -73,24 +71,16 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
       this.clear(); // Clear before rendering
     }
 
-    // Find the matching BrickDeclaration by comparing the 'kind' key.
-    const brickDeclaration = this.brickDeclarations.find((d: BrickDeclaration) => {
-      return d.kind === this.silicate.data[this.index].kind;
-    });
-
-    if (!brickDeclaration) {
-      throw new Error(`${this.silicate.data[this.index].kind} is not a valid brick type`);
-    }
-
     // Inject the right brick in the wrapper
-    const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(brickDeclaration.component);
+    const factory: ComponentFactory<T> = this.componentFactory
+      .resolveComponentFactory<T>(
+        this.silicate.getBrickComponent(this.silicate.data[this.index].kind)
+      );
 
     this.brickRef = this.wrapper.createComponent(factory);
     this.brickRef.instance.assign(this.silicate.data[this.index]);
     this.brickRef.instance.brickChange.subscribe((brick) => {
       this.silicate.data[this.index] = brick;
     });
-
-    this.icon = brickDeclaration.icon;
   }
 }

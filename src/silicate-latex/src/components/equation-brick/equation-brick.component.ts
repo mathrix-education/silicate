@@ -9,13 +9,9 @@ import {EquationBrick} from './equation-brick';
   styleUrls: ['./equation-brick.component.scss']
 })
 export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements OnInit {
-  static declaration = {
-    kind: 'equation',
-    name: 'Équation',
-    icon: 'functions',
-    component: EquationBrickComponent,
-    toolbar: null
-  };
+  static readonly kind = 'equation';
+  static readonly icon = 'functions';
+  static readonly displayName = 'Équation';
 
   constructor(public silicate: SilicateService) {
     super();

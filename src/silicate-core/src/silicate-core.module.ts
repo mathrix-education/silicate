@@ -23,7 +23,9 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
+import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
 import {TextBrickComponent} from './bricks/text-brick/text-brick.component';
+import {TitleBrickComponent} from './bricks/title-brick/title-brick.component';
 import {SilicateDebugComponent} from './components/silicate-debug/silicate-debug.component';
 import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
@@ -38,9 +40,12 @@ import {SelectionService} from './services/selection/selection.service';
 
 @NgModule({
   entryComponents: [
-    SilicateProxyComponent,
+    // Bricks
     TextBrickComponent,
+    TitleBrickComponent,
     ImageBrickComponent,
+    ListBrickComponent,
+    // Dialogs
     ImageBrickDialogComponent,
     LinkDialogComponent
   ],
@@ -57,6 +62,8 @@ import {SelectionService} from './services/selection/selection.service';
     VideoTimestampPipe,
     SilicateEditableComponent,
     SilicateToolbarComponent,
+    TitleBrickComponent,
+    ListBrickComponent,
   ],
   imports: [
     CommonModule,
@@ -94,6 +101,8 @@ export class SilicateCoreModule {
   static bricks() {
     return [
       TextBrickComponent,
+      TitleBrickComponent,
+      ListBrickComponent,
       ImageBrickComponent
     ];
   }

@@ -6,13 +6,30 @@ import {SilicateEditableComponent} from '../../components/silicate-editable/sili
 
 @Injectable()
 export class SilicateService {
-  id: string;
+  bricksMappings = {};
+  bricksValue: BaseBrickComponent[] = [];
   data$ = new BehaviorSubject<BaseBrick[]>([]);
   editable$ = new BehaviorSubject<boolean>(false);
-  bricks: BaseBrickComponent[] = [];
   editableComponent$ = new BehaviorSubject<SilicateEditableComponent>(null);
 
   constructor() {
+  }
+
+  get bricks() {
+    return this.bricksValue;
+  }
+
+  set bricks(newBricks: any[] | BaseBrickComponent[]) {
+    this.bricksValue = newBricks;
+
+    // Generate mappings
+    newBricks.forEach(brickComponent => {
+      this.bricksMappings[brickComponent.kind] = {
+        icon: brickComponent.icon,
+        displayName: brickComponent.displayName,
+        component: brickComponent
+      };
+    });
   }
 
   get data(): BaseBrick[] {
@@ -47,5 +64,21 @@ export class SilicateService {
 
   delete(index: number) {
     this.data.splice(index, 1);
+  }
+
+  getDeclaration(kind: string) {
+    if (!this.bricksMappings.hasOwnProperty(kind)) {
+      throw new Error(`${kind} is not a valid brick kind.`);
+    }
+
+    return this.bricksMappings[kind];
+  }
+
+  getIcon(kind: string) {
+    return this.getDeclaration(kind).icon;
+  }
+
+  getBrickComponent(kind: string) {
+    return this.getDeclaration(kind).component;
   }
 }

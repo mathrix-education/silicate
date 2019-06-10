@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let item of model.items; let i = index; trackBy: trackByFn">
+    <mtx-silicate-editable  [(content)]="model.items[i]" (enter)="onEnter($event, i)"></mtx-silicate-editable>
+  </li>
+</ul>

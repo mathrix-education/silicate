@@ -1,24 +1,33 @@
 import {EventEmitter, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
-import {BrickDeclaration} from './brick-declaration';
 
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
-  static declaration: BrickDeclaration = {} as BrickDeclaration;
+  static readonly kind: string;
+  static readonly icon: string;
+  static readonly displayName: string;
 
-  /** Called when the brick data change */
   @Output() brickChange = new EventEmitter<T>();
-  @Output() toolbar = new EventEmitter<any>();
-  @Output() enter = new EventEmitter();
-  model: any | T = {};
+
+  modelValue: any | T = {};
   protected dirty = false;
   protected original: any | T = null;
 
-  get hydrated() {
-    return this.original !== null;
-  }
 
   static empty() {
     return {};
+  }
+
+  get model() {
+    return this.modelValue;
+  }
+
+  set model(newModel) {
+    this.modelValue = newModel;
+    this.brickChange.emit(this.model);
+  }
+
+  get hydrated() {
+    return this.original !== null;
   }
 
   assign(data: T) {

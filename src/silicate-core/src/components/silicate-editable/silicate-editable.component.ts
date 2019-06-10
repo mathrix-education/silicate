@@ -15,7 +15,10 @@ export class SilicateEditableComponent {
   private static readonly MIN_ID = 100000;
 
   @Output() contentChange = new EventEmitter<string>();
+  @Output() enter = new EventEmitter<KeyboardEvent>();
+
   @HostBinding('id') id: string;
+
   @ViewChild('wrapper', {static: false}) wrapper: ElementRef<HTMLDivElement>;
 
   model = {
@@ -58,7 +61,13 @@ export class SilicateEditableComponent {
     this.silicate.editableComponent = this;
   }
 
+  @HostListener('keydown.enter', ['$event'])
+  onEnter($event: KeyboardEvent) {
+    this.enter.emit($event);
+  }
+
   @HostListener('document:selectionchange', ['$event'])
+  @HostListener('window:scroll', ['$event'])
   onSelection($event: Event) {
     if (!this.silicate.editable) {
       return;
