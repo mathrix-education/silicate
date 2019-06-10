@@ -7,7 +7,8 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
-  MatDialogModule, MatExpansionModule,
+  MatDialogModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -21,13 +22,42 @@ import {
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
+import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
+import {TextBrickComponent} from './bricks/text-brick/text-brick.component';
+import {SilicateDebugComponent} from './components/silicate-debug/silicate-debug.component';
+import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
+import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
-import {componentDeclarations, entryComponentsDeclarations} from './silicate.common';
+import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
+import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
+import {SafeHtmlPipe} from './pipes/safe-html.pipe';
+import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
+import {VideoTimestampPipe} from './pipes/video-timestamp.pipe';
+import {SelectionService} from './services/selection/selection.service';
 
 @NgModule({
-  entryComponents: [...entryComponentsDeclarations],
-  declarations: [...componentDeclarations],
+  entryComponents: [
+    SilicateProxyComponent,
+    TextBrickComponent,
+    ImageBrickComponent,
+    ImageBrickDialogComponent,
+    LinkDialogComponent
+  ],
+  declarations: [
+    SilicateProxyComponent,
+    TextBrickComponent,
+    ImageBrickComponent,
+    ImageBrickDialogComponent,
+    LinkDialogComponent,
+    SilicateDebugComponent,
+    SilicateWrapperComponent,
+    SafeHtmlPipe,
+    UnsafeHtmlPipe,
+    VideoTimestampPipe,
+    SilicateEditableComponent,
+    SilicateToolbarComponent,
+  ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -52,12 +82,19 @@ import {componentDeclarations, entryComponentsDeclarations} from './silicate.com
     DragDropModule
   ],
   providers: [
+    SelectionService,
     JsonPipe
   ],
   exports: [
     SilicateWrapperComponent,
-    SilicateProxyComponent
+    SilicateEditableComponent
   ]
 })
 export class SilicateCoreModule {
+  static bricks() {
+    return [
+      TextBrickComponent,
+      ImageBrickComponent
+    ];
+  }
 }

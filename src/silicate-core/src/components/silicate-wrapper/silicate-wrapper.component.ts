@@ -1,26 +1,10 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {
-  AfterViewInit,
-  Component,
-  ComponentFactoryResolver,
-  ComponentRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  QueryList,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef
-} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren, ViewContainerRef} from '@angular/core';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
+import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
-import {hasChanged} from '../../helpers/functions';
-import {BaseBrickToolbarComponent} from '../../toolbars/base-brick-toolbar/base-brick-toolbar.component';
+import {SilicateService} from '../../services/silicate/silicate.service';
+import {ToolbarService} from '../../services/toolbar/toolbar.service';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 
 /**
@@ -30,61 +14,28 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
 @Component({
   selector: 'mtx-silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
-  styleUrls: ['./silicate-wrapper.component.scss']
+  styleUrls: ['./silicate-wrapper.component.scss'],
+  providers: [
+    SilicateService,
+    ToolbarService
+  ]
 })
-export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+export class SilicateWrapperComponent implements OnInit {
   @Input() debug = false;
+  @Input() editable = false;
+  @Input() bricks: BaseBrickComponent[] = [];
+  @Input() data: BaseBrick[] = [];
   @Input() canEdit = false;
-  @Input() additionalBricks: any[] = [];
 
-  @Output() editableChange = new EventEmitter<boolean>();
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
   @ViewChild('wall', {read: ViewContainerRef, static: false}) wall: ViewContainerRef;
   @ViewChild('toolbar', {read: ViewContainerRef, static: false}) toolbar: ViewContainerRef;
   @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
-  model: {
-    editable: boolean,
-    data: BaseBrick[]
-  } = {
-    editable: false,
-    data: []
-  };
-
-  toolbarRef: ComponentRef<BaseBrickToolbarComponent>;
-  toolbarSubscriptions: Subscription[] = [];
-  brickChangesSubscriptions: Subscription[] = [];
-
-  constructor(private componentFactory: ComponentFactoryResolver) {
-  }
-
-  /*
-   * [(editable)]
-   * ============
-   */
-  @Input()
-  get editable() {
-    return this.model.editable;
-  }
-
-  set editable(editable: boolean) {
-    this.model.editable = editable;
-    this.editableChange.emit(editable);
-  }
-
-  /*
-   * [(data)]
-   * ========
-   */
-  @Input()
-  get data() {
-    return this.model.data;
-  }
-
-  set data(data: BaseBrick[]) {
-    this.model.data = data;
-    this.dataChange.emit(data);
+  constructor(
+    public silicate: SilicateService,
+  ) {
   }
 
   /*
@@ -92,93 +43,28 @@ export class SilicateWrapperComponent implements OnInit, AfterViewInit, OnChange
    * ===============
    */
   ngOnInit(): void {
-  }
+    this.silicate.bricks = this.bricks;
 
-  ngAfterViewInit(): void {
-    if (this.editable) {
-      this.subscribe();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (hasChanged(changes, 'editable')) {
-      if (changes.editable.currentValue === false) {
-        this.toolbar.clear();
-        this.unsubscribe();
-      }
-    }
-
-    if (hasChanged(changes, 'data')) {
-      if (this.proxies !== undefined) {
-        this.subscribe();
-      }
-    }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe();
-  }
-
-  /**
-   * Reset toolbar and brick changes subscriptions.
-   */
-  subscribe() {
-    this.unsubscribe();
-
-    this.proxies.map((proxy, proxyIndex) => {
-      this.toolbarSubscriptions.push(
-        proxy.brickRef.instance.toolbar.subscribe((toolbarComponent) => {
-
-          const factory = this.componentFactory.resolveComponentFactory<BaseBrickToolbarComponent>(toolbarComponent);
-          this.toolbar.clear();
-          this.toolbarRef = this.toolbar.createComponent(factory);
-          this.toolbarRef.instance.componentRef = proxy.brickRef;
-        })
-      );
-
-      this.brickChangesSubscriptions.push(
-        proxy.brickRef.instance.brickChange.subscribe((brick: BaseBrick) => {
-          // proxy.brickRef.instance.assign(brick);
-          this.model.data[proxyIndex] = brick;
-          this.dataChange.emit(this.model.data);
-        })
-      );
+    // [(data)]
+    this.silicate.data$.subscribe((newData: BaseBrick[]) => {
+      this.dataChange.emit(newData);
     });
+    this.silicate.data = this.data;
 
-    return this;
-  }
-
-  /**
-   * Destroy toolbar and brick changes subscriptions.
-   */
-  unsubscribe() {
-    this.toolbarSubscriptions.forEach(s => s.unsubscribe());
-    this.brickChangesSubscriptions.forEach(s => s.unsubscribe());
-
-    return this;
+    this.silicate.editable = this.editable;
   }
 
   /**
    * Append a new brick too the current content.
    */
   onNewBrick() {
-    this.data.push(TextBrickComponent.empty());
-    setTimeout(() => this.subscribe()); // We need to wait a tick
+    this.silicate.data.push(TextBrickComponent.empty());
   }
 
   /**
    * Material CDK Drag'n'Drop handler.
    */
   onDrag($event: CdkDragDrop<any>) {
-    moveItemInArray(this.data, $event.previousIndex, $event.currentIndex);
-    setTimeout(() => this.subscribe());
-  }
-
-  /**
-   * Delete a brick.
-   */
-  onDelete(index: number) {
-    this.data.splice(index, 1);
-    setTimeout(() => this.subscribe());
+    moveItemInArray(this.silicate.data, $event.previousIndex, $event.currentIndex);
   }
 }

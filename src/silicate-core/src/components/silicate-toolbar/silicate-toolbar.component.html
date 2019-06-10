@@ -1,1 +1,3 @@
-<ng-template #toolbar></ng-template>
+<mat-icon (mousedown)="toolbar.dispatch('bold', $event)">format_bold</mat-icon>
+<mat-icon (mousedown)="toolbar.dispatch('italic', $event)">format_italic</mat-icon>
+<mat-icon (mousedown)="toolbar.dispatch('link', $event)">link</mat-icon>

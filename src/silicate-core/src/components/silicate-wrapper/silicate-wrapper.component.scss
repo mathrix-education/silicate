@@ -1,6 +1,7 @@
 @import "../../../assets/drag-n-drop";
 
 :host {
+  position: relative;
   flex-direction: column;
 }
 

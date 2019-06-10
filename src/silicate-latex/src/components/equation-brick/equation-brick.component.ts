@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseBrickComponent} from '../../../../silicate-core/src/bricks/base-brick/base-brick.component';
+import {SilicateService} from '../../../../silicate-core/src/services/silicate/silicate.service';
 import {EquationBrick} from './equation-brick';
 
 @Component({
@@ -15,6 +16,10 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
     component: EquationBrickComponent,
     toolbar: null
   };
+
+  constructor(public silicate: SilicateService) {
+    super();
+  }
 
   /**
    * Default equation.

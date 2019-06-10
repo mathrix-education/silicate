@@ -2,18 +2,18 @@
      fxLayoutAlign="center center"
      fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
-    <button (click)="brick = brickDeclarations[i].component.empty()"
-            *ngFor="let brickDeclaration of brickDeclarations; let i = index"
-            [disabled]="icon === brickDeclarations[i].icon"
-            mat-menu-item>
-      <mat-icon>{{ brickDeclarations[i].icon }}</mat-icon>
-      {{ brickDeclarations[i].name }}
+    <button mat-menu-item
+            *ngFor="let brickDeclaration of brickDeclarations"
+            (click)="this.silicate.data[this.index] = brickDeclaration.component.empty()"
+            [disabled]="icon === brickDeclaration.icon">
+      <mat-icon>{{ brickDeclaration.icon }}</mat-icon>
+      {{ brickDeclaration.name }}
     </button>
   </mat-menu>
 
-  <button *ngIf="editable"
-          [matMenuTriggerFor]="brickType"
-          mat-icon-button>
+  <button *ngIf="silicate.editable"
+          mat-icon-button
+          [matMenuTriggerFor]="brickType">
     <mat-icon>{{ icon }}</mat-icon>
   </button>
 
@@ -21,7 +21,9 @@
     <ng-template #wrapper></ng-template>
   </div>
 
-  <button (click)="onDelete()" *ngIf="editable" mat-icon-button>
+  <button *ngIf="silicate.editable"
+          mat-icon-button
+          (click)="silicate.delete(index)">
     <mat-icon>delete</mat-icon>
   </button>
 </div>

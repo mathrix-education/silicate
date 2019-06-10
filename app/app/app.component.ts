@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {SilicateCoreModule} from '../../src/silicate-core/src/silicate-core.module';
 import {EquationBrickComponent} from '../../src/silicate-latex/src/components/equation-brick/equation-brick.component';
 import {VideoBrickComponent} from '../../src/silicate-videos/src/components/video-brick/video-brick.component';
 
@@ -52,7 +53,7 @@ export class AppComponent {
     {
       kind: 'text',
       style: 'normal',
-      content: 'Ceci est un texte enrichi avec du <strong>gras</strong> et de l\'<em>italique</em>.'
+      content: 'Ceci est un texte enrichi avec du <b>gras</b> et de l\'<i>italique</i>.'
     },
     {
       kind: 'text',
@@ -79,7 +80,8 @@ export class AppComponent {
       content: '\\zeta(s)=\\frac{1}{\\Gamma(s)}\\int_0^{\\infty}\\frac{x^{s-1}}{e^x-1}\\mathrm{d}x'
     }
   ];
-  additionalBricks = [
+  bricks = [
+    ...SilicateCoreModule.bricks(),
     VideoBrickComponent,
     EquationBrickComponent
   ];

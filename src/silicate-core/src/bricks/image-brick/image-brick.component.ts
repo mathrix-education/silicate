@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
+import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {BrickDeclaration} from '../base-brick/brick-declaration';
 import {ImageBrick} from './image-brick';
@@ -19,7 +20,10 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
     toolbar: null
   };
 
-  constructor(private matDialog: MatDialog) {
+  constructor(
+    public silicate: SilicateService,
+    private matDialog: MatDialog
+  ) {
     super();
   }
 
@@ -32,10 +36,6 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   }
 
   openDialog() {
-    if (!this.editable) {
-      return;
-    }
-
     const dialogRef = this.matDialog.open(ImageBrickDialogComponent, {
       width: '400px',
       data: this.serialize()

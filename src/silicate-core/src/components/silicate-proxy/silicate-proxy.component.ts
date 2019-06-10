@@ -3,34 +3,25 @@ import {
   ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
-  EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  Output,
-  SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {BrickDeclaration} from '../../bricks/base-brick/brick-declaration';
 import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
+import {SilicateService} from '../../services/silicate/silicate.service';
 
 @Component({
   selector: 'mtx-silicate-proxy',
   templateUrl: './silicate-proxy.component.html',
   styleUrls: ['./silicate-proxy.component.scss']
 })
-export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComponent> implements OnInit, OnChanges, OnDestroy {
-  @Input() editable: boolean;
-  @Input() additionalBricks: any[];
-
-  @Output() brickChange = new EventEmitter<BaseBrick>();
-  @Output() delete = new EventEmitter();
-
+export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComponent> implements OnInit, OnDestroy {
+  @Input() index: number;
   @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
 
   initialized = false;
@@ -42,45 +33,20 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     ImageBrickComponent
   ];
   brickDeclarations: BrickDeclaration[] = [];
-
   icon = 'settings';
-
-  brickValue: BaseBrick;
   brickRef: ComponentRef<T>;
 
-  constructor(private componentFactory: ComponentFactoryResolver) {
-  }
-
-  @Input()
-  get brick() {
-    return this.brickValue;
-  }
-
-  set brick(brick) {
-    const reRender = this.brickValue === undefined || this.brickValue.kind !== brick.kind;
-    this.brickValue = brick;
-    this.brickChange.emit(brick);
-
-    if (reRender) {
-      this.render();
-    }
+  constructor(
+    public silicate: SilicateService,
+    private componentFactory: ComponentFactoryResolver
+  ) {
   }
 
   ngOnInit() {
     this.initialized = true;
-    this.bricks = [...this.bricks, ...this.additionalBricks];
-    this.brickDeclarations = this.bricks.map(b => b.declaration);
+    // @ts-ignore
+    this.brickDeclarations = this.silicate.bricks.map(b => b.declaration);
     this.render();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.editable !== undefined) {
-      this.editable = changes.editable.currentValue;
-
-      if (this.brickRef !== undefined) {
-        this.brickRef.instance.editable = changes.editable.currentValue;
-      }
-    }
   }
 
   ngOnDestroy(): void {
@@ -108,27 +74,23 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
 
     // Find the matching BrickDeclaration by comparing the 'kind' key.
-    const brickDeclaration = this.brickDeclarations.find((d: BrickDeclaration) => d.kind === this.brick.kind);
+    const brickDeclaration = this.brickDeclarations.find((d: BrickDeclaration) => {
+      return d.kind === this.silicate.data[this.index].kind;
+    });
 
     if (!brickDeclaration) {
-      throw new Error(`${this.brick.kind} is not a valid brick type`);
+      throw new Error(`${this.silicate.data[this.index].kind} is not a valid brick type`);
     }
 
     // Inject the right brick in the wrapper
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(brickDeclaration.component);
 
     this.brickRef = this.wrapper.createComponent(factory);
-    this.brickRef.instance.assign(this.brick);
-    this.brickRef.instance.editable = this.editable;
+    this.brickRef.instance.assign(this.silicate.data[this.index]);
     this.brickRef.instance.brickChange.subscribe((brick) => {
-      this.brick = brick;
+      this.silicate.data[this.index] = brick;
     });
 
     this.icon = brickDeclaration.icon;
-  }
-
-  onDelete() {
-    this.clear();
-    this.delete.emit();
   }
 }

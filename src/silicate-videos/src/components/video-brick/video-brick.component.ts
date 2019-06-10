@@ -1,6 +1,7 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {BaseBrickComponent} from '../../../../silicate-core/src/bricks/base-brick/base-brick.component';
+import {SilicateService} from '../../../../silicate-core/src/services/silicate/silicate.service';
 import {VideoPlayer} from '../../players/video-player';
 import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';
@@ -29,6 +30,11 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
   };
 
   loading = true;
+
+
+  constructor(public silicate: SilicateService) {
+    super();
+  }
 
   get type() {
     return this.model.type;
@@ -76,10 +82,6 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
   }
 
   setTime(seconds: number): void {
-    if (this.editable) {
-      return;
-    }
-
     this.player.setTime(seconds);
   }
 }

@@ -1,8 +1,6 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
-import {DomHelpers} from '../../helpers/dom-helpers';
-import {TextBrickToolbarComponent} from '../../toolbars/text-brick-toolbar/text-brick-toolbar.component';
+import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TextBrick} from './text-brick';
 
@@ -12,17 +10,26 @@ import {TextBrick} from './text-brick';
   styleUrls: ['./text-brick.component.scss']
 })
 export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
+  static readonly kind = 'text';
+  static config = {
+    name: 'Texte',
+    icon: 'notes'
+  };
+  static readonly icon = 'notes';
   static declaration = {
     kind: 'text',
     name: 'Texte',
     icon: 'notes',
     component: TextBrickComponent,
-    toolbar: TextBrickToolbarComponent
+    toolbar: null
   };
 
   @ViewChild('wrapper', {static: true}) wrapper: ElementRef<HTMLDivElement>;
 
-  constructor(private dialog: MatDialog) {
+  constructor(
+    public silicate: SilicateService,
+    private dialog: MatDialog
+  ) {
     super();
   }
 
@@ -40,8 +47,7 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
   }
 
   set content(content: string) {
-    // Sanitize content
-    this.model.content = DomHelpers.stripHtml(content, '<i><b><a>');
+    this.model.content = content;
     this.brickChange.emit(this.model);
   }
 
@@ -51,47 +57,5 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
       style: 'normal',
       content: 'Texte...'
     };
-  }
-
-  onClick($event) {
-    if (!this.editable) {
-      return;
-    }
-
-    const targetLink = $event.target.closest('a');
-
-    if (targetLink !== null) {
-      const link = {
-        elementRef: new ElementRef(targetLink),
-        href: targetLink.getAttribute('href'),
-        target: targetLink.getAttribute('target')
-      };
-
-      this.dialog.open(LinkDialogComponent, {
-        width: '400px',
-        data: link
-      });
-    }
-  }
-
-  /**
-   * Wrap a selection into a given tag.
-   */
-  wrap(command: string) {
-    const selection = document.getSelection();
-
-    if (
-      selection.isCollapsed ||
-      !this.wrapper.nativeElement.contains(selection.anchorNode) ||
-      !this.wrapper.nativeElement.contains(selection.focusNode)
-    ) {
-      return;
-    }
-
-    if (['bold', 'italic'].includes(command)) {
-      document.execCommand(command, false);
-    }
-
-    this.content = this.wrapper.nativeElement.innerHTML;
   }
 }

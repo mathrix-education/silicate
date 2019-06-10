@@ -21,7 +21,7 @@
   </div>
 
   <div fxFlex="30%" fxLayout="column" fxLayoutGap="16px">
-    <mat-card *ngIf="editable">
+    <mat-card *ngIf="silicate.editable">
       <mat-card-header>
         <mat-card-header>Options de la vidéo</mat-card-header>
       </mat-card-header>
@@ -44,13 +44,13 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="editable || summary.length > 0">
+    <mat-card *ngIf="silicate.editable || summary.length > 0">
       <mat-card-header>
         <mat-card-title>Sommaire</mat-card-title>
       </mat-card-header>
 
       <mat-card-content fxLayout="column" fxLayoutGap="8px" cdkDropList (cdkDropListDropped)="onDrag($event)">
-        <div *ngFor="let s of summary; let i = index" (click)="setTime(summary[i].timestamp)"
+        <div *ngFor="let s of summary; let i = index" (click)="!silicate.editable && setTime(summary[i].timestamp)"
              cdkDrag
              class="video-anchor-container"
              matRipple
@@ -58,15 +58,16 @@
              fxLayout="row"
              fxLayoutGap="16px"
              fxLayoutAlign="center center">
-          <mat-icon *ngIf="editable" cdkDragHandle>drag_indicator</mat-icon>
+          <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
-          <mtx-video-brick-anchor [editable]="editable" [(timestamp)]="summary[i].timestamp"></mtx-video-brick-anchor>
-          <div fxFlex="grow" [contenteditable]="editable" [(ngModel)]="summary[i].title"></div>
-          <mat-icon *ngIf="editable" (click)="summary.splice(i, 1)">delete</mat-icon>
+          <mtx-video-brick-anchor [editable]="silicate.editable"
+                                  [(timestamp)]="summary[i].timestamp"></mtx-video-brick-anchor>
+          <mtx-silicate-editable fxFlex="grow" [(content)]="summary[i].title"></mtx-silicate-editable>
+          <mat-icon *ngIf="silicate.editable" (click)="summary.splice(i, 1)">delete</mat-icon>
         </div>
       </mat-card-content>
 
-      <mat-card-actions *ngIf="editable">
+      <mat-card-actions *ngIf="silicate.editable">
         <button mat-flat-button
                 color="primary"
                 (click)="summary.push({timestamp: 0, title: 'Nouvelle ancre'})">
