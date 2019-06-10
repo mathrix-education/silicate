@@ -25,9 +25,8 @@ steps:
     args:
       - '-c'
       - |
-        sleep 10
         gcloud beta run deploy mtx-silicate-demo \
-          --image gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA \
+          --image eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA \
           --region us-central1
-images: ['gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+images: ['eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']
