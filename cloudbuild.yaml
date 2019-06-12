@@ -16,18 +16,25 @@ steps:
       deploy/scripts/build.sh silicate-core
       deploy/scripts/build.sh silicate-latex
       deploy/scripts/build.sh silicate-videos
-    # deploy/scripts/build.sh silicate-demo
+    # yarn run ng build silicate-demo --prod
 
   # Deploy libraries
   # ----------------
-  - id: 'git:push'
+  - id: 'gcloud:kms:decrypt'
     name: 'gcr.io/cloud-builders/gcloud'
     waitFor: ['ng:build']
     entrypoint: 'bash'
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+    args: ['deploy/scripts/decrypt.sh']
+  - id: 'git:push'
+    name: 'gcr.io/cloud-builders/git'
+    waitFor: ['gcloud:kms:decrypt']
+    entrypoint: 'bash'
     args:
-      - '-c'
+      - -c
       - |
-        deploy/scripts/decrypt.sh
         deploy/scripts/setup_ssh.sh
         deploy/scripts/push.sh silicate-core
         deploy/scripts/push.sh silicate-latex
