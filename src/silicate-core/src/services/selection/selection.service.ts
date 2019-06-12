@@ -1,19 +1,14 @@
-import {isPlatformBrowser} from '@angular/common';
-import {ElementRef, Inject, Injectable, PLATFORM_ID} from '@angular/core';
+import {ElementRef, Injectable} from '@angular/core';
 
 @Injectable()
 export class SelectionService {
   private savedSelection;
 
-  constructor(@Inject(PLATFORM_ID) private platformId) {
+  constructor() {
   }
 
   private getSelection(): Selection {
-    if (isPlatformBrowser(this.platformId)) {
-      return window.getSelection();
-    } else {
-      return null;
-    }
+    return window.getSelection();
   }
 
   private selection(callback, returns = null) {

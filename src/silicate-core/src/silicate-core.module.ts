@@ -32,9 +32,7 @@ import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-t
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
 import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
 import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
-import {SafeHtmlPipe} from './pipes/safe-html.pipe';
 import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
-import {VideoTimestampPipe} from './pipes/video-timestamp.pipe';
 import {SelectionService} from './services/selection/selection.service';
 
 @NgModule({
@@ -56,9 +54,7 @@ import {SelectionService} from './services/selection/selection.service';
     LinkDialogComponent,
     SilicateDebugComponent,
     SilicateWrapperComponent,
-    SafeHtmlPipe,
     UnsafeHtmlPipe,
-    VideoTimestampPipe,
     SilicateEditableComponent,
     SilicateToolbarComponent,
     TitleBrickComponent,
