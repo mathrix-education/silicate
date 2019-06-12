@@ -5,7 +5,7 @@ NODE_MODULES_DIR="${WORKSPACE_DIR}/node_modules/@mathrix/$1"
 
 cd ${WORKSPACE_DIR}
 
-ng build $1
+yarn run ng build $1
 
 # Copy the build module to the node_modules
 rm -rf ${NODE_MODULES_DIR}
