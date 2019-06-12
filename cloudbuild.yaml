@@ -16,7 +16,7 @@ steps:
       deploy/scripts/build.sh silicate-core
       deploy/scripts/build.sh silicate-latex
       deploy/scripts/build.sh silicate-videos
-      deploy/scripts/build.sh silicate-demo
+    # deploy/scripts/build.sh silicate-demo
 
   # Deploy libraries
   # ----------------

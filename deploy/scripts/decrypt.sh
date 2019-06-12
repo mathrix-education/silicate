@@ -3,8 +3,8 @@
 # Decrypt the SSH key
 # -------------------
 gcloud kms decrypt \
-  --ciphertext-file=deploy/ssh/id_25519.enc \
-  --plaintext-file=/root/.ssh/id_25519 \
+  --ciphertext-file=deploy/ssh/id_ed25519.enc \
+  --plaintext-file=/root/.ssh/id_ed25519 \
   --location=global \
   --keyring=librairies-keyring \
   --key=silicate-key
