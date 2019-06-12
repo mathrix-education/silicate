@@ -20,7 +20,6 @@ import {
   MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
 import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
