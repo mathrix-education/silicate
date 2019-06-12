@@ -1,3 +1,3 @@
 # @mathrix/silicate-core
 
-Usage :
+See <https://github.com/mathrix-education/silicate> for Silicate Documentation.

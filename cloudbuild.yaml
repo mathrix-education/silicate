@@ -36,9 +36,9 @@ steps:
       - -c
       - |
         deploy/scripts/setup_ssh.sh
-        deploy/scripts/push.sh silicate-core
-        deploy/scripts/push.sh silicate-latex
-        deploy/scripts/push.sh silicate-videos
+        deploy/scripts/push.sh silicate-core $SHORT_SHA
+        deploy/scripts/push.sh silicate-latex $SHORT_SHA
+        deploy/scripts/push.sh silicate-videos $SHORT_SHA
     volumes:
       - name: 'ssh'
         path: /root/.ssh

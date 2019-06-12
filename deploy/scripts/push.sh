@@ -9,6 +9,6 @@ mv /tmp/$1/* ${DIST_DIR}/
 rm -rf /tmp/$1
 cd ${DIST_DIR}
 git add .
-git commit -m "chore(build): Build ${SHORT_SHA}" \
-  -m "See https://github.com/mathrix-education/silicate/commit/${COMMIT_SHA}"
+git commit -m "chore(build): Build $2" \
+  -m "See https://github.com/mathrix-education/silicate/commit/$2"
 git push
