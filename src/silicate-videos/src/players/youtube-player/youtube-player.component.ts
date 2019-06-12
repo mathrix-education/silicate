@@ -1,6 +1,6 @@
 /// <reference types="youtube" />
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {hasChanged} from '../../../../silicate-core/src/helpers/functions';
+import {hasChanged} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../video-player';
 
 @Component({

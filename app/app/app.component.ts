@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {SilicateCoreModule} from '../../src/silicate-core/src/silicate-core.module';
-import {EquationBrickComponent} from '../../src/silicate-latex/src/components/equation-brick/equation-brick.component';
+import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {EquationBrickComponent} from '@mathrix/silicate-latex';
 import {VideoBrickComponent} from '../../src/silicate-videos/src/components/video-brick/video-brick.component';
 
 @Component({

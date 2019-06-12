@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {SilicateService} from '@mathrix/silicate-core';
 
 @Component({
   selector: 'mtx-video-brick-anchor',
@@ -6,7 +7,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./video-brick-anchor.component.scss']
 })
 export class VideoBrickAnchorComponent implements OnInit {
-  @Input() editable = false;
   @Input() timestamp: number;
   @Output() timestampChange = new EventEmitter<number>();
 
@@ -16,7 +16,7 @@ export class VideoBrickAnchorComponent implements OnInit {
     secondsStr: null
   };
 
-  constructor() {
+  constructor(private silicate: SilicateService) {
   }
 
   ngOnInit() {

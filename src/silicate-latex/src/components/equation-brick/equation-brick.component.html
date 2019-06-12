@@ -1,12 +1,7 @@
 <div fxLayout="column">
-  <mat-form-field *ngIf="silicate.editable">
-    <mat-label>Équation</mat-label>
-    <label>
-      <input matInput [(ngModel)]="content">
-    </label>
-  </mat-form-field>
-
-  <ng-katex [equation]="content"
-            [options]="{displayMode: true}">
+  <ng-katex fxFlex="grow"
+            [equation]="model.content"
+            [options]="{displayMode: true}"
+            (click)="openEquationDialog()">
   </ng-katex>
 </div>

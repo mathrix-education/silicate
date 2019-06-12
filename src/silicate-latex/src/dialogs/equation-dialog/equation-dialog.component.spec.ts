@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NativePlayerComponent } from './native-player.component';
+import { EquationDialogComponent } from './equation-dialog.component';
 
-describe('NativePlayerComponent', () => {
-  let component: NativePlayerComponent;
-  let fixture: ComponentFixture<NativePlayerComponent>;
+describe('EquationDialogComponent', () => {
+  let component: EquationDialogComponent;
+  let fixture: ComponentFixture<EquationDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NativePlayerComponent ]
+      declarations: [ EquationDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NativePlayerComponent);
+    fixture = TestBed.createComponent(EquationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

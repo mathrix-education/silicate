@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "build silicate-core": "ng build silicate-core"
+    "ng build *": "ng build silicate-core && ng build silicate-latex && ng build silicate-videos"
   },
   "private": true,
   "dependencies": {
@@ -22,16 +22,10 @@
     "@angular/platform-browser": "~8.0.0",
     "@angular/platform-browser-dynamic": "~8.0.0",
     "@angular/router": "~8.0.0",
-    "@ng-stack/contenteditable": "^1.0.1",
-    "@types/vimeo__player": "^2.6.2",
-    "@types/youtube-player": "^5.5.1",
-    "@vimeo/player": "^2.9.1",
     "core-js": "^2.5.4",
-    "ng-katex": "^1.2.1",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.5.2",
     "tslib": "^1.9.0",
-    "youtube-player": "^5.5.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

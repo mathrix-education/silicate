@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {BaseBrickComponent} from '../../../../silicate-core/src/bricks/base-brick/base-brick.component';
-import {SilicateService} from '../../../../silicate-core/src/services/silicate/silicate.service';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {first} from 'rxjs/operators';
+import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
 
 @Component({
@@ -8,12 +10,15 @@ import {EquationBrick} from './equation-brick';
   templateUrl: './equation-brick.component.html',
   styleUrls: ['./equation-brick.component.scss']
 })
-export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements OnInit {
+export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
   static readonly kind = 'equation';
   static readonly icon = 'functions';
   static readonly displayName = 'Équation';
 
-  constructor(public silicate: SilicateService) {
+  constructor(
+    private dialog: MatDialog,
+    public silicate: SilicateService
+  ) {
     super();
   }
 
@@ -27,15 +32,22 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
     };
   }
 
-  ngOnInit() {
-  }
+  openEquationDialog() {
+    if (!this.silicate.editable) {
+      return;
+    }
 
-  get content() {
-    return this.model.content;
-  }
-
-  set content(content: string) {
-    this.model.content = content;
-    this.brickChange.emit(this.model);
+    this.dialog
+      .open(EquationDialogComponent, {
+        width: '800px',
+        data: this.model.content
+      })
+      .afterClosed()
+      .pipe(first())
+      .subscribe((equation: string) => {
+        if (equation) {
+          this.model.content = equation;
+        }
+      });
   }
 }

@@ -1,14 +1,30 @@
 {
   "name": "@mathrix/silicate-core",
   "version": "0.9.0",
-  "dependencies": {
-    "@angular/cdk": "^7.0.0 || ^8.0.0",
-    "@angular/material": "^7.0.0 || ^8.0.0",
-    "@angular/flex-layout": "^7.0.0-beta.24 || ^8.0.0-beta.26",
-    "@ng-stack/contenteditable": "^1.0.1"
+  "description": "Base package of Silicate Editor. Provides the most basic bricks (Text, Title, Image and List)",
+  "keywords": ["silicate", "editor", "wysiwyg"],
+  "homepage": "silicate.mathrix.fr",
+  "bugs": {
+    "url": "https://github.com/mathrix-education/mtx-silicate",
+    "email": "mathieu@mathrix.fr"
+  },
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Mathieu Bour",
+    "email": "mathieu@mathrix.fr",
+    "url": "https://developers.edutech.fr/mathieu-bour"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mathrix-education/mtx-silicate"
   },
   "peerDependencies": {
-    "@angular/common": "^7.2.0 || ^8.0.0",
-    "@angular/core": "^7.2.0 || ^8.0.0"
-  }
+    "@ng-stack/contenteditable": "^1.0.1",
+    "@angular/common": "^7.0.0 || ^8.0.0",
+    "@angular/core": "^7.0.0 || ^8.0.0",
+    "@angular/material": "^7.0.0 || ^8.0.0",
+    "@angular/cdk": "^7.0.0 || ^8.0.0",
+    "@angular/flex-layout": "^7.0.0-beta.24 || ^8.0.0-beta.26"
+  },
+  "private": true
 }

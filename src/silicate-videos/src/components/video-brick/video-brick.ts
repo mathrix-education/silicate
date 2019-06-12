@@ -1,4 +1,4 @@
-import {BaseBrick} from '../../../../silicate-core/src/bricks/base-brick/base-brick';
+import {BaseBrick} from '@mathrix/silicate-core';
 
 export interface VideoBrick extends BaseBrick {
   kind: 'video';

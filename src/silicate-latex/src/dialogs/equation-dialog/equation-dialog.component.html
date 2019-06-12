@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Éditeur d'équation</h1>
+<div mat-dialog-content>
+  <div fxLayout="column">
+    <mat-form-field>
+      <mat-label>Équation</mat-label>
+      <label>
+        <textarea matInput
+                  cdkAutosizeMinRows="1"
+                  cdkTextareaAutosize
+                  type="text"
+                  placeholder="f(x) = x^2"
+                  [(ngModel)]="equation">
+        </textarea>
+      </label>
+    </mat-form-field>
+
+    <ng-katex [equation]="equation"
+              [options]="{displayMode: true}">
+    </ng-katex>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Annuler</button>
+  <button mat-button [mat-dialog-close]="equation">Sauvegarder</button>
+</div>

@@ -9,15 +9,15 @@
         <mat-spinner></mat-spinner>
       </div>
 
-      <ng-container [ngSwitch]="type">
+      <ng-container [ngSwitch]="model.type">
         <mtx-youtube-player
           *ngSwitchCase="'youtube'"
-          [videoId]="videoId"
+          [videoId]="model.videoId"
           (ready)="loading = false">
         </mtx-youtube-player>
         <mtx-vimeo-player
           *ngSwitchCase="'vimeo'"
-          [videoId]="videoId"
+          [videoId]="model.videoId"
           (ready)="loading = false">
         </mtx-vimeo-player>
       </ng-container>
@@ -36,7 +36,7 @@
       <mat-card-content fxLayout="column">
         <mat-form-field>
           <mat-label>Source</mat-label>
-          <mat-select [(value)]="type">
+          <mat-select [(value)]="model.type">
             <mat-option value="youtube">YouTube</mat-option>
             <mat-option value="vimeo">Vimeo</mat-option>
           </mat-select>
@@ -45,13 +45,13 @@
         <mat-form-field>
           <mat-label>Identifiant</mat-label>
           <label>
-            <input matInput [(ngModel)]="videoId">
+            <input matInput [(ngModel)]="model.videoId">
           </label>
         </mat-form-field>
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="silicate.editable || summary.length > 0">
+    <mat-card *ngIf="silicate.editable || model.summary.length > 0">
       <mat-card-header>
         <mat-card-title>Sommaire</mat-card-title>
       </mat-card-header>
@@ -71,16 +71,16 @@
           <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
           <mtx-video-brick-anchor [editable]="silicate.editable"
-                                  [(timestamp)]="summary[i].timestamp"></mtx-video-brick-anchor>
-          <mtx-silicate-editable fxFlex="grow" [(content)]="summary[i].title"></mtx-silicate-editable>
-          <mat-icon *ngIf="silicate.editable" (click)="summary.splice(i, 1)">delete</mat-icon>
+                                  [(timestamp)]="model.summary[i].timestamp"></mtx-video-brick-anchor>
+          <mtx-silicate-editable fxFlex="grow" [(content)]="model.summary[i].title"></mtx-silicate-editable>
+          <mat-icon *ngIf="silicate.editable" (click)="model.summary.splice(i, 1)">delete</mat-icon>
         </div>
       </mat-card-content>
 
       <mat-card-actions *ngIf="silicate.editable">
         <button mat-flat-button
                 color="primary"
-                (click)="summary.push({timestamp: 0, title: 'Nouvelle ancre'})">
+                (click)="model.summary.push({timestamp: 0, title: 'Nouvelle ancre'})">
           Ajouter une ancre
         </button>
       </mat-card-actions>

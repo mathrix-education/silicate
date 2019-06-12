@@ -14,12 +14,11 @@ import {
   MatSelectModule
 } from '@angular/material';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
-import {SilicateCoreModule} from '../../silicate-core/src/silicate-core.module';
+import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
 import {VideoBrickComponent} from './components/video-brick/video-brick.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.component';
-import { NativePlayerComponent } from './players/native-player/native-player.component';
 
 @NgModule({
   entryComponents: [
@@ -29,8 +28,7 @@ import { NativePlayerComponent } from './players/native-player/native-player.com
     VideoBrickComponent,
     VideoBrickAnchorComponent,
     VimeoPlayerComponent,
-    YoutubePlayerComponent,
-    NativePlayerComponent
+    YoutubePlayerComponent
   ],
   imports: [
     CommonModule,
@@ -44,15 +42,11 @@ import { NativePlayerComponent } from './players/native-player/native-player.com
     MatSelectModule,
     MatInputModule,
     MatIconModule,
-    MatRippleModule,
     MatButtonModule,
     DragDropModule
   ],
   exports: [
-    VideoBrickComponent,
-    VideoBrickAnchorComponent,
-    VimeoPlayerComponent,
-    YoutubePlayerComponent
+    VideoBrickComponent
   ]
 })
 export class SilicateVideosModule {
