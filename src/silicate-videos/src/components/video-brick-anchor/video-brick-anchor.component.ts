@@ -16,7 +16,7 @@ export class VideoBrickAnchorComponent implements OnInit {
     secondsStr: null
   };
 
-  constructor(private silicate: SilicateService) {
+  constructor(public silicate: SilicateService) {
   }
 
   ngOnInit() {

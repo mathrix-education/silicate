@@ -2,11 +2,11 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "src",
-  "defaultProject": "silicate-app",
+  "defaultProject": "silicate-demo",
   "projects": {
-    "silicate-app": {
-      "root": "app",
-      "sourceRoot": "app",
+    "silicate-demo": {
+      "root": "src/silicate-demo",
+      "sourceRoot": "src/silicate-demo/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "deploy/demo",
+            "outputPath": "dist/silicate-demo",
             "index": "app/index.html",
             "main": "app/main.ts",
             "polyfills": "app/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "silicate-app:build"
+            "browserTarget": "silicate-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "silicate-app:build:production"
+              "browserTarget": "silicate-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "silicate-app:build"
+            "browserTarget": "silicate-demo:build"
           }
         },
         "lint": {

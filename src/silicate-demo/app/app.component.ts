@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {EquationBrickComponent} from '@mathrix/silicate-latex';
-import {VideoBrickComponent} from '../../src/silicate-videos/src/components/video-brick/video-brick.component';
+import {SilicateLatexModule} from '@mathrix/silicate-latex';
+import {SilicateVideosModule} from '@mathrix/silicate-videos';
 
 @Component({
   selector: 'app-root',
@@ -97,7 +97,7 @@ export class AppComponent {
 
   bricks = [
     ...SilicateCoreModule.bricks(),
-    VideoBrickComponent,
-    EquationBrickComponent
+    ...SilicateLatexModule.bricks(),
+    ...SilicateVideosModule.bricks()
   ];
 }

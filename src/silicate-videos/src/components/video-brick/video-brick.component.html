@@ -61,7 +61,7 @@
                         cdkDropList
                         [cdkDropListDisabled]="!silicate.editable"
                         (cdkDropListDropped)="onDrag($event)">
-        <div *ngFor="let s of summary; let i = index" (click)="!silicate.editable && setTime(summary[i].timestamp)"
+        <div *ngFor="let s of model.summary; let i = index" (click)="!silicate.editable && setTime(model.summary[i].timestamp)"
              cdkDrag
              class="video-anchor-container"
              fxFlex="grow"
@@ -70,8 +70,7 @@
              fxLayoutAlign="center center">
           <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
-          <mtx-video-brick-anchor [editable]="silicate.editable"
-                                  [(timestamp)]="model.summary[i].timestamp"></mtx-video-brick-anchor>
+          <mtx-video-brick-anchor [(timestamp)]="model.summary[i].timestamp"></mtx-video-brick-anchor>
           <mtx-silicate-editable fxFlex="grow" [(content)]="model.summary[i].title"></mtx-silicate-editable>
           <mat-icon *ngIf="silicate.editable" (click)="model.summary.splice(i, 1)">delete</mat-icon>
         </div>

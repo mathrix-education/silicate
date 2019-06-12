@@ -3,8 +3,8 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {SilicateLatexModule} from '../../src/silicate-latex/src/silicate-latex.module';
-import {SilicateVideosModule} from '../../src/silicate-videos/src/silicate-videos.module';
+import {SilicateLatexModule} from '@mathrix/silicate-latex';
+import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
 
 @NgModule({

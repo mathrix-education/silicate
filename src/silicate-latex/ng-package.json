@@ -3,5 +3,9 @@
   "dest": "../../dist/silicate-latex",
   "lib": {
     "entryFile": "src/silicate-latex.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@mathrix/silicate-core",
+    "ng-katex"
+  ]
 }

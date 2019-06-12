@@ -93,6 +93,7 @@ import {SelectionService} from './services/selection/selection.service';
     JsonPipe
   ],
   exports: [
+    ContenteditableModule,
     SilicateWrapperComponent,
     SilicateEditableComponent
   ]

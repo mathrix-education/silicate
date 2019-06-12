@@ -1,4 +1,3 @@
-/// <reference types="youtube" />
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {hasChanged} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../video-player';

@@ -2,6 +2,13 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/silicate-videos",
   "lib": {
-    "entryFile": "src/silicate-videos.ts"
-  }
+    "entryFile": "./src/silicate-videos.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "@mathrix/silicate-core",
+    "@vimeo/player",
+    "youtube-player",
+    "@types/vimeo__player",
+    "@types/youtube"
+  ]
 }

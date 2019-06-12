@@ -716,15 +716,10 @@
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-12.0.12.tgz#45dd1d0638e8c8f153e87d296907659296873916"
   integrity sha512-SOhuU4wNBxhhTHxYaiG5NY4HBhDIDnJF60GU+2LqHAdKKer86//e4yg69aENCtQ04n0ovz+tq2YPME5t5yp4pw==
 
-"@types/youtube-player@^5.5.1":
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/@types/youtube-player/-/youtube-player-5.5.1.tgz#648dcbfb994d50b529ec77ff0abfef655d95d571"
-  integrity sha512-6pcJWr/GoMec8a/mhR6uF4DKTPOYD8pnwZiwtxs+holUTIaEarihEX+dgl8NFCZE66698DTE7ehx5JYhF+IhFw==
-
-"@types/youtube@^0.0.37":
-  version "0.0.37"
-  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.37.tgz#c18a5af9c7c1a77f9f16eb2abd6e93940c909719"
-  integrity sha512-JnDSFd3SzKOrWZnzMYgtgPoA496+PMIo3lC4dh0DbMC/viVwlwOCLhRYi5i7DQWKQg36s70Bq1FoW651/Z/26Q==
+"@types/youtube@^0.0.38":
+  version "0.0.38"
+  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.38.tgz#04aa5efa61f4d52e9cf682575a9dfed58f31e8c1"
+  integrity sha512-rS0nLlnnZIvOfBNT4957rkKRMHjHxutoVhSEzowocYgNiTMVBmN+Hbkf/L3TeGMMtts9uKZ9gw7O2JLHREVnIw==
 
 "@vimeo/player@^2.9.1":
   version "2.9.1"

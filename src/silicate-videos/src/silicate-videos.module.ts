@@ -10,11 +10,10 @@ import {
   MatIconModule,
   MatInputModule,
   MatProgressSpinnerModule,
-  MatRippleModule,
   MatSelectModule
 } from '@angular/material';
-import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
 import {VideoBrickComponent} from './components/video-brick/video-brick.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
@@ -45,9 +44,10 @@ import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.co
     MatButtonModule,
     DragDropModule
   ],
-  exports: [
-    VideoBrickComponent
-  ]
+  exports: [VideoBrickComponent]
 })
 export class SilicateVideosModule {
+  static bricks() {
+    return [VideoBrickComponent];
+  }
 }
