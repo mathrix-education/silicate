@@ -35,7 +35,7 @@ steps:
   # Deploy demo
   # -----------
   - id: 'docker:build'
-    waitFor: ['ng:build']
+    waitFor: ['git:push']
     name: 'gcr.io/cloud-builders/docker'
     args: ['build',
            '-t', 'eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA',
