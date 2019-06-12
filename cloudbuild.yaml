@@ -9,7 +9,7 @@ steps:
   - id: 'ng:build'
     name: 'node:11-alpine'
     waitFor: ['yarn:install']
-    entrypoint: 'bash'
+    entrypoint: 'ash'
     args:
     - '-c'
     - |
