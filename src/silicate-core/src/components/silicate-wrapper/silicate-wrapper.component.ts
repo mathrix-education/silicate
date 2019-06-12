@@ -1,8 +1,21 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {TextBrickComponent} from '../../bricks/text-brick/text-brick.component';
+import {hasChanged} from '../../helpers/functions';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
@@ -20,12 +33,10 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
     ToolbarService
   ]
 })
-export class SilicateWrapperComponent implements OnInit {
-  @Input() debug = false;
+export class SilicateWrapperComponent implements OnInit, OnChanges {
   @Input() editable = false;
   @Input() bricks: BaseBrickComponent[] = [];
   @Input() data: BaseBrick[] = [];
-  @Input() canEdit = false;
 
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
@@ -52,6 +63,15 @@ export class SilicateWrapperComponent implements OnInit {
     this.silicate.data = this.data;
 
     this.silicate.editable = this.editable;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (hasChanged(changes, 'editable')) {
+      this.silicate.editable = changes.editable.currentValue;
+    }
+    if (hasChanged(changes, 'data')) {
+      this.silicate.data = changes.data.currentValue;
+    }
   }
 
   /**

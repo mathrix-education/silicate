@@ -25,7 +25,6 @@ import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
 import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
 import {TextBrickComponent} from './bricks/text-brick/text-brick.component';
 import {TitleBrickComponent} from './bricks/title-brick/title-brick.component';
-import {SilicateDebugComponent} from './components/silicate-debug/silicate-debug.component';
 import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
@@ -52,7 +51,6 @@ import {SelectionService} from './services/selection/selection.service';
     ImageBrickComponent,
     ImageBrickDialogComponent,
     LinkDialogComponent,
-    SilicateDebugComponent,
     SilicateWrapperComponent,
     UnsafeHtmlPipe,
     SilicateEditableComponent,
