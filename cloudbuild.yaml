@@ -3,21 +3,47 @@ steps:
     name: 'node:11-alpine'
     entrypoint: 'yarn'
     args: ['install']
-  - id: 'ng:build'
+
+  # Build silicate libraries and demo
+  # ---------------------------------
+  - id: 'ng:build:silicate'
     name: 'node:11-alpine'
     waitFor: ['yarn:install']
-    entrypoint: 'yarn'
-    args: ['run', 'ng', 'build', '--aot', '--prod']
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      deploy/scripts/build.sh silicate-core
+      deploy/scripts/build.sh silicate-latex
+      deploy/scripts/build.sh silicate-videos
+      deploy/scripts/build.sh silicate-demo
+
+  # Deploy libraries
+  # ----------------
+  - id: 'git:push'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        deploy/scripts/decrypt.sh
+        deploy/scripts/setup_ssh.sh
+        deploy/scripts/push.sh silicate-core
+        deploy/scripts/push.sh silicate-latex
+        deploy/scripts/push.sh silicate-videos
+
+  # Deploy demo
+  # -----------
   - id: 'docker:build'
     waitFor: ['ng:build']
     name: 'gcr.io/cloud-builders/docker'
     args: ['build',
-           '-t', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA',
+           '-t', 'eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA',
            '.']
   - id: 'docker:push'
     waitFor: ['docker:build']
     name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+    args: ['push', 'eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']
   - id: 'cloud-run:deploy'
     waitFor: ['docker:push']
     name: 'gcr.io/cloud-builders/gcloud'
@@ -25,8 +51,8 @@ steps:
     args:
       - '-c'
       - |
-        gcloud beta run deploy mtx-silicate-demo \
-          --image eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA \
+        gcloud beta run deploy silicate-demo \
+          --image eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA \
           --region us-central1
-images: ['eu.gcr.io/$PROJECT_ID/mtx-silicate-demo:$SHORT_SHA']
+images: ['eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']

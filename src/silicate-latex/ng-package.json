@@ -5,7 +5,6 @@
     "entryFile": "src/silicate-latex.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "@mathrix/silicate-core",
     "ng-katex"
   ]
 }

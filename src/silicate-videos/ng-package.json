@@ -5,7 +5,6 @@
     "entryFile": "./src/silicate-videos.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "@mathrix/silicate-core",
     "@vimeo/player",
     "youtube-player",
     "@types/vimeo__player",

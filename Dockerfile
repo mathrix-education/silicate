@@ -9,6 +9,6 @@ RUN apk add -U nginx bash
 COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY deploy/nginx/vhost.conf /etc/nginx/conf.d/default.conf
 COPY deploy/entrypoint.sh /entrypoint.sh
-COPY dist /var/www
+COPY dist/silicate-demo /var/www
 
 ENTRYPOINT ["/entrypoint.sh"]

@@ -3,5 +3,8 @@
   "dest": "../../dist/silicate-core",
   "lib": {
     "entryFile": "src/silicate-core.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "@ng-stack/contenteditable"
+  ]
 }

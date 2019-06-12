@@ -6,7 +6,7 @@
   "projects": {
     "silicate-demo": {
       "root": "src/silicate-demo",
-      "sourceRoot": "src/silicate-demo/src",
+      "sourceRoot": "src/silicate-demo",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -19,16 +19,16 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/silicate-demo",
-            "index": "app/index.html",
-            "main": "app/main.ts",
-            "polyfills": "app/polyfills.ts",
-            "tsConfig": "app/tsconfig.app.json",
+            "index": "src/silicate-demo/index.html",
+            "main": "src/silicate-demo/main.ts",
+            "polyfills": "src/silicate-demo/polyfills.ts",
+            "tsConfig": "src/silicate-demo/tsconfig.app.json",
             "assets": [
-              "app/favicon.ico",
-              "app/assets"
+              "src/silicate-demo/favicon.ico",
+              "src/silicate-demo/assets"
             ],
             "styles": [
-              "app/styles.scss"
+              "src/silicate-demo/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -37,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "app/environments/environment.ts",
-                  "with": "app/environments/environment.prod.ts"
+                  "replace": "src/silicate-demo/environments/environment.ts",
+                  "with": "src/silicate-demo/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -81,8 +81,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "app/tsconfig.app.json",
-              "app/tsconfig.spec.json"
+              "src/silicate-demo/tsconfig.app.json",
+              "src/silicate-demo/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

@@ -18,8 +18,10 @@
     "type": "git",
     "url": "https://github.com/mathrix-education/mtx-silicate"
   },
+  "dependencies": {
+    "@ng-stack/contenteditable": "^1.0.1"
+  },
   "peerDependencies": {
-    "@ng-stack/contenteditable": "^1.0.1",
     "@angular/common": "^7.0.0 || ^8.0.0",
     "@angular/core": "^7.0.0 || ^8.0.0",
     "@angular/material": "^7.0.0 || ^8.0.0",

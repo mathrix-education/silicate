@@ -43,4 +43,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-deploy/demo/
+deploy/ssh/id_ed25519
