@@ -2,7 +2,7 @@
 # -------------------------
 # Setup the SSH environment
 # -------------------------
-chmod 600 /root/.ssh/id_25519
+chmod 600 /root/.ssh/id_ed25519
 cat <<EOF >/root/.ssh/config
 Hostname github.com
 IdentityFile /root/.ssh/id_ed25519
