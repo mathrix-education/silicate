@@ -6,7 +6,7 @@ steps:
 
   # Build silicate libraries and demo
   # ---------------------------------
-  - id: 'ng:build:silicate'
+  - id: 'ng:build'
     name: 'node:11-alpine'
     waitFor: ['yarn:install']
     entrypoint: 'bash'
@@ -22,6 +22,7 @@ steps:
   # ----------------
   - id: 'git:push'
     name: 'gcr.io/cloud-builders/gcloud'
+    waitFor: ['ng:build']
     entrypoint: 'bash'
     args:
       - '-c'
