@@ -13,9 +13,9 @@ steps:
     args:
     - '-c'
     - |
-      deploy/scripts/build.sh silicate-core
-      deploy/scripts/build.sh silicate-latex
-      deploy/scripts/build.sh silicate-videos
+      yarn run ng build silicate-core
+      yarn run ng build silicate-latex
+      yarn run ng build silicate-videos
       yarn run ng build silicate-demo --prod
 
   # Deploy libraries

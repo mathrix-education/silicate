@@ -20,28 +20,22 @@
       "dom"
     ],
     "paths": {
-      "silicate-core": [
+      "@mathrix/silicate-core": [
         "dist/silicate-core"
       ],
-      "silicate-core/*": [
-        "dist/silicate/*"
+      "@mathrix/silicate-core/*": [
+        "dist/silicate-core/*"
       ],
-      "silicate-video": [
-        "dist/silicate-video"
-      ],
-      "silicate-video/*": [
-        "dist/silicate-video/*"
-      ],
-      "silicate-videos": [
+      "@mathrix/silicate-videos": [
         "dist/silicate-videos"
       ],
-      "silicate-videos/*": [
+      "@mathrix/silicate-videos/*": [
         "dist/silicate-videos/*"
       ],
-      "silicate-latex": [
+      "@mathrix/silicate-latex": [
         "dist/silicate-latex"
       ],
-      "silicate-latex/*": [
+      "@mathrix/silicate-latex/*": [
         "dist/silicate-latex/*"
       ]
     }
