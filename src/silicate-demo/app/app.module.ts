@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {SilicateLatexModule} from '@mathrix/silicate-latex';
@@ -13,6 +14,7 @@ import {AppComponent} from './app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     SilicateCoreModule,
     SilicateLatexModule,
     SilicateVideosModule,

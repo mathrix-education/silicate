@@ -67,7 +67,6 @@ import {SelectionService} from './services/selection/selection.service';
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FormsModule,
     ContenteditableModule,
     FlexLayoutModule,
