@@ -39,6 +39,10 @@ steps:
         deploy/scripts/push.sh silicate-core
         deploy/scripts/push.sh silicate-latex
         deploy/scripts/push.sh silicate-videos
+    volumes:
+      - name: 'ssh'
+        path: /root/.ssh
+
 
   # Deploy demo
   # -----------
