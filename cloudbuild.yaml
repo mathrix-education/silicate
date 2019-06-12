@@ -16,7 +16,7 @@ steps:
       deploy/scripts/build.sh silicate-core
       deploy/scripts/build.sh silicate-latex
       deploy/scripts/build.sh silicate-videos
-    # yarn run ng build silicate-demo --prod
+      yarn run ng build silicate-demo --prod
 
   # Deploy libraries
   # ----------------
