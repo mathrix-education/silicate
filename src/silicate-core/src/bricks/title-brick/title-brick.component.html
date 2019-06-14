@@ -1,7 +1,3 @@
 <h1>
-  <mtx-silicate-editable
-    [content]="get('content')"
-    (contentChange)="set('content', $event)"
-  >
-  </mtx-silicate-editable>
+  <mtx-silicate-editable [(content)]="this.data.content"></mtx-silicate-editable>
 </h1>

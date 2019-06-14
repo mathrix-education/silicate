@@ -5,10 +5,12 @@ import {
   ComponentRef,
   Input,
   OnDestroy,
-  OnInit, Type,
+  OnInit,
+  Type,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 
@@ -23,6 +25,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   initialized = false;
   brickRef: ComponentRef<T>;
+  dataChangeSubscription: Subscription;
 
   constructor(
     public silicate: SilicateService,
@@ -32,7 +35,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   get icon() {
     try {
-      return this.silicate.resolve(this.silicate.get(this.index).kind);
+      return this.silicate.resolve(this.silicate.get(this.index).kind).icon;
     } catch (e) {
       return 'settings';
     }
@@ -55,6 +58,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    * Clear the proxy content.
    */
   clear() {
+    this.dataChangeSubscription.unsubscribe();
     this.wrapper.clear(); // Remove any content in the wrapper
     this.brickRef.destroy(); // Destroy the Brick reference if it exists.
   }
@@ -76,5 +80,11 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const component = this.silicate.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory);
+
+    // [(data)]
+    this.brickRef.instance.data = this.silicate.get(this.index);
+    this.dataChangeSubscription = this.brickRef.instance.dataChanged.subscribe((data) => {
+      this.silicate.patch(this.index, data);
+    });
   }
 }

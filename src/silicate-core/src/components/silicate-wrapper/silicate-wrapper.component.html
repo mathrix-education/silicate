@@ -4,7 +4,7 @@
      cdkDropList
      [cdkDropListDisabled]="!silicate.editable"
      (cdkDropListDropped)="onDrag($event)">
-  <div *ngFor="let brick of data; let i = index"
+  <div *ngFor="let brick of data; let i = index; trackBy: trackByFn"
        cdkDrag
        class="brick-container"
        fxLayout="row"

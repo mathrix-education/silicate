@@ -13,10 +13,6 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
   static readonly icon = 'notes';
   static readonly displayName = 'Texte';
 
-  constructor(public silicate: SilicateService) {
-    super(silicate);
-  }
-
   static empty(): TextBrick {
     return {
       kind: 'text',

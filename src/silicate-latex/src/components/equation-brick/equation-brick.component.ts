@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, KeyValueDiffers} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
@@ -17,9 +17,10 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
 
   constructor(
     private dialog: MatDialog,
-    public silicate: SilicateService
+    private silicate: SilicateService,
+    protected differs: KeyValueDiffers
   ) {
-    super(silicate);
+    super(differs);
   }
 
   /**
@@ -40,13 +41,13 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
     this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
-        data: this.get('content')
+        data: this.data.content
       })
       .afterClosed()
       .pipe(first())
       .subscribe((equation: string) => {
         if (equation) {
-          this.set('content', equation);
+          this.data.content = equation;
         }
       });
   }

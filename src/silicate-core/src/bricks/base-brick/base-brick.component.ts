@@ -1,8 +1,7 @@
-import {Input} from '@angular/core';
-import {SilicateService} from '../../services/silicate/silicate.service';
+import {DoCheck, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 
-export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
+export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements DoCheck {
   /**
    * BaseBrickComponent declaration.
    * In this case, it is pretty irrelevant but allow surcharging the declaration.
@@ -11,27 +10,29 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> {
   static readonly icon: string = 'settings';
   static readonly displayName: string = 'none';
 
-  /** The index of the brick in the SilicateService */
-  @Input() index: number;
+  @Input() editable = false;
+  @Input() data: T;
+  @Output() dataChanged = new EventEmitter<T>();
 
-  constructor(public silicate: SilicateService) {
+  protected differ: KeyValueDiffer<keyof T, any>;
+
+  constructor(protected differs: KeyValueDiffers) {
+    this.differ = this.differs.find({}).create();
   }
 
-  static empty() {
-    return {};
-  }
+  ngDoCheck() {
+    const changes = this.differ.diff(this.data);
 
-  get(key: string = null): any {
-    if (key === null) {
-      return this.silicate.get(this.index);
-    } else {
-      return this.silicate.get(this.index)[key];
+    if (changes) {
+      let shouldEmit = false;
+
+      changes.forEachChangedItem((change) => {
+        shouldEmit = shouldEmit || JSON.stringify(change.currentValue) !== JSON.stringify(change.previousValue);
+      });
+
+      if (shouldEmit) {
+        this.dataChanged.emit(this.data);
+      }
     }
-  }
-
-  set(key: string, value: any) {
-    const original: T = this.get(null) as T;
-    original[key] = value;
-    this.silicate.patch(this.index, original);
   }
 }

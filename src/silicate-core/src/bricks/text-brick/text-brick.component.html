@@ -1,7 +1,6 @@
 <p>
   <mtx-silicate-editable
-    [content]="get('content')"
-    (contentChange)="set('content', $event)"
+    [(content)]="data.content"
     (enter)="onEnter($event)"
   >
   </mtx-silicate-editable>

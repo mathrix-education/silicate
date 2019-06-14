@@ -1,10 +1,9 @@
 <ul>
-  <li *ngFor="let item of items; let i = index; trackBy: trackByFn">
+  <li *ngFor="let item of data.items; let i = index; trackBy: trackByFn">
     <mtx-silicate-editable [placeholder]="'Texte...'"
-                           [content]="items[i]"
-                           (contentChange)="this.setItemContent(i, $event)"
+                           [(content)]="data.items[i]"
                            (enter)="onEnter($event, i)"
-                           (delete)="onDeleteItem($event, i)">
+                           (delete)="data.items.splice(i, 1)">
     </mtx-silicate-editable>
   </li>
 </ul>

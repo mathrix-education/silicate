@@ -1,7 +1,6 @@
-import {Injectable, Type} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {BrickDeclaration, BrickMappings, Wall} from '../../silicate-core.types';
 
 @Injectable()
@@ -74,9 +73,9 @@ export class SilicateService {
    * @param brick The brick data.
    */
   patch(index: number, brick: BaseBrick) {
-    this.wall$.next(
-      this.wall.splice(index, 1, brick)
-    );
+    const wall = this.wall;
+    wall[index] = brick;
+    this.wall$.next(wall);
     return this;
   }
 

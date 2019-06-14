@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, KeyValueDiffers} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {first} from 'rxjs/operators';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
@@ -17,10 +17,11 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   static readonly displayName = 'Image';
 
   constructor(
-    public silicate: SilicateService,
+    protected differs: KeyValueDiffers,
+    private silicate: SilicateService,
     private matDialog: MatDialog
   ) {
-    super(silicate);
+    super(differs);
   }
 
   static empty(): ImageBrick {
@@ -32,16 +33,20 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   }
 
   openDialog() {
+    if (!this.silicate.editable) {
+      return;
+    }
+
     this.matDialog
       .open(ImageBrickDialogComponent, {
         width: '400px',
-        data: this.get()
+        data: {...this.data}
       })
       .afterClosed()
       .pipe(first())
       .subscribe((data => {
         if (data) {
-          this.silicate.patch(this.index, data);
+          this.data = data;
         }
       }));
   }

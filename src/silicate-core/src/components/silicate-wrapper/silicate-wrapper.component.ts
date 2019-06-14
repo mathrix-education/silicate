@@ -26,7 +26,7 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
   selector: 'mtx-silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
   styleUrls: ['./silicate-wrapper.component.scss'],
-  providers: []
+  providers: [SilicateService]
 })
 export class SilicateWrapperComponent implements OnInit, OnChanges {
   @Input() editable = false;
@@ -41,6 +41,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
   constructor(public silicate: SilicateService) {
+  }
+
+  trackByFn(index: any, item: any) {
+    return index;
   }
 
   /*
@@ -63,9 +67,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
     if (hasChanged(changes, 'editable')) {
       this.silicate.editable = changes.editable.currentValue;
     }
-    if (hasChanged(changes, 'data')) {
-      this.silicate.wall$.next(changes.data.currentValue);
-    }
+
+    // if (hasChanged(changes, 'data')) {
+    //   this.silicate.wall$.next(changes.data.currentValue);
+    // }
   }
 
   /**
