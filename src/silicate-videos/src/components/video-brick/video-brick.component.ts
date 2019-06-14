@@ -1,7 +1,6 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {BaseBrickComponent} from '@mathrix/silicate-core';
-import {SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../../players/video-player';
 import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';
@@ -20,27 +19,18 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
   @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
   @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;
 
-  mappings = {
-    youtube: 'YouTube',
-    vimeo: 'Vimeo'
-  };
-
   loading = true;
 
 
   constructor(public silicate: SilicateService) {
-    super();
+    super(silicate);
   }
 
   ngOnInit() {
   }
 
-  onDrag($event: CdkDragDrop<any>) {
-    moveItemInArray(this.model.summary, $event.previousIndex, $event.currentIndex);
-  }
-
   get player(): VideoPlayer {
-    switch (this.model.type) {
+    switch (this.get('type')) {
       case 'vimeo':
         return this.vimeoPlayer;
       case 'youtube':
@@ -50,7 +40,33 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
     }
   }
 
+  get type() {
+    return this.get('type');
+  }
+
+  set type(newType: string) {
+    this.set('type', newType);
+  }
+
+  get videoId() {
+    return this.get('videoId');
+  }
+
+  set videoId(newVideoId: string) {
+    this.set('videoId', newVideoId);
+  }
+
+  onDrag($event: CdkDragDrop<any>) {
+    const summary = this.get('summary');
+    moveItemInArray(summary, $event.previousIndex, $event.currentIndex);
+    this.set('summary', summary);
+  }
+
   setTime(seconds: number): void {
+    if (this.silicate.editable) {
+      return;
+    }
+
     this.player.setTime(seconds);
   }
 }

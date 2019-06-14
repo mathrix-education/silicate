@@ -12,12 +12,12 @@
       <ng-container [ngSwitch]="model.type">
         <mtx-youtube-player
           *ngSwitchCase="'youtube'"
-          [videoId]="model.videoId"
+          [videoId]="videoId"
           (ready)="loading = false">
         </mtx-youtube-player>
         <mtx-vimeo-player
           *ngSwitchCase="'vimeo'"
-          [videoId]="model.videoId"
+          [videoId]="videoId"
           (ready)="loading = false">
         </mtx-vimeo-player>
       </ng-container>
@@ -36,7 +36,7 @@
       <mat-card-content fxLayout="column">
         <mat-form-field>
           <mat-label>Source</mat-label>
-          <mat-select [(value)]="model.type">
+          <mat-select [(value)]="type">
             <mat-option value="youtube">YouTube</mat-option>
             <mat-option value="vimeo">Vimeo</mat-option>
           </mat-select>
@@ -45,13 +45,13 @@
         <mat-form-field>
           <mat-label>Identifiant</mat-label>
           <label>
-            <input matInput [(ngModel)]="model.videoId">
+            <input matInput [(ngModel)]="videoId">
           </label>
         </mat-form-field>
       </mat-card-content>
     </mat-card>
 
-    <mat-card *ngIf="silicate.editable || model.summary.length > 0">
+    <mat-card *ngIf="silicate.editable || get('summary').length > 0">
       <mat-card-header>
         <mat-card-title>Sommaire</mat-card-title>
       </mat-card-header>
@@ -61,7 +61,8 @@
                         cdkDropList
                         [cdkDropListDisabled]="!silicate.editable"
                         (cdkDropListDropped)="onDrag($event)">
-        <div *ngFor="let s of model.summary; let i = index" (click)="!silicate.editable && setTime(model.summary[i].timestamp)"
+        <div *ngFor="let s of get('summary'); let i = index"
+             (click)="setTime(model.summary[i].timestamp)"
              cdkDrag
              class="video-anchor-container"
              fxFlex="grow"

@@ -1,3 +1,8 @@
 <p>
-  <mtx-silicate-editable [(content)]="this.model.content" (enter)="onEnter($event)"></mtx-silicate-editable>
+  <mtx-silicate-editable
+    [content]="get('content')"
+    (contentChange)="set('content', $event)"
+    (enter)="onEnter($event)"
+  >
+  </mtx-silicate-editable>
 </p>

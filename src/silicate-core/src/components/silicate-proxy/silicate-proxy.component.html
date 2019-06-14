@@ -3,11 +3,11 @@
      fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
     <button mat-menu-item
-            *ngFor="let brick of bricks"
-            (click)="this.silicate.data[this.index] = brick.component.empty()"
-            [disabled]="icon === brick.icon">
-      <mat-icon>{{ brick.icon }}</mat-icon>
-      {{ brick.displayName }}
+            *ngFor="let d of declarations"
+            (click)="silicate.insert(index + 1, d.component.empty())"
+            [disabled]="icon === d.icon">
+      <mat-icon>{{ d.icon }}</mat-icon>
+      {{ d.displayName }}
     </button>
   </mat-menu>
 

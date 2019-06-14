@@ -17,7 +17,8 @@ export class AppComponent {
     ...SilicateLatexModule.bricks(),
     ...SilicateVideosModule.bricks()
   ];
-  data = MATHS_FIXTURE;
+
+  data = DEMO_FIXTURE;
 
   fixtures = [
     {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TextBrick} from './text-brick';
@@ -13,8 +13,8 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
   static readonly icon = 'notes';
   static readonly displayName = 'Texte';
 
-  constructor(private silicate: SilicateService) {
-    super();
+  constructor(public silicate: SilicateService) {
+    super(silicate);
   }
 
   static empty(): TextBrick {
@@ -26,6 +26,5 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
 
   onEnter($event: KeyboardEvent) {
     $event.preventDefault();
-    this.silicate.insert(this.silicate.data.indexOf(this.model) + 1, TextBrickComponent.empty());
   }
 }

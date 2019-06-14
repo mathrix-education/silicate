@@ -1,7 +1,12 @@
 <div fxLayoutAlign="center center">
-  <ng-container *ngIf="!model.src">
-    <button (click)="silicate.editable && openDialog()" mat-flat-button color="primary">Choisir l'image</button>
+  <ng-container *ngIf="!get('src')">
+    <button (click)="openDialog()" mat-flat-button color="primary">Choisir l'image</button>
   </ng-container>
 
-  <img (click)="silicate.editable && openDialog()" *ngIf="model.src" [alt]="model.alt" [src]="model.src">
+  <img
+    *ngIf="get('src')"
+    [src]="get('src')"
+    [alt]="get('alt')"
+    (click)="openDialog()"
+  >
 </div>

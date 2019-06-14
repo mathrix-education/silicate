@@ -19,7 +19,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
     private dialog: MatDialog,
     public silicate: SilicateService
   ) {
-    super();
+    super(silicate);
   }
 
   /**
@@ -40,13 +40,13 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
     this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
-        data: this.model.content
+        data: this.get('content')
       })
       .afterClosed()
       .pipe(first())
       .subscribe((equation: string) => {
         if (equation) {
-          this.model.content = equation;
+          this.set('content', equation);
         }
       });
   }

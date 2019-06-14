@@ -18,6 +18,7 @@ import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-b
 import {VideoBrickComponent} from './components/video-brick/video-brick.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.component';
+import { VideoBrickSummaryComponent } from './components/video-brick-summary/video-brick-summary.component';
 
 @NgModule({
   entryComponents: [
@@ -27,7 +28,8 @@ import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.co
     VideoBrickComponent,
     VideoBrickAnchorComponent,
     VimeoPlayerComponent,
-    YoutubePlayerComponent
+    YoutubePlayerComponent,
+    VideoBrickSummaryComponent
   ],
   imports: [
     CommonModule,

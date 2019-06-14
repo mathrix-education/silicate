@@ -5,7 +5,7 @@ import {
   ComponentRef,
   Input,
   OnDestroy,
-  OnInit,
+  OnInit, Type,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -32,14 +32,14 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   get icon() {
     try {
-      return this.silicate.getIcon(this.silicate.data[this.index].kind);
+      return this.silicate.resolve(this.silicate.get(this.index).kind);
     } catch (e) {
       return 'settings';
     }
   }
 
-  get bricks() {
-    return Object.values(this.silicate.bricksMappings);
+  get declarations() {
+    return Object.values(this.silicate.mappings);
   }
 
   ngOnInit() {
@@ -72,15 +72,9 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
 
     // Inject the right brick in the wrapper
-    const factory: ComponentFactory<T> = this.componentFactory
-      .resolveComponentFactory<T>(
-        this.silicate.getBrickComponent(this.silicate.data[this.index].kind)
-      );
-
+    const kind = this.silicate.get(this.index).kind;
+    const component = this.silicate.resolve(kind).component;
+    const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory);
-    this.brickRef.instance.assign(this.silicate.data[this.index]);
-    this.brickRef.instance.brickChange.subscribe((brick) => {
-      this.silicate.data[this.index] = brick;
-    });
   }
 }

@@ -1,30 +1,25 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Type} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
+import {BrickDeclaration, BrickMappings, Wall} from '../../silicate-core.types';
 
 @Injectable()
 export class SilicateService {
-  bricksMappings = {};
-  bricksValue: BaseBrickComponent[] = [];
-  data$ = new BehaviorSubject<BaseBrick[]>([]);
-  editable$ = new BehaviorSubject<boolean>(false);
-  editableComponent$ = new BehaviorSubject<SilicateEditableComponent>(null);
+  /** If the edition should be permitted */
+  editable = false;
+  /** The Bricks mappings */
+  mappings: BrickMappings = {};
+  /** The wall, which contains the bricks data. */
+  wall$ = new BehaviorSubject<Wall>([]);
 
-  constructor() {
-  }
-
-  get bricks() {
-    return this.bricksValue;
-  }
-
-  set bricks(newBricks: any[] | BaseBrickComponent[]) {
-    this.bricksValue = newBricks;
-
-    // Generate mappings
-    newBricks.forEach(brickComponent => {
-      this.bricksMappings[brickComponent.kind] = {
+  /**
+   * Generate bricks mappings using the given brick static declarations.
+   * @param bricks Array of the used BrickComponents
+   */
+  generateMappings(bricks: any[]) {
+    bricks.forEach(brickComponent => {
+      this.mappings[brickComponent.kind] = {
         icon: brickComponent.icon,
         displayName: brickComponent.displayName,
         component: brickComponent
@@ -32,53 +27,68 @@ export class SilicateService {
     });
   }
 
-  get data(): BaseBrick[] {
-    return this.data$.value;
-  }
-
-  set data(newData: BaseBrick[]) {
-    this.data$.next(newData);
-  }
-
-  get editable() {
-    return this.editable$.value;
-  }
-
-  set editable(newEditable: boolean) {
-    this.editable$.next(newEditable);
-  }
-
-  get editableComponent() {
-    return this.editableComponent$.value;
-  }
-
-  set editableComponent(newRichTextComponent: SilicateEditableComponent) {
-    if (!this.editableComponent || this.editableComponent.id !== newRichTextComponent.id) {
-      this.editableComponent$.next(newRichTextComponent);
-    }
-  }
-
-  insert(index: number, data: BaseBrick) {
-    this.data.splice(index, 0, data);
-  }
-
-  delete(index: number) {
-    this.data.splice(index, 1);
-  }
-
-  getDeclaration(kind: string) {
-    if (!this.bricksMappings.hasOwnProperty(kind)) {
+  /**
+   * Get the brick declaration matching with the given kind.
+   * @param kind The Brick kind.
+   */
+  resolve(kind: string): BrickDeclaration {
+    if (!this.mappings.hasOwnProperty(kind)) {
       throw new Error(`${kind} is not a valid brick kind.`);
     }
 
-    return this.bricksMappings[kind];
+    return this.mappings[kind];
   }
 
-  getIcon(kind: string) {
-    return this.getDeclaration(kind).icon;
+  /**
+   * Get a copy of the wall$ BehaviorSubject. Since the structure of a brick is relatively free, we cannot make any assumption of its
+   * structure and the JSON intermediate is fine.
+   * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
+   */
+  get wall(): Wall {
+    return JSON.parse(JSON.stringify(this.wall$.value));
   }
 
-  getBrickComponent(kind: string) {
-    return this.getDeclaration(kind).component;
+  /**
+   * Get the brick at a given index.
+   * @param index The brick index.
+   */
+  get<T = any>(index: number): T {
+    return this.wall[index];
+  }
+
+  /**
+   * Insert a brick at a given index.
+   * @param index The brick index.
+   * @param brick The brick data.
+   */
+  insert(index: number, brick: BaseBrick) {
+    this.wall$.next(
+      this.wall.splice(index, 0, brick)
+    );
+    return this;
+  }
+
+  /**
+   * Edit a brick at a given index.
+   * @param index The brick index.
+   * @param brick The brick data.
+   */
+  patch(index: number, brick: BaseBrick) {
+    this.wall$.next(
+      this.wall.splice(index, 1, brick)
+    );
+    return this;
+  }
+
+
+  /**
+   * Delete a brick at a given index.
+   * @param index The brick index.
+   */
+  delete(index: number) {
+    this.wall$.next(
+      this.wall.splice(index)
+    );
+    return this;
   }
 }

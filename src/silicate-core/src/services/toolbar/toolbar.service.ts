@@ -5,7 +5,9 @@ import {SilicateEditableComponent} from '../../components/silicate-editable/sili
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 import {SelectionService} from '../selection/selection.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);

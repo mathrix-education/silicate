@@ -3,23 +3,27 @@
   <div fxLayout="column">
     <mat-form-field>
       <mat-label>URL de l'image</mat-label>
-      <input [(ngModel)]="data.src"
-             matInput
-             placeholder="https://placehold.it/400x150"
-             type="url">
+      <label>
+        <input [(ngModel)]="data.src"
+               matInput
+               placeholder="https://placehold.it/400x150"
+               type="url">
+      </label>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Texte alternatif</mat-label>
-      <input [(ngModel)]="data.alt"
-             matInput
-             placeholder="Description"
-             type="text">
+      <label>
+        <input [(ngModel)]="data.alt"
+               matInput
+               placeholder="Description"
+               type="text">
+      </label>
     </mat-form-field>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="dialogRef.close()" mat-button>Annuler</button>
-  <button [mat-dialog-close]="data" cdkFocusInitial mat-button>Sauvegarder</button>
+  <button (click)="dialogRef.close()" mat-button>Fermer</button>
+  <button mat-button [mat-dialog-close]="data">Sauvegarder</button>
 </div>

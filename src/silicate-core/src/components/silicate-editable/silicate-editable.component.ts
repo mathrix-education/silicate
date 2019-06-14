@@ -70,11 +70,6 @@ export class SilicateEditableComponent implements AfterViewInit {
     this.content = this.wrapper.nativeElement.innerHTML;
   }
 
-  @HostListener('focus')
-  onFocus() {
-    this.silicate.editableComponent = this;
-  }
-
   @HostListener('keydown.enter', ['$event'])
   onEnter($event: KeyboardEvent) {
     this.enter.emit($event);

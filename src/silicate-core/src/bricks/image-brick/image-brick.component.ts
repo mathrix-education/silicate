@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
+import {first} from 'rxjs/operators';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
@@ -19,7 +20,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
     public silicate: SilicateService,
     private matDialog: MatDialog
   ) {
-    super();
+    super(silicate);
   }
 
   static empty(): ImageBrick {
@@ -31,20 +32,17 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   }
 
   openDialog() {
-    const dialogRef = this.matDialog.open(ImageBrickDialogComponent, {
-      width: '400px',
-      data: this.serialize()
-    });
-
-    dialogRef.afterClosed().subscribe((data: ImageBrick) => {
-      if (this.dirty) {
-        this.assign(data);
-        this.brickChange.emit(this.serialize());
-      }
-    });
-  }
-
-  serialize() {
-    return this.model;
+    this.matDialog
+      .open(ImageBrickDialogComponent, {
+        width: '400px',
+        data: this.get()
+      })
+      .afterClosed()
+      .pipe(first())
+      .subscribe((data => {
+        if (data) {
+          this.silicate.patch(this.index, data);
+        }
+      }));
   }
 }
