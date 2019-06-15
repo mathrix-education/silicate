@@ -83,4 +83,23 @@ export const DEMO_FIXTURE = [
       }
     ]
   },
+  {
+    kind: 'card',
+    title: 'Test de Material Card',
+    data: [
+      {
+        kind: 'text',
+        content: 'Texte dans la Material Card'
+      },
+      {
+        kind: 'title',
+        content: 'Image de démonstration'
+      },
+      {
+        kind: 'image',
+        src: 'https://placehold.it/400x100',
+        alt: 'Image 400x100'
+      }
+    ]
+  }
 ];

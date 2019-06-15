@@ -72,6 +72,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
 
   /**
    * Material CDK Drag'n'Drop handler.
+   * TODO: Upgrade this
    */
   onDrag($event: CdkDragDrop<any>) {
     const wall = this.silicate.wall;

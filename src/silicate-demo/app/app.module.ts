@@ -8,12 +8,17 @@ import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {SilicateLatexModule} from '@mathrix/silicate-latex';
 import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
-import { DebugComponent } from './components/debug/debug.component';
+import {CardBrickComponent} from './components/bricks/card-brick/card-brick.component';
+import {DebugComponent} from './components/debug/debug.component';
 
 @NgModule({
+  entryComponents: [
+    CardBrickComponent
+  ],
   declarations: [
     AppComponent,
     DebugComponent,
+    CardBrickComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,7 @@ import { DebugComponent } from './components/debug/debug.component';
     MatSlideToggleModule,
     SilicateCoreModule,
     SilicateLatexModule,
-    SilicateVideosModule,
+    SilicateVideosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
