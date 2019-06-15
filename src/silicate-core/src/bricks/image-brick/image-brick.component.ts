@@ -17,11 +17,10 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   static readonly displayName = 'Image';
 
   constructor(
-    protected differs: KeyValueDiffers,
     private silicate: SilicateService,
     private matDialog: MatDialog
   ) {
-    super(differs);
+    super();
   }
 
   static empty(): ImageBrick {

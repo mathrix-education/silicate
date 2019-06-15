@@ -13,6 +13,7 @@ import {
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
+import {BrickDeclaration} from '../../silicate-core.types';
 
 @Component({
   selector: 'mtx-silicate-proxy',
@@ -41,7 +42,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
-  get declarations() {
+  get declarations(): BrickDeclaration[] {
     return Object.values(this.silicate.mappings);
   }
 
@@ -64,6 +65,25 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   }
 
   /**
+   * Swap the current brick with another
+   * @param declaration The new brick declaration.
+   */
+  swap(declaration: BrickDeclaration) {
+    const old = this.silicate.get(this.index);
+    const empty = declaration.component.empty();
+
+    // UX: copy the old properties to the new brick instance if they exist
+    Object.keys(old).forEach(k => {
+      if (k !== 'kind' && empty.hasOwnProperty(k)) {
+        empty[k] = old[k];
+      }
+    });
+
+    this.silicate.patch(this.index, empty);
+    this.render();
+  }
+
+  /**
    * Render the Brick in the proxy.
    */
   render() {
@@ -81,7 +101,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory);
 
-    // [(data)]
+    // [(data)] "artificial" two-way binding
     this.brickRef.instance.data = this.silicate.get(this.index);
     this.dataChangeSubscription = this.brickRef.instance.dataChanged.subscribe((data) => {
       this.silicate.patch(this.index, data);

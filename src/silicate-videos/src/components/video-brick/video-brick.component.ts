@@ -1,6 +1,5 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Component, KeyValueDiffers, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Component, ViewChild} from '@angular/core';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../../players/video-player';
 import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
@@ -12,7 +11,7 @@ import {VideoBrick} from './video-brick';
   templateUrl: './video-brick.component.html',
   styleUrls: ['./video-brick.component.scss']
 })
-export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implements OnInit {
+export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
   static readonly kind = 'video';
   static readonly icon = 'movie';
   static readonly displayName = 'Vidéo';
@@ -22,14 +21,8 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
 
   loading = true;
 
-  constructor(
-    public silicate: SilicateService,
-    protected differs: KeyValueDiffers
-  ) {
-    super(differs);
-  }
-
-  ngOnInit() {
+  constructor(public silicate: SilicateService) {
+    super();
   }
 
   get player(): VideoPlayer {
@@ -45,7 +38,6 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> implemen
 
   addAnchor() {
     this.data.summary.push({timestamp: 0, title: 'Nouvelle ancre'});
-    this.dataChanged.emit(this.data);
   }
 
   onDrag($event: CdkDragDrop<any>) {

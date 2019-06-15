@@ -17,6 +17,7 @@ import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {hasChanged} from '../../helpers/functions';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Type explicit declared in Object literals:
@@ -67,10 +68,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
     if (hasChanged(changes, 'editable')) {
       this.silicate.editable = changes.editable.currentValue;
     }
-
-    // if (hasChanged(changes, 'data')) {
-    //   this.silicate.wall$.next(changes.data.currentValue);
-    // }
   }
 
   /**
@@ -79,6 +76,9 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   onDrag($event: CdkDragDrop<any>) {
     const wall = this.silicate.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
-    this.silicate.wall$.next(wall);
+    this.silicate.wall$.next([]);
+    setTimeout(() => {
+      this.silicate.wall$.next(wall);
+    });
   }
 }

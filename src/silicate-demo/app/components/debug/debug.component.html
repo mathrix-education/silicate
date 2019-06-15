@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Debug</mat-card-title>
+    <mat-card-subtitle>Données de l'éditeur</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <pre [innerHTML]="strip(data | json)" style="width: 100%; white-space: pre-wrap;"></pre>
+  </mat-card-content>
+</mat-card>

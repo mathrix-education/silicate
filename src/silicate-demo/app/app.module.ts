@@ -8,10 +8,12 @@ import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {SilicateLatexModule} from '@mathrix/silicate-latex';
 import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
+import { DebugComponent } from './components/debug/debug.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DebugComponent,
   ],
   imports: [
     BrowserModule,

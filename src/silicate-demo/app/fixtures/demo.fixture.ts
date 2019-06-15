@@ -1,7 +1,7 @@
 export const DEMO_FIXTURE = [
   {
     kind: 'title',
-    content: 'Bienvenue sur l\'éditeur Silicate (not lazy-loaded) !'
+    content: 'Bienvenue sur l\'éditeur Silicate !'
   },
   {
     kind: 'text',
@@ -14,7 +14,8 @@ export const DEMO_FIXTURE = [
   },
   {
     kind: 'text',
-    content: 'Ceci est un texte enrichi avec du <b>gras</b> et de l\'<i>italique</i>.'
+    content: 'Ceci est un texte enrichi avec du <b>gras</b> et de l\'<i>italique</i>. Il y aussi un lien vers <a' +
+      ' href="https://mathrix.fr" target="_blank">Mathrix.fr</a>'
   },
   {
     kind: 'list',

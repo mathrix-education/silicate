@@ -26,17 +26,17 @@
       "@mathrix/silicate-core/*": [
         "dist/silicate-core/*"
       ],
-      "@mathrix/silicate-videos": [
-        "dist/silicate-videos"
-      ],
-      "@mathrix/silicate-videos/*": [
-        "dist/silicate-videos/*"
-      ],
       "@mathrix/silicate-latex": [
         "dist/silicate-latex"
       ],
       "@mathrix/silicate-latex/*": [
         "dist/silicate-latex/*"
+      ],
+      "@mathrix/silicate-videos": [
+        "dist/silicate-videos"
+      ],
+      "@mathrix/silicate-videos/*": [
+        "dist/silicate-videos/*"
       ]
     }
   }

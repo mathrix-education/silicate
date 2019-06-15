@@ -1,4 +1,4 @@
-import {DoCheck, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, Output} from '@angular/core';
+import {DoCheck, EventEmitter, Input, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements DoCheck {
@@ -14,25 +14,16 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
   @Input() data: T;
   @Output() dataChanged = new EventEmitter<T>();
 
-  protected differ: KeyValueDiffer<keyof T, any>;
-
-  constructor(protected differs: KeyValueDiffers) {
-    this.differ = this.differs.find({}).create();
-  }
+  /** The previously checked data, JSON stringified. */
+  private dataJSON: string;
 
   ngDoCheck() {
-    const changes = this.differ.diff(this.data);
+    const dataJSONChallenge = JSON.stringify(this.data);
 
-    if (changes) {
-      let shouldEmit = false;
-
-      changes.forEachChangedItem((change) => {
-        shouldEmit = shouldEmit || JSON.stringify(change.currentValue) !== JSON.stringify(change.previousValue);
-      });
-
-      if (shouldEmit) {
-        this.dataChanged.emit(this.data);
-      }
+    if (this.dataJSON !== dataJSONChallenge) {
+      this.dataChanged.emit(this.data);
     }
+
+    this.dataJSON = dataJSONChallenge;
   }
 }

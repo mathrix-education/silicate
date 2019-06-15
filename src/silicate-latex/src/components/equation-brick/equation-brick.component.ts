@@ -1,4 +1,4 @@
-import {Component, KeyValueDiffers} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
@@ -17,10 +17,9 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
 
   constructor(
     private dialog: MatDialog,
-    private silicate: SilicateService,
-    protected differs: KeyValueDiffers
+    private silicate: SilicateService
   ) {
-    super(differs);
+    super();
   }
 
   /**

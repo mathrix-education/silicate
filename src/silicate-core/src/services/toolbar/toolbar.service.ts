@@ -42,6 +42,7 @@ export class ToolbarService {
     if (typeof this[key] === 'function') {
       this[key]($event);
     }
+    // Custom callbacks
   }
 
   bold(): void {
