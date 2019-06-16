@@ -76,7 +76,6 @@ export class SilicateService {
     const wall = this.wall;
     wall[index] = brick;
     this.wall$.next(wall);
-
     return this;
   }
 
@@ -86,9 +85,9 @@ export class SilicateService {
    * @param index The brick index.
    */
   delete(index: number) {
-    this.wall$.next(
-      this.wall.splice(index, 1)
-    );
+    const wall = this.wall;
+    wall.splice(index, 1);
+    this.wall$.next(wall);
     return this;
   }
 }

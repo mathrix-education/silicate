@@ -53,53 +53,53 @@ export const DEMO_FIXTURE = [
     kind: 'equation',
     content: '\\zeta(s)=\\frac{1}{\\Gamma(s)}\\int_0^{\\infty}\\frac{x^{s-1}}{e^x-1}\\mathrm{d}x'
   },
-  // {
-  //   kind: 'video',
-  //   type: 'vimeo',
-  //   videoId: '76979871',
-  //   summary: [
-  //     {
-  //       timestamp: 15,
-  //       title: 'Ancre à 15 secondes'
-  //     }
-  //   ]
-  // },
-  // {
-  //   kind: 'video',
-  //   type: 'youtube',
-  //   videoId: 'BsyfRX4x8RY',
-  //   summary: [
-  //     {
-  //       timestamp: 34,
-  //       title: 'Comprendre',
-  //     },
-  //     {
-  //       timestamp: 89,
-  //       title: 'Un petit jeu'
-  //     },
-  //     {
-  //       timestamp: 399,
-  //       title: 'Les limites à connaître'
-  //     }
-  //   ]
-  // },
-  // {
-  //   kind: 'card',
-  //   title: 'Test de Material Card',
-  //   data: [
-  //     {
-  //       kind: 'text',
-  //       content: 'Texte dans la Material Card'
-  //     },
-  //     {
-  //       kind: 'title',
-  //       content: 'Image de démonstration'
-  //     },
-  //     {
-  //       kind: 'image',
-  //       src: 'https://placehold.it/400x100',
-  //       alt: 'Image 400x100'
-  //     }
-  //   ]
-  // }
+  {
+    kind: 'video',
+    type: 'vimeo',
+    videoId: '76979871',
+    summary: [
+      {
+        timestamp: 15,
+        title: 'Ancre à 15 secondes'
+      }
+    ]
+  },
+  {
+    kind: 'video',
+    type: 'youtube',
+    videoId: 'BsyfRX4x8RY',
+    summary: [
+      {
+        timestamp: 34,
+        title: 'Comprendre',
+      },
+      {
+        timestamp: 89,
+        title: 'Un petit jeu'
+      },
+      {
+        timestamp: 399,
+        title: 'Les limites à connaître'
+      }
+    ]
+  },
+  {
+    kind: 'card',
+    title: 'Test de Material Card',
+    data: [
+      {
+        kind: 'text',
+        content: 'Texte dans la Material Card'
+      },
+      {
+        kind: 'title',
+        content: 'Image de démonstration'
+      },
+      {
+        kind: 'image',
+        src: 'https://placehold.it/400x100',
+        alt: 'Image 400x100'
+      }
+    ]
+  }
 ];

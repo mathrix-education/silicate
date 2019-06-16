@@ -60,7 +60,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
       this.dataChange.emit(newData);
     });
 
-    // Add missing uuid
+    // Add missing uuid if necessary
     this.data = this.data.map((brick) => {
       if (!brick.hasOwnProperty('uuid')) {
         brick.uuid = uuid();
@@ -70,7 +70,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
     });
 
     this.silicate.wall$.next(this.data);
-
     this.silicate.editable = this.editable;
   }
 
