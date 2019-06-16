@@ -11,7 +11,6 @@ import {SelectionService} from '../selection/selection.service';
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
-  format = new EventEmitter<string>();
 
   constructor(
     private selection: SelectionService,

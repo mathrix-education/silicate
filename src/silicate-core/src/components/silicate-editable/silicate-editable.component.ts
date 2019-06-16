@@ -5,12 +5,14 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  Input, OnInit,
+  Input,
+  OnDestroy,
   Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
 import {MatDialog} from '@angular/material';
+import {first} from 'rxjs/operators';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
@@ -21,7 +23,7 @@ import {ToolbarService} from '../../services/toolbar/toolbar.service';
   templateUrl: './silicate-editable.component.html',
   styleUrls: ['./silicate-editable.component.scss'],
 })
-export class SilicateEditableComponent implements AfterViewInit {
+export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   private static readonly MAX_ID = 999999;
   private static readonly MIN_ID = 100000;
 
@@ -38,6 +40,13 @@ export class SilicateEditableComponent implements AfterViewInit {
     content: null
   };
 
+  /** Un-listen the wrapper focus event. */
+  unlistenWrapperFocus: () => void;
+  /** Un-listen the wrapper focus event. */
+  unlistenWrapperBlur: () => void;
+  /** Un-listen the document selectionchange event. */
+  unlistenSelectionChange: () => void;
+
   constructor(
     private renderer2: Renderer2,
     public silicate: SilicateService,
@@ -51,11 +60,6 @@ export class SilicateEditableComponent implements AfterViewInit {
     this.id = `silicate-editable-${idInt}`;
   }
 
-  private hasValidSelection() {
-    return this.selection.isSelectionInside(this.wrapper.nativeElement)
-      && !this.selection.isSelectionCollapsed();
-  }
-
   @Input()
   get content(): string {
     return this.model.content;
@@ -64,6 +68,11 @@ export class SilicateEditableComponent implements AfterViewInit {
   set content(newContent: string) {
     this.model.content = this.sanitize(newContent, '<i><b><a>');
     this.contentChange.emit(this.content);
+  }
+
+  private hasValidSelection() {
+    return this.selection.isSelectionInside(this.wrapper.nativeElement)
+      && !this.selection.isSelectionCollapsed();
   }
 
   refresh() {
@@ -76,23 +85,9 @@ export class SilicateEditableComponent implements AfterViewInit {
   }
 
   @HostListener('keydown.backspace', ['$event'])
-  onKeydown($event: KeyboardEvent) {
+  onBackSpace($event: KeyboardEvent) {
     if (this.content === null || this.content.length === 0) {
       this.delete.emit($event);
-    }
-  }
-
-  @HostListener('document:selectionchange', ['$event'])
-  @HostListener('window:scroll', ['$event'])
-  onSelection($event: Event) {
-    if (!this.silicate.editable) {
-      return;
-    }
-
-    if (this.hasValidSelection()) {
-      this.toolbar.show(this);
-    } else {
-      this.toolbar.hide(this);
     }
   }
 
@@ -116,6 +111,7 @@ export class SilicateEditableComponent implements AfterViewInit {
           data: link
         })
         .afterClosed()
+        .pipe(first())
         .subscribe(() => this.refresh());
     }
   }
@@ -124,6 +120,44 @@ export class SilicateEditableComponent implements AfterViewInit {
     if (this.placeholder) {
       this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
     }
+
+    this.listenWrapperFocus();
+    this.listenWrapperBlur();
+  }
+
+  ngOnDestroy(): void {
+    this.unlistenWrapperFocus();
+    this.unlistenWrapperBlur();
+  }
+
+  /**
+   * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit the
+   * event to the ToolbarService.
+   */
+  listenWrapperFocus() {
+    this.unlistenWrapperFocus = this.renderer2.listen(this.wrapper.nativeElement, 'focus', () => {
+      this.unlistenSelectionChange = this.renderer2.listen('document', 'selectionchange', () => {
+        if (!this.silicate.editable) {
+          return;
+        }
+
+        if (this.hasValidSelection()) {
+          this.toolbar.show(this);
+        } else {
+          this.toolbar.hide(this);
+        }
+      });
+    });
+  }
+
+  /**
+   * Listen on the #wrapper blur event. Then, destroy the document-wide selection change.
+   */
+  listenWrapperBlur() {
+    this.unlistenWrapperBlur = this.renderer2.listen(this.wrapper.nativeElement, 'blur', () => {
+      this.toolbar.hide(this);
+      this.unlistenSelectionChange();
+    });
   }
 
   focus() {

@@ -6,6 +6,8 @@
     "entryFile": "src/silicate-latex.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "ng-katex"
+    "katex",
+    "ng-katex",
+    "@types/katex"
   ]
 }

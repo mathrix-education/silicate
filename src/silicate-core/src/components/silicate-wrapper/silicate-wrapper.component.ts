@@ -30,6 +30,7 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
   providers: [SilicateService]
 })
 export class SilicateWrapperComponent implements OnInit, OnChanges {
+  @Input() root = true;
   @Input() editable = false;
   @Input() bricks: (typeof BaseBrickComponent)[] = [];
 
