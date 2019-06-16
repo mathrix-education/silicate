@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SilicateService} from '@mathrix/silicate-core';
 
+
 @Component({
   selector: 'mtx-video-brick-anchor',
   templateUrl: './video-brick-anchor.component.html',
@@ -16,30 +17,37 @@ export class VideoBrickAnchorComponent implements OnInit {
     secondsStr: null
   };
 
+
   constructor(public silicate: SilicateService) {
   }
 
-  ngOnInit() {
-    this.refreshStrings();
-  }
 
   get minutesStr() {
     return this.model.minutesStr;
   }
+
 
   set minutesStr(minutesStr) {
     this.model.minutesStr = minutesStr.replace(/[^0-9]/g, '');
     this.refreshTimestamp();
   }
 
+
   get secondsStr() {
     return this.model.secondsStr;
   }
+
 
   set secondsStr(secondsStr) {
     this.model.secondsStr = secondsStr.replace(/[^0-9]/g, '');
     this.refreshTimestamp();
   }
+
+
+  ngOnInit() {
+    this.refreshStrings();
+  }
+
 
   refreshTimestamp() {
     if (this.minutesStr !== '' && this.secondsStr !== '') {
@@ -49,6 +57,7 @@ export class VideoBrickAnchorComponent implements OnInit {
       this.timestampChange.emit(this.timestamp);
     }
   }
+
 
   refreshStrings() {
     const minutes = Math.floor(this.timestamp / 60);

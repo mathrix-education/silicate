@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ImageBrick} from '../../bricks/image-brick/image-brick';
-import {ImageBrickComponent} from '../../bricks/image-brick/image-brick.component';
+
 
 @Component({
   selector: 'mtx-image-brick-dialog',

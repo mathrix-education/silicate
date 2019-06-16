@@ -1,9 +1,10 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
 import {SelectionService} from '../selection/selection.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,18 @@ export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
 
+
   constructor(
     private selection: SelectionService,
     private dialog: MatDialog
   ) {
   }
 
+
   get component() {
     return this.component$.value;
   }
+
 
   show(component: SilicateEditableComponent) {
     if (this.component$.value === null || this.component$.value.id !== component.id) {
@@ -30,12 +34,14 @@ export class ToolbarService {
     this.show$.next(true);
   }
 
+
   hide(component: SilicateEditableComponent) {
     if (this.component$.value !== null && this.component$.value.id === component.id) {
       this.component$.next(null);
       this.show$.next(false);
     }
   }
+
 
   dispatch(key: string, $event: MouseEvent) {
     if (typeof this[key] === 'function') {
@@ -44,6 +50,7 @@ export class ToolbarService {
     // Custom callbacks
   }
 
+
   bold(): void {
     this.selection.saveSelection();
     document.execCommand('bold', false);
@@ -51,12 +58,14 @@ export class ToolbarService {
     this.selection.restoreSelection();
   }
 
+
   italic(): void {
     this.selection.saveSelection();
     document.execCommand('italic', false);
     this.component.refresh();
     this.selection.restoreSelection();
   }
+
 
   link(): void {
     this.selection.saveSelection();

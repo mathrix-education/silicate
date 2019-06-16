@@ -1,5 +1,6 @@
 import {ElementRef, EventEmitter} from '@angular/core';
 
+
 export interface VideoPlayer {
   videoId: string;
   player: ElementRef<HTMLDivElement>;

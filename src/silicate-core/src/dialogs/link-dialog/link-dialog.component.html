@@ -21,6 +21,6 @@
 
 <div mat-dialog-actions>
   <button (click)="dialogRef.close()" mat-button>Annuler</button>
-  <button mat-button (click)="link()">Sauvegarder</button>
-  <button *ngIf="elementRef" mat-button (click)="unlink()">Supprimer</button>
+  <button (click)="link()" mat-button>Sauvegarder</button>
+  <button (click)="unlink()" *ngIf="elementRef" mat-button>Supprimer</button>
 </div>

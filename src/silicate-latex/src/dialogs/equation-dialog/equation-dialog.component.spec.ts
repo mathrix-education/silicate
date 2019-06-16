@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EquationDialogComponent } from './equation-dialog.component';
+import {EquationDialogComponent} from './equation-dialog.component';
 
 describe('EquationDialogComponent', () => {
   let component: EquationDialogComponent;
@@ -8,9 +8,9 @@ describe('EquationDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EquationDialogComponent ]
-    })
-    .compileComponents();
+        declarations: [EquationDialogComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

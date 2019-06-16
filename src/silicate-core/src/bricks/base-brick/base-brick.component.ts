@@ -1,6 +1,7 @@
 import {DoCheck, EventEmitter, Input, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 
+
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements DoCheck {
   /**
    * BaseBrickComponent declaration.
@@ -17,7 +18,10 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
   /** The previously checked data, JSON stringified. */
   private dataJSON: string = null;
 
-  ngOnInit() {}
+
+  ngOnInit() {
+  }
+
 
   ngDoCheck() {
     const dataJSONChallenge = JSON.stringify(this.data);

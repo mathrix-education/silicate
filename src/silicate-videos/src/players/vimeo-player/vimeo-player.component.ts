@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import Player from '@vimeo/player';
 import {VideoPlayer} from '../video-player';
 
+
 @Component({
   selector: 'mtx-vimeo-player',
   templateUrl: './vimeo-player.component.html',
@@ -14,8 +15,10 @@ export class VimeoPlayerComponent implements OnInit, VideoPlayer {
 
   vimeoPlayer: Player;
 
+
   constructor() {
   }
+
 
   ngOnInit() {
     this.vimeoPlayer = new Player(this.player.nativeElement, {
@@ -28,9 +31,11 @@ export class VimeoPlayerComponent implements OnInit, VideoPlayer {
     });
   }
 
+
   play() {
     this.vimeoPlayer.play();
   }
+
 
   setTime(seconds: number) {
     this.vimeoPlayer.setCurrentTime(seconds);

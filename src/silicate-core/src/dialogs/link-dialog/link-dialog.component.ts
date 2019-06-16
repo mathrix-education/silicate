@@ -2,6 +2,7 @@ import {Component, ElementRef, Inject, Renderer2} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {SelectionService} from '../../services/selection/selection.service';
 
+
 @Component({
   selector: 'mtx-link-dialog',
   templateUrl: './link-dialog.component.html',
@@ -11,6 +12,7 @@ export class LinkDialogComponent {
   elementRef: ElementRef<HTMLLinkElement> = null;
   href = 'https://mathrix.fr';
   target = '_blank';
+
 
   constructor(
     private renderer2: Renderer2,
@@ -22,6 +24,7 @@ export class LinkDialogComponent {
       this[k] = data[k];
     });
   }
+
 
   link() {
     if (this.selection.hasSavedSelection()) {
@@ -50,6 +53,7 @@ export class LinkDialogComponent {
 
     this.dialogRef.close();
   }
+
 
   unlink() {
     this.renderer2.setProperty(

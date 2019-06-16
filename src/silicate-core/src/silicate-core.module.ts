@@ -34,6 +34,7 @@ import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
 import {SelectionService} from './services/selection/selection.service';
 
+
 @NgModule({
   entryComponents: [
     // Bricks
@@ -56,7 +57,7 @@ import {SelectionService} from './services/selection/selection.service';
     SilicateEditableComponent,
     SilicateToolbarComponent,
     TitleBrickComponent,
-    ListBrickComponent,
+    ListBrickComponent
   ],
   imports: [
     CommonModule,

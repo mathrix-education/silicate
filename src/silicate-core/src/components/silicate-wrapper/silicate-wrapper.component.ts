@@ -18,6 +18,7 @@ import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
 
+
 /**
  * Type explicit declared in Object literals:
  * @link https://stackoverflow.com/q/31816061
@@ -45,8 +46,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   /** The SilicateProxyComponent QueryList */
   @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
+
   constructor(public silicate: SilicateService) {
   }
+
 
   /**
    * We need to track brick changes using their UUID for two main reasons:
@@ -61,6 +64,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   trackByFn(index: any, brick: BaseBrick) {
     return brick.uuid;
   }
+
 
   /**
    * ngOnInit hook
@@ -91,6 +95,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
     this.silicate.editable = this.editable;
   }
 
+
   /**
    * ngOnChanges hook
    */
@@ -100,6 +105,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
       this.silicate.editable = changes.editable.currentValue;
     }
   }
+
 
   /**
    * Material CDK Drag'n'Drop handler.

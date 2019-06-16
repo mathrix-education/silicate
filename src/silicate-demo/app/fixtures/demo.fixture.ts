@@ -71,7 +71,7 @@ export const DEMO_FIXTURE = [
     summary: [
       {
         timestamp: 34,
-        title: 'Comprendre',
+        title: 'Comprendre'
       },
       {
         timestamp: 89,

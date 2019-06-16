@@ -8,8 +8,8 @@ describe('LinkDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LinkDialogComponent]
-    })
+        declarations: [LinkDialogComponent]
+      })
       .compileComponents();
   }));
 

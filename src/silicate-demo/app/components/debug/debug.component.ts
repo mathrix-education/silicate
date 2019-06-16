@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Wall} from '@mathrix/silicate-core/src/silicate-core.types';
 
+
 @Component({
   selector: 'app-debug',
   templateUrl: './debug.component.html',
@@ -8,6 +9,7 @@ import {Wall} from '@mathrix/silicate-core/src/silicate-core.types';
 })
 export class DebugComponent {
   @Input() data: Wall;
+
 
   strip(data: string) {
     return data

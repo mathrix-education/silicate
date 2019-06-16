@@ -2,18 +2,18 @@
      fxLayoutAlign="center center"
      fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
-    <button mat-menu-item
+    <button (click)="swap(declaration)"
             *ngFor="let declaration of declarations"
-            (click)="swap(declaration)"
-            [disabled]="icon === declaration.icon">
+            [disabled]="icon === declaration.icon"
+            mat-menu-item>
       <mat-icon>{{ declaration.icon }}</mat-icon>
       {{ declaration.displayName }}
     </button>
   </mat-menu>
 
   <button *ngIf="silicate.editable"
-          mat-icon-button
-          [matMenuTriggerFor]="brickType">
+          [matMenuTriggerFor]="brickType"
+          mat-icon-button>
     <mat-icon>{{ icon }}</mat-icon>
   </button>
 

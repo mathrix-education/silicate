@@ -15,6 +15,7 @@ import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BrickDeclaration} from '../../silicate-core.types';
 
+
 @Component({
   selector: 'mtx-silicate-proxy',
   templateUrl: './silicate-proxy.component.html',
@@ -28,11 +29,13 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   brickRef: ComponentRef<T>;
   dataChangeSubscription: Subscription;
 
+
   constructor(
     public silicate: SilicateService,
     private componentFactory: ComponentFactoryResolver
   ) {
   }
+
 
   get icon() {
     try {
@@ -42,18 +45,22 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
+
   get declarations(): BrickDeclaration[] {
     return Object.values(this.silicate.mappings);
   }
+
 
   ngOnInit() {
     this.initialized = true;
     this.render();
   }
 
+
   ngOnDestroy(): void {
     this.clear();
   }
+
 
   /**
    * Clear the proxy content.
@@ -63,6 +70,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     this.wrapper.clear(); // Remove any content in the wrapper
     this.brickRef.destroy(); // Destroy the Brick reference if it exists.
   }
+
 
   /**
    * Swap the current brick with another
@@ -82,6 +90,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     this.silicate.patch(this.index, empty);
     this.render();
   }
+
 
   /**
    * Render the Brick in the proxy.

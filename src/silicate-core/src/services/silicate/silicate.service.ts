@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BrickDeclaration, BrickMappings, Wall} from '../../silicate-core.types';
 
+
 @Injectable()
 export class SilicateService {
   /** If the edition should be permitted */
@@ -11,6 +12,17 @@ export class SilicateService {
   mappings: BrickMappings = {};
   /** The wall, which contains the bricks data. */
   wall$ = new BehaviorSubject<Wall>([]);
+
+
+  /**
+   * Get a copy of the wall$ BehaviorSubject. Since the structure of a brick is relatively free, we cannot make any assumption of its
+   * structure and the JSON intermediate is fine.
+   * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
+   */
+  get wall(): Wall {
+    return JSON.parse(JSON.stringify(this.wall$.value));
+  }
+
 
   /**
    * Generate bricks mappings using the given brick static declarations.
@@ -26,6 +38,7 @@ export class SilicateService {
     });
   }
 
+
   /**
    * Get the brick declaration matching with the given kind.
    * @param kind The Brick kind.
@@ -38,14 +51,6 @@ export class SilicateService {
     return this.mappings[kind];
   }
 
-  /**
-   * Get a copy of the wall$ BehaviorSubject. Since the structure of a brick is relatively free, we cannot make any assumption of its
-   * structure and the JSON intermediate is fine.
-   * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
-   */
-  get wall(): Wall {
-    return JSON.parse(JSON.stringify(this.wall$.value));
-  }
 
   /**
    * Get the brick at a given index.
@@ -54,6 +59,7 @@ export class SilicateService {
   get<T = any>(index: number): T {
     return this.wall[index];
   }
+
 
   /**
    * Insert a brick at a given index.
@@ -66,6 +72,7 @@ export class SilicateService {
     );
     return this;
   }
+
 
   /**
    * Edit a brick at a given index.

@@ -8,9 +8,9 @@ describe('SilicateToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SilicateToolbarComponent ]
-    })
-    .compileComponents();
+        declarations: [SilicateToolbarComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

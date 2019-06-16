@@ -2,6 +2,7 @@ import {Component, ElementRef, HostBinding, OnInit} from '@angular/core';
 import {SelectionService} from '../../services/selection/selection.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
 
+
 @Component({
   selector: 'mtx-silicate-toolbar',
   templateUrl: './silicate-toolbar.component.html',
@@ -12,6 +13,7 @@ export class SilicateToolbarComponent implements OnInit {
   @HostBinding('style.left.px') x: number;
   @HostBinding('style.top.px') y: number;
 
+
   constructor(
     public toolbar: ToolbarService,
     private selection: SelectionService,
@@ -19,13 +21,16 @@ export class SilicateToolbarComponent implements OnInit {
   ) {
   }
 
+
   get width() {
     return this.elementRef.nativeElement.offsetWidth;
   }
 
+
   get height() {
     return this.elementRef.nativeElement.offsetHeight;
   }
+
 
   ngOnInit() {
     this.toolbar.show$.subscribe((s) => {
@@ -37,9 +42,11 @@ export class SilicateToolbarComponent implements OnInit {
     });
   }
 
+
   hide() {
     this.visibility = 'hidden';
   }
+
 
   show() {
     this.visibility = 'visible';

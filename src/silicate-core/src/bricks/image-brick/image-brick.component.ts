@@ -7,6 +7,7 @@ import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {ImageBrick} from './image-brick';
 
+
 @Component({
   selector: 'mtx-image-brick',
   templateUrl: './image-brick.component.html',
@@ -17,12 +18,14 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   static readonly icon = 'image';
   static readonly displayName = 'Image';
 
+
   constructor(
     private silicate: SilicateService,
     private matDialog: MatDialog
   ) {
     super();
   }
+
 
   static empty(): ImageBrick {
     return {
@@ -32,6 +35,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
       alt: 'Texte alternatif'
     };
   }
+
 
   openDialog() {
     if (!this.silicate.editable) {

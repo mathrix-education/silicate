@@ -18,10 +18,11 @@ import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
 
+
 @Component({
   selector: 'mtx-silicate-editable',
   templateUrl: './silicate-editable.component.html',
-  styleUrls: ['./silicate-editable.component.scss'],
+  styleUrls: ['./silicate-editable.component.scss']
 })
 export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   private static readonly MAX_ID = 999999;
@@ -47,6 +48,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   /** Un-listen the document selectionchange event. */
   unlistenSelectionChange: () => void;
 
+
   constructor(
     private renderer2: Renderer2,
     public silicate: SilicateService,
@@ -60,29 +62,29 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     this.id = `silicate-editable-${idInt}`;
   }
 
+
   @Input()
   get content(): string {
     return this.model.content;
   }
+
 
   set content(newContent: string) {
     this.model.content = this.sanitize(newContent, '<i><b><a>');
     this.contentChange.emit(this.content);
   }
 
-  private hasValidSelection() {
-    return this.selection.isSelectionInside(this.wrapper.nativeElement)
-      && !this.selection.isSelectionCollapsed();
-  }
 
   refresh() {
     this.content = this.wrapper.nativeElement.innerHTML;
   }
 
+
   @HostListener('keydown.enter', ['$event'])
   onEnter($event: KeyboardEvent) {
     this.enter.emit($event);
   }
+
 
   @HostListener('keydown.backspace', ['$event'])
   onBackSpace($event: KeyboardEvent) {
@@ -90,6 +92,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
       this.delete.emit($event);
     }
   }
+
 
   @HostListener('click', ['$event'])
   onClick($event) {
@@ -116,6 +119,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+
   ngAfterViewInit(): void {
     if (this.placeholder) {
       this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
@@ -125,10 +129,12 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     this.listenWrapperBlur();
   }
 
+
   ngOnDestroy(): void {
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
   }
+
 
   /**
    * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit the
@@ -150,6 +156,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+
   /**
    * Listen on the #wrapper blur event. Then, destroy the document-wide selection change.
    */
@@ -160,10 +167,12 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     });
   }
 
+
   focus() {
     // TODO: place the caret at the end of the element
     this.wrapper.nativeElement.focus();
   }
+
 
   /**
    * Sanitize HTML
@@ -181,5 +190,11 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
       .replace(tags, ($0, $1) => allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '')
       .replace(/&nbsp;/g, ' ')
       .trim();
+  }
+
+
+  private hasValidSelection() {
+    return this.selection.isSelectionInside(this.wrapper.nativeElement)
+      && !this.selection.isSelectionCollapsed();
   }
 }

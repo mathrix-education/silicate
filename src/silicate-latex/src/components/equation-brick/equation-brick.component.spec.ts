@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EquationBrickComponent } from './equation-brick.component';
+import {EquationBrickComponent} from './equation-brick.component';
 
 describe('EquationBrickComponent', () => {
   let component: EquationBrickComponent;
@@ -8,9 +8,9 @@ describe('EquationBrickComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EquationBrickComponent ]
-    })
-    .compileComponents();
+        declarations: [EquationBrickComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

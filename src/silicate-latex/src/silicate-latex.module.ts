@@ -9,6 +9,7 @@ import {KatexModule} from 'ng-katex';
 import {EquationBrickComponent} from './components/equation-brick/equation-brick.component';
 import {EquationDialogComponent} from './dialogs/equation-dialog/equation-dialog.component';
 
+
 @NgModule({
   entryComponents: [
     EquationBrickComponent,

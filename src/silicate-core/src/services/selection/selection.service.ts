@@ -1,31 +1,21 @@
 import {ElementRef, Injectable} from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class SelectionService {
   private savedSelection;
 
+
   constructor() {
   }
 
-  private getSelection(): Selection {
-    return window.getSelection();
-  }
-
-  private selection(callback, returns = null) {
-    const selection = this.getSelection();
-
-    if (!selection) {
-      return returns;
-    } else {
-      return callback(selection);
-    }
-  }
 
   hasSavedSelection() {
     return this.savedSelection !== null;
   }
+
 
   saveSelection() {
     this.selection((selection) => {
@@ -34,6 +24,7 @@ export class SelectionService {
       }
     });
   }
+
 
   restoreSelection() {
     this.selection((selection) => {
@@ -45,11 +36,13 @@ export class SelectionService {
     });
   }
 
+
   isSelectionInside(element: ElementRef<HTMLDivElement> | any) {
     return this.selection((selection) => {
       return element.contains(selection.anchorNode) && element.contains(selection.focusNode);
     }, false);
   }
+
 
   isSelectionCollapsed() {
     return this.selection((selection) => {
@@ -57,9 +50,26 @@ export class SelectionService {
     }, false);
   }
 
+
   getSelectionRectangle(): ClientRect | DOMRect {
     return this.selection((selection) => {
       return selection.getRangeAt(0).getBoundingClientRect();
     }, false);
+  }
+
+
+  private getSelection(): Selection {
+    return window.getSelection();
+  }
+
+
+  private selection(callback, returns = null) {
+    const selection = this.getSelection();
+
+    if (!selection) {
+      return returns;
+    } else {
+      return callback(selection);
+    }
   }
 }

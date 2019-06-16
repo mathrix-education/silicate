@@ -6,6 +6,7 @@ import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.comp
 import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';
 import {VideoBrick} from './video-brick';
 
+
 @Component({
   selector: 'mtx-video-brick',
   templateUrl: './video-brick.component.html',
@@ -21,9 +22,11 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
 
   loading = true;
 
+
   constructor(public silicate: SilicateService) {
     super();
   }
+
 
   get player(): VideoPlayer {
     switch (this.data.type) {
@@ -36,13 +39,16 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
     }
   }
 
+
   addAnchor() {
     this.data.summary.push({timestamp: 0, title: 'Nouvelle ancre'});
   }
 
+
   onDrag($event: CdkDragDrop<any>) {
     moveItemInArray(this.data.summary, $event.previousIndex, $event.currentIndex);
   }
+
 
   setTime(seconds: number): void {
     if (this.silicate.editable) {

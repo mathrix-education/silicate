@@ -41,10 +41,10 @@
     </mat-card-header>
 
     <mat-card-content>
-      <mtx-silicate-wrapper fxFlex="grow"
-                            [editable]="editable"
+      <mtx-silicate-wrapper [(data)]="data"
                             [bricks]="bricks"
-                            [(data)]="data">
+                            [editable]="editable"
+                            fxFlex="grow">
       </mtx-silicate-wrapper>
     </mat-card-content>
   </mat-card>

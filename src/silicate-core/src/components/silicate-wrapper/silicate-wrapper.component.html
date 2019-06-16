@@ -1,9 +1,9 @@
-<div class="wall"
-     fxFlex
-     fxLayout="column"
-     cdkDropList
+<div (cdkDropListDropped)="onDrag($event)"
      [cdkDropListDisabled]="!silicate.editable"
-     (cdkDropListDropped)="onDrag($event)">
+     cdkDropList
+     class="wall"
+     fxFlex
+     fxLayout="column">
   <div *ngFor="let brick of (silicate.wall$ | async); let i = index; trackBy: trackByFn"
        cdkDrag
        class="brick-container"
@@ -12,11 +12,11 @@
        fxLayoutGap="8px">
     <mat-icon *ngIf="silicate.editable" cdkDragHandle fxFlex>drag_indicator</mat-icon>
 
-    <mtx-silicate-proxy fxFlex="grow" [index]="i"></mtx-silicate-proxy>
+    <mtx-silicate-proxy [index]="i" fxFlex="grow"></mtx-silicate-proxy>
 
-    <button *ngIf="silicate.editable"
-            mat-icon-button
-            (click)="silicate.delete(i)">
+    <button (click)="silicate.delete(i)"
+            *ngIf="silicate.editable"
+            mat-icon-button>
       <mat-icon>delete</mat-icon>
     </button>
   </div>

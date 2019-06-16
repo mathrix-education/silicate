@@ -1,9 +1,9 @@
 <div fxLayout="column">
   <ng-katex
-    fxFlex="grow"
+    (click)="openEquationDialog()"
     [equation]="data.content"
     [options]="{displayMode: true}"
-    (click)="openEquationDialog()"
+    fxFlex="grow"
   >
   </ng-katex>
 </div>

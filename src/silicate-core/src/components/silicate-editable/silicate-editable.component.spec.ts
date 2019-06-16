@@ -8,9 +8,9 @@ describe('RichTextComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SilicateEditableComponent ]
-    })
-    .compileComponents();
+        declarations: [SilicateEditableComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {

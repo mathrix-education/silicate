@@ -2,7 +2,11 @@
   "name": "@mathrix/silicate-core",
   "version": "0.9.0",
   "description": "Base package of Silicate Editor. Provides the most basic bricks (Text, Title, Image and List)",
-  "keywords": ["silicate", "editor", "wysiwyg"],
+  "keywords": [
+    "silicate",
+    "editor",
+    "wysiwyg"
+  ],
   "homepage": "silicate.mathrix.fr",
   "bugs": {
     "url": "https://github.com/mathrix-education/mtx-silicate",

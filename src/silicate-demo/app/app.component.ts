@@ -6,6 +6,7 @@ import {CardBrickComponent} from './components/bricks/card-brick/card-brick.comp
 import {DEMO_FIXTURE} from './fixtures/demo.fixture';
 import {MATHS_FIXTURE} from './fixtures/maths.fixture';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
       value: MATHS_FIXTURE
     }
   ];
+
 
   ngOnInit(): void {
   }

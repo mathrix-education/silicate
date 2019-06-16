@@ -1,6 +1,17 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {hasChanged} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../video-player';
+
 
 @Component({
   selector: 'mtx-youtube-player',
@@ -13,6 +24,7 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
   @Output() ready = new EventEmitter();
 
   youtubePlayer: YT.Player;
+
 
   ngOnInit() {
     if (typeof (YT) === 'undefined' || typeof (YT.Player) === 'undefined') {
@@ -37,15 +49,18 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
     };
   }
 
+
   ngOnChanges(changes: SimpleChanges): void {
     if (this.youtubePlayer && hasChanged(changes, 'videoId')) {
       this.youtubePlayer.cueVideoById(changes.videoId.currentValue as string);
     }
   }
 
+
   play(): void {
     this.youtubePlayer.playVideo();
   }
+
 
   setTime(seconds: number): void {
     this.youtubePlayer.seekTo(seconds, true);

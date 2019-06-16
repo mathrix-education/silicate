@@ -1,15 +1,17 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h3><mtx-silicate-editable [(content)]="data.title"></mtx-silicate-editable></h3>
+      <h3>
+        <mtx-silicate-editable [(content)]="data.title"></mtx-silicate-editable>
+      </h3>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
     <mtx-silicate-wrapper
+      [(data)]="data.data"
       [bricks]="bricks"
       [editable]="silicate.editable"
-      [(data)]="data.data"
     ></mtx-silicate-wrapper>
   </mat-card-content>
 </mat-card>

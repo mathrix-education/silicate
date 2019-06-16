@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {CardBrickComponent} from './components/bricks/card-brick/card-brick.component';
 import {DebugComponent} from './components/debug/debug.component';
 
+
 @NgModule({
   entryComponents: [
     CardBrickComponent

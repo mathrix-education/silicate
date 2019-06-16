@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
+import {v4 as uuid} from 'uuid';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
-import {v4 as uuid} from 'uuid';
+
 
 @Component({
   selector: 'mtx-equation-brick',
@@ -16,12 +17,14 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
   static readonly icon = 'functions';
   static readonly displayName = 'Équation';
 
+
   constructor(
     private dialog: MatDialog,
     private silicate: SilicateService
   ) {
     super();
   }
+
 
   /**
    * Default equation.
@@ -33,6 +36,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
       content: 'f(x) = x^2'
     };
   }
+
 
   openEquationDialog() {
     if (!this.silicate.editable) {
