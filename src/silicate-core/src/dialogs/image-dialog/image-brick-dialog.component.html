@@ -6,8 +6,8 @@
       <label>
         <input [(ngModel)]="data.src"
                matInput
-               placeholder="https://placehold.it/400x150"
-               type="url">
+               type="url"
+               placeholder="https://placehold.it/400x150">
       </label>
     </mat-form-field>
 
@@ -16,14 +16,14 @@
       <label>
         <input [(ngModel)]="data.alt"
                matInput
-               placeholder="Description"
-               type="text">
+               type="text"
+               placeholder="Description">
       </label>
     </mat-form-field>
   </div>
 </div>
 
 <div mat-dialog-actions>
-  <button (click)="dialogRef.close()" mat-button>Fermer</button>
-  <button [mat-dialog-close]="data" mat-button>Sauvegarder</button>
+  <button mat-button (click)="dialogRef.close()">Fermer</button>
+  <button mat-button [mat-dialog-close]="data">Sauvegarder</button>
 </div>

@@ -54,7 +54,7 @@ export class ToolbarService {
   bold(): void {
     this.selection.saveSelection();
     document.execCommand('bold', false);
-    this.component.refresh();
+    this.component.sync();
     this.selection.restoreSelection();
   }
 
@@ -62,7 +62,7 @@ export class ToolbarService {
   italic(): void {
     this.selection.saveSelection();
     document.execCommand('italic', false);
-    this.component.refresh();
+    this.component.sync();
     this.selection.restoreSelection();
   }
 
@@ -77,6 +77,6 @@ export class ToolbarService {
         }
       })
       .afterClosed()
-      .subscribe(() => this.component.refresh());
+      .subscribe(() => this.component.sync());
   }
 }

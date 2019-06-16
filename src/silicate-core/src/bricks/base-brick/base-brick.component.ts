@@ -18,11 +18,6 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
   /** The previously checked data, JSON stringified. */
   private dataJSON: string = null;
 
-
-  ngOnInit() {
-  }
-
-
   ngDoCheck() {
     const dataJSONChallenge = JSON.stringify(this.data);
 

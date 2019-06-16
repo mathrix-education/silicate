@@ -75,7 +75,10 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  refresh() {
+  /**
+   * Synchronise (replace) the current innerHTML to the content.
+   */
+  sync() {
     this.content = this.wrapper.nativeElement.innerHTML;
   }
 
@@ -115,7 +118,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
         })
         .afterClosed()
         .pipe(first())
-        .subscribe(() => this.refresh());
+        .subscribe(() => this.sync());
     }
   }
 
