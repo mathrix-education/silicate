@@ -71,6 +71,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
    */
   ngOnInit(): void {
     this.silicate.generateMappings(this.bricks);
+    this.silicate.editable = this.editable;
 
     // Add missing uuid if necessary
     this.data = this.data.map((brick) => {
@@ -81,18 +82,18 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
       return brick;
     });
 
+    // Push initial data to the Silicate Service
+    this.silicate.wall$.next(this.data);
+
     // (data) Output
     this.silicate.wall$.subscribe((newData: BaseBrick[]) => {
       // Since the use of the brick uuid are only used internally, there is no reason to emit them outside the wrapper.
-      this.dataChange.emit(newData.map(d => {
-        delete d.uuid;
-        return d;
-      }));
+      // this.dataChange.emit(newData.map(d => {
+      //   delete d.uuid;
+      //   return d;
+      // }));
+      this.dataChange.emit(newData);
     });
-
-    // Push initial data to the Silicate Service
-    this.silicate.wall$.next(this.data);
-    this.silicate.editable = this.editable;
   }
 
 
