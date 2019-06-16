@@ -7,5 +7,4 @@ export * from './services/silicate/silicate.service';
 // Modules
 export * from './silicate-core.module';
 // Others
-export * from './helpers/functions';
 export * from './bricks/base-brick/base-brick';
