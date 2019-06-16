@@ -1,5 +1,7 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {
+  AfterViewInit, ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -27,9 +29,10 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
   selector: 'mtx-silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
   styleUrls: ['./silicate-wrapper.component.scss'],
-  providers: [SilicateService]
+  providers: [SilicateService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SilicateWrapperComponent implements OnInit, OnChanges {
+export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit {
   /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
   @Input() root = true;
   /** If the edition is enabled. */
@@ -47,7 +50,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
 
-  constructor(public silicate: SilicateService) {
+  constructor(public silicate: SilicateService, private cd: ChangeDetectorRef) {
   }
 
 
@@ -72,6 +75,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.silicate.generateMappings(this.bricks);
     this.silicate.editable = this.editable;
+
 
     // Add missing uuid if necessary
     this.data = this.data.map((brick) => {
@@ -105,6 +109,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
       // Push to the Silicate Service the modification of the edition mode, which is then propagated all over the silicate components.
       this.silicate.editable = changes.editable.currentValue;
     }
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 
 
