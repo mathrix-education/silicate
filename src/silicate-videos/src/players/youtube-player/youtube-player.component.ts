@@ -9,7 +9,6 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {hasChanged} from '@mathrix/silicate-core';
 import {VideoPlayer} from '../video-player';
 
 
@@ -51,7 +50,7 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.youtubePlayer && hasChanged(changes, 'videoId')) {
+    if (this.youtubePlayer && changes.videoId) {
       this.youtubePlayer.cueVideoById(changes.videoId.currentValue as string);
     }
   }
