@@ -1,5 +1,5 @@
-import {BaseBrick} from '@mathrix/silicate-core/src/bricks/base-brick/base-brick';
-import {Wall} from '@mathrix/silicate-core/src/silicate-core.types';
+import {BaseBrick} from '@mathrix/silicate-core';
+import {Wall} from '@mathrix/silicate-core';
 
 
 export interface CardBrick extends BaseBrick {

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Wall} from '@mathrix/silicate-core/src/silicate-core.types';
+import {Wall} from '@mathrix/silicate-core';
 
 
 @Component({
