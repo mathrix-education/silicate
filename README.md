@@ -1,12 +1,17 @@
 # @mathrix/silicate
+
+![Silicate logo](src/silicate-demo/assets/img/mstile-144x144.png)
+
 Silicate is a data-driven WYSIWYG editor, proudly maintained by Mathieu Bour <mathieu@mathrix.fr>.
 
 
 ## Usage
 To use the editor, you must use the SilicateWrapperComponent from the `@mathrix/silicate-core` library. To do so, import in your Angular module :
 ```typescript
+import {NgModule} from '@angular/core'; 
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-...
+// ...
+
 @NgModule({
   // ...
   imports: [
