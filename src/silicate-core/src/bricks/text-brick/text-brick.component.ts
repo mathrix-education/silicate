@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {SilicateService} from '../../services/silicate/silicate.service';
+import {Component} from '@angular/core';
+import {v4 as uuid} from 'uuid';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TextBrick} from './text-brick';
 
@@ -15,6 +15,7 @@ export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
 
   static empty(): TextBrick {
     return {
+      uuid: uuid(),
       kind: 'text',
       content: 'Texte...'
     };

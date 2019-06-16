@@ -1,6 +1,7 @@
-import {Component, KeyValueDiffers} from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {first} from 'rxjs/operators';
+import {v4 as uuid} from 'uuid';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
@@ -25,6 +26,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
 
   static empty(): ImageBrick {
     return {
+      uuid: uuid(),
       kind: 'image',
       src: 'https://placehold.it/450x200',
       alt: 'Texte alternatif'

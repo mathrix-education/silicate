@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {SilicateLatexModule} from '@mathrix/silicate-latex';
 import {SilicateVideosModule} from '@mathrix/silicate-videos';
@@ -11,7 +11,7 @@ import {MATHS_FIXTURE} from './fixtures/maths.fixture';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   editable = true;
   bricks = [
     ...SilicateCoreModule.bricks(),
@@ -32,4 +32,7 @@ export class AppComponent {
       value: MATHS_FIXTURE
     }
   ];
+
+  ngOnInit(): void {
+  }
 }

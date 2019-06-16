@@ -3,6 +3,7 @@ import {first} from 'rxjs/operators';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {ListBrick} from './list-brick';
+import {v4 as uuid} from 'uuid';
 
 @Component({
   selector: 'mtx-list-brick',
@@ -18,6 +19,7 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
 
   static empty(): ListBrick {
     return {
+      uuid: uuid(),
       kind: 'list',
       items: [
         'Texte...'

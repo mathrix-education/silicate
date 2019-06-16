@@ -96,6 +96,10 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
 
     // Inject the right brick in the wrapper
+    if (this.index === 0) {
+      console.log(this.index, this.silicate.get(this.index));
+    }
+
     const kind = this.silicate.get(this.index).kind;
     const component = this.silicate.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);

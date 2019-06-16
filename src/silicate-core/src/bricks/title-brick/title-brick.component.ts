@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {v4 as uuid} from 'uuid';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
 import {TitleBrick} from './title-brick';
 
@@ -14,6 +15,7 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> {
 
   static empty(): TitleBrick {
     return {
+      uuid: uuid(),
       kind: 'title',
       content: 'Nouveau titre'
     };

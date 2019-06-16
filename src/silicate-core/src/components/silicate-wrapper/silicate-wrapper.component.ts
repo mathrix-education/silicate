@@ -12,12 +12,12 @@ import {
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
+import {v4 as uuid} from 'uuid';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {hasChanged} from '../../helpers/functions';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
-import { v4 as uuid } from 'uuid';
 
 /**
  * Type explicit declared in Object literals:
@@ -44,8 +44,8 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
   constructor(public silicate: SilicateService) {
   }
 
-  trackByFn(index: any, item: any) {
-    return index;
+  trackByFn(index: any, item: BaseBrick) {
+    return item.uuid;
   }
 
   /*
@@ -59,6 +59,16 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
     this.silicate.wall$.subscribe((newData: BaseBrick[]) => {
       this.dataChange.emit(newData);
     });
+
+    // Add missing uuid
+    this.data = this.data.map((brick) => {
+      if (!brick.hasOwnProperty('uuid')) {
+        brick.uuid = uuid();
+      }
+
+      return brick;
+    });
+
     this.silicate.wall$.next(this.data);
 
     this.silicate.editable = this.editable;
@@ -72,14 +82,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges {
 
   /**
    * Material CDK Drag'n'Drop handler.
-   * TODO: Upgrade this
    */
   onDrag($event: CdkDragDrop<any>) {
     const wall = this.silicate.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
-    this.silicate.wall$.next([]);
-    setTimeout(() => {
-      this.silicate.wall$.next(wall);
-    });
+    this.silicate.wall$.next(wall);
   }
 }

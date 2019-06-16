@@ -4,6 +4,7 @@ import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
+import {v4 as uuid} from 'uuid';
 
 @Component({
   selector: 'mtx-equation-brick',
@@ -27,6 +28,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> {
    */
   static empty() {
     return {
+      uuid: uuid(),
       kind: 'equation',
       content: 'f(x) = x^2'
     };

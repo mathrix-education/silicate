@@ -15,12 +15,14 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
   @Output() dataChanged = new EventEmitter<T>();
 
   /** The previously checked data, JSON stringified. */
-  private dataJSON: string;
+  private dataJSON: string = null;
+
+  ngOnInit() {}
 
   ngDoCheck() {
     const dataJSONChallenge = JSON.stringify(this.data);
 
-    if (this.dataJSON !== dataJSONChallenge) {
+    if (dataJSONChallenge !== null && this.dataJSON !== dataJSONChallenge) {
       this.dataChanged.emit(this.data);
     }
 

@@ -5,7 +5,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
-  Input,
+  Input, OnInit,
   Output,
   Renderer2,
   ViewChild
