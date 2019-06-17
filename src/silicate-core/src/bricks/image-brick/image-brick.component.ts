@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {first} from 'rxjs/operators';
-import {v4 as uuid} from 'uuid';
+import {ImageBrick} from '../../declarations/bricks-factories/image-brick';
 import {ImageBrickDialogComponent} from '../../dialogs/image-dialog/image-brick-dialog.component';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {ImageBrick} from './image-brick';
 
 
 @Component({
@@ -14,26 +13,11 @@ import {ImageBrick} from './image-brick';
   styleUrls: ['./image-brick.component.scss']
 })
 export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
-  static readonly kind = 'image';
-  static readonly icon = 'image';
-  static readonly displayName = 'Image';
-
-
   constructor(
     private silicate: SilicateService,
     private matDialog: MatDialog
   ) {
     super();
-  }
-
-
-  static empty(): ImageBrick {
-    return {
-      uuid: uuid(),
-      kind: 'image',
-      src: 'https://placehold.it/450x200',
-      alt: 'Texte alternatif'
-    };
   }
 
 

@@ -1,9 +1,8 @@
 import {Component, QueryList, ViewChildren} from '@angular/core';
 import {first} from 'rxjs/operators';
-import {v4 as uuid} from 'uuid';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
+import {ListBrick} from '../../declarations/bricks-factories/list-brick';
 import {BaseBrickComponent} from '../base-brick/base-brick.component';
-import {ListBrick} from './list-brick';
 
 
 @Component({
@@ -12,22 +11,7 @@ import {ListBrick} from './list-brick';
   styleUrls: ['./list-brick.component.scss']
 })
 export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
-  static readonly kind = 'list';
-  static readonly icon = 'format_list_bulleted';
-  static readonly displayName = 'Liste';
-
   @ViewChildren(SilicateEditableComponent) itemsEditableComponents: QueryList<SilicateEditableComponent>;
-
-
-  static empty(): ListBrick {
-    return {
-      uuid: uuid(),
-      kind: 'list',
-      items: [
-        'Texte...'
-      ]
-    };
-  }
 
 
   trackByFn(index: any, item: any) {

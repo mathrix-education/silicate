@@ -14,9 +14,12 @@ import {
 import {MatDialog} from '@angular/material';
 import {first} from 'rxjs/operators';
 import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
+import {ContainerService} from '../../services/container/container.service';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
+import {EditableFilter} from '../../silicate-core.types';
+
 
 
 @Component({
@@ -52,6 +55,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   constructor(
     private renderer2: Renderer2,
     public silicate: SilicateService,
+    private container: ContainerService,
     public selection: SelectionService,
     private toolbar: ToolbarService,
     private dialog: MatDialog
@@ -70,8 +74,24 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
 
   set content(newContent: string) {
-    this.model.content = this.sanitize(newContent, '<i><b><a>');
+    this.model.content = this.purify(newContent, []);
     this.contentChange.emit(this.content);
+  }
+
+
+  ngAfterViewInit(): void {
+    if (this.placeholder) {
+      this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
+    }
+
+    this.listenWrapperFocus();
+    this.listenWrapperBlur();
+  }
+
+
+  ngOnDestroy(): void {
+    this.unlistenWrapperFocus();
+    this.unlistenWrapperBlur();
   }
 
 
@@ -83,17 +103,11 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  @HostListener('keydown.enter', ['$event'])
-  onEnter($event: KeyboardEvent) {
-    this.enter.emit($event);
-  }
-
-
-  @HostListener('keydown.backspace', ['$event'])
-  onBackSpace($event: KeyboardEvent) {
-    if (this.content === null || this.content.length === 0) {
-      this.delete.emit($event);
-    }
+  @HostListener('keydown', ['$event'])
+  onKeydown($event: KeyboardEvent) {
+    this.container.editableEvents
+      .filter(kdc => kdc.key === $event.key)
+      .forEach(kdc => kdc.callback(this));
   }
 
 
@@ -123,22 +137,6 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  ngAfterViewInit(): void {
-    if (this.placeholder) {
-      this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
-    }
-
-    this.listenWrapperFocus();
-    this.listenWrapperBlur();
-  }
-
-
-  ngOnDestroy(): void {
-    this.unlistenWrapperFocus();
-    this.unlistenWrapperBlur();
-  }
-
-
   /**
    * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit the
    * event to the ToolbarService.
@@ -150,7 +148,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
           return;
         }
 
-        if (this.hasValidSelection()) {
+        if (this.selection.isSelectionInside(this.wrapper.nativeElement)) {
           this.toolbar.show(this);
         } else {
           this.toolbar.hide(this);
@@ -178,26 +176,60 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
 
   /**
-   * Sanitize HTML
+   * Purify HTML using a custom rules set.
+   * @param dirtyHTML The dirty HTML.
+   * @param filters Array of Filers.
+   *
+   * Example of rules:
+   * [
+   *   {
+   *     selector: 'p',
+   *     allowedAttributes: ['class']
+   *   }
+   * ]
+   *
+   * Will only allow <p> tags and will only keep 'class' attribute on those <p> tags.
+   * @see SilicateCoreFilters
    */
-  sanitize(rawHtml: string, allowedTags: string) {
-    allowedTags = (((allowedTags || '') + '')
-      .toLowerCase()
-      .match(/<[a-z][a-z0-9]*>/g) || [])
-      .join('');
+  purify(dirtyHTML: string, filters: EditableFilter[]) {
+    const sandbox: HTMLDivElement = this.renderer2.createElement('div');
+    this.renderer2.setProperty(sandbox, 'innerHTML', dirtyHTML);
 
-    const tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-    const comments = /<!--[\s\S]*?-->/gi;
+    // First, we remove all elements which does not match with our selectors.
+    const blacklistSelector = filters.map(rule => `:not(${rule.selector})`).join('');
+    const blacklistedElements = sandbox.querySelectorAll(blacklistSelector);
+    blacklistedElements.forEach((blacklistedElement) => {
+      /**
+       * outerHTML = innerHTML is equivalent to removing the HTML tag
+       * Example: <p>test</p> => test
+       */
+      this.renderer2.setProperty(blacklistedElement, 'outerHTML', blacklistedElement.innerHTML);
+    });
 
-    return rawHtml.replace(comments, '')
-      .replace(tags, ($0, $1) => allowedTags.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '')
-      .replace(/&nbsp;/g, ' ')
-      .trim();
-  }
 
+    // Then, we remove unwanted attributes (those which are not explicitly whitelisted in the rule set)
+    filters.forEach(rule => {
+      const nodes = sandbox.querySelectorAll(rule.selector);
 
-  private hasValidSelection() {
-    return this.selection.isSelectionInside(this.wrapper.nativeElement)
-      && !this.selection.isSelectionCollapsed();
+      nodes.forEach((element: Element) => {
+        /**
+         * We need to convert element.attributes since it is not an implementation of Array.
+         * @see https://www.w3schools.com/jsref/prop_node_attributes.asp
+         * @see NamedNodeMap
+         */
+        const blacklistedAttributes = Array.from(element.attributes)
+          .map(attribute => attribute.name)
+          .filter(attributeName => !rule.allowedAttributes.includes(attributeName));
+        blacklistedAttributes.forEach(blacklistedAttributeName => {
+          element.removeAttribute(blacklistedAttributeName);
+        });
+      });
+    });
+
+    // Finally, we get the clean HTML and destroy the sandbox
+    const cleanHTML = sandbox.innerHTML;
+    this.renderer2.destroyNode(sandbox);
+
+    return cleanHTML;
   }
 }

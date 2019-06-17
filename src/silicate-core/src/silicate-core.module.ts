@@ -92,12 +92,4 @@ import {SelectionService} from './services/selection/selection.service';
   ]
 })
 export class SilicateCoreModule {
-  static bricks() {
-    return [
-      TextBrickComponent,
-      TitleBrickComponent,
-      ListBrickComponent,
-      ImageBrickComponent
-    ];
-  }
 }

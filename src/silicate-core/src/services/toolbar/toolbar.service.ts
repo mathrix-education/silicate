@@ -2,21 +2,28 @@ import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
-import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
+import {ContainerService} from '../container/container.service';
 import {SelectionService} from '../selection/selection.service';
 
+export interface ToolbarAction {
+  id: string;
+  icon: string;
+  callback: (serviceRef: ToolbarService, $event: MouseEvent) => void;
+}
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class ToolbarService {
+  private actions: { [key: string]: ToolbarAction } = {};
+
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
 
 
   constructor(
-    private selection: SelectionService,
-    private dialog: MatDialog
+    private container: ContainerService,
+    public selection: SelectionService,
+    public dialog: MatDialog
   ) {
   }
 
@@ -43,40 +50,9 @@ export class ToolbarService {
   }
 
 
-  dispatch(key: string, $event: MouseEvent) {
-    if (typeof this[key] === 'function') {
-      this[key]($event);
-    }
-    // Custom callbacks
-  }
-
-
-  bold(): void {
-    this.selection.saveSelection();
-    document.execCommand('bold', false);
-    this.component.sync();
-    this.selection.restoreSelection();
-  }
-
-
-  italic(): void {
-    this.selection.saveSelection();
-    document.execCommand('italic', false);
-    this.component.sync();
-    this.selection.restoreSelection();
-  }
-
-
-  link(): void {
-    this.selection.saveSelection();
-    this.dialog
-      .open(LinkDialogComponent, {
-        width: '400px',
-        data: {
-          href: 'https://mathrix.fr'
-        }
-      })
-      .afterClosed()
-      .subscribe(() => this.component.sync());
+  dispatch(id: string, $event: MouseEvent) {
+    this.container.toolbarActions
+      .filter(ta => ta.id === id)
+      .forEach(ta => ta.callback(this, $event));
   }
 }

@@ -4,7 +4,7 @@
      class="wall"
      fxFlex
      fxLayout="column">
-  <div *ngFor="let brick of (silicate.wall$ | async); let i = index; trackBy: trackByFn"
+  <div *ngFor="let brick of (wall.wall$ | async); let i = index; trackBy: trackByFn"
        cdkDrag
        class="brick-container"
        fxLayout="row"
@@ -14,7 +14,7 @@
 
     <mtx-silicate-proxy [index]="i" fxFlex="grow"></mtx-silicate-proxy>
 
-    <button (click)="silicate.delete(i)"
+    <button (click)="wall.delete(i)"
             *ngIf="silicate.editable"
             mat-icon-button>
       <mat-icon>delete</mat-icon>

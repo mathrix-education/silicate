@@ -7,4 +7,5 @@ export * from './services/silicate/silicate.service';
 // Modules
 export * from './silicate-core.module';
 // Others
-export * from './bricks/base-brick/base-brick';
+export * from './silicate-core.types';
+export * from './declarations/bricks-factories/base-brick';

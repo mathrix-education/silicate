@@ -1,6 +1,7 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {
-  AfterViewInit, ChangeDetectionStrategy,
+  AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -8,17 +9,15 @@ import {
   OnChanges,
   OnInit,
   Output,
-  QueryList,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef
+  SimpleChanges
 } from '@angular/core';
 import {v4 as uuid} from 'uuid';
-import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
+import {BaseBrick} from '../../declarations/bricks-factories/base-brick';
+import {SilicateWrapper} from '../../interfaces/silicate-wrapper';
+import {ContainerService} from '../../services/container/container.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
-import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component';
+import {ToolbarService} from '../../services/toolbar/toolbar.service';
+import {WallService} from '../../services/wall/wall.service';
 
 
 /**
@@ -29,43 +28,69 @@ import {SilicateProxyComponent} from '../silicate-proxy/silicate-proxy.component
   selector: 'mtx-silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
   styleUrls: ['./silicate-wrapper.component.scss'],
-  providers: [SilicateService],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [SilicateService, ToolbarService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit {
+export class SilicateWrapperComponent implements SilicateWrapper, OnInit, OnChanges, AfterViewInit {
   /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
   @Input() root = true;
   /** If the edition is enabled. */
   @Input() editable = false;
-  /** The enabled brick components. */
-  @Input() bricks: (typeof BaseBrickComponent)[] = [];
 
   // [(data)] two-way binding
   @Input() data: BaseBrick[] = [];
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
-  /** The #wall ViewContainerRef */
-  @ViewChild('wall', {read: ViewContainerRef, static: false}) wall: ViewContainerRef;
-  /** The SilicateProxyComponent QueryList */
-  @ViewChildren(SilicateProxyComponent) proxies: QueryList<SilicateProxyComponent>;
 
-
-  constructor(public silicate: SilicateService, private cd: ChangeDetectorRef) {
+  constructor(
+    private container: ContainerService,
+    public wall: WallService,
+    public silicate: SilicateService,
+    private cd: ChangeDetectorRef) {
   }
 
 
-  /**
-   * We need to track brick changes using their UUID for two main reasons:
-   * 1. A change in the n-th brick should only trigger the re-render of the n-th ngFor item
-   * 2. We avoid a lost focus issue.
-   *
-   * @see https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5
-   *
-   * @param index The brick index [0 -> n-1].
-   * @param brick The brick data.
-   */
-  trackByFn(index: any, brick: BaseBrick) {
-    return brick.uuid;
+  @Input()
+  get brickFactories(): any[] {
+    return this.container.brickFactories;
+  }
+
+
+  set bricks(newBrickFactories) {
+    this.container.brickFactories = newBrickFactories;
+  }
+
+
+  @Input()
+  get editableEvents(): any[] {
+    return this.container.editableEvents;
+  }
+
+
+  set editableEvents(newEditableEvents) {
+    this.container.editableEvents = newEditableEvents;
+  }
+
+
+  @Input()
+  get editableFilters(): any[] {
+    return this.container.toolbarActions;
+  }
+
+
+  set editableFilters(newEditableFilters) {
+    this.container.editableFilters = newEditableFilters;
+  }
+
+
+  @Input()
+  get toolbarActions(): any[] {
+    return this.container.toolbarActions;
+  }
+
+
+  set toolbarActions(newToolbarActions) {
+    this.container.toolbarActions = newToolbarActions;
   }
 
 
@@ -73,9 +98,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
    * ngOnInit hook
    */
   ngOnInit(): void {
-    this.silicate.generateMappings(this.bricks);
     this.silicate.editable = this.editable;
-
 
     // Add missing uuid if necessary
     this.data = this.data.map((brick) => {
@@ -87,10 +110,10 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     });
 
     // Push initial data to the Silicate Service
-    this.silicate.wall$.next(this.data);
+    this.wall.wall$.next(this.data);
 
     // (data) Output
-    this.silicate.wall$.subscribe((newData: BaseBrick[]) => {
+    this.wall.wall$.subscribe((newData: BaseBrick[]) => {
       // Since the use of the brick uuid are only used internally, there is no reason to emit them outside the wrapper.
       // this.dataChange.emit(newData.map(d => {
       //   delete d.uuid;
@@ -111,6 +134,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
+
   ngAfterViewInit() {
     this.cd.detectChanges();
   }
@@ -125,8 +149,23 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
      * We need a copy of the current brick array, because the BehaviorSubject is immutable.
      * @see https://stackoverflow.com/q/56574381
      */
-    const wall = this.silicate.wall;
+    const wall = this.wall.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
-    this.silicate.wall$.next(wall);
+    this.wall.wall$.next(wall);
+  }
+
+
+  /**
+   * We need to track brick changes using their UUID for two main reasons:
+   * 1. A change in the n-th brick should only trigger the re-render of the n-th ngFor item
+   * 2. We avoid a lost focus issue.
+   *
+   * @see https://netbasal.com/angular-2-improve-performance-with-trackby-cc147b5104e5
+   *
+   * @param index The brick index [0 -> n-1].
+   * @param brick The brick data.
+   */
+  trackByFn(index: any, brick: BaseBrick) {
+    return brick.uuid;
   }
 }

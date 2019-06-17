@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {ImageBrick} from '../../bricks/image-brick/image-brick';
+import {ImageBrick} from '../../declarations/bricks-factories/image-brick';
 
 
 @Component({

@@ -2,12 +2,12 @@
      fxLayoutAlign="center center"
      fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
-    <button (click)="swap(declaration)"
-            *ngFor="let declaration of declarations"
-            [disabled]="icon === declaration.icon"
+    <button (click)="swap(factory)"
+            *ngFor="let factory of container.brickFactories"
+            [disabled]="icon === factory.icon"
             mat-menu-item>
-      <mat-icon>{{ declaration.icon }}</mat-icon>
-      {{ declaration.displayName }}
+      <mat-icon>{{ factory.icon }}</mat-icon>
+      {{ factory.displayName }}
     </button>
   </mat-menu>
 
