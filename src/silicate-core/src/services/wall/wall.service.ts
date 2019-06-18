@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {BaseBrick} from '../../declarations/bricks-factories/base-brick';
+import {SilicateCoreModule} from '../../silicate-core.module';
 import {Wall} from '../../silicate-core.types';
 
 
-@Injectable()
+@Injectable({
+  providedIn: SilicateCoreModule
+})
 export class WallService {
   /** The wall, which contains the bricks data. */
   wall$ = new BehaviorSubject<Wall>([]);

@@ -8,14 +8,6 @@
         </mat-card-header>
 
         <mat-card-content fxLayout="column">
-          <mat-form-field>
-            <mat-label>Exemple à charger</mat-label>
-            <mat-select (valueChange)="data = $event">
-              <mat-option *ngFor="let f of fixtures" [value]="f.value">
-                {{f.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
         </mat-card-content>
       </mat-card>
 
@@ -41,10 +33,11 @@
     </mat-card-header>
 
     <mat-card-content>
-      <mtx-silicate-wrapper [(data)]="data"
-                            [bricks]="bricks"
-                            [editable]="editable"
-                            fxFlex="grow">
+      <mtx-silicate-wrapper
+        [editable]="editable"
+        [brickFactories]=""
+        [(data)]="data"
+        fxFlex="grow">
       </mtx-silicate-wrapper>
     </mat-card-content>
   </mat-card>

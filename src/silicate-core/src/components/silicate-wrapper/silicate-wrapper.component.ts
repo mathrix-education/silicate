@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
+  EventEmitter, Injector,
   Input,
   OnChanges,
   OnInit,
@@ -43,6 +43,7 @@ export class SilicateWrapperComponent implements SilicateWrapper, OnInit, OnChan
 
 
   constructor(
+    private injector: Injector,
     private container: ContainerService,
     public wall: WallService,
     public silicate: SilicateService,

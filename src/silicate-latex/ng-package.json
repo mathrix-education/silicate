@@ -3,7 +3,10 @@
   "dest": "../../dist/silicate-latex",
   "deleteDestPath": false,
   "lib": {
-    "entryFile": "src/silicate-latex.ts"
+    "entryFile": "src/silicate-latex.ts",
+    "umdModuleIds": {
+      "katex": "katex"
+    }
   },
   "whitelistedNonPeerDependencies": [
     "katex",

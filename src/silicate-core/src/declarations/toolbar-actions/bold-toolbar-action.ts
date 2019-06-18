@@ -1,12 +1,22 @@
-import {ToolbarAction, ToolbarService} from '../../services/toolbar/toolbar.service';
+import {Injectable} from '@angular/core';
+import {SelectionService} from '../../services/selection/selection.service';
+import {ToolbarService} from '../../services/toolbar/toolbar.service';
 
-export const BoldToolbarAction: ToolbarAction = {
-  id: 'bold',
-  icon: 'format_bold',
-  callback: (service: ToolbarService) => {
-    service.selection.saveSelection();
-    document.execCommand('bold', false);
-    service.component.sync();
-    service.selection.restoreSelection();
+
+@Injectable()
+export class BoldToolbarAction {
+  readonly id = 'bold';
+  readonly icon = 'format_bold';
+
+
+  constructor(private selection: SelectionService, private toolbar: ToolbarService) {
   }
-};
+
+
+  callback() {
+    this.selection.saveSelection();
+    document.execCommand('bold', false);
+    this.toolbar.component.sync();
+    this.selection.restoreSelection();
+  }
+}

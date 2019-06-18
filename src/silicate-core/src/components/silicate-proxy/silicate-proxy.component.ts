@@ -2,7 +2,7 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  ComponentRef,
+  ComponentRef, Injector,
   Input,
   OnDestroy,
   OnInit,
@@ -33,6 +33,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
 
   constructor(
+    private injector: Injector,
     public silicate: SilicateService,
     private wall: WallService,
     public container: ContainerService,
@@ -107,7 +108,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const kind = this.wall.get(this.index).kind;
     const component = this.container.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
-    this.brickRef = this.wrapper.createComponent(factory);
+    this.brickRef = this.wrapper.createComponent(factory, undefined, this.injector);
 
     // [(data)] "artificial" two-way binding
     this.brickRef.instance.data = this.wall.get(this.index);

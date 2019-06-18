@@ -5,8 +5,6 @@ import {MatCardModule, MatSelectModule, MatSlideToggleModule} from '@angular/mat
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {SilicateLatexModule} from '@mathrix/silicate-latex';
-import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
 import {CardBrickComponent} from './components/bricks/card-brick/card-brick.component';
 import {DebugComponent} from './components/debug/debug.component';
@@ -30,8 +28,6 @@ import {DebugComponent} from './components/debug/debug.component';
     MatSelectModule,
     MatSlideToggleModule,
     SilicateCoreModule,
-    SilicateLatexModule,
-    SilicateVideosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
