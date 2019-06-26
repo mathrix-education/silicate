@@ -1,5 +1,6 @@
 import {TitleBrickComponent} from '../../bricks/title-brick/title-brick.component';
 import {BaseBrick, BaseBrickFactory} from './base-brick';
+import {Injectable} from '@angular/core';
 
 
 export interface TitleBrick extends BaseBrick {
@@ -7,16 +8,18 @@ export interface TitleBrick extends BaseBrick {
   content: string;
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+export class TitleBrickFactory extends BaseBrickFactory<TitleBrick> {
+  readonly kind = 'title';
+  readonly icon = 'title';
+  readonly displayName = 'Titre';
+  readonly component = TitleBrickComponent;
 
-export class TitleBrickFactory extends BaseBrickFactory {
-  static readonly kind = 'title';
-  static readonly icon = 'title';
-  static readonly displayName = 'Titre';
-  static readonly component = TitleBrickComponent;
 
-
-  static make(): TitleBrick {
-    return TitleBrickFactory.withUuid({
+  make(): TitleBrick {
+    return this.withUuid({
       kind: 'title',
       content: 'Titre à définir...'
     });

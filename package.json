@@ -11,6 +11,7 @@
   "private": true,
   "workspaces": [
     "src/silicate-core",
+    "src/silicate-demo",
     "src/silicate-latex",
     "src/silicate-videos"
   ],

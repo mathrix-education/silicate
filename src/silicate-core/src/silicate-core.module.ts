@@ -1,6 +1,6 @@
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {CommonModule, JsonPipe} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {
@@ -32,8 +32,12 @@ import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-w
 import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
 import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
-import {SelectionService} from './services/selection/selection.service';
-
+import {TextBrick, TextBrickFactory} from './declarations/bricks-factories/text-brick';
+import {SilicateExtensionModule} from './silicate-extension.module';
+import {brick} from './silicate-core.helpers';
+import {ImageBrick, ImageBrickFactory} from './declarations/bricks-factories/image-brick';
+import {ListBrick, ListBrickFactory} from './declarations/bricks-factories/list-brick';
+import {TitleBrick, TitleBrickFactory} from './declarations/bricks-factories/title-brick';
 
 @NgModule({
   entryComponents: [
@@ -81,15 +85,32 @@ import {SelectionService} from './services/selection/selection.service';
     MatExpansionModule,
     DragDropModule
   ],
-  providers: [
-    SelectionService,
-    JsonPipe
-  ],
   exports: [
     ContenteditableModule,
     SilicateWrapperComponent,
     SilicateEditableComponent
   ]
 })
-export class SilicateCoreModule {
+export class SilicateCoreModule extends SilicateExtensionModule {
+  static bricks(): Provider[] {
+    return [
+      brick<TextBrick>('text', TextBrickComponent, TextBrickFactory, 'Texte', 'notes'),
+      brick<ImageBrick>('image', ImageBrickComponent, ImageBrickFactory, 'Image', 'image'),
+      brick<ListBrick>('list', ListBrickComponent, ListBrickFactory, 'Liste', 'format_list_bulleted'),
+      brick<TitleBrick>('title', TitleBrickComponent, TitleBrickFactory, 'Titre', 'title')
+    ];
+  }
+
+  static withBricks(modules: any[]): ModuleWithProviders {
+    const bricksProviders = [];
+
+    modules.forEach(m => {
+      bricksProviders.push(...m.bricks());
+    });
+
+    return {
+      ngModule: SilicateCoreModule,
+      providers: bricksProviders
+    };
+  }
 }

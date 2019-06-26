@@ -11,16 +11,11 @@ export interface BaseBrick {
  * BaseBrickFactory declaration.
  * In this case, it is pretty irrelevant but allow surcharging the declaration.
  */
-export abstract class BaseBrickFactory<T> {
-  readonly kind: string = 'none';
-  readonly icon: string = 'settings';
-  readonly displayName: string = 'none';
-
-
+export abstract class BaseBrickFactory<T = BaseBrick> {
   protected withUuid(data) {
     return {...{uuid: uuid()}, ...data};
   }
 
 
-  abstract make(): T;
+  abstract make();
 }

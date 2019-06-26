@@ -1,5 +1,6 @@
 import {ListBrickComponent} from '../../bricks/list-brick/list-brick.component';
 import {BaseBrick, BaseBrickFactory} from './base-brick';
+import {Injectable} from '@angular/core';
 
 
 export interface ListBrick extends BaseBrick {
@@ -7,16 +8,18 @@ export interface ListBrick extends BaseBrick {
   items: string[];
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+export class ListBrickFactory extends BaseBrickFactory<ListBrick> {
+  readonly kind = 'list';
+  readonly icon = 'format_list_bulleted';
+  readonly displayName = 'Liste';
+  readonly component = ListBrickComponent;
 
-export class ListBrickFactory extends BaseBrickFactory {
-  static readonly kind = 'list';
-  static readonly icon = 'format_list_bulleted';
-  static readonly displayName = 'Liste';
-  static readonly component = ListBrickComponent;
 
-
-  static make(): ListBrick {
-    return ListBrickFactory.withUuid({
+  make(): ListBrick {
+    return this.withUuid({
       kind: 'list',
       items: [
         'Un premier item...',
