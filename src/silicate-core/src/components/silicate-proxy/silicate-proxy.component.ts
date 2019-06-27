@@ -21,7 +21,7 @@ import {BrickDeclarations} from '../../silicate-core.tokens';
 
 
 @Component({
-  selector: 'mtx-silicate-proxy',
+  selector: 'silicate-proxy',
   templateUrl: './silicate-proxy.component.html',
   styleUrls: ['./silicate-proxy.component.scss']
 })

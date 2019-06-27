@@ -21,7 +21,7 @@ import {EditableEvents} from '../../silicate-core.tokens';
 
 
 @Component({
-  selector: 'mtx-silicate-editable',
+  selector: 'silicate-editable',
   templateUrl: './silicate-editable.component.html',
   styleUrls: ['./silicate-editable.component.scss']
 })

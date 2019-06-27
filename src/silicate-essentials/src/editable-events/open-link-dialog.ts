@@ -5,9 +5,7 @@ import {first} from 'rxjs/operators';
 import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class OpenLinkDialogService {
   constructor(
     private silicate: SilicateService,

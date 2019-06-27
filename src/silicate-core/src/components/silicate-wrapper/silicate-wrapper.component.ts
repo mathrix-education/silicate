@@ -26,7 +26,7 @@ import {WallService} from '../../services/wall/wall.service';
  * @link https://stackoverflow.com/q/31816061
  */
 @Component({
-  selector: 'mtx-silicate-wrapper',
+  selector: 'silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
   styleUrls: ['./silicate-wrapper.component.scss'],
   providers: [

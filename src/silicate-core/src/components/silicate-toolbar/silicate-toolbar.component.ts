@@ -4,7 +4,7 @@ import {ToolbarService} from '../../services/toolbar/toolbar.service';
 
 
 @Component({
-  selector: 'mtx-silicate-toolbar',
+  selector: 'silicate-toolbar',
   templateUrl: './silicate-toolbar.component.html',
   styleUrls: ['./silicate-toolbar.component.scss']
 })

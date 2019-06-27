@@ -1,4 +1,8 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule} from '@angular/forms';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatSelectModule} from '@angular/material';
 import {
   BrickDeclarations,
   EditableEvents,
@@ -26,27 +30,14 @@ import {LinkToolbarAction} from './toolbar-actions/link.toolbar-action';
 
 
 @NgModule({
-  entryComponents: [
-    // Bricks
-    ImageBrickComponent,
-    ListBrickComponent,
-    TextBrickComponent,
-    TitleBrickComponent,
-    // Dialogs
-    ImageDialogComponent,
-    LinkDialogComponent
-  ],
-  declarations: [
-    // Bricks
-    ImageBrickComponent,
-    ListBrickComponent,
-    TextBrickComponent,
-    TitleBrickComponent,
-    // Dialogs
-    ImageDialogComponent,
-    LinkDialogComponent
-  ],
   imports: [
+    CommonModule,
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
     SilicateCoreModule.withBricks([
       // Bricks
       {
@@ -108,10 +99,31 @@ import {LinkToolbarAction} from './toolbar-actions/link.toolbar-action';
       {provide: ToolbarActions, multi: true, useValue: LinkToolbarAction}
     ])
   ],
+  declarations: [
+    ImageBrickComponent,
+    ListBrickComponent,
+    TextBrickComponent,
+    TitleBrickComponent,
+    ImageDialogComponent,
+    LinkDialogComponent
+  ],
+  entryComponents: [
+    ImageBrickComponent,
+    ListBrickComponent,
+    TextBrickComponent,
+    TitleBrickComponent,
+    ImageDialogComponent,
+    LinkDialogComponent
+  ],
   exports: [
-    SilicateCoreModule
+    SilicateCoreModule,
+    ImageBrickComponent,
+    ListBrickComponent,
+    TextBrickComponent,
+    TitleBrickComponent,
+    ImageDialogComponent,
+    LinkDialogComponent
   ]
 })
 export class SilicateEssentialsModule {
-
 }
