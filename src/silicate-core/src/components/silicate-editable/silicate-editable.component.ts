@@ -4,22 +4,20 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
-  HostListener,
+  Inject,
+  Injector,
   Input,
   OnDestroy,
   Output,
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {first} from 'rxjs/operators';
-import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
-import {ContainerService} from '../../services/container/container.service';
+import {EditableEvent} from '../../interfaces/editable-event';
+import {PurifierService} from '../../services/purifier/purifier.service';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
-import {EditableFilter} from '../../silicate-core.types';
-
+import {EditableEvents} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -50,15 +48,20 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   unlistenWrapperBlur: () => void;
   /** Un-listen the document selectionchange event. */
   unlistenSelectionChange: () => void;
+  /** Un-listen provided global events */
+  unlistenGlobalEvents: (() => void)[];
+  /** Un-listen provided on-focus events */
+  unlistenFocusEvents: (() => void)[];
 
 
   constructor(
     private renderer2: Renderer2,
     public silicate: SilicateService,
-    private container: ContainerService,
     public selection: SelectionService,
     private toolbar: ToolbarService,
-    private dialog: MatDialog
+    private purifier: PurifierService,
+    private injector: Injector,
+    @Inject(EditableEvents) private editableEvents: EditableEvent[]
   ) {
     const max = SilicateEditableComponent.MAX_ID;
     const min = SilicateEditableComponent.MIN_ID;
@@ -74,7 +77,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
 
   set content(newContent: string) {
-    this.model.content = this.purify(newContent, []);
+    this.model.content = this.purifier.purify(newContent);
     this.contentChange.emit(this.content);
   }
 
@@ -84,6 +87,18 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
       this.renderer2.setAttribute(this.wrapper.nativeElement, 'placeholder', this.placeholder);
     }
 
+
+    this.editableEvents
+      .filter(e => !e.focusOnly) // We only want the global events
+      .forEach((editableEvent: EditableEvent) => {
+        const unlisten = this.renderer2.listen(this.wrapper.nativeElement, editableEvent.eventName, ($event) => {
+          const service = this.injector.get(editableEvent.service);
+          service[editableEvent.method]($event);
+        });
+
+        this.unlistenGlobalEvents.push(unlisten);
+      });
+
     this.listenWrapperFocus();
     this.listenWrapperBlur();
   }
@@ -92,6 +107,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
+    this.unlistenGlobalEvents.forEach(e => e());
   }
 
 
@@ -100,40 +116,6 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
    */
   sync() {
     this.content = this.wrapper.nativeElement.innerHTML;
-  }
-
-
-  @HostListener('keydown', ['$event'])
-  onKeydown($event: KeyboardEvent) {
-    this.container.editableEvents
-      .filter(kdc => kdc.key === $event.key)
-      .forEach(kdc => kdc.callback(this));
-  }
-
-
-  @HostListener('click', ['$event'])
-  onClick($event) {
-    if (!this.silicate.editable) {
-      return;
-    }
-
-    const targetLink = $event.target.closest('a');
-    if (targetLink !== null) {
-      const link = {
-        elementRef: new ElementRef(targetLink),
-        href: targetLink.getAttribute('href'),
-        target: targetLink.getAttribute('target')
-      };
-
-      this.dialog
-        .open(LinkDialogComponent, {
-          width: '400px',
-          data: link
-        })
-        .afterClosed()
-        .pipe(first())
-        .subscribe(() => this.sync());
-    }
   }
 
 
@@ -154,6 +136,19 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
           this.toolbar.hide(this);
         }
       });
+
+      // Register on-focus events
+      this.editableEvents
+        .filter(e => e.focusOnly)
+        .forEach((editableEvent: EditableEvent) => {
+          const unlisten = this.renderer2.listen(this.wrapper.nativeElement, editableEvent.eventName, ($event) => {
+            const service = this.injector.get(editableEvent.service);
+            const method = editableEvent.method ? editableEvent.method : 'invoke';
+            service[method]($event, this);
+          });
+
+          this.unlistenFocusEvents.push(unlisten);
+        });
     });
   }
 
@@ -165,6 +160,8 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     this.unlistenWrapperBlur = this.renderer2.listen(this.wrapper.nativeElement, 'blur', () => {
       this.toolbar.hide(this);
       this.unlistenSelectionChange();
+
+      this.unlistenFocusEvents.forEach(e => e());
     });
   }
 
@@ -172,64 +169,5 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   focus() {
     // TODO: place the caret at the end of the element
     this.wrapper.nativeElement.focus();
-  }
-
-
-  /**
-   * Purify HTML using a custom rules set.
-   * @param dirtyHTML The dirty HTML.
-   * @param filters Array of Filers.
-   *
-   * Example of rules:
-   * [
-   *   {
-   *     selector: 'p',
-   *     allowedAttributes: ['class']
-   *   }
-   * ]
-   *
-   * Will only allow <p> tags and will only keep 'class' attribute on those <p> tags.
-   * @see SilicateCoreFilters
-   */
-  purify(dirtyHTML: string, filters: EditableFilter[]) {
-    const sandbox: HTMLDivElement = this.renderer2.createElement('div');
-    this.renderer2.setProperty(sandbox, 'innerHTML', dirtyHTML);
-
-    // First, we remove all elements which does not match with our selectors.
-    const blacklistSelector = filters.map(rule => `:not(${rule.selector})`).join('');
-    const blacklistedElements = sandbox.querySelectorAll(blacklistSelector);
-    blacklistedElements.forEach((blacklistedElement) => {
-      /**
-       * outerHTML = innerHTML is equivalent to removing the HTML tag
-       * Example: <p>test</p> => test
-       */
-      this.renderer2.setProperty(blacklistedElement, 'outerHTML', blacklistedElement.innerHTML);
-    });
-
-
-    // Then, we remove unwanted attributes (those which are not explicitly whitelisted in the rule set)
-    filters.forEach(rule => {
-      const nodes = sandbox.querySelectorAll(rule.selector);
-
-      nodes.forEach((element: Element) => {
-        /**
-         * We need to convert element.attributes since it is not an implementation of Array.
-         * @see https://www.w3schools.com/jsref/prop_node_attributes.asp
-         * @see NamedNodeMap
-         */
-        const blacklistedAttributes = Array.from(element.attributes)
-          .map(attribute => attribute.name)
-          .filter(attributeName => !rule.allowedAttributes.includes(attributeName));
-        blacklistedAttributes.forEach(blacklistedAttributeName => {
-          element.removeAttribute(blacklistedAttributeName);
-        });
-      });
-    });
-
-    // Finally, we get the clean HTML and destroy the sandbox
-    const cleanHTML = sandbox.innerHTML;
-    this.renderer2.destroyNode(sandbox);
-
-    return cleanHTML;
   }
 }

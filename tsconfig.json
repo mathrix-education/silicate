@@ -37,6 +37,12 @@
       ],
       "@mathrix/silicate-videos/*": [
         "dist/silicate-videos/*"
+      ],
+      "silicate-essentials": [
+        "dist/silicate-essentials"
+      ],
+      "silicate-essentials/*": [
+        "dist/silicate-essentials/*"
       ]
     }
   }

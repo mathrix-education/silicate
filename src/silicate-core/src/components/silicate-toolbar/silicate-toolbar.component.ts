@@ -33,13 +33,7 @@ export class SilicateToolbarComponent implements OnInit {
 
 
   ngOnInit() {
-    this.toolbar.show$.subscribe((s) => {
-      if (s) {
-        this.show();
-      } else {
-        this.hide();
-      }
-    });
+    this.toolbar.show$.subscribe((s) => s ? this.show() : this.hide());
   }
 
 

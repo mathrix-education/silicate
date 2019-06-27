@@ -1,29 +1,19 @@
-import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Inject, Injectable, Injector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
-import {ContainerService} from '../container/container.service';
-import {SelectionService} from '../selection/selection.service';
-
-export interface ToolbarAction {
-  id: string;
-  icon: string;
-  callback: (serviceRef: ToolbarService, $event: MouseEvent) => void;
-}
+import {ToolbarAction} from '../../interfaces/toolbar-action';
+import {ToolbarActions} from '../../silicate-core.tokens';
 
 
 @Injectable()
 export class ToolbarService {
-  private actions: { [key: string]: ToolbarAction } = {};
-
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
 
 
   constructor(
-    private container: ContainerService,
-    public selection: SelectionService,
-    public dialog: MatDialog
+    private injector: Injector,
+    @Inject(ToolbarActions) private toolbarActions: ToolbarAction[]
   ) {
   }
 
@@ -50,9 +40,11 @@ export class ToolbarService {
   }
 
 
-  dispatch(id: string, $event: MouseEvent) {
-    this.container.toolbarActions
-      .filter(ta => ta.id === id)
-      .forEach(ta => ta.callback(this, $event));
+  dispatch(key: string, $event: MouseEvent) {
+    const action = this.toolbarActions.find(ta => ta.key === key);
+    const service = this.injector.get(action.service);
+    const method = action.method ? action.method : 'invoke';
+
+    service[method]($event, this.component);
   }
 }

@@ -95,7 +95,7 @@
       "projectType": "library",
       "root": "src/silicate-core",
       "sourceRoot": "src/silicate-core/src",
-      "prefix": "mtx",
+      "prefix": "silicate",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -127,7 +127,7 @@
       "projectType": "library",
       "root": "src/silicate-videos",
       "sourceRoot": "src/silicate-videos/src",
-      "prefix": "mtx",
+      "prefix": "silicate",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -159,7 +159,7 @@
       "projectType": "library",
       "root": "src/silicate-latex",
       "sourceRoot": "src/silicate-latex/src",
-      "prefix": "mtx",
+      "prefix": "silicate",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -179,6 +179,38 @@
             "tsConfig": [
               "src/silicate-latex/tsconfig.lib.json",
               "src/silicate-latex/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "silicate-essentials": {
+      "projectType": "library",
+      "root": "src/silicate-essentials",
+      "sourceRoot": "src/silicate-essentials/src",
+      "prefix": "silicate",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "src/silicate-essentials/tsconfig.lib.json",
+            "project": "src/silicate-essentials/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/silicate-essentials/tsconfig.lib.json",
+              "src/silicate-essentials/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

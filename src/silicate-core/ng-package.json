@@ -1,7 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/silicate-core",
-  "deleteDestPath": false,
+  "deleteDestPath": true,
   "lib": {
     "entryFile": "src/silicate-core.ts"
   },

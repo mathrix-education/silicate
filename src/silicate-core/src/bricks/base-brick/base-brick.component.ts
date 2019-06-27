@@ -1,5 +1,5 @@
 import {DoCheck, EventEmitter, Input, Output} from '@angular/core';
-import {BaseBrick} from '../../declarations/bricks-factories/base-brick';
+import {BaseBrick} from './base-brick';
 
 
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements DoCheck {

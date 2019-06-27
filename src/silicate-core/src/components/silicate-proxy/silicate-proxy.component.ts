@@ -2,7 +2,8 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  ComponentRef, Injector,
+  ComponentRef, Inject,
+  Injector,
   Input,
   OnDestroy,
   OnInit,
@@ -12,10 +13,11 @@ import {
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {BaseBrickFactory} from '../../declarations/bricks-factories/base-brick';
-import {ContainerService} from '../../services/container/container.service';
+import {BrickDeclaration} from '../../interfaces/brick-declaration';
+import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
+import {BrickDeclarations} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -34,17 +36,18 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   constructor(
     private injector: Injector,
+    private componentFactory: ComponentFactoryResolver,
     public silicate: SilicateService,
+    private brickResolver: BrickResolverService,
     private wall: WallService,
-    public container: ContainerService,
-    private componentFactory: ComponentFactoryResolver
+    @Inject(BrickDeclarations) public brickDeclarations: BrickDeclaration[]
   ) {
   }
 
 
   get icon() {
     try {
-      return this.container.resolve(this.wall.get(this.index).kind).icon;
+      return this.brickResolver.resolve(this.wall.get(this.index).kind).icon;
     } catch (e) {
       return 'settings';
     }
@@ -106,7 +109,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
     // Inject the right brick in the wrapper
     const kind = this.wall.get(this.index).kind;
-    const component = this.container.resolve(kind).component;
+    const component = this.brickResolver.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory, undefined, this.injector);
 
