@@ -38,10 +38,10 @@
       "@mathrix/silicate-videos/*": [
         "dist/silicate-videos/*"
       ],
-      "silicate-essentials": [
+      "@mathrix/silicate-essentials": [
         "dist/silicate-essentials"
       ],
-      "silicate-essentials/*": [
+      "@mathrix/silicate-essentials/*": [
         "dist/silicate-essentials/*"
       ]
     }
