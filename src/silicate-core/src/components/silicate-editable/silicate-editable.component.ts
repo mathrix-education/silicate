@@ -8,6 +8,7 @@ import {
   Injector,
   Input,
   OnDestroy,
+  Optional,
   Output,
   Renderer2,
   ViewChild
@@ -49,9 +50,9 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   /** Un-listen the document selectionchange event. */
   unlistenSelectionChange: () => void;
   /** Un-listen provided global events */
-  unlistenGlobalEvents: (() => void)[];
+  unlistenGlobalEvents: (() => void)[] = [];
   /** Un-listen provided on-focus events */
-  unlistenFocusEvents: (() => void)[];
+  unlistenFocusEvents: (() => void)[] = [];
 
 
   constructor(
@@ -61,8 +62,12 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     private toolbar: ToolbarService,
     private purifier: PurifierService,
     private injector: Injector,
-    @Inject(EditableEvents) private editableEvents: EditableEvent[]
+    @Optional() @Inject(EditableEvents) private readonly editableEvents: EditableEvent[]
   ) {
+    if (!this.editableEvents) {
+      this.editableEvents = [];
+    }
+
     const max = SilicateEditableComponent.MAX_ID;
     const min = SilicateEditableComponent.MIN_ID;
     const idInt = Math.floor(Math.random() * (max - min + 1)) + min;

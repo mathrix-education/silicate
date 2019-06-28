@@ -34,6 +34,5 @@ export class LinkToolbarActionService {
 export const LinkToolbarAction: ToolbarAction = {
   key: 'link',
   icon: 'link',
-  service: LinkToolbarActionService,
-  method: 'italic'
+  service: LinkToolbarActionService
 };

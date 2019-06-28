@@ -25,6 +25,5 @@ export class ItalicToolbarActionService {
 export const ItalicToolbarAction: ToolbarAction = {
   key: 'italic',
   icon: 'format_italic',
-  service: ItalicToolbarActionService,
-  method: 'italic'
+  service: ItalicToolbarActionService
 };

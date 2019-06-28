@@ -1,4 +1,4 @@
-import {Inject, Injectable, Renderer2} from '@angular/core';
+import {Inject, Injectable, Optional, Renderer2} from '@angular/core';
 import {EditableFilter} from '../../interfaces/editable-filter';
 import {EditableFilters} from '../../silicate-core.tokens';
 
@@ -7,8 +7,11 @@ import {EditableFilters} from '../../silicate-core.tokens';
 export class PurifierService {
   constructor(
     private renderer2: Renderer2,
-    @Inject(EditableFilters) private filters: EditableFilter[]
+    @Optional() @Inject(EditableFilters) private readonly filters: EditableFilter[]
   ) {
+    if (!this.filters) {
+      this.filters = [];
+    }
   }
 
 
@@ -28,6 +31,10 @@ export class PurifierService {
    * @see SilicateCoreFilters
    */
   purify(dirtyHTML: string) {
+    if (this.filters.length === 0) {
+      return dirtyHTML;
+    }
+
     const sandbox: HTMLDivElement = this.renderer2.createElement('div');
     this.renderer2.setProperty(sandbox, 'innerHTML', dirtyHTML);
 

@@ -1,6 +1,8 @@
-import {Component, ElementRef, HostBinding, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, Inject, OnInit, Optional} from '@angular/core';
+import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {SelectionService} from '../../services/selection/selection.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
+import {ToolbarActions} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -17,8 +19,12 @@ export class SilicateToolbarComponent implements OnInit {
   constructor(
     public toolbar: ToolbarService,
     private selection: SelectionService,
-    private elementRef: ElementRef<HTMLElement>
+    private elementRef: ElementRef<HTMLElement>,
+    @Optional() @Inject(ToolbarActions) public readonly toolbarActions: ToolbarAction[]
   ) {
+    if (!this.toolbarActions) {
+      this.toolbarActions = [];
+    }
   }
 
 
@@ -33,7 +39,13 @@ export class SilicateToolbarComponent implements OnInit {
 
 
   ngOnInit() {
-    this.toolbar.show$.subscribe((s) => s ? this.show() : this.hide());
+    this.toolbar.show$.subscribe((s) => {
+      if (s) {
+        this.show();
+      } else {
+        this.hide();
+      }
+    });
   }
 
 

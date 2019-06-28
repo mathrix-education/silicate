@@ -1,4 +1,4 @@
-import {Inject, Injectable, Injector} from '@angular/core';
+import {Inject, Injectable, Injector, Optional} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
 import {ToolbarAction} from '../../interfaces/toolbar-action';
@@ -13,8 +13,11 @@ export class ToolbarService {
 
   constructor(
     private injector: Injector,
-    @Inject(ToolbarActions) private toolbarActions: ToolbarAction[]
+    @Optional() @Inject(ToolbarActions) private readonly toolbarActions: ToolbarAction[]
   ) {
+    if (!this.toolbarActions) {
+      this.toolbarActions = [];
+    }
   }
 
 

@@ -25,6 +25,5 @@ export class BoldToolbarActionService {
 export const BoldToolbarAction: ToolbarAction = {
   key: 'bold',
   icon: 'format_bold',
-  service: BoldToolbarActionService,
-  method: 'bold'
+  service: BoldToolbarActionService
 };

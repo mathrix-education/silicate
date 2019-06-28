@@ -39,11 +39,3 @@ export class OpenLinkDialogService {
     }
   }
 }
-
-
-export const OpenLinkDialog: EditableEvent = {
-  eventName: 'click',
-  focusOnly: true,
-  service: OpenLinkDialogService,
-  method: 'invoke'
-};
