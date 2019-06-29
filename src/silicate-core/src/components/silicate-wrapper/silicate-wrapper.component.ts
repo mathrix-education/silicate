@@ -33,7 +33,6 @@ import {WallService} from '../../services/wall/wall.service';
     BrickResolverService,
     PurifierService,
     SilicateService,
-    ToolbarService,
     WallService
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

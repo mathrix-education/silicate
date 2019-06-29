@@ -135,7 +135,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
           return;
         }
 
-        if (this.selection.isSelectionInside(this.wrapper.nativeElement)) {
+        if (!this.selection.isSelectionCollapsed() && this.selection.isSelectionInside(this.wrapper.nativeElement)) {
           this.toolbar.show(this);
         } else {
           this.toolbar.hide(this);

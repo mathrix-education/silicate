@@ -1,4 +1,13 @@
-import {Component, ElementRef, HostBinding, Inject, OnInit, Optional} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostBinding,
+  Inject,
+  OnInit,
+  Optional,
+  Renderer2
+} from '@angular/core';
 import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {SelectionService} from '../../services/selection/selection.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
@@ -20,6 +29,7 @@ export class SilicateToolbarComponent implements OnInit {
     public toolbar: ToolbarService,
     private selection: SelectionService,
     private elementRef: ElementRef<HTMLElement>,
+    private renderer2: Renderer2,
     @Optional() @Inject(ToolbarActions) public readonly toolbarActions: ToolbarAction[]
   ) {
     if (!this.toolbarActions) {
@@ -50,13 +60,11 @@ export class SilicateToolbarComponent implements OnInit {
 
 
   hide() {
-    this.visibility = 'hidden';
+    this.renderer2.setStyle(this.elementRef.nativeElement, 'visibility', 'hidden');
   }
 
 
   show() {
-    this.visibility = 'visible';
-
     const rect = this.selection.getSelectionRectangle();
     let computedX = rect.left + (rect.width / 2) - (this.width / 2);
     const computedY = rect.top - this.height - 8;
@@ -65,7 +73,8 @@ export class SilicateToolbarComponent implements OnInit {
       computedX = 8;
     }
 
-    this.x = computedX;
-    this.y = computedY;
+    this.renderer2.setStyle(this.elementRef.nativeElement, 'visibility', 'visible');
+    this.renderer2.setStyle(this.elementRef.nativeElement, 'left', computedX + 'px');
+    this.renderer2.setStyle(this.elementRef.nativeElement, 'top', computedY + 'px');
   }
 }

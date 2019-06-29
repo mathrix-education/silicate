@@ -5,7 +5,9 @@ import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {ToolbarActions} from '../../silicate-core.tokens';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
