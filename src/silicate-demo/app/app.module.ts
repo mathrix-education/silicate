@@ -5,16 +5,8 @@ import {MatCardModule, MatSelectModule, MatSlideToggleModule} from '@angular/mat
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {
-  BoldEditableFiltersProvider,
-  BoldToolbarActionProvider,
-  ImageBrickProvider,
-  ItalicToolbarActionProvider,
-  ListBrickProvider,
-  SilicateEssentialsModule,
-  TextBrickProvider,
-  TitleBrickProvider
-} from '@mathrix/silicate-essentials';
+import {SilicateEssentialsModule} from '@mathrix/silicate-essentials';
+import {SilicateLatexModule} from '@mathrix/silicate-latex';
 import {AppComponent} from './app.component';
 import {DebugComponent} from './components/debug/debug.component';
 
@@ -34,14 +26,10 @@ import {DebugComponent} from './components/debug/debug.component';
     MatSelectModule,
     MatSlideToggleModule,
     SilicateEssentialsModule,
-    SilicateCoreModule.withBricks([
-      TextBrickProvider,
-      ImageBrickProvider,
-      TitleBrickProvider,
-      ListBrickProvider,
-      BoldEditableFiltersProvider,
-      BoldToolbarActionProvider,
-      ItalicToolbarActionProvider
+    SilicateLatexModule,
+    SilicateCoreModule.withProviders([
+      ...SilicateEssentialsModule.providers(),
+      ...SilicateLatexModule.providers()
     ])
   ],
   providers: [],

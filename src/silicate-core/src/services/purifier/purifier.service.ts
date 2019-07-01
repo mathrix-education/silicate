@@ -31,6 +31,8 @@ export class PurifierService {
    * @see SilicateCoreFilters
    */
   purify(dirtyHTML: string) {
+    console.log(this.filters);
+
     if (this.filters.length === 0) {
       return dirtyHTML;
     }
@@ -39,8 +41,16 @@ export class PurifierService {
     this.renderer2.setProperty(sandbox, 'innerHTML', dirtyHTML);
 
     // First, we remove all elements which does not match with our selectors.
-    const blacklistSelector = this.filters.map(rule => `:not(${rule.selector})`).join('');
-    const blacklistedElements = sandbox.querySelectorAll(blacklistSelector);
+    /**
+     * Since there are limitation oif the :not() CSS pseudo selector, we have to walk around: firstly, we get all
+     * elements in the wrapper, then we find the whitelisted elements. Finally we convert both of them to array to
+     * differenciate them.
+     */
+    const allElements = Array.from(sandbox.querySelectorAll('*'));
+    const whitelistSelector = this.filters.map(rule => rule.selector).join(',');
+    const whitelistedElements = Array.from(sandbox.querySelectorAll(whitelistSelector));
+    const blacklistedElements = allElements.filter(e => !whitelistedElements.includes(e));
+
     blacklistedElements.forEach((blacklistedElement) => {
       /**
        * outerHTML = innerHTML is equivalent to removing the HTML tag

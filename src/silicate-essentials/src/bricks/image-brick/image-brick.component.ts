@@ -14,8 +14,7 @@ import {ImageBrick} from './image-brick';
 export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   constructor(
     private silicate: SilicateService,
-    private matDialog: MatDialog
-  ) {
+    private matDialog: MatDialog) {
     super();
   }
 

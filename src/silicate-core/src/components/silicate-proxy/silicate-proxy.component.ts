@@ -81,7 +81,9 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    */
   swap(brickFactory) {
     const old = this.wall.get(this.index);
-    const empty = brickFactory.make();
+    const factory = this.injector.get(brickFactory);
+    console.log(factory, factory.make);
+    const empty = factory.make();
 
     // UX: copy the old properties to the new brick instance if they exist
     Object.keys(old).forEach(k => {

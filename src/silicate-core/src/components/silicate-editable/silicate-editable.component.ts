@@ -14,11 +14,12 @@ import {
   ViewChild
 } from '@angular/core';
 import {EditableEvent} from '../../interfaces/editable-event';
+import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {PurifierService} from '../../services/purifier/purifier.service';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
-import {EditableEvents} from '../../silicate-core.tokens';
+import {EditableEvents, ToolbarActions} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -62,6 +63,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     private toolbar: ToolbarService,
     private purifier: PurifierService,
     private injector: Injector,
+    @Optional() @Inject(ToolbarActions) private readonly toolbarActions: ToolbarAction[],
     @Optional() @Inject(EditableEvents) private readonly editableEvents: EditableEvent[]
   ) {
     if (!this.editableEvents) {
@@ -130,6 +132,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
    */
   listenWrapperFocus() {
     this.unlistenWrapperFocus = this.renderer2.listen(this.wrapper.nativeElement, 'focus', () => {
+      // Listen for selectionchange, to display the Toolbar
       this.unlistenSelectionChange = this.renderer2.listen('document', 'selectionchange', () => {
         if (!this.silicate.editable) {
           return;
@@ -142,7 +145,8 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
         }
       });
 
-      // Register on-focus events
+      // (Re)Register on-focus events
+      this.unlistenFocusEvents = [];
       this.editableEvents
         .filter(e => e.focusOnly)
         .forEach((editableEvent: EditableEvent) => {

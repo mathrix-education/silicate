@@ -12,7 +12,7 @@ import {OpenLinkDialogService} from './editable-events/open-link-dialog';
 import {BoldFilter} from './editable-filters/bold-filter';
 import {ItalicFilter} from './editable-filters/italic-filter';
 import {LinkFilter} from './editable-filters/link-filter';
-import {BoldToolbarAction} from './toolbar-actions/bold.toolbar-action';
+import {BoldToolbarAction, BoldToolbarActionService} from './toolbar-actions/bold.toolbar-action';
 import {ItalicToolbarAction} from './toolbar-actions/italic.toolbar-action';
 import {LinkToolbarAction} from './toolbar-actions/link.toolbar-action';
 

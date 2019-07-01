@@ -6,8 +6,15 @@ import {MatButtonModule, MatDialogModule, MatIconModule, MatInputModule} from '@
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {KatexModule} from 'ng-katex';
-import {EquationBrickComponent} from './components/equation-brick/equation-brick.component';
+import {EquationBrickComponent} from './bricks/equation-brick/equation-brick.component';
+import {EquationBrickFactory} from './bricks/equation-brick/equation-brick.factory';
 import {EquationDialogComponent} from './dialogs/equation-dialog/equation-dialog.component';
+import {InlineEquationHandler} from './handlers/inline-equation.handler';
+import {
+  ClickEquationHandlerProvider,
+  EquationBrickProvider, KatexFilterProvider,
+  KeydownEquationHandlerProvider
+} from './silicate-latex.providers';
 
 
 @NgModule({
@@ -18,6 +25,10 @@ import {EquationDialogComponent} from './dialogs/equation-dialog/equation-dialog
   declarations: [
     EquationBrickComponent,
     EquationDialogComponent
+  ],
+  providers: [
+    EquationBrickFactory,
+    InlineEquationHandler
   ],
   imports: [
     CommonModule,
@@ -30,11 +41,15 @@ import {EquationDialogComponent} from './dialogs/equation-dialog/equation-dialog
     MatIconModule,
     MatButtonModule,
     MatDialogModule
-  ],
-  exports: [EquationBrickComponent]
+  ]
 })
 export class SilicateLatexModule {
-  static bricks() {
-    return [EquationBrickComponent];
+  static providers() {
+    return [
+      EquationBrickProvider,
+      KatexFilterProvider,
+      KeydownEquationHandlerProvider,
+      ClickEquationHandlerProvider
+    ];
   }
 }

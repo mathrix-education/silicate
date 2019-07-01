@@ -9,9 +9,13 @@ import {SilicateEditableComponent} from './components/silicate-editable/silicate
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
+import {SilicateService} from './services/silicate/silicate.service';
 
 
 @NgModule({
+  providers: [
+    SilicateService
+  ],
   declarations: [
     SilicateProxyComponent,
     SilicateWrapperComponent,
@@ -34,7 +38,7 @@ import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-w
   ]
 })
 export class SilicateCoreModule {
-  static withBricks(providers: Provider[]): ModuleWithProviders<SilicateCoreModule> {
+  static withProviders(providers: Provider[]): ModuleWithProviders {
     return {
       ngModule: SilicateCoreModule,
       providers
