@@ -20,7 +20,7 @@ export class ToolbarHandler {
       return;
     }
 
-    if (!this.selection.isSelectionCollapsed() && this.selection.isSelectionInside(source.wrapper.nativeElement)) {
+    if (!this.selection.isSelectionCollapsed() && this.selection.isSelectionInside(source.wrapper)) {
       this.toolbar.show(source);
     } else {
       this.toolbar.hide(source);

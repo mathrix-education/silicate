@@ -5,9 +5,7 @@ import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {ToolbarActions} from '../../silicate-core.tokens';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
@@ -48,7 +46,7 @@ export class ToolbarService {
   dispatch(key: string, $event: MouseEvent) {
     const action = this.toolbarActions.find(ta => ta.key === key);
     const service = this.injector.get(action.service);
-    const method = action.method ? action.method : 'invoke';
+    const method = action.method ? action.method : 'invoke'; // Default method is invoke
 
     service[method]($event, this.component);
   }

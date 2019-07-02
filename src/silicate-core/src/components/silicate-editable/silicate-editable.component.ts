@@ -13,13 +13,12 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {EditableEvent} from '../../interfaces/editable-event';
-import {ToolbarAction} from '../../interfaces/toolbar-action';
+import {Handler} from '../../interfaces/handler';
 import {PurifierService} from '../../services/purifier/purifier.service';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
-import {EditableEvents, ToolbarActions} from '../../silicate-core.tokens';
+import {Handlers} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -38,6 +37,9 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
   @HostBinding('id') id: string;
 
+  /**
+   * We need a wrapper, since we cannot directly bind a directive on the host of our component.
+   */
   @ViewChild('wrapper', {static: false}) wrapper: ElementRef<HTMLDivElement>;
 
   model = {
@@ -63,8 +65,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     private toolbar: ToolbarService,
     private purifier: PurifierService,
     private injector: Injector,
-    @Optional() @Inject(ToolbarActions) private readonly toolbarActions: ToolbarAction[],
-    @Optional() @Inject(EditableEvents) private readonly editableEvents: EditableEvent[]
+    @Optional() @Inject(Handlers) private readonly editableEvents: Handler[]
   ) {
     if (!this.editableEvents) {
       this.editableEvents = [];
@@ -97,10 +98,11 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
     this.editableEvents
       .filter(e => !e.focusOnly) // We only want the global events
-      .forEach((editableEvent: EditableEvent) => {
-        const unlisten = this.renderer2.listen(this.wrapper.nativeElement, editableEvent.eventName, ($event) => {
-          const service = this.injector.get(editableEvent.service);
-          service[editableEvent.method]($event);
+      .forEach((handler: Handler) => {
+        const target = handler.target === 'self' ? this.wrapper.nativeElement : handler.target;
+        const unlisten = this.renderer2.listen(target, handler.eventName, ($event) => {
+          const service = this.injector.get(handler.service);
+          service[handler.method]($event);
         });
 
         this.unlistenGlobalEvents.push(unlisten);
@@ -111,6 +113,9 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   }
 
 
+  /**
+   * Un-listen all declared event listener to cleanly delete the component.
+   */
   ngOnDestroy(): void {
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
@@ -120,6 +125,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
   /**
    * Synchronise (replace) the current innerHTML to the content.
+   * This will trigger the sanitization by the PurifierService.
    */
   sync() {
     this.content = this.wrapper.nativeElement.innerHTML;
@@ -138,7 +144,7 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
           return;
         }
 
-        if (!this.selection.isSelectionCollapsed() && this.selection.isSelectionInside(this.wrapper.nativeElement)) {
+        if (!this.selection.isSelectionCollapsed() && this.selection.isSelectionInside(this.wrapper)) {
           this.toolbar.show(this);
         } else {
           this.toolbar.hide(this);
@@ -149,14 +155,16 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
       this.unlistenFocusEvents = [];
       this.editableEvents
         .filter(e => e.focusOnly)
-        .forEach((editableEvent: EditableEvent) => {
-          const unlisten = this.renderer2.listen(this.wrapper.nativeElement, editableEvent.eventName, ($event) => {
-            const service = this.injector.get(editableEvent.service);
-            const method = editableEvent.method ? editableEvent.method : 'invoke';
+        .forEach((handler: Handler) => {
+          const target = handler.target === 'self' ? this.wrapper.nativeElement : handler.target;
+
+          const unlistenFocusEvent = this.renderer2.listen(target, handler.eventName, ($event) => {
+            const service = this.injector.get(handler.service);
+            const method = handler.method ? handler.method : 'invoke';
             service[method]($event, this);
           });
 
-          this.unlistenFocusEvents.push(unlisten);
+          this.unlistenFocusEvents.push(unlistenFocusEvent);
         });
     });
   }
@@ -175,8 +183,11 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
   }
 
 
+  /**
+   * Focus the wrapper.
+   * TODO: place the caret at the end of the element
+   */
   focus() {
-    // TODO: place the caret at the end of the element
     this.wrapper.nativeElement.focus();
   }
 }

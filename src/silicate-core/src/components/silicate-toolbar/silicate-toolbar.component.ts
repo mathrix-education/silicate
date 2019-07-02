@@ -1,13 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  HostBinding,
-  Inject,
-  OnInit,
-  Optional,
-  Renderer2
-} from '@angular/core';
+import {Component, ElementRef, HostBinding, Inject, OnInit, Optional, Renderer2} from '@angular/core';
 import {ToolbarAction} from '../../interfaces/toolbar-action';
 import {SelectionService} from '../../services/selection/selection.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';

@@ -1,0 +1,10 @@
+# Silicate Documentation
+## General
+- [Usage](usage.md): Learn how to use Silicate.
+
+
+## Concepts
+
+
+## Extending Silicate
+- [Creating Bricks](extending/creating-bricks.md): Learn how to create new bricks.

@@ -1,7 +1,9 @@
-import {Invokable} from './invokable';
+import {Type} from '@angular/core';
 
 
-export interface ToolbarAction extends Invokable {
+export interface ToolbarAction {
+  service: Type<any>;
+  method?: string;
   key: string;
   icon: string;
 }

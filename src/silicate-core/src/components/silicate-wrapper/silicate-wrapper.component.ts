@@ -21,10 +21,6 @@ import {ToolbarService} from '../../services/toolbar/toolbar.service';
 import {WallService} from '../../services/wall/wall.service';
 
 
-/**
- * Type explicit declared in Object literals:
- * @link https://stackoverflow.com/q/31816061
- */
 @Component({
   selector: 'silicate-wrapper',
   templateUrl: './silicate-wrapper.component.html',
@@ -33,7 +29,8 @@ import {WallService} from '../../services/wall/wall.service';
     BrickResolverService,
     PurifierService,
     SilicateService,
-    WallService
+    WallService,
+    ToolbarService
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -76,11 +73,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
 
     // (data) Output
     this.wall.wall$.subscribe((newData: BaseBrick[]) => {
-      // Since the use of the brick uuid are only used internally, there is no reason to emit them outside the wrapper.
-      // this.dataChange.emit(newData.map(d => {
-      //   delete d.uuid;
-      //   return d;
-      // }));
+
       this.dataChange.emit(newData);
     });
   }

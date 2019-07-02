@@ -23,8 +23,6 @@ export class OpenLinkDialogService {
         target: targetLink.getAttribute('target')
       };
 
-      console.log(this.dialog);
-
       this.dialog
         .open(LinkDialogComponent, {
           width: '400px',

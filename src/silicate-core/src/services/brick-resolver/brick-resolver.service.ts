@@ -5,10 +5,7 @@ import {BrickDeclarations} from '../../silicate-core.tokens';
 
 @Injectable()
 export class BrickResolverService {
-
-  constructor(
-    @Inject(BrickDeclarations) private bricks: BrickDeclaration[]
-  ) {
+  constructor(@Inject(BrickDeclarations) private bricks: BrickDeclaration[]) {
   }
 
 

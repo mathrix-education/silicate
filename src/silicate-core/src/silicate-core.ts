@@ -6,8 +6,8 @@ export * from './bricks/base-brick/base-brick.factory';
 // Interfaces
 export * from './interfaces/wall';
 export * from './interfaces/brick-declaration';
-export * from './interfaces/editable-event';
-export * from './interfaces/editable-filter';
+export * from './interfaces/handler';
+export * from './interfaces/filter';
 export * from './interfaces/toolbar-action';
 
 // Components
