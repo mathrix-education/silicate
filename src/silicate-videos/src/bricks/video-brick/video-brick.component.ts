@@ -8,7 +8,7 @@ import {VideoBrick} from './video-brick';
 
 
 @Component({
-  selector: 'mtx-video-brick',
+  selector: 'silicate-video-brick',
   templateUrl: './video-brick.component.html',
   styleUrls: ['./video-brick.component.scss']
 })

@@ -4,7 +4,7 @@ import {VideoPlayer} from '../video-player';
 
 
 @Component({
-  selector: 'mtx-vimeo-player',
+  selector: 'silicate-vimeo-player',
   templateUrl: './vimeo-player.component.html',
   styleUrls: ['./vimeo-player.component.scss']
 })

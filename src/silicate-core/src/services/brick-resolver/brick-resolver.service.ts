@@ -1,15 +1,15 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BrickDeclaration} from '../../interfaces/brick-declaration';
-import {BrickDeclarations} from '../../silicate-core.tokens';
+import {SilicateService} from '../silicate/silicate.service';
 
 
 @Injectable()
 export class BrickResolverService {
-  constructor(@Inject(BrickDeclarations) private bricks: BrickDeclaration[]) {
+  constructor(private silicate: SilicateService) {
   }
 
 
   resolve(kind: string): BrickDeclaration {
-    return this.bricks.find(b => b.kind === kind);
+    return this.silicate.bricksDeclarations.find(b => b.kind === kind);
   }
 }

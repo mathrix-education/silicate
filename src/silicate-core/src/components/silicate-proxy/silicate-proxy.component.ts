@@ -2,7 +2,7 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  ComponentRef, Inject,
+  ComponentRef,
   Injector,
   Input,
   OnDestroy,
@@ -13,11 +13,9 @@ import {
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {BrickDeclaration} from '../../interfaces/brick-declaration';
 import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
-import {BrickDeclarations} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -39,8 +37,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     private componentFactory: ComponentFactoryResolver,
     public silicate: SilicateService,
     private brickResolver: BrickResolverService,
-    private wall: WallService,
-    @Inject(BrickDeclarations) public brickDeclarations: BrickDeclaration[]
+    private wall: WallService
   ) {
   }
 

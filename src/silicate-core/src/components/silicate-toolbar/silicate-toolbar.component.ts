@@ -1,8 +1,9 @@
 import {Component, ElementRef, HostBinding, Inject, OnInit, Optional, Renderer2} from '@angular/core';
-import {ToolbarAction} from '../../interfaces/toolbar-action';
+import {Toolbar} from '../../interfaces/toolbar';
 import {SelectionService} from '../../services/selection/selection.service';
+import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
-import {ToolbarActions} from '../../silicate-core.tokens';
+import {Toolbars} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -17,15 +18,12 @@ export class SilicateToolbarComponent implements OnInit {
 
 
   constructor(
-    public toolbar: ToolbarService,
-    private selection: SelectionService,
     private elementRef: ElementRef<HTMLElement>,
     private renderer2: Renderer2,
-    @Optional() @Inject(ToolbarActions) public readonly toolbarActions: ToolbarAction[]
+    public silicate: SilicateService,
+    public toolbar: ToolbarService,
+    private selection: SelectionService
   ) {
-    if (!this.toolbarActions) {
-      this.toolbarActions = [];
-    }
   }
 
 

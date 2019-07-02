@@ -29,8 +29,8 @@ import {WallService} from '../../services/wall/wall.service';
     BrickResolverService,
     PurifierService,
     SilicateService,
-    WallService,
-    ToolbarService
+    ToolbarService,
+    WallService
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -47,14 +47,15 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
 
   constructor(
     private injector: Injector,
-    public wall: WallService,
+    private cd: ChangeDetectorRef,
     public silicate: SilicateService,
-    private cd: ChangeDetectorRef) {
+    public wall: WallService
+  ) {
   }
 
 
   /**
-   * ngOnInit hook
+   * Initialize everything
    */
   ngOnInit(): void {
     this.silicate.editable = this.editable;
@@ -79,9 +80,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   }
 
 
-  /**
-   * ngOnChanges hook
-   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.editable) {
       /*
@@ -110,6 +108,11 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     const wall = this.wall.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
     this.wall.wall$.next(wall);
+  }
+
+
+  push() {
+
   }
 
 

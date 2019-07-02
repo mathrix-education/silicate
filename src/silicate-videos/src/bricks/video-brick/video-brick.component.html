@@ -10,16 +10,16 @@
       </div>
 
       <ng-container [ngSwitch]="data.type">
-        <mtx-youtube-player
+        <silicate-youtube-player
           (ready)="loading = false"
           *ngSwitchCase="'youtube'"
           [videoId]="data.videoId">
-        </mtx-youtube-player>
-        <mtx-vimeo-player
+        </silicate-youtube-player>
+        <silicate-vimeo-player
           (ready)="loading = false"
           *ngSwitchCase="'vimeo'"
           [videoId]="data.videoId">
-        </mtx-vimeo-player>
+        </silicate-vimeo-player>
       </ng-container>
     </div>
   </div>
@@ -71,8 +71,8 @@
              fxLayoutGap="16px">
           <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
-          <mtx-video-brick-anchor [(timestamp)]="data.summary[i].timestamp"></mtx-video-brick-anchor>
-          <mtx-silicate-editable [(content)]="data.summary[i].title" fxFlex="grow"></mtx-silicate-editable>
+          <silicate-video-brick-anchor [(timestamp)]="data.summary[i].timestamp"></silicate-video-brick-anchor>
+          <silicate-editable [(content)]="data.summary[i].title" fxFlex="grow"></silicate-editable>
           <mat-icon (click)="data.summary.splice(i, 1)" *ngIf="silicate.editable">delete</mat-icon>
         </div>
       </mat-card-content>

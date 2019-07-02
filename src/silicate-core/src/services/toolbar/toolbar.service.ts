@@ -1,8 +1,7 @@
-import {Inject, Injectable, Injector, Optional} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
-import {ToolbarAction} from '../../interfaces/toolbar-action';
-import {ToolbarActions} from '../../silicate-core.tokens';
+import {SilicateService} from '../silicate/silicate.service';
 
 
 @Injectable()
@@ -13,11 +12,8 @@ export class ToolbarService {
 
   constructor(
     private injector: Injector,
-    @Optional() @Inject(ToolbarActions) private readonly toolbarActions: ToolbarAction[]
+    private silicate: SilicateService
   ) {
-    if (!this.toolbarActions) {
-      this.toolbarActions = [];
-    }
   }
 
 
@@ -27,6 +23,10 @@ export class ToolbarService {
 
 
   show(component: SilicateEditableComponent) {
+    if (this.silicate.toolbars.length === 0) {
+      return;
+    }
+
     if (this.component$.value === null || this.component$.value.id !== component.id) {
       this.component$.next(component);
     }
@@ -36,6 +36,10 @@ export class ToolbarService {
 
 
   hide(component: SilicateEditableComponent) {
+    if (this.silicate.toolbars.length === 0) {
+      return;
+    }
+
     if (this.component$.value !== null && this.component$.value.id === component.id) {
       this.component$.next(null);
       this.show$.next(false);
@@ -43,8 +47,8 @@ export class ToolbarService {
   }
 
 
-  dispatch(key: string, $event: MouseEvent) {
-    const action = this.toolbarActions.find(ta => ta.key === key);
+  dispatch($event: MouseEvent, key: string) {
+    const action = this.silicate.toolbars.find(ta => ta.key === key);
     const service = this.injector.get(action.service);
     const method = action.method ? action.method : 'invoke'; // Default method is invoke
 

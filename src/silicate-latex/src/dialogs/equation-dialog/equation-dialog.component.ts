@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 
 @Component({
-  selector: 'mtx-equation-dialog',
+  selector: 'silicate-equation-dialog',
   templateUrl: './equation-dialog.component.html',
   styleUrls: ['./equation-dialog.component.scss']
 })

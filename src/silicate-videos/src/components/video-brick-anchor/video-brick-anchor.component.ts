@@ -3,7 +3,7 @@ import {SilicateService} from '@mathrix/silicate-core';
 
 
 @Component({
-  selector: 'mtx-video-brick-anchor',
+  selector: 'silicate-video-brick-anchor',
   templateUrl: './video-brick-anchor.component.html',
   styleUrls: ['./video-brick-anchor.component.scss']
 })

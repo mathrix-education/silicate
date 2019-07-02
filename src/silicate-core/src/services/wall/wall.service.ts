@@ -42,6 +42,14 @@ export class WallService {
   }
 
 
+  append(brick: BaseBrick) {
+    const wall = this.wall;
+    wall.push(brick);
+    this.wall$.next(wall);
+    return this;
+  }
+
+
   /**
    * Edit a brick at a given index.import {Wall} from '../../silicate-core.types';
    * @param index The brick index.

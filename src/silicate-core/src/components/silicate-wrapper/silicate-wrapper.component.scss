@@ -15,14 +15,5 @@
 
 .brick-container {
   display: flex;
-  padding: 8px 0;
-  background-color: #fff; // TODO: confirm this
-}
-
-mat-card-content {
-  background-color: #ccc;
-
-  &.debug {
-    padding: 16px 8px;
-  }
+  // background-color: #fff; // TODO: confirm this
 }

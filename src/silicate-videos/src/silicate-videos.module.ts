@@ -1,6 +1,6 @@
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {
@@ -14,28 +14,19 @@ import {
 } from '@angular/material';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
+import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
-import {VideoBrickComponent} from './components/video-brick/video-brick.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.component';
+import {VideoBrickProvider} from './providers/bricks.providers';
 
 
 @NgModule({
-  entryComponents: [
-    VideoBrickComponent
-  ],
-  declarations: [
-    VideoBrickComponent,
-    VideoBrickAnchorComponent,
-    VimeoPlayerComponent,
-    YoutubePlayerComponent
-  ],
   imports: [
+    // Angular
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
-    ContenteditableModule,
-    SilicateCoreModule,
+    // Angular Material
     MatProgressSpinnerModule,
     MatCardModule,
     MatFormFieldModule,
@@ -43,12 +34,28 @@ import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.co
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    DragDropModule
+    DragDropModule,
+    // Flex Layouts
+    FlexLayoutModule,
+    // Contenteditable
+    ContenteditableModule,
+    // Silicate
+    SilicateCoreModule
   ],
-  exports: [VideoBrickComponent]
+  declarations: [
+    VideoBrickComponent,
+    VideoBrickAnchorComponent,
+    VimeoPlayerComponent,
+    YoutubePlayerComponent
+  ],
+  entryComponents: [
+    VideoBrickComponent
+  ]
 })
 export class SilicateVideosModule {
-  static bricks() {
-    return [VideoBrickComponent];
+  static providers(): Provider[] {
+    return [
+      VideoBrickProvider
+    ];
   }
 }

@@ -13,7 +13,7 @@ import {VideoPlayer} from '../video-player';
 
 
 @Component({
-  selector: 'mtx-youtube-player',
+  selector: 'silicate-youtube-player',
   templateUrl: './youtube-player.component.html',
   styleUrls: ['./youtube-player.component.scss']
 })

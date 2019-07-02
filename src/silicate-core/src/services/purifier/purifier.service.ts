@@ -1,17 +1,10 @@
-import {Inject, Injectable, Optional, Renderer2} from '@angular/core';
-import {Filter} from '../../interfaces/filter';
-import {Filters} from '../../silicate-core.tokens';
+import {Injectable, Renderer2} from '@angular/core';
+import {SilicateService} from '../silicate/silicate.service';
 
 
 @Injectable()
 export class PurifierService {
-  constructor(
-    private renderer2: Renderer2,
-    @Optional() @Inject(Filters) private readonly filters: Filter[]
-  ) {
-    if (!this.filters) {
-      this.filters = [];
-    }
+  constructor(private renderer2: Renderer2, private silicate: SilicateService) {
   }
 
 
@@ -31,7 +24,7 @@ export class PurifierService {
    * @see SilicateCoreFilters
    */
   purify(dirtyHTML: string) {
-    if (this.filters.length === 0) {
+    if (this.silicate.filters.length === 0) {
       return dirtyHTML;
     }
 
@@ -45,7 +38,7 @@ export class PurifierService {
      * differenciate them.
      */
     const allElements = Array.from(sandbox.querySelectorAll('*'));
-    const whitelistSelector = this.filters.map(rule => rule.selector).join(',');
+    const whitelistSelector = this.silicate.filters.map(rule => rule.selector).join(',');
     const whitelistedElements = Array.from(sandbox.querySelectorAll(whitelistSelector));
     const blacklistedElements = allElements.filter(e => !whitelistedElements.includes(e));
 
@@ -59,7 +52,7 @@ export class PurifierService {
 
 
     // Then, we remove unwanted attributes (those which are not explicitly whitelisted in the rule set)
-    this.filters.forEach(rule => {
+    this.silicate.filters.forEach(rule => {
       const nodes = sandbox.querySelectorAll(rule.selector);
 
       nodes.forEach((element: Element) => {

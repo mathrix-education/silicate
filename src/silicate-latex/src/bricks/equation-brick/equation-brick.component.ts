@@ -7,7 +7,7 @@ import {EquationBrick} from './equation-brick';
 
 
 @Component({
-  selector: 'mtx-equation-brick',
+  selector: 'silicate-equation-brick',
   templateUrl: './equation-brick.component.html',
   styleUrls: ['./equation-brick.component.scss']
 })

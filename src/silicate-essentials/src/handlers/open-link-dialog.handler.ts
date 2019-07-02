@@ -9,7 +9,7 @@ import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component'
 @Injectable({
   providedIn: SilicateCoreModule
 })
-export class OpenLinkDialogService {
+export class OpenLinkDialogHandler {
   constructor(private dialog: MatDialog) {
   }
 

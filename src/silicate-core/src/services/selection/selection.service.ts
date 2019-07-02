@@ -73,7 +73,8 @@ export class SelectionService {
    */
   isSelectionInside(elementRef: ElementRef<HTMLDivElement> | any) {
     return this.selection((selection) => {
-      return elementRef.contains(selection.anchorNode) && elementRef.contains(selection.focusNode);
+      return elementRef.nativeElement.contains(selection.anchorNode)
+        && elementRef.nativeElement.contains(selection.focusNode);
     }, false);
   }
 

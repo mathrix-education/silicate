@@ -3,7 +3,7 @@
      fxLayoutGap="0px">
   <mat-menu #brickType="matMenu">
     <button
-      *ngFor="let bd of brickDeclarations"
+      *ngFor="let bd of silicate.bricksDeclarations"
       (click)="swap(bd.factory)"
       [disabled]="icon === bd.icon"
       mat-menu-item>

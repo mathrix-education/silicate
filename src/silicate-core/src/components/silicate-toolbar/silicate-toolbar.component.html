@@ -1,6 +1,6 @@
 <mat-icon
-  *ngFor="let ta of toolbarActions"
-  (mousedown)="toolbar.dispatch(ta.key, $event)"
+  *ngFor="let t of silicate.toolbars"
+  (mousedown)="toolbar.dispatch($event, t.key)"
 >
-  {{ ta.icon }}
+  {{ t.icon }}
 </mat-icon>

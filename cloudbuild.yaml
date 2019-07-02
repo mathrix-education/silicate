@@ -14,6 +14,7 @@ steps:
     - '-c'
     - |
       yarn run ng build silicate-core
+      yarn run ng build silicate-essentials
       yarn run ng build silicate-latex
       yarn run ng build silicate-videos
       yarn run ng build silicate-demo --prod
@@ -37,6 +38,7 @@ steps:
       - |
         deploy/scripts/setup_ssh.sh
         deploy/scripts/push.sh silicate-core $SHORT_SHA
+        deploy/scripts/push.sh silicate-essentials $SHORT_SHA
         deploy/scripts/push.sh silicate-latex $SHORT_SHA
         deploy/scripts/push.sh silicate-videos $SHORT_SHA
     volumes:

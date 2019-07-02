@@ -1,14 +1,16 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {SelectionService, SilicateEditableComponent} from '@mathrix/silicate-core';
+import {SelectionService, SilicateCoreModule, SilicateEditableComponent} from '@mathrix/silicate-core';
 import * as katex from 'katex';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../dialogs/equation-dialog/equation-dialog.component';
 
 
 /** @dynamic */
-@Injectable()
+@Injectable({
+  providedIn: SilicateCoreModule
+})
 export class InlineEquationHandler {
   private renderer2: Renderer2;
 

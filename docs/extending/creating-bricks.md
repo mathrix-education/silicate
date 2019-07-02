@@ -35,10 +35,12 @@ Your factory has to be decorated with `@Injectable()` decorated.
 Example of `your-brick.factory.ts`:
 ```typescript
 import {Injectable} from '@angular/core';
-import {BaseBrickFactory} from '@mathrix/silicate-core';
+import {SilicateCoreModule, BaseBrickFactory} from '@mathrix/silicate-core';
 import {YourBrick} from './your-brick.ts';
 
-@Injectable()
+@Injectable({
+  providedIn: SilicateCoreModule // Important!
+})
 export class YourBrickFactory extends BaseBrickFactory<YourBrick> {
   make(): YourBrick {
     return this.withUuid({ // <-- This will automatically generate a uuid v4

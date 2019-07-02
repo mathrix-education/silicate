@@ -6,14 +6,3 @@ export interface TitleBrick extends BaseBrick {
   kind: 'title';
   content: string;
 }
-
-
-@Injectable()
-export class TitleBrickFactory extends BaseBrickFactory<TitleBrick> {
-  make(): TitleBrick {
-    return this.withUuid({
-      kind: 'title',
-      content: 'Titre à définir...'
-    });
-  }
-}

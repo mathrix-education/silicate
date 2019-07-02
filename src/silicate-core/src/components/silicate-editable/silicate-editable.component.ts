@@ -4,11 +4,9 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
-  Inject,
   Injector,
   Input,
   OnDestroy,
-  Optional,
   Output,
   Renderer2,
   ViewChild
@@ -18,7 +16,6 @@ import {PurifierService} from '../../services/purifier/purifier.service';
 import {SelectionService} from '../../services/selection/selection.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
-import {Handlers} from '../../silicate-core.tokens';
 
 
 @Component({
@@ -64,13 +61,8 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     public selection: SelectionService,
     private toolbar: ToolbarService,
     private purifier: PurifierService,
-    private injector: Injector,
-    @Optional() @Inject(Handlers) private readonly editableEvents: Handler[]
+    private injector: Injector
   ) {
-    if (!this.editableEvents) {
-      this.editableEvents = [];
-    }
-
     const max = SilicateEditableComponent.MAX_ID;
     const min = SilicateEditableComponent.MIN_ID;
     const idInt = Math.floor(Math.random() * (max - min + 1)) + min;
@@ -96,10 +88,11 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
     }
 
 
-    this.editableEvents
+    this.silicate.handlers
       .filter(e => !e.focusOnly) // We only want the global events
       .forEach((handler: Handler) => {
-        const target = handler.target === 'self' ? this.wrapper.nativeElement : handler.target;
+        const target = (!handler.target || handler.target === 'self') ? this.wrapper.nativeElement : handler.target;
+
         const unlisten = this.renderer2.listen(target, handler.eventName, ($event) => {
           const service = this.injector.get(handler.service);
           service[handler.method]($event);
@@ -153,10 +146,10 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
 
       // (Re)Register on-focus events
       this.unlistenFocusEvents = [];
-      this.editableEvents
+      this.silicate.handlers
         .filter(e => e.focusOnly)
         .forEach((handler: Handler) => {
-          const target = handler.target === 'self' ? this.wrapper.nativeElement : handler.target;
+          const target = (!handler.target || handler.target === 'self') ? this.wrapper.nativeElement : handler.target;
 
           const unlistenFocusEvent = this.renderer2.listen(target, handler.eventName, ($event) => {
             const service = this.injector.get(handler.service);

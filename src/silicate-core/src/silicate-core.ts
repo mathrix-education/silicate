@@ -4,11 +4,12 @@ export * from './bricks/base-brick/base-brick.component';
 export * from './bricks/base-brick/base-brick.factory';
 
 // Interfaces
-export * from './interfaces/wall';
 export * from './interfaces/brick-declaration';
 export * from './interfaces/handler';
 export * from './interfaces/filter';
-export * from './interfaces/toolbar-action';
+export * from './interfaces/toolbar';
+export * from './interfaces/typed-value-provider';
+export * from './interfaces/wall';
 
 // Components
 export * from './components/silicate-wrapper/silicate-wrapper.component';
