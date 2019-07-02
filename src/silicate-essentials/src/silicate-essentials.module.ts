@@ -1,0 +1,73 @@
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FormsModule} from '@angular/forms';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
+import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
+import {TextBrickComponent} from './bricks/text-brick/text-brick.component';
+import {TitleBrickComponent} from './bricks/title-brick/title-brick.component';
+import {ImageDialogComponent} from './dialogs/image-dialog/image-dialog.component';
+import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
+import {
+  ImageBrickProvider,
+  ListBrickProvider,
+  TextBrickProvider,
+  TitleBrickProvider
+} from './providers/bricks.providers';
+import {BoldFilterProvider, ItalicFilterProvider, LinkFilterProvider} from './providers/filters.providers';
+import {OpenLinkDialogHandlerProvider} from './providers/handlers.providers';
+import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from './providers/toolbars.providers';
+
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    SilicateCoreModule
+  ],
+  declarations: [
+    ImageBrickComponent,
+    ListBrickComponent,
+    TextBrickComponent,
+    TitleBrickComponent,
+    ImageDialogComponent,
+    LinkDialogComponent
+  ],
+  entryComponents: [
+    ImageBrickComponent,
+    ListBrickComponent,
+    TextBrickComponent,
+    TitleBrickComponent,
+    ImageDialogComponent,
+    LinkDialogComponent
+  ]
+})
+export class SilicateEssentialsModule {
+  static providers() {
+    return [
+      // Bricks
+      TextBrickProvider,
+      ImageBrickProvider,
+      TitleBrickProvider,
+      ListBrickProvider,
+      // Handlers
+      OpenLinkDialogHandlerProvider,
+      // EditableFilters
+      BoldFilterProvider,
+      ItalicFilterProvider,
+      LinkFilterProvider,
+      // ToolbarActions
+      BoldToolbarProvider,
+      ItalicToolbarProvider,
+      LinkToolbarProvider
+    ];
+  }
+}

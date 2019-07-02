@@ -1,103 +1,47 @@
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {CommonModule, JsonPipe} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSlideToggleModule,
-  MatToolbarModule
-} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
-import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
-import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
-import {TextBrickComponent} from './bricks/text-brick/text-brick.component';
-import {TitleBrickComponent} from './bricks/title-brick/title-brick.component';
 import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
-import {ImageBrickDialogComponent} from './dialogs/image-dialog/image-brick-dialog.component';
-import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
-import {UnsafeHtmlPipe} from './pipes/unsafe-html.pipe';
-import {SelectionService} from './services/selection/selection.service';
+import {SilicateService} from './services/silicate/silicate.service';
 
 
 @NgModule({
-  entryComponents: [
-    // Bricks
-    TextBrickComponent,
-    TitleBrickComponent,
-    ImageBrickComponent,
-    ListBrickComponent,
-    // Dialogs
-    ImageBrickDialogComponent,
-    LinkDialogComponent
+  providers: [
+    SilicateService
   ],
   declarations: [
     SilicateProxyComponent,
-    TextBrickComponent,
-    ImageBrickComponent,
-    ImageBrickDialogComponent,
-    LinkDialogComponent,
     SilicateWrapperComponent,
-    UnsafeHtmlPipe,
     SilicateEditableComponent,
-    SilicateToolbarComponent,
-    TitleBrickComponent,
-    ListBrickComponent
+    SilicateToolbarComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ContenteditableModule,
     FlexLayoutModule,
-    MatCardModule,
-    MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatButtonToggleModule,
-    MatSlideToggleModule,
-    MatDialogModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatListModule,
-    MatRippleModule,
-    MatExpansionModule,
     DragDropModule
   ],
-  providers: [
-    SelectionService,
-    JsonPipe
-  ],
   exports: [
-    ContenteditableModule,
     SilicateWrapperComponent,
     SilicateEditableComponent
   ]
 })
 export class SilicateCoreModule {
-  static bricks() {
-    return [
-      TextBrickComponent,
-      TitleBrickComponent,
-      ListBrickComponent,
-      ImageBrickComponent
-    ];
+  static withProviders(providers: Provider[]): ModuleWithProviders {
+    return {
+      ngModule: SilicateCoreModule,
+      providers
+    };
   }
 }

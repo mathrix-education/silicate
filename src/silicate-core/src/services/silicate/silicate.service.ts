@@ -1,100 +1,38 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {BrickDeclaration, BrickMappings, Wall} from '../../silicate-core.types';
+import {Inject, Injectable, Optional} from '@angular/core';
+import {BrickDeclaration} from '../../interfaces/brick-declaration';
+import {Filter} from '../../interfaces/filter';
+import {Handler} from '../../interfaces/handler';
+import {Toolbar} from '../../interfaces/toolbar';
+import {BrickDeclarations, Filters, Handlers, Toolbars} from '../../silicate-core.tokens';
 
 
 @Injectable()
 export class SilicateService {
   /** If the edition should be permitted */
   editable = false;
-  /** The Bricks mappings */
-  mappings: BrickMappings = {};
-  /** The wall, which contains the bricks data. */
-  wall$ = new BehaviorSubject<Wall>([]);
 
 
-  /**
-   * Get a copy of the wall$ BehaviorSubject. Since the structure of a brick is relatively free, we cannot make any assumption of its
-   * structure and the JSON intermediate is fine.
-   * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
-   */
-  get wall(): Wall {
-    return JSON.parse(JSON.stringify(this.wall$.value));
-  }
-
-
-  /**
-   * Generate bricks mappings using the given brick static declarations.
-   * @param bricks Array of the used BrickComponents
-   */
-  generateMappings(bricks: any[]) {
-    bricks.forEach(brickComponent => {
-      this.mappings[brickComponent.kind] = {
-        icon: brickComponent.icon,
-        displayName: brickComponent.displayName,
-        component: brickComponent
-      };
-    });
-  }
-
-
-  /**
-   * Get the brick declaration matching with the given kind.
-   * @param kind The Brick kind.
-   */
-  resolve(kind: string): BrickDeclaration {
-    if (!this.mappings.hasOwnProperty(kind)) {
-      throw new Error(`${kind} is not a valid brick kind.`);
+  constructor(
+    @Optional() @Inject(BrickDeclarations) public bricksDeclarations: BrickDeclaration[],
+    @Optional() @Inject(Filters) public filters: Filter[],
+    @Optional() @Inject(Handlers) public handlers: Handler[],
+    @Optional() @Inject(Toolbars) public toolbars: Toolbar[]
+  ) {
+    if (this.bricksDeclarations === null) {
+      // No brick are provided, throw error
+      throw new Error('No bricks were provided! Use The BrickDeclarations Injection Token');
     }
 
-    return this.mappings[kind];
-  }
+    if (this.filters === null) {
+      this.filters = [];
+    }
 
+    if (this.handlers === null) {
+      this.handlers = [];
+    }
 
-  /**
-   * Get the brick at a given index.
-   * @param index The brick index.
-   */
-  get<T = any>(index: number): T {
-    return this.wall[index];
-  }
-
-
-  /**
-   * Insert a brick at a given index.
-   * @param index The brick index.
-   * @param brick The brick data.
-   */
-  insert(index: number, brick: BaseBrick) {
-    this.wall$.next(
-      this.wall.splice(index, 0, brick)
-    );
-    return this;
-  }
-
-
-  /**
-   * Edit a brick at a given index.
-   * @param index The brick index.
-   * @param brick The brick data.
-   */
-  patch(index: number, brick: BaseBrick) {
-    const wall = this.wall;
-    wall[index] = brick;
-    this.wall$.next(wall);
-    return this;
-  }
-
-
-  /**
-   * Delete a brick at a given index.
-   * @param index The brick index.
-   */
-  delete(index: number) {
-    const wall = this.wall;
-    wall.splice(index, 1);
-    this.wall$.next(wall);
-    return this;
+    if (this.toolbars === null) {
+      this.toolbars = [];
+    }
   }
 }

@@ -3,6 +3,7 @@ import {
   ComponentFactory,
   ComponentFactoryResolver,
   ComponentRef,
+  Injector,
   Input,
   OnDestroy,
   OnInit,
@@ -12,12 +13,13 @@ import {
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
+import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
-import {BrickDeclaration} from '../../silicate-core.types';
+import {WallService} from '../../services/wall/wall.service';
 
 
 @Component({
-  selector: 'mtx-silicate-proxy',
+  selector: 'silicate-proxy',
   templateUrl: './silicate-proxy.component.html',
   styleUrls: ['./silicate-proxy.component.scss']
 })
@@ -31,23 +33,21 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
 
   constructor(
+    private injector: Injector,
+    private componentFactory: ComponentFactoryResolver,
     public silicate: SilicateService,
-    private componentFactory: ComponentFactoryResolver
+    private brickResolver: BrickResolverService,
+    private wall: WallService
   ) {
   }
 
 
   get icon() {
     try {
-      return this.silicate.resolve(this.silicate.get(this.index).kind).icon;
+      return this.brickResolver.resolve(this.wall.get(this.index).kind).icon;
     } catch (e) {
       return 'settings';
     }
-  }
-
-
-  get declarations(): BrickDeclaration[] {
-    return Object.values(this.silicate.mappings);
   }
 
 
@@ -74,11 +74,12 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   /**
    * Swap the current brick with another
-   * @param declaration The new brick declaration.
+   * @param brickFactory The new brick declaration.
    */
-  swap(declaration: BrickDeclaration) {
-    const old = this.silicate.get(this.index);
-    const empty = declaration.component.empty();
+  swap(brickFactory) {
+    const old = this.wall.get(this.index);
+    const factory = this.injector.get(brickFactory);
+    const empty = factory.make();
 
     // UX: copy the old properties to the new brick instance if they exist
     Object.keys(old).forEach(k => {
@@ -87,7 +88,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
       }
     });
 
-    this.silicate.patch(this.index, empty);
+    this.wall.patch(this.index, empty);
     this.render();
   }
 
@@ -105,15 +106,15 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
 
     // Inject the right brick in the wrapper
-    const kind = this.silicate.get(this.index).kind;
-    const component = this.silicate.resolve(kind).component;
+    const kind = this.wall.get(this.index).kind;
+    const component = this.brickResolver.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
-    this.brickRef = this.wrapper.createComponent(factory);
+    this.brickRef = this.wrapper.createComponent(factory, undefined, this.injector);
 
     // [(data)] "artificial" two-way binding
-    this.brickRef.instance.data = this.silicate.get(this.index);
+    this.brickRef.instance.data = this.wall.get(this.index);
     this.dataChangeSubscription = this.brickRef.instance.dataChanged.subscribe((data) => {
-      this.silicate.patch(this.index, data);
+      this.wall.patch(this.index, data);
     });
   }
 }

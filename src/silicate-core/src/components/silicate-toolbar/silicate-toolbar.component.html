@@ -1,3 +1,6 @@
-<mat-icon (mousedown)="toolbar.dispatch('bold', $event)">format_bold</mat-icon>
-<mat-icon (mousedown)="toolbar.dispatch('italic', $event)">format_italic</mat-icon>
-<mat-icon (mousedown)="toolbar.dispatch('link', $event)">link</mat-icon>
+<mat-icon
+  *ngFor="let t of silicate.toolbars"
+  (mousedown)="toolbar.dispatch($event, t.key)"
+>
+  {{ t.icon }}
+</mat-icon>

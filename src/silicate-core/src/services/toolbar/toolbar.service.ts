@@ -1,22 +1,18 @@
-import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Injectable, Injector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
-import {LinkDialogComponent} from '../../dialogs/link-dialog/link-dialog.component';
-import {SelectionService} from '../selection/selection.service';
+import {SilicateService} from '../silicate/silicate.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
   component$ = new BehaviorSubject<SilicateEditableComponent>(null);
 
 
   constructor(
-    private selection: SelectionService,
-    private dialog: MatDialog
+    private injector: Injector,
+    private silicate: SilicateService
   ) {
   }
 
@@ -27,6 +23,10 @@ export class ToolbarService {
 
 
   show(component: SilicateEditableComponent) {
+    if (this.silicate.toolbars.length === 0) {
+      return;
+    }
+
     if (this.component$.value === null || this.component$.value.id !== component.id) {
       this.component$.next(component);
     }
@@ -36,6 +36,10 @@ export class ToolbarService {
 
 
   hide(component: SilicateEditableComponent) {
+    if (this.silicate.toolbars.length === 0) {
+      return;
+    }
+
     if (this.component$.value !== null && this.component$.value.id === component.id) {
       this.component$.next(null);
       this.show$.next(false);
@@ -43,40 +47,11 @@ export class ToolbarService {
   }
 
 
-  dispatch(key: string, $event: MouseEvent) {
-    if (typeof this[key] === 'function') {
-      this[key]($event);
-    }
-    // Custom callbacks
-  }
+  dispatch($event: MouseEvent, key: string) {
+    const action = this.silicate.toolbars.find(ta => ta.key === key);
+    const service = this.injector.get(action.service);
+    const method = action.method ? action.method : 'invoke'; // Default method is invoke
 
-
-  bold(): void {
-    this.selection.saveSelection();
-    document.execCommand('bold', false);
-    this.component.sync();
-    this.selection.restoreSelection();
-  }
-
-
-  italic(): void {
-    this.selection.saveSelection();
-    document.execCommand('italic', false);
-    this.component.sync();
-    this.selection.restoreSelection();
-  }
-
-
-  link(): void {
-    this.selection.saveSelection();
-    this.dialog
-      .open(LinkDialogComponent, {
-        width: '400px',
-        data: {
-          href: 'https://mathrix.fr'
-        }
-      })
-      .afterClosed()
-      .subscribe(() => this.component.sync());
+    service[method]($event, this.component);
   }
 }

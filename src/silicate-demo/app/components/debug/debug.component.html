@@ -1,10 +1,22 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Debug</mat-card-title>
-    <mat-card-subtitle>Données de l'éditeur</mat-card-subtitle>
+    <mat-card-subtitle>Informations internes</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    <pre [innerHTML]="strip(data | json)" style="width: 100%; white-space: pre-wrap;"></pre>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Données de l'éditeur
+          </mat-panel-title>
+          <mat-panel-description>
+            JSON du wall
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <pre [innerHTML]="strip(data | json)" style="width: 100%; white-space: pre-wrap;"></pre>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-card-content>
 </mat-card>
