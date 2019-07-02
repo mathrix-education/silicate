@@ -8,4 +8,4 @@
 
 ## Extending Silicate
 - [Creating Bricks](extending/creating-bricks.md): Learn how to create new bricks.
-- [Wrapper in Bricks](extending/wrapper-in-bricks.md): Learn to integrate a Silicate Editor in a brick.
+- [Wrapper in Bricks](extending/wrapper-in-brick.md): Learn to integrate a Silicate Editor in a brick.
