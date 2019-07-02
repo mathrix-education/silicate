@@ -74,7 +74,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
 
     // (data) Output
     this.wall.wall$.subscribe((newData: BaseBrick[]) => {
-
       this.dataChange.emit(newData);
     });
   }
@@ -108,11 +107,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     const wall = this.wall.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
     this.wall.wall$.next(wall);
-  }
-
-
-  push() {
-
   }
 
 

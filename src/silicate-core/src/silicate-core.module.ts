@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
+import {SilicateBrickSelectorComponent} from './components/silicate-brick-selector/silicate-brick-selector.component';
 import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
@@ -20,7 +21,8 @@ import {SilicateService} from './services/silicate/silicate.service';
     SilicateProxyComponent,
     SilicateWrapperComponent,
     SilicateEditableComponent,
-    SilicateToolbarComponent
+    SilicateToolbarComponent,
+    SilicateBrickSelectorComponent
   ],
   imports: [
     CommonModule,

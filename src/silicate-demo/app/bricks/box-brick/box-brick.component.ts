@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseBrickComponent} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {BoxBrick} from './box-brick';
 
 
@@ -9,6 +9,11 @@ import {BoxBrick} from './box-brick';
   styleUrls: ['./box-brick.component.scss']
 })
 export class BoxBrickComponent extends BaseBrickComponent<BoxBrick> implements OnInit {
+  constructor(public silicate: SilicateService) {
+    super();
+  }
+
+
   ngOnInit() {
   }
 }

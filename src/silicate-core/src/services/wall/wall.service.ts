@@ -20,6 +20,11 @@ export class WallService {
   }
 
 
+  fill(wall: Wall) {
+
+  }
+
+
   /**
    * Get the brick at a given index.
    * @param index The brick index.
@@ -35,9 +40,9 @@ export class WallService {
    * @param brick The brick data.
    */
   insert(index: number, brick: BaseBrick) {
-    this.wall$.next(
-      this.wall.splice(index, 0, brick)
-    );
+    const wall = this.wall;
+    wall.splice(index, 0, brick);
+    this.wall$.next(wall);
     return this;
   }
 

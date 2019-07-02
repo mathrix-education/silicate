@@ -13,17 +13,7 @@
     <mat-icon *ngIf="silicate.editable" cdkDragHandle fxFlex>drag_indicator</mat-icon>
 
     <silicate-proxy [index]="i" fxFlex="grow"></silicate-proxy>
-
-    <button (click)="wall.delete(i)"
-            *ngIf="silicate.editable"
-            mat-icon-button>
-      <mat-icon>delete</mat-icon>
-    </button>
   </div>
 </div>
-
-<button mat-fab color="primary">
-  <mat-icon>add</mat-icon>
-</button>
 
 <silicate-toolbar *ngIf="root"></silicate-toolbar>

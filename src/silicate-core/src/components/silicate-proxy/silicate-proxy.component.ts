@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
+import {BrickDeclaration} from '../../interfaces/brick-declaration';
 import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
@@ -37,7 +38,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     private componentFactory: ComponentFactoryResolver,
     public silicate: SilicateService,
     private brickResolver: BrickResolverService,
-    private wall: WallService
+    public wall: WallService
   ) {
   }
 
@@ -74,11 +75,11 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   /**
    * Swap the current brick with another
-   * @param brickFactory The new brick declaration.
+   * @param brickDeclaration The new brick declaration.
    */
-  swap(brickFactory) {
+  swap(brickDeclaration: BrickDeclaration) {
     const old = this.wall.get(this.index);
-    const factory = this.injector.get(brickFactory);
+    const factory = this.injector.get(brickDeclaration.factory);
     const empty = factory.make();
 
     // UX: copy the old properties to the new brick instance if they exist
@@ -90,6 +91,12 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
     this.wall.patch(this.index, empty);
     this.render();
+  }
+
+
+  insert(brickDeclaration: BrickDeclaration) {
+    const empty = this.injector.get(brickDeclaration.factory).make();
+    this.wall.insert(this.index + 1, empty);
   }
 
 
