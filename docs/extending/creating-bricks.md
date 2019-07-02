@@ -1,4 +1,7 @@
 # Creating a new Brick
+In this small guide, you will learn how to create a new Silicate Brick and how to use it in you components.
+
+
 First of all, you need to choose a unique `kind`, which is a string. It will identify your brick. Then, you have to create the following files:
 
 
@@ -96,3 +99,51 @@ Example of `your-brick.component.html`:
 ```
 
 Note: The Silicate Editable has no style defined, so you are free to style it yourself.
+
+
+## Brick Provider
+In order to use your now brick, you have to load it using the multi-InjectionToken named `BrickDeclarations`. To do so, create a file which exports the following constant:
+
+Example of `bricks.providers.ts`:
+```typescript
+import {TypedValueProvider, BrickDeclaration, BrickDeclarations} from '@mathrix/core';
+
+export const YourBrickProvider: TypedValueProvider<BrickDeclaration> = {
+  provide: BrickDeclarations,
+  multi: true,
+  useValue: {
+    kind: 'your-kind',
+    icon: 'favorite',
+    name: 'Your Brick',
+    component: YourBrickComponent,
+    factory: YourBrickFactory
+  }
+};
+```
+
+Finally, load the brick alongside the other Silicate Extensions in your NgModule :
+
+Example of `your.module.ts`:
+```typescript
+import {NgModule} from '@angular/core'; 
+import {SilicateCoreModule} from '@mathrix/silicate-core';
+// ...
+
+@NgModule({
+  // ...
+  imports: [
+    // ... your module imports
+    SilicateCoreModule.withProviders([
+      // ...SilicateEssentials.providers()
+      // ...SilicateLatex.providers()
+      // ...SilicateVideos.providers()
+      YourBrickProvider
+    ])
+    // etc.
+  ]
+  // ...
+})
+export class YourModule {}
+````
+
+See the [Silicate Usage](../usage.md) for more in-depth explanations.
