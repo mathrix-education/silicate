@@ -72,7 +72,7 @@ export class PurifierService {
 
     // Finally, we get the clean HTML and destroy the sandbox
     const cleanHTML = sandbox.innerHTML;
-    this.renderer2.destroyNode(sandbox);
+    this.renderer2.removeChild(sandbox.parentNode, sandbox);
 
     return cleanHTML;
   }
