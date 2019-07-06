@@ -10,6 +10,12 @@ export class BrickResolverService {
 
 
   resolve(kind: string): BrickDeclaration {
-    return this.silicate.bricksDeclarations.find(b => b.kind === kind);
+    const resolved = this.silicate.bricksDeclarations.find(b => b.kind === kind);
+
+    if (resolved === undefined) {
+      throw new Error(`Brick kind '${kind}' is not declared.`);
+    }
+
+    return resolved;
   }
 }

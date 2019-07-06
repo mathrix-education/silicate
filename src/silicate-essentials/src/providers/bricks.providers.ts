@@ -7,6 +7,8 @@ import {TextBrickComponent} from '../bricks/text-brick/text-brick.component';
 import {TextBrickFactory} from '../bricks/text-brick/text-brick.factory';
 import {TitleBrickComponent} from '../bricks/title-brick/title-brick.component';
 import {TitleBrickFactory} from '../bricks/title-brick/title-brick.factory';
+import {TableBrickComponent} from '../bricks/table-brick/table-brick.component';
+import {TableBrickFactory} from '../bricks/table-brick/table-brick.factory';
 
 /**
  * Bricks
@@ -53,5 +55,16 @@ export const TitleBrickProvider: TypedValueProvider<BrickDeclaration> = {
     name: 'Titre',
     component: TitleBrickComponent,
     factory: TitleBrickFactory
+  }
+};
+export const TableBrickProvider: TypedValueProvider<BrickDeclaration> = {
+  provide: BrickDeclarations,
+  multi: true,
+  useValue: {
+    kind: 'table',
+    icon: 'grid_on',
+    name: 'Tableau',
+    component: TableBrickComponent,
+    factory: TableBrickFactory
   }
 };

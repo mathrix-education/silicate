@@ -19,6 +19,7 @@ import {PurifierService} from '../../services/purifier/purifier.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {ToolbarService} from '../../services/toolbar/toolbar.service';
 import {WallService} from '../../services/wall/wall.service';
+import {Wall} from '../../interfaces/wall';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   @Input() editable = false;
 
   // [(data)] two-way binding
-  @Input() data: BaseBrick[] = [];
+  @Input() data: Wall = [];
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
 
@@ -73,13 +74,19 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     this.wall.wall$.next(this.data);
 
     // (data) Output
-    this.wall.wall$.subscribe((newData: BaseBrick[]) => {
+    this.wall.wall$.subscribe((newData: Wall) => {
+      this.data = newData;
       this.dataChange.emit(newData);
     });
   }
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.data) {
+      const newWall = (changes.data.currentValue as any) as Wall;
+      this.wall.wall$.next(newWall);
+    }
+
     if (changes.editable) {
       /*
        * Push to the Silicate Service the modification of the edition mode, which is then propagated all over the

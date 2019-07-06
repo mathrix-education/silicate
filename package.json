@@ -12,6 +12,8 @@
   "workspaces": [
     "src/silicate-core",
     "src/silicate-demo",
+    "src/silicate-education",
+    "src/silicate-essentials",
     "src/silicate-latex",
     "src/silicate-videos"
   ],

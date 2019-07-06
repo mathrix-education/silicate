@@ -4,19 +4,21 @@
     <mat-card-subtitle>Informations internes</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content>
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Données de l'éditeur
-          </mat-panel-title>
-          <mat-panel-description>
-            JSON du wall
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <pre [innerHTML]="strip(data | json)" style="width: 100%; white-space: pre-wrap;"></pre>
-      </mat-expansion-panel>
-    </mat-accordion>
+  <mat-card-content fxLayout="column">
+    <mat-slide-toggle [(ngModel)]="demo.editable">@Input() [editable]: boolean</mat-slide-toggle>
+
+    <div>
+      <button mat-button color="primary" (click)="pull()">Pull</button>
+      <button mat-button color="primary" (click)="push()">Push</button>
+    </div>
+
+    <mat-form-field>
+      <textarea
+        placeholder="Entrer le JSON à tester ici..."
+        matInput
+        cdkTextareaAutosize
+        [(ngModel)]="buffer">
+      </textarea>
+    </mat-form-field>
   </mat-card-content>
 </mat-card>

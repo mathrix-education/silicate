@@ -1,44 +1,5 @@
 <div fxLayout="row">
-  <div fxFlex="30%" fxLayout="column">
-    <div fxLayout="row">
-      <mat-card fxFlex="50%">
-        <mat-card-header>
-          <mat-card-title>Démonstration</mat-card-title>
-          <mat-card-subtitle>Charger des données</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content fxLayout="column">
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card fxFlex="50%">
-        <mat-card-header>
-          <mat-card-title>Options</mat-card-title>
-          <mat-card-subtitle>Réglages possibles</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>
-          <mat-slide-toggle [(ngModel)]="editable">@Input() [editable]: boolean</mat-slide-toggle>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <app-debug [data]="data"></app-debug>
-  </div>
-
-  <mat-card fxFlex="grow">
-    <mat-card-header>
-      <mat-card-title>Éditeur</mat-card-title>
-      <mat-card-subtitle>Voici Silicate !</mat-card-subtitle>
-    </mat-card-header>
-
-    <mat-card-content>
-      <silicate-wrapper
-        [editable]="editable"
-        [(data)]="data"
-        fxFlex="grow">
-      </silicate-wrapper>
-    </mat-card-content>
-  </mat-card>
+  <app-debug fxFlex="50%"></app-debug>
+  <app-view fxFlex="50%"></app-view>
 </div>
 

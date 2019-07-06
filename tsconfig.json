@@ -43,6 +43,12 @@
       ],
       "@mathrix/silicate-essentials/*": [
         "dist/silicate-essentials/*"
+      ],
+      "@mathrix/silicate-education": [
+        "dist/silicate-education"
+      ],
+      "@mathrix/silicate-education/*": [
+        "dist/silicate-education/*"
       ]
     }
   }

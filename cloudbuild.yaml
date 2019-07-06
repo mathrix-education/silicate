@@ -11,13 +11,14 @@ steps:
     waitFor: ['yarn:install']
     entrypoint: 'ash'
     args:
-    - '-c'
-    - |
-      yarn run ng build silicate-core
-      yarn run ng build silicate-essentials
-      yarn run ng build silicate-latex
-      yarn run ng build silicate-videos
-      yarn run ng build silicate-demo --prod
+      - '-c'
+      - |
+        yarn run ng build silicate-core
+        yarn run ng build silicate-education
+        yarn run ng build silicate-essentials
+        yarn run ng build silicate-latex
+        yarn run ng build silicate-videos
+        yarn run ng build silicate-demo --prod
 
   # Deploy libraries
   # ----------------
@@ -38,6 +39,7 @@ steps:
       - |
         deploy/scripts/setup_ssh.sh
         deploy/scripts/push.sh silicate-core $SHORT_SHA
+        deploy/scripts/push.sh silicate-education $SHORT_SHA
         deploy/scripts/push.sh silicate-essentials $SHORT_SHA
         deploy/scripts/push.sh silicate-latex $SHORT_SHA
         deploy/scripts/push.sh silicate-videos $SHORT_SHA
