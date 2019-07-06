@@ -19,6 +19,7 @@
 </div>
 
 <div mat-dialog-actions>
+  <button (click)="delete()" mat-button>Supprimer</button>
   <button (click)="dialogRef.close()" mat-button>Annuler</button>
-  <button [mat-dialog-close]="equation" mat-button>Sauvegarder</button>
+  <button (click)="apply()" mat-button>Sauvegarder</button>
 </div>

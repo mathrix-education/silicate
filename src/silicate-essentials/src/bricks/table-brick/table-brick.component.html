@@ -1,0 +1,10 @@
+<table cellpadding="0">
+  <tr *ngFor="let row of data.matrix; let i = index; trackBy: trackBy">
+    <td *ngFor="let cell of data.matrix[i]; let j = index; trackBy: trackBy">
+      <silicate-wrapper
+        [editable]="silicate.editable"
+        [(data)]="data.matrix[i][j]"
+      ></silicate-wrapper>
+    </td>
+  </tr>
+</table>

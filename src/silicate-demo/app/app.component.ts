@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CHAPTER_FIXTURE} from './fixtures/chapter.fixture';
-import {SILICATE_CORE_FIXTURE} from './fixtures/silicate-core.fixture';
+import {EDUCATION_FIXTURE} from './fixtures/education.fixture';
 
 
 @Component({
@@ -10,8 +9,7 @@ import {SILICATE_CORE_FIXTURE} from './fixtures/silicate-core.fixture';
 })
 export class AppComponent implements OnInit {
   editable = true;
-  data = CHAPTER_FIXTURE;
-
+  data = EDUCATION_FIXTURE;
 
   ngOnInit(): void {
   }

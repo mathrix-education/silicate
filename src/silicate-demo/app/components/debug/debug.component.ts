@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Wall} from '@mathrix/silicate-core';
+import {Component, OnInit} from '@angular/core';
+import {DemoService} from '../../services/demo.service';
 
 
 @Component({
@@ -7,13 +7,22 @@ import {Wall} from '@mathrix/silicate-core';
   templateUrl: './debug.component.html',
   styleUrls: ['./debug.component.scss']
 })
-export class DebugComponent {
-  @Input() data: Wall;
+export class DebugComponent implements OnInit {
+  buffer: string;
 
+  constructor(public demo: DemoService) {
+  }
 
-  strip(data: string) {
-    return data
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+  ngOnInit() {
+    this.pull();
+  }
+
+  pull() {
+    this.buffer = JSON.stringify(this.demo.data, undefined, 2);
+  }
+
+  push() {
+    this.demo.data = [];
+    setTimeout(() => this.demo.data = JSON.parse(this.buffer));
   }
 }

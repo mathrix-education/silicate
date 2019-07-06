@@ -1,0 +1,8 @@
+{
+  "name": "@mathrix/silicate-education",
+  "version": "0.9.0",
+  "peerDependencies": {
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1"
+  }
+}

@@ -13,12 +13,14 @@ import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {
   ImageBrickProvider,
   ListBrickProvider,
+  TableBrickProvider,
   TextBrickProvider,
   TitleBrickProvider
 } from './providers/bricks.providers';
 import {BoldFilterProvider, ItalicFilterProvider, LinkFilterProvider} from './providers/filters.providers';
 import {OpenLinkDialogHandlerProvider} from './providers/handlers.providers';
 import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from './providers/toolbars.providers';
+import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from '.
     TextBrickComponent,
     TitleBrickComponent,
     ImageDialogComponent,
-    LinkDialogComponent
+    LinkDialogComponent,
+    TableBrickComponent
   ],
   entryComponents: [
     ImageBrickComponent,
@@ -47,7 +50,8 @@ import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from '.
     TextBrickComponent,
     TitleBrickComponent,
     ImageDialogComponent,
-    LinkDialogComponent
+    LinkDialogComponent,
+    TableBrickComponent
   ]
 })
 export class SilicateEssentialsModule {
@@ -58,6 +62,7 @@ export class SilicateEssentialsModule {
       ImageBrickProvider,
       TitleBrickProvider,
       ListBrickProvider,
+      TableBrickProvider,
       // Handlers
       OpenLinkDialogHandlerProvider,
       // EditableFilters

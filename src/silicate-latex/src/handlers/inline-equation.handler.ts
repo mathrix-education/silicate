@@ -1,5 +1,5 @@
 import {DOCUMENT} from '@angular/common';
-import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
+import {ElementRef, Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {SelectionService, SilicateCoreModule, SilicateEditableComponent} from '@mathrix/silicate-core';
 import * as katex from 'katex';
@@ -29,19 +29,14 @@ export class InlineEquationHandler {
     return this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
-        data: equation
+        data: {
+          equation,
+          elementRef: new ElementRef(equationElement)
+        }
       })
       .afterClosed()
       .pipe(first())
-      .subscribe((dialogEquation: string) => {
-        if (!dialogEquation) {
-          this.renderer2.setProperty(equationElement, 'outerHTML', '');
-        } else {
-          this.renderer2.setProperty(equationElement, 'outerHTML', katex.renderToString(dialogEquation));
-        }
-
-        source.sync();
-      });
+      .subscribe(() => source.sync());
   }
 
 
@@ -52,7 +47,7 @@ export class InlineEquationHandler {
       this.document.execCommand('insertHTML', false, '<span id="katex-tmp"></span>');
       const katexTmpElement = this.document.querySelector('#katex-tmp');
 
-      this.openEquationDialog('f(x)=x', source, katexTmpElement);
+      this.openEquationDialog('', source, katexTmpElement);
     }
   }
 

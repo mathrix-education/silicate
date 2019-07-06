@@ -1,0 +1,6 @@
+import {BaseBrick} from '@mathrix/silicate-core';
+
+export interface PDFViewerBrick extends BaseBrick {
+  kind: 'pdf-viewer';
+  url: string;
+}
