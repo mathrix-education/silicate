@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseBrickFactory, SilicateCoreModule} from '@mathrix/silicate-core';
 import {TipBrick} from './tip-brick';
-import {TextBrick} from '@mathrix/silicate-essentials';
+
 
 @Injectable({
   providedIn: SilicateCoreModule
@@ -14,7 +14,7 @@ export class TipBrickFactory extends BaseBrickFactory<TipBrick> {
         {
           kind: 'text',
           content: 'En tip...'
-        } as TextBrick
+        }
       ]
     });
   }

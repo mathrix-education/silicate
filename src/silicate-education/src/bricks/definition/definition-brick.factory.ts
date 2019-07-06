@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseBrickFactory, SilicateCoreModule} from '@mathrix/silicate-core';
 import {DefinitionBrick} from './definition-brick';
-import {TextBrick} from '@mathrix/silicate-essentials';
+
 
 @Injectable({
   providedIn: SilicateCoreModule
@@ -14,7 +14,7 @@ export class DefinitionBrickFactory extends BaseBrickFactory<DefinitionBrick> {
         {
           kind: 'text',
           content: 'En definition...'
-        } as TextBrick
+        }
       ]
     });
   }
