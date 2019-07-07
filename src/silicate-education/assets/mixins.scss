@@ -1,8 +1,8 @@
 @mixin box-brick($color) {
   .wrapper {
-    padding: 10px 20px;
+    padding: 2px 16px;
     background-color: #ffffff;
-    border-left: solid 3px $color;
+    border-left: solid 6px $color;
 
     h3 {
       color: $color;

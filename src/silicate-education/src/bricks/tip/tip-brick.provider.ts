@@ -8,7 +8,7 @@ export const TipBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'tip',
     icon: 'functions',
-    name: 'Tip',
+    name: 'Conseil',
     component: TipBrickComponent,
     factory: TipBrickFactory
   }

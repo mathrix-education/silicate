@@ -8,7 +8,7 @@ export const TrapBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'trap',
     icon: 'functions',
-    name: 'Trap',
+    name: 'Piège',
     component: TrapBrickComponent,
     factory: TrapBrickFactory
   }

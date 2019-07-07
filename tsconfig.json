@@ -19,37 +19,6 @@
       "es2018",
       "dom"
     ],
-    "paths": {
-      "@mathrix/silicate-core": [
-        "dist/silicate-core"
-      ],
-      "@mathrix/silicate-core/*": [
-        "dist/silicate-core/*"
-      ],
-      "@mathrix/silicate-latex": [
-        "dist/silicate-latex"
-      ],
-      "@mathrix/silicate-latex/*": [
-        "dist/silicate-latex/*"
-      ],
-      "@mathrix/silicate-videos": [
-        "dist/silicate-videos"
-      ],
-      "@mathrix/silicate-videos/*": [
-        "dist/silicate-videos/*"
-      ],
-      "@mathrix/silicate-essentials": [
-        "dist/silicate-essentials"
-      ],
-      "@mathrix/silicate-essentials/*": [
-        "dist/silicate-essentials/*"
-      ],
-      "@mathrix/silicate-education": [
-        "dist/silicate-education"
-      ],
-      "@mathrix/silicate-education/*": [
-        "dist/silicate-education/*"
-      ]
-    }
+    "paths": {}
   }
 }

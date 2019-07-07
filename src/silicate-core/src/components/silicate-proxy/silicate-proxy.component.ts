@@ -42,10 +42,13 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   ) {
   }
 
+  get kind() {
+    return this.wall.get(this.index).kind;
+  }
 
   get icon() {
     try {
-      return this.brickResolver.resolve(this.wall.get(this.index).kind).icon;
+      return this.brickResolver.resolve(this.kind).icon;
     } catch (e) {
       return 'settings';
     }

@@ -1,15 +1,26 @@
 <h1 mat-dialog-title>Éditeur d'équation</h1>
 <div mat-dialog-content>
-  <div fxLayout="column">
+  <div fxLayout="column" fxLayoutGap="16px">
+    <div fxLayout="row"fxLayoutGap="8px">
+      <button
+        *ngFor="let s of snippets"
+        mat-raised-button
+        [disabled]="!snippetsActive"
+        (mousedown)="applySnippet($event, s)">
+        <ng-katex [equation]="s"></ng-katex>
+      </button>
+    </div>
+
     <mat-form-field>
       <mat-label>Équation</mat-label>
       <label>
-        <textarea [(ngModel)]="equation"
-                  cdkAutosizeMinRows="1"
+        <textarea cdkAutosizeMinRows="1"
                   cdkTextareaAutosize
                   matInput
                   placeholder="f(x) = x^2"
-                  type="text">
+                  (focus)="snippetsActive = true"
+                  (blur)="snippetsActive = false"
+                  [(ngModel)]="equation">
         </textarea>
       </label>
     </mat-form-field>

@@ -8,7 +8,7 @@ export const TheoremBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'theorem',
     icon: 'functions',
-    name: 'Theorem',
+    name: 'Théorème',
     component: TheoremBrickComponent,
     factory: TheoremBrickFactory
   }

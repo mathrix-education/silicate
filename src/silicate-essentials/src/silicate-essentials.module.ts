@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
@@ -55,7 +55,7 @@ import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
   ]
 })
 export class SilicateEssentialsModule {
-  static providers() {
+  static providers(): Provider[] {
     return [
       // Bricks
       TextBrickProvider,

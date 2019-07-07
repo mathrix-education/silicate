@@ -10,8 +10,9 @@ import {SilicateService} from '../../services/silicate/silicate.service';
 })
 export class SilicateBrickSelectorComponent {
   @Input() icon: string = null;
+  @Input() kind: string = null;
+  @Input() label: string = null;
   @Output() select = new EventEmitter<BrickDeclaration>();
-
 
   constructor(public silicate: SilicateService) {
   }

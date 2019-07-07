@@ -8,5 +8,9 @@ body {
 }
 
 .brick-container:not(:last-child) {
-  margin-bottom: 16px !important;
+  margin-bottom: 32px !important;
+}
+
+.mat-menu-panel {
+  max-width: none !important;
 }

@@ -8,7 +8,7 @@ export const CorollaryBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'corollary',
     icon: 'functions',
-    name: 'Corollary',
+    name: 'Corollaire',
     component: CorollaryBrickComponent,
     factory: CorollaryBrickFactory
   }

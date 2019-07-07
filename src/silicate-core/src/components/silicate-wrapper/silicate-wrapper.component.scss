@@ -1,3 +1,4 @@
+@import "../../../assets/variables";
 @import "../../../assets/drag-n-drop";
 
 :host {
@@ -5,15 +6,10 @@
   flex-direction: column;
 }
 
-.silicate-toolbar {
-  min-height: 70px;
-}
-
-//.wall {
-//  padding: 16px 0;
-//}
-
 .brick-container {
   display: flex;
-  // background-color: #fff; // TODO: confirm this
+}
+
+.drag-handle-icon {
+  color: $icon-color;
 }

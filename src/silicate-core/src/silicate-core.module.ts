@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule, MatIconModule, MatMenuModule} from '@angular/material';
+import {MatButtonModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateBrickSelectorComponent} from './components/silicate-brick-selector/silicate-brick-selector.component';
 import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
@@ -32,7 +32,8 @@ import {SilicateService} from './services/silicate/silicate.service';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    MatGridListModule
   ],
   exports: [
     SilicateWrapperComponent,

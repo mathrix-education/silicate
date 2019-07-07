@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "katex": "^0.10.0",
-    "ng-katex": "^1.2.1"
+    "ng-katex": "^1.2.1",
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
     "@types/katex": "^0.10.1"
@@ -37,6 +38,16 @@
     "@angular/cdk": "^8.0.0",
     "@angular/flex-layout": "^8.0.0-beta.26",
     "@mathrix/silicate-core": "^0.9.0"
-},
-  "private": true
+  },
+  "private": true,
+  "main": "bundles/mathrix-silicate-latex.umd.js",
+  "module": "fesm5/mathrix-silicate-latex.js",
+  "es2015": "fesm2015/mathrix-silicate-latex.js",
+  "esm5": "esm5/mathrix-silicate-latex.js",
+  "esm2015": "esm2015/mathrix-silicate-latex.js",
+  "fesm5": "fesm5/mathrix-silicate-latex.js",
+  "fesm2015": "fesm2015/mathrix-silicate-latex.js",
+  "typings": "mathrix-silicate-latex.d.ts",
+  "metadata": "mathrix-silicate-latex.metadata.json",
+  "sideEffects": false
 }

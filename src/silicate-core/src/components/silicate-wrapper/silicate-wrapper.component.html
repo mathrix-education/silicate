@@ -10,7 +10,10 @@
        fxLayout="row"
        fxLayoutAlign="center center"
        fxLayoutGap="8px">
-    <mat-icon *ngIf="silicate.editable" cdkDragHandle fxFlex>drag_indicator</mat-icon>
+    <mat-icon *ngIf="silicate.editable"
+              cdkDragHandle
+              fxFlex
+              class="drag-handle-icon">drag_indicator</mat-icon>
 
     <silicate-proxy [index]="i" fxFlex="grow"></silicate-proxy>
   </div>

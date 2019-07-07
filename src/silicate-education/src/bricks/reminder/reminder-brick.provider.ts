@@ -8,7 +8,7 @@ export const ReminderBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'reminder',
     icon: 'functions',
-    name: 'Reminder',
+    name: 'À retenir',
     component: ReminderBrickComponent,
     factory: ReminderBrickFactory
   }

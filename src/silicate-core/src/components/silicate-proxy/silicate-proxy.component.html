@@ -1,27 +1,48 @@
 <div fxLayout="row"
      fxLayoutAlign="center center"
      fxLayoutGap="0px">
-  <div fxLayout="column">
-    <silicate-brick-selector
-      *ngIf="silicate.editable"
-      [icon]="icon"
-      (select)="swap($event)">
-    </silicate-brick-selector>
-
-    <silicate-brick-selector
-      *ngIf="silicate.editable"
-      [icon]="'subdirectory_arrow_right'"
-      (select)="insert($event)">
-    </silicate-brick-selector>
-  </div>
-
   <div fxFlex="grow">
     <ng-template #wrapper></ng-template>
   </div>
 
-  <button (click)="wall.delete(index)"
-          *ngIf="silicate.editable"
-          mat-icon-button>
-    <mat-icon>delete</mat-icon>
+  <button *ngIf="silicate.editable"
+          class="proxy-menu-trigger"
+          mat-icon-button
+          [matMenuTriggerFor]="proxyMenu">
+    <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
   </button>
+
+  <mat-menu #proxyMenu="matMenu">
+    <button mat-menu-item (click)="wall.delete(index)">
+      Supprimer
+    </button>
+
+    <button mat-menu-item [matMenuTriggerFor]="swapMenu">Changer</button>
+    <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
+  </mat-menu>
 </div>
+
+<mat-menu #swapMenu="matMenu">
+  <mat-grid-list cols="2" rowHeight="48px">
+    <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
+      <button
+        mat-menu-item
+        (click)="swap(brick)"
+        [disabled]="kind === brick.kind">
+        <mat-icon>{{ brick.icon }}</mat-icon>
+        {{ brick.name }}
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-menu>
+
+<mat-menu #appendMenu="matMenu">
+  <mat-grid-list cols="2" rowHeight="48px">
+    <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
+      <button mat-menu-item (click)="insert(brick)">
+        <mat-icon>{{ brick.icon }}</mat-icon>
+        {{ brick.name }}
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-menu>

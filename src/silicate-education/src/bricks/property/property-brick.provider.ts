@@ -8,7 +8,7 @@ export const PropertyBrickProvider: TypedValueProvider<BrickDeclaration> = {
   useValue: {
     kind: 'property',
     icon: 'functions',
-    name: 'Property',
+    name: 'Propriété',
     component: PropertyBrickComponent,
     factory: PropertyBrickFactory
   }
