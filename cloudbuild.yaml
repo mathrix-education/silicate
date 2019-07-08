@@ -29,7 +29,7 @@ steps:
     entrypoint: 'bash'
     args: ['deploy/scripts/decrypt.sh']
   - id: 'git:push'
-    name: 'gcr.io/cloud-builders/node:11-alpine'
+    name: 'node:11-alpine'
     waitFor: ['gcloud:kms:decrypt']
     entrypoint: 'bash'
     args:
