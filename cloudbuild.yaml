@@ -28,7 +28,7 @@ steps:
     waitFor: ['ng:build']
     entrypoint: 'bash'
     args: ['deploy/scripts/decrypt.sh']
-  - id: 'git:push'
+  - id: 'npm:publish'
     name: 'node:11-alpine'
     waitFor: ['gcloud:kms:decrypt']
     entrypoint: 'ash'
