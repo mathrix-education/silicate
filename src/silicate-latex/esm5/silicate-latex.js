@@ -1,6 +1,0 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-export { SilicateLatexModule } from './silicate-latex.module';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2lsaWNhdGUtbGF0ZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AbWF0aHJpeC9zaWxpY2F0ZS1sYXRleC8iLCJzb3VyY2VzIjpbInNpbGljYXRlLWxhdGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxvQ0FBYyx5QkFBeUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vc2lsaWNhdGUtbGF0ZXgubW9kdWxlJztcbiJdfQ==

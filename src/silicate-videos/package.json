@@ -41,16 +41,5 @@
     "@angular/material": "^7.0.0 || ^8.0.0",
     "@angular/cdk": "^7.0.0 || ^8.0.0",
     "@angular/flex-layout": "^7.0.0-beta.24 || ^8.0.0-beta.26"
-  },
-  "private": true,
-  "main": "bundles/mathrix-silicate-videos.umd.js",
-  "module": "fesm5/mathrix-silicate-videos.js",
-  "es2015": "fesm2015/mathrix-silicate-videos.js",
-  "esm5": "esm5/mathrix-silicate-videos.js",
-  "esm2015": "esm2015/mathrix-silicate-videos.js",
-  "fesm5": "fesm5/mathrix-silicate-videos.js",
-  "fesm2015": "fesm2015/mathrix-silicate-videos.js",
-  "typings": "mathrix-silicate-videos.d.ts",
-  "metadata": "mathrix-silicate-videos.metadata.json",
-  "sideEffects": false
+  }
 }
