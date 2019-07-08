@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/ash
 WORKSPACE_DIR=$(dirname $(dirname $(cd $(dirname $0) && pwd)))
 TOKEN=$(cat ${WORKSPACE_DIR}/deploy/scripts/verdaccio.mathrix.fr.txt)
 npm config set //verdaccio.mathrix.fr/:_authToken \"${TOKEN}\"
