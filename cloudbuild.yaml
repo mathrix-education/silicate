@@ -27,9 +27,6 @@ steps:
     name: 'gcr.io/cloud-builders/gcloud'
     waitFor: ['ng:build']
     entrypoint: 'bash'
-    volumes:
-      - name: 'ssh'
-        path: /root/.ssh
     args: ['deploy/scripts/decrypt.sh']
   - id: 'git:push'
     name: 'gcr.io/cloud-builders/git'
@@ -38,15 +35,12 @@ steps:
     args:
       - -c
       - |
-        deploy/scripts/setup_ssh.sh
-        deploy/scripts/push.sh silicate-core $SHORT_SHA
-        deploy/scripts/push.sh silicate-education $SHORT_SHA
-        deploy/scripts/push.sh silicate-essentials $SHORT_SHA
-        deploy/scripts/push.sh silicate-latex $SHORT_SHA
-        deploy/scripts/push.sh silicate-videos $SHORT_SHA
-    volumes:
-      - name: 'ssh'
-        path: /root/.ssh
+        deploy/scripts/setup_registry.sh
+        deploy/scripts/publish.sh silicate-core $SHORT_SHA
+        deploy/scripts/publish.sh silicate-education $SHORT_SHA
+        deploy/scripts/publish.sh silicate-essentials $SHORT_SHA
+        deploy/scripts/publish.sh silicate-latex $SHORT_SHA
+        deploy/scripts/publish.sh silicate-videos $SHORT_SHA
 
 
   # Deploy demo

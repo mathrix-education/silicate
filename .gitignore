@@ -43,4 +43,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-deploy/ssh/id_ed25519
+deploy/registry/verdaccio.mathrix.fr.txt
