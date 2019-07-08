@@ -19,7 +19,7 @@ steps:
         yarn run ng build silicate-essentials
         yarn run ng build silicate-latex
         yarn run ng build silicate-videos
-        yarn run ng build silicate-demo --prod
+        yarn run ng build silicate-demo
 
   # Deploy libraries
   # ----------------
