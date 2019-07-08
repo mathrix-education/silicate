@@ -1,0 +1,7 @@
+<figure fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px">
+  <ng-katex [equation]="data.equation" [options]="{displayMode: true}"></ng-katex>
+
+  <figcaption *ngIf="data.description">
+    {{ data.description }}
+  </figcaption>
+</figure>
