@@ -1,8 +1,17 @@
-<object
-  data="test.pdf"
-  type="application/pdf"
-  width="100%"
-  height="100%"
->
-  <p>Alternative text - include a link <a href="myfile.pdf">to the PDF!</a></p>
-</object>
+<mat-form-field *ngIf="silicate.editable">
+  <input matInput placeholder="URL du PDF" [(ngModel)]="data.url">
+</mat-form-field>
+
+<button
+  mat-raised-button
+  color="primary"
+  (click)="viewerOpen = !viewerOpen">
+  {{ viewerOpen ? texts.close : texts.open }}
+</button>
+
+<embed *ngIf="viewerOpen"
+       frameborder="0"
+       webkitallowfullscreen
+       mozallowfullscreen
+       allowfullscreen
+       [src]="data.url | safe:'resourceUrl'">

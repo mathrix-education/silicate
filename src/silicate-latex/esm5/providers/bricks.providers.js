@@ -1,0 +1,22 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { BrickDeclarations } from '@mathrix/silicate-core';
+import { EquationBrickComponent } from '../bricks/equation-brick/equation-brick.component';
+import { EquationBrickFactory } from '../bricks/equation-brick/equation-brick.factory';
+var ɵ0 = {
+    kind: 'equation',
+    icon: 'functions',
+    name: 'Équation',
+    component: EquationBrickComponent,
+    factory: EquationBrickFactory
+};
+/** @type {?} */
+export var EquationBrickProvider = {
+    provide: BrickDeclarations,
+    multi: true,
+    useValue: ɵ0
+};
+export { ɵ0 };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnJpY2tzLnByb3ZpZGVycy5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BtYXRocml4L3NpbGljYXRlLWxhdGV4LyIsInNvdXJjZXMiOlsicHJvdmlkZXJzL2JyaWNrcy5wcm92aWRlcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBbUIsaUJBQWlCLEVBQXFCLE1BQU0sd0JBQXdCLENBQUM7QUFDL0YsT0FBTyxFQUFDLHNCQUFzQixFQUFDLE1BQU0sbURBQW1ELENBQUM7QUFDekYsT0FBTyxFQUFDLG9CQUFvQixFQUFDLE1BQU0saURBQWlELENBQUM7U0FLekU7SUFDUixJQUFJLEVBQUUsVUFBVTtJQUNoQixJQUFJLEVBQUUsV0FBVztJQUNqQixJQUFJLEVBQUUsVUFBVTtJQUNoQixTQUFTLEVBQUUsc0JBQXNCO0lBQ2pDLE9BQU8sRUFBRSxvQkFBb0I7Q0FDOUI7O0FBVEgsTUFBTSxLQUFPLHFCQUFxQixHQUF5QztJQUN6RSxPQUFPLEVBQUUsaUJBQWlCO0lBQzFCLEtBQUssRUFBRSxJQUFJO0lBQ1gsUUFBUSxJQU1QO0NBQ0YiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge0JyaWNrRGVjbGFyYXRpb24sIEJyaWNrRGVjbGFyYXRpb25zLCBUeXBlZFZhbHVlUHJvdmlkZXJ9IGZyb20gJ0BtYXRocml4L3NpbGljYXRlLWNvcmUnO1xuaW1wb3J0IHtFcXVhdGlvbkJyaWNrQ29tcG9uZW50fSBmcm9tICcuLi9icmlja3MvZXF1YXRpb24tYnJpY2svZXF1YXRpb24tYnJpY2suY29tcG9uZW50JztcbmltcG9ydCB7RXF1YXRpb25Ccmlja0ZhY3Rvcnl9IGZyb20gJy4uL2JyaWNrcy9lcXVhdGlvbi1icmljay9lcXVhdGlvbi1icmljay5mYWN0b3J5JztcblxuZXhwb3J0IGNvbnN0IEVxdWF0aW9uQnJpY2tQcm92aWRlcjogVHlwZWRWYWx1ZVByb3ZpZGVyPEJyaWNrRGVjbGFyYXRpb24+ID0ge1xuICBwcm92aWRlOiBCcmlja0RlY2xhcmF0aW9ucyxcbiAgbXVsdGk6IHRydWUsXG4gIHVzZVZhbHVlOiB7XG4gICAga2luZDogJ2VxdWF0aW9uJyxcbiAgICBpY29uOiAnZnVuY3Rpb25zJyxcbiAgICBuYW1lOiAnw4lxdWF0aW9uJyxcbiAgICBjb21wb25lbnQ6IEVxdWF0aW9uQnJpY2tDb21wb25lbnQsXG4gICAgZmFjdG9yeTogRXF1YXRpb25Ccmlja0ZhY3RvcnlcbiAgfVxufTtcbiJdfQ==

@@ -6,7 +6,6 @@ export const KeydownEquationHandlerProvider: TypedValueProvider<Handler> = {
   multi: true,
   useValue: {
     eventName: 'keydown',
-    focusOnly: true,
     service: InlineEquationHandler,
     method: 'keydown'
   }
@@ -16,7 +15,6 @@ export const ClickEquationHandlerProvider: TypedValueProvider<Handler> = {
   multi: true,
   useValue: {
     eventName: 'click',
-    focusOnly: true,
     service: InlineEquationHandler,
     method: 'click'
   }

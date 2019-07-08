@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
@@ -13,8 +13,6 @@ import {EquationBrick} from './equation-brick';
 })
 export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements OnInit {
   constructor(
-    private renderer2: Renderer2,
-    private elementRef: ElementRef<HTMLElement>,
     private dialog: MatDialog,
     private silicate: SilicateService
   ) {
@@ -22,7 +20,6 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
   }
 
   ngOnInit() {
-    this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', this.data.content);
   }
 
   @HostListener('click')
@@ -31,29 +28,23 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       return;
     }
 
-    let equationSource;
-    const equationSourceElement = this.elementRef.nativeElement.querySelector('annotation');
-
-    if (equationSourceElement === null) {
-      equationSource = 'f(x)=x^2'; // Default equation
-    } else {
-      equationSource = equationSourceElement.textContent;
-    }
-
     this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
         data: {
-          elementRef: this.elementRef,
-          property: 'innerHTML',
-          equation: equationSource,
-          displayMode: true
+          equation: this.data.equation,
+          description: this.data.description,
+          enableDescription: true
         }
       })
       .afterClosed()
       .pipe(first())
-      .subscribe(() => {
-        this.data.content = this.elementRef.nativeElement.innerHTML;
+      .subscribe((data) => {
+        if (data !== undefined && data.equation !== '') {
+          this.data.equation = data.equation;
+          this.data.description = data.description;
+          this.ngDoCheck();
+        }
       });
   }
 }

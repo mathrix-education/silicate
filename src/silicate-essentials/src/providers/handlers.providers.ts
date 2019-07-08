@@ -9,7 +9,6 @@ export const OpenLinkDialogHandlerProvider: TypedValueProvider<Handler> = {
   multi: true,
   useValue: {
     eventName: 'click',
-    focusOnly: true,
     service: OpenLinkDialogHandler,
     method: 'invoke'
   }

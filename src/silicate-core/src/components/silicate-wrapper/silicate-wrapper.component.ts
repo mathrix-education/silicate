@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
+  EventEmitter, HostBinding,
   Injector,
   Input,
   OnChanges,
@@ -30,14 +30,13 @@ import {Wall} from '../../interfaces/wall';
     BrickResolverService,
     PurifierService,
     SilicateService,
-    ToolbarService,
     WallService
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit {
   /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
-  @Input() root = true;
+  @HostBinding('attr.data-silicate-root') @Input() root = true;
   /** If the edition is enabled. */
   @Input() editable = false;
 

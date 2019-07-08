@@ -1,1 +1,6 @@
-<p><silicate-editable [(content)]="data.text"></silicate-editable></p>
+<p>
+  <silicate-editable
+    (output)="onOutput($event)"
+    [(content)]="data.text"
+  ></silicate-editable>
+</p>

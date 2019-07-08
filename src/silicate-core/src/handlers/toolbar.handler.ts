@@ -1,14 +1,12 @@
 import {Injectable} from '@angular/core';
 import {SilicateEditableComponent} from '../components/silicate-editable/silicate-editable.component';
 import {SelectionService} from '../services/selection/selection.service';
-import {SilicateService} from '../services/silicate/silicate.service';
 import {ToolbarService} from '../services/toolbar/toolbar.service';
 
 
 @Injectable()
 export class ToolbarHandler {
   constructor(
-    private silicate: SilicateService,
     private selection: SelectionService,
     private toolbar: ToolbarService
   ) {
@@ -16,7 +14,7 @@ export class ToolbarHandler {
 
 
   invoke($event, source: SilicateEditableComponent) {
-    if (!this.silicate.editable) {
+    if (!source.silicate.editable) {
       return;
     }
 

@@ -1,0 +1,40 @@
+<div #wrapper class="wrapper">
+  <h3 #titleContainer fxLayout="row" fxLayoutAlign="start center">
+    <silicate-editable
+      class="prefix"
+      #prefix
+      *ngIf="silicate.editable || data.prefix"
+      [content]="data.prefix"
+      (contentChange)="onPrefixChange($event)">
+    </silicate-editable>
+
+    <span>{{ title }}</span>
+
+    <silicate-editable
+      fxFlex="grow"
+      class="suffix"
+      #suffix
+      *ngIf="silicate.editable || data.suffix"
+      [(content)]="data.suffix">
+    </silicate-editable>
+
+    <button
+      *ngIf="silicate.editable"
+      mat-button
+      mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>swap_horiz</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button
+        *ngFor="let bv of containerBrickVariants"
+        mat-menu-item
+        [disabled]="data.variant === bv.variant"
+        (click)="onVariantChange(bv)">
+        {{ bv.title }}
+      </button>
+    </mat-menu>
+  </h3>
+
+  <silicate-wrapper [(data)]="data.wall" [editable]="silicate.editable"></silicate-wrapper>
+</div>

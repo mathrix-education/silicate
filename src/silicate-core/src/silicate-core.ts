@@ -6,6 +6,7 @@ export * from './bricks/base-brick/base-brick.factory';
 // Interfaces
 export * from './interfaces/brick-declaration';
 export * from './interfaces/handler';
+export * from './interfaces/serializer';
 export * from './interfaces/filter';
 export * from './interfaces/toolbar';
 export * from './interfaces/typed-value-provider';

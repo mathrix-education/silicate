@@ -5,6 +5,5 @@ export interface Handler {
   service: Type<any>;
   method?: string;
   eventName: string;
-  target?: 'self' | 'document';
-  focusOnly?: boolean;
+  target?: 'self' | 'document' | 'window';
 }

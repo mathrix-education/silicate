@@ -71,7 +71,7 @@ export class SelectionService {
    * Check if the selection is inside a given element.
    * @param elementRef The element reference.
    */
-  isSelectionInside(elementRef: ElementRef<HTMLDivElement> | any) {
+  isSelectionInside(elementRef: ElementRef<HTMLElement> | any) {
     return this.selection((selection) => {
       return elementRef.nativeElement.contains(selection.anchorNode)
         && elementRef.nativeElement.contains(selection.focusNode);
@@ -96,5 +96,16 @@ export class SelectionService {
     return this.selection((selection) => {
       return selection.getRangeAt(0).getBoundingClientRect();
     }, false);
+  }
+
+  setAfter(node: Node, offset: number = 0) {
+    const range = this.document.createRange();
+    range.setStart(node, offset);
+    range.setEnd(node, offset);
+
+    this.selection((selection) => {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    });
   }
 }

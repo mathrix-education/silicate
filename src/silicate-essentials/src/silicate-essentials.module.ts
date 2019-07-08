@@ -2,7 +2,14 @@ import {CommonModule} from '@angular/common';
 import {NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule
+} from '@angular/material';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
 import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
@@ -33,7 +40,8 @@ import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    SilicateCoreModule
+    SilicateCoreModule,
+    MatCheckboxModule
   ],
   declarations: [
     ImageBrickComponent,

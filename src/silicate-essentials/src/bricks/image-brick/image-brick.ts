@@ -5,4 +5,5 @@ export interface ImageBrick extends BaseBrick {
   kind: 'image';
   src: string;
   alt: string;
+  displayAlt: boolean;
 }

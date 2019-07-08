@@ -3,7 +3,8 @@ import {BrickDeclaration} from '../../interfaces/brick-declaration';
 import {Filter} from '../../interfaces/filter';
 import {Handler} from '../../interfaces/handler';
 import {Toolbar} from '../../interfaces/toolbar';
-import {BrickDeclarations, Filters, Handlers, Toolbars} from '../../silicate-core.tokens';
+import {BrickDeclarations, Filters, Handlers, Serializers, Toolbars} from '../../silicate-core.tokens';
+import {Serializer} from '../../interfaces/serializer';
 
 
 @Injectable()
@@ -16,7 +17,8 @@ export class SilicateService {
     @Optional() @Inject(BrickDeclarations) public bricksDeclarations: BrickDeclaration[],
     @Optional() @Inject(Filters) public filters: Filter[],
     @Optional() @Inject(Handlers) public handlers: Handler[],
-    @Optional() @Inject(Toolbars) public toolbars: Toolbar[]
+    @Optional() @Inject(Toolbars) public toolbars: Toolbar[],
+    @Optional() @Inject(Serializers) public serializers: Serializer[]
   ) {
     if (this.bricksDeclarations === null) {
       // No brick are provided, throw error
@@ -33,6 +35,10 @@ export class SilicateService {
 
     if (this.toolbars === null) {
       this.toolbars = [];
+    }
+
+    if (this.serializers === null) {
+      this.serializers = [];
     }
   }
 }

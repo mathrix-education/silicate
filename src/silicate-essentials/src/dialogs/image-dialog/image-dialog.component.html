@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Texte alternatif</mat-label>
+      <mat-label>Description</mat-label>
       <label>
         <input [(ngModel)]="data.alt"
                matInput
@@ -20,6 +20,10 @@
                type="text">
       </label>
     </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="data.displayAlt">
+      Afficher la description en dessous de l'image
+    </mat-checkbox>
   </div>
 </div>
 

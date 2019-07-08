@@ -1,5 +1,5 @@
 import {DOCUMENT} from '@angular/common';
-import {ElementRef, Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
+import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {SelectionService, SilicateCoreModule, SilicateEditableComponent} from '@mathrix/silicate-core';
 import * as katex from 'katex';
@@ -18,25 +18,33 @@ export class InlineEquationHandler {
   constructor(
     private dialog: MatDialog,
     private selection: SelectionService,
-    @Inject(DOCUMENT) private document: Document,
-    rendererFactory: RendererFactory2
+    rendererFactory: RendererFactory2,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.renderer2 = rendererFactory.createRenderer(null, null);
   }
 
 
-  private openEquationDialog(equation, source, equationElement) {
+  private openEquationDialog(actualEquation, source: SilicateEditableComponent, equationElement) {
     return this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
         data: {
-          equation,
-          elementRef: new ElementRef(equationElement)
+          equation: actualEquation
         }
       })
       .afterClosed()
       .pipe(first())
-      .subscribe(() => source.sync());
+      .subscribe((data) => {
+        if (data === undefined && actualEquation === '') {
+          this.renderer2.removeChild(equationElement.parentNode, equationElement);
+        } else if (data !== undefined && data.equation) {
+          const newEquation = data.equation;
+          this.renderer2.setProperty(equationElement, 'outerHTML', katex.renderToString(newEquation));
+        }
+
+        source.sync();
+      });
   }
 
 

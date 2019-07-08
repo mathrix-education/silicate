@@ -10,7 +10,8 @@ export class EquationBrickFactory extends BaseBrickFactory<EquationBrick> {
   make(): EquationBrick {
     return this.withUuid({
       kind: 'equation',
-      content: 'f(x) = x^2'
+      equation: 'f(x) = x^2',
+      description: 'Fonction carrée'
     });
   }
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 WORKSPACE_DIR=$(dirname $(dirname $(cd $(dirname $0) && pwd)))
 GIT_DIR="${WORKSPACE_DIR}/git/$1"
-DIST_DIR="${WORKSPACE_DIR}/dist/$1"
+DIST_DIR="${WORKSPACE_DIR}/node_modules/@mathrix/$1"
 
 # Clone the git repo from GitHub
 mkdir -p ${GIT_DIR}

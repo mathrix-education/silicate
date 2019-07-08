@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ElementRef, Inject, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, Renderer2} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import * as katex from 'katex';
 import {DOCUMENT} from '@angular/common';
+import {LATEX_SYMBOLS} from './equation-dialog.symbols';
+import {LATEX_SNIPPETS} from './equation-dialog.snippets';
 
 
 /** @dynamic */
@@ -12,43 +13,24 @@ import {DOCUMENT} from '@angular/common';
 })
 export class EquationDialogComponent {
   elementRef: ElementRef<HTMLElement> = null;
-  property: 'outerHTML' | 'innerHTML' = 'outerHTML';
-
-  snippetsActive = false;
-  /** The LaTeX snippets */
-  snippets: string[] = [
-    '\\frac{a}{b}',
-    '\\sum',
-    '\\int',
-    '\\begin{bmatrix}\n' +
-      '  a & b \\\\\n' +
-      '  c & d \n' +
-      '\\end{bmatrix}'
-  ];
-
-  equation: string;
-  displayMode = false;
+  equationFormFieldFocused = false;
+  symbols = LATEX_SYMBOLS;
+  snippets = LATEX_SNIPPETS;
 
   constructor(
     private renderer2: Renderer2,
     public dialogRef: MatDialogRef<EquationDialogComponent>,
     @Inject(DOCUMENT) private document: Document,
-    @Inject(MAT_DIALOG_DATA) data: string
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    Object.keys(data).forEach(k => {
-      this[k] = data[k];
-    });
   }
 
   applySnippet($event: MouseEvent, latexSnippet: string) {
-    $event.preventDefault();
-    this.document.execCommand('insertText', false, latexSnippet);
-  }
-
-  apply() {
-    const compiledEquation = katex.renderToString(this.equation, {displayMode: this.displayMode});
-    this.renderer2.setProperty(this.elementRef.nativeElement, this.property, compiledEquation);
-    this.dialogRef.close();
+    if (this.equationFormFieldFocused) {
+      $event.preventDefault();
+      this.document.execCommand('insertText', false, latexSnippet);
+    }
+    // TODO: Insert the snippet at the end
   }
 
   delete() {

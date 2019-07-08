@@ -3,5 +3,8 @@
   "dest": "../../node_modules/@mathrix/silicate-education",
   "lib": {
     "entryFile": "src/silicate-education.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "safe-pipe"
+  ]
 }

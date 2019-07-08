@@ -26,7 +26,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
 
     this.matDialog
       .open(ImageDialogComponent, {
-        width: '400px',
+        width: '500px',
         data: {...this.data}
       })
       .afterClosed()
@@ -34,6 +34,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
       .subscribe((data => {
         if (data) {
           this.data = data;
+          this.ngDoCheck();
         }
       }));
   }

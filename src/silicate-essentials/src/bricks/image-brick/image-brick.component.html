@@ -3,10 +3,14 @@
     <button (click)="openDialog()" color="primary" mat-flat-button>Choisir l'image</button>
   </ng-container>
 
-  <img
-    (click)="openDialog()"
-    *ngIf="data.src"
-    [alt]="data.alt"
-    [src]="data.src"
-  >
+  <figure>
+    <img (click)="openDialog()"
+      *ngIf="data.src"
+      [alt]="data.alt"
+      [src]="data.src">
+
+    <figcaption>
+      <silicate-editable *ngIf="data.displayAlt" [(content)]="data.alt"></silicate-editable>
+    </figcaption>
+  </figure>
 </div>

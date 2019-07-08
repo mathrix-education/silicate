@@ -1,4 +1,14 @@
-[contenteditable=true]:empty:before {
-  content: attr(placeholder);
-  color: #999999;
+@import "../../../assets/variables";
+
+[contenteditable=true] {
+  border-bottom: dotted 1px $icon-color;
+
+  &:empty {
+    min-width: 32px;
+
+    &:before {
+      content: attr(placeholder);
+      color: #999999;
+    }
+  }
 }

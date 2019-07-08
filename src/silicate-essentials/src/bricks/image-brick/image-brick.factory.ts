@@ -12,7 +12,8 @@ export class ImageBrickFactory extends BaseBrickFactory<ImageBrick> {
     return this.withUuid({
       kind: 'image',
       src: 'https://placehold.it/300x120',
-      alt: 'Texte alternatif'
+      alt: 'Texte alternatif',
+      displayAlt: true
     });
   }
 }

@@ -13,6 +13,7 @@ steps:
     args:
       - '-c'
       - |
+        rm -rf node_modules/@mathrix
         yarn run ng build silicate-core
         yarn run ng build silicate-education
         yarn run ng build silicate-essentials
