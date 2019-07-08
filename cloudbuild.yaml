@@ -31,7 +31,7 @@ steps:
   - id: 'git:push'
     name: 'node:11-alpine'
     waitFor: ['gcloud:kms:decrypt']
-    entrypoint: 'bash'
+    entrypoint: 'ash'
     args:
       - -c
       - |
