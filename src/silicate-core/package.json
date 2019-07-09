@@ -1,15 +1,16 @@
 {
   "name": "@mathrix/silicate-core",
   "version": "0.9.0",
-  "description": "Base package of Silicate Editor. Provides the most basic bricks (Text, Title, Image and List)",
+  "description": "Base package of Silicate Editor.",
   "keywords": [
     "silicate",
     "editor",
-    "wysiwyg"
+    "wysiwyg",
+    "core"
   ],
   "homepage": "https://github.com/mathrix-education/silicate",
   "bugs": {
-    "url": "https://github.com/mathrix-education/silicate",
+    "url": "https://github.com/mathrix-education/silicate/issues",
     "email": "mathieu@mathrix.fr"
   },
   "license": "UNLICENSED",
@@ -26,10 +27,10 @@
     "@ng-stack/contenteditable": "^1.0.1"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/material": "^8.0.0",
-    "@angular/cdk": "^8.0.0",
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1",
+    "@angular/material": "^8.0.1",
+    "@angular/cdk": "^8.0.1",
     "@angular/flex-layout": "^8.0.0-beta.26"
   },
   "publishConfig": {

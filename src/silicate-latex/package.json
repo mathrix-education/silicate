@@ -1,12 +1,13 @@
 {
   "name": "@mathrix/silicate-latex",
   "version": "0.9.0",
-  "description": "Provides the LaTeX features.",
+  "description": "Provides the LaTeX features, based on KaTeX library.",
   "keywords": [
     "silicate",
     "editor",
     "wysiwyg",
-    "latex"
+    "latex",
+    "katex"
   ],
   "homepage": "silicate.mathrix.fr",
   "bugs": {
@@ -17,7 +18,7 @@
   "author": {
     "name": "Mathieu Bour",
     "email": "mathieu@mathrix.fr",
-    "url": "https://developers.edutech.fr/mathieu-bour"
+    "url": "https://www.linkedin.com/in/mathieu-bour"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,11 @@
     "@types/katex": "^0.10.1"
   },
   "peerDependencies": {
-    "@angular/cdk": "^8.0.0",
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/flex-layout": "^8.0.0-beta.26",
-    "@angular/material": "^8.0.0",
-    "@mathrix/silicate-core": "^0.9.0"
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1",
+    "@angular/material": "^8.0.1",
+    "@angular/cdk": "^8.0.1",
+    "@angular/flex-layout": "^8.0.0-beta.26"
   },
   "publishConfig": {
     "registry": "https://verdaccio.mathrix.fr"

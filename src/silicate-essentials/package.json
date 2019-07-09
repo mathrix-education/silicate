@@ -1,9 +1,34 @@
 {
   "name": "@mathrix/silicate-essentials",
   "version": "0.9.0",
+  "description": "Provides Text, Image, Title and List Bricks.",
+  "keywords": [
+    "silicate",
+    "editor",
+    "wysiwyg",
+    "core"
+  ],
+  "homepage": "https://github.com/mathrix-education/silicate",
+  "bugs": {
+    "url": "https://github.com/mathrix-education/silicate/issues",
+    "email": "mathieu@mathrix.fr"
+  },
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Mathieu Bour",
+    "email": "mathieu@mathrix.fr",
+    "url": "https://www.linkedin.com/in/mathieu-bour"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mathrix-education/silicate"
+  },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/common": "^8.0.1",
+    "@angular/core": "^8.0.1",
+    "@angular/material": "^8.0.1",
+    "@angular/cdk": "^8.0.1",
+    "@angular/flex-layout": "^8.0.0-beta.26"
   },
   "publishConfig": {
     "registry": "https://verdaccio.mathrix.fr"
