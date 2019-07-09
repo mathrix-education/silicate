@@ -12,24 +12,32 @@ export class TableBrickFactory extends BaseBrickFactory<TableBrick> {
       kind: 'table',
       matrix: [
         [
-          this.withUuid({
-            kind: 'text',
-            text: 'Texte 1'
-          }),
-          this.withUuid({
-            kind: 'text',
-            text: 'Texte 2'
-          })
+          [
+            this.withUuid({
+              kind: 'text',
+              text: 'Texte 1'
+            })
+          ],
+          [
+            this.withUuid({
+              kind: 'text',
+              text: 'Texte 2'
+            })
+          ]
         ],
         [
-          this.withUuid({
-            kind: 'text',
-            text: 'Texte 3'
-          }),
-          this.withUuid({
-            kind: 'text',
-            text: 'Texte 4'
-          })
+          [
+            this.withUuid({
+              kind: 'text',
+              text: 'Texte 1'
+            })
+          ],
+          [
+            this.withUuid({
+              kind: 'text',
+              text: 'Texte 2'
+            })
+          ]
         ]
       ]
     });
