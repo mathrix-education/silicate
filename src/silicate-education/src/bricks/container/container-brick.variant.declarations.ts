@@ -37,6 +37,13 @@ export const ContainerBrickVariantDeclarations: ContainerBrickVariant[] = [
     suffix: true
   },
   {
+    variant: 'proposition',
+    title: 'Proposition',
+    color: '#008989',
+    prefix: true,
+    suffix: true
+  },
+  {
     variant: 'property',
     title: 'Propriété',
     color: '#008989',
