@@ -1,7 +1,7 @@
 {
   "name": "@mathrix/silicate-essentials",
   "version": "0.9.0",
-  "description": "Provides Text, Image, Title and List Bricks.",
+  "description": "Provide Text, Image, Title and List Bricks.",
   "keywords": [
     "silicate",
     "editor",
