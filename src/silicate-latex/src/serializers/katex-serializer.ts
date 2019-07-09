@@ -15,6 +15,9 @@ export class KatexSerializer implements Serializer {
    * @param str The brick content.
    */
   render(str: string): string {
+    // Reference: https://stackoverflow.com/a/34064434
+    str = new DOMParser().parseFromString(str, 'text/html').documentElement.textContent;
+
     const segments = str.split('$');
     let output = '';
 
@@ -27,7 +30,6 @@ export class KatexSerializer implements Serializer {
     });
 
     const sandbox: HTMLDivElement = this.renderer2.createElement('div');
-
     this.renderer2.setProperty(sandbox, 'innerHTML', output);
     sandbox.querySelectorAll('.katex-display').forEach(katexElement => {
       this.renderer2.setProperty(katexElement, 'outerHTML', katexElement.innerHTML);

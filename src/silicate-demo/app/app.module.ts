@@ -4,7 +4,8 @@ import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
-  MatExpansionModule, MatFormFieldModule,
+  MatExpansionModule,
+  MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
   MatSlideToggleModule
@@ -18,7 +19,7 @@ import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
 import {DebugComponent} from './components/debug/debug.component';
 import {SilicateEducationModule} from '@mathrix/silicate-education';
-import { ViewComponent } from './components/view/view.component';
+import {ViewComponent} from './components/view/view.component';
 
 
 @NgModule({
