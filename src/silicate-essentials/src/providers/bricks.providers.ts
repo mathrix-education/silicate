@@ -9,6 +9,7 @@ import {TitleBrickComponent} from '../bricks/title-brick/title-brick.component';
 import {TitleBrickFactory} from '../bricks/title-brick/title-brick.factory';
 import {TableBrickComponent} from '../bricks/table-brick/table-brick.component';
 import {TableBrickFactory} from '../bricks/table-brick/table-brick.factory';
+import {Heading, TitleBrickAllowedHeadings} from '../silicate-essentials.tokens';
 
 /**
  * Bricks
@@ -67,4 +68,8 @@ export const TableBrickProvider: TypedValueProvider<BrickDeclaration> = {
     component: TableBrickComponent,
     factory: TableBrickFactory
   }
+};
+export const TitleBrickAllowedHeadingsProvider: TypedValueProvider<Heading[]> = {
+  provide: TitleBrickAllowedHeadings,
+  useValue: ['h2', 'h3']
 };

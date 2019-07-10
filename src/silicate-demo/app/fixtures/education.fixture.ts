@@ -1,5 +1,10 @@
 export const EDUCATION_FIXTURE = [
   {
+    kind: 'title',
+    heading: 'h2',
+    text: 'Ceci est un titre'
+  },
+  {
     kind: 'pdf-viewer',
     url: 'https://cdn.mathrix.fr/./s-sciences-ingenieur-2018-metropole-sujet-officiel.pdf',
     uuid: 'f21e7ce8-a5e7-4cfa-b8ad-a925be75644c'
@@ -76,15 +81,5 @@ export const EDUCATION_FIXTURE = [
       ]
     ],
     uuid: '7efb26ef-8496-408f-8104-18138e53d8ae'
-  },
-  {
-    kind: 'title',
-    text: 'Titre',
-    uuid: '5f4c0cbf-6d76-4b6f-adfe-2d6a5859e111'
-  },
-  {
-    kind: 'subtitle',
-    text: 'Sous-titre',
-    uuid: '79d1ad73-b634-41ab-a499-4759f9df596c'
   }
 ];

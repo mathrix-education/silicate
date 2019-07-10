@@ -4,7 +4,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter, HostBinding,
+  EventEmitter,
+  HostBinding,
   Injector,
   Input,
   OnChanges,
@@ -17,9 +18,9 @@ import {BaseBrick} from '../../bricks/base-brick/base-brick';
 import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {PurifierService} from '../../services/purifier/purifier.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
-import {ToolbarService} from '../../services/toolbar/toolbar.service';
 import {WallService} from '../../services/wall/wall.service';
 import {Wall} from '../../interfaces/wall';
+import {BaseBrickFactory} from '../../bricks/base-brick/base-brick.factory';
 
 
 @Component({
@@ -98,6 +99,18 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
 
   ngAfterViewInit() {
     this.cd.detectChanges();
+  }
+
+  /**
+   * Allow to fill the empty wall.
+   */
+  begin(): void {
+    const factoryClass = this.silicate.bricksDeclarations[0].factory;
+    const factory = this.injector.get(factoryClass);
+
+    this.wall.wall$.next([
+      factory.make()
+    ]);
   }
 
 

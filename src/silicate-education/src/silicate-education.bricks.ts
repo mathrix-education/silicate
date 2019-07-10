@@ -1,4 +1,3 @@
-import {SubtitleBrickComponent} from './bricks/subtitle/subtitle-brick.component';
 import {ContainerBrickComponent} from './bricks/container/container-brick.component';
 import {BlockBrickComponent} from './bricks/block/block-brick.component';
 import {PDFViewerBrickComponent} from './bricks/pdf-viewer/pdf-viewer-brick.component';
@@ -6,6 +5,5 @@ import {PDFViewerBrickComponent} from './bricks/pdf-viewer/pdf-viewer-brick.comp
 export const SilicateEducationBricks = [
   BlockBrickComponent,
   ContainerBrickComponent,
-  PDFViewerBrickComponent,
-  SubtitleBrickComponent
+  PDFViewerBrickComponent
 ];

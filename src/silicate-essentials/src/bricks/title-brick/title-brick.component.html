@@ -1,3 +1,35 @@
-<h1>
+<h1 *ngIf="data.heading === 'h1'" fxFlex="grow">
   <silicate-editable [(content)]="data.text"></silicate-editable>
 </h1>
+<h2 *ngIf="data.heading === 'h2'" fxFlex="grow">
+  <silicate-editable [(content)]="data.text"></silicate-editable>
+</h2>
+<h3 *ngIf="data.heading === 'h3'" fxFlex="grow">
+  <silicate-editable [(content)]="data.text"></silicate-editable>
+</h3>
+<h4 *ngIf="data.heading === 'h4'" fxFlex="grow">
+  <silicate-editable [(content)]="data.text"></silicate-editable>
+</h4>
+<h5 *ngIf="data.heading === 'h5'" fxFlex="grow">
+  <silicate-editable [(content)]="data.text"></silicate-editable>
+</h5>
+<h6 *ngIf="data.heading === 'h6'" fxFlex="grow">
+  <silicate-editable [(content)]="data.text"></silicate-editable>
+</h6>
+
+<button
+  *ngIf="silicate.editable"
+  mat-button
+  mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>swap_horiz</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button
+    *ngFor="let heading of allowedHeadings; let i = index"
+    mat-menu-item
+    [disabled]="data.heading === heading"
+    (click)="data.heading = heading">
+    Titre {{ i + 1 }}
+  </button>
+</mat-menu>

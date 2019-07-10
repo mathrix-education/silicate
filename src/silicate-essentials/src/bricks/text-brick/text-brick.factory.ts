@@ -10,7 +10,7 @@ export class TextBrickFactory extends BaseBrickFactory<TextBrick> {
   make(): TextBrick {
     return this.withUuid({
       kind: 'text',
-      content: 'Texte à écrire...'
+      text: 'Texte à écrire...'
     });
   }
 }

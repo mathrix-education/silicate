@@ -7,7 +7,9 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
+  MatMenuModule,
   MatSelectModule
 } from '@angular/material';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
@@ -21,13 +23,14 @@ import {
   ImageBrickProvider,
   ListBrickProvider,
   TableBrickProvider,
-  TextBrickProvider,
+  TextBrickProvider, TitleBrickAllowedHeadingsProvider,
   TitleBrickProvider
 } from './providers/bricks.providers';
 import {BoldFilterProvider, ItalicFilterProvider, LinkFilterProvider} from './providers/filters.providers';
 import {OpenLinkDialogHandlerProvider} from './providers/handlers.providers';
 import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from './providers/toolbars.providers';
 import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
+import {TitleBrickAllowedHeadings} from './silicate-essentials.tokens';
 
 
 @NgModule({
@@ -35,13 +38,17 @@ import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
     CommonModule,
     FormsModule,
     FlexLayoutModule,
+    // Material
     MatButtonModule,
     MatDialogModule,
-    MatInputModule,
+    MatCheckboxModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
     MatSelectModule,
-    SilicateCoreModule,
-    MatCheckboxModule
+    // Silicate
+    SilicateCoreModule
   ],
   declarations: [
     ImageBrickComponent,
@@ -71,6 +78,7 @@ export class SilicateEssentialsModule {
       TitleBrickProvider,
       ListBrickProvider,
       TableBrickProvider,
+      TitleBrickAllowedHeadingsProvider,
       // Handlers
       OpenLinkDialogHandlerProvider,
       // EditableFilters
