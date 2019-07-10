@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Wall} from '@mathrix/silicate-core';
-import {EDUCATION_FIXTURE} from '../fixtures/education.fixture';
+import {DEMO_FIXTURE} from '../fixtures/demo.fixture';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemoService {
   editable = true;
-  data: Wall = EDUCATION_FIXTURE;
+  data: Wall = DEMO_FIXTURE;
 }

@@ -15,9 +15,6 @@ export class KatexSerializer implements Serializer {
    * @param str The brick content.
    */
   render(str: string): string {
-    // Reference: https://stackoverflow.com/a/34064434
-    str = new DOMParser().parseFromString(str, 'text/html').documentElement.textContent;
-
     const segments = str.split('$');
     let output = '';
 
@@ -25,6 +22,9 @@ export class KatexSerializer implements Serializer {
       if (index % 2 === 0) {
         output += segment;
       } else {
+        // Unescape the '<' and '>' chars since the were escape by the DOM parser and may be math symbols
+        segment = segment.replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>');
         output += katex.renderToString(segment, {displayMode: true});
       }
     });

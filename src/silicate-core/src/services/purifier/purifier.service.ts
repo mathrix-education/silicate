@@ -33,9 +33,9 @@ export class PurifierService {
 
     // First, we remove all elements which does not match with our selectors.
     /**
-     * Since there are limitation oif the :not() CSS pseudo selector, we have to walk around: firstly, we get all
+     * Since there are limitation if the :not() CSS pseudo selector, we have to walk around: firstly, we get all
      * elements in the wrapper, then we find the whitelisted elements. Finally we convert both of them to array to
-     * differenciate them.
+     * differ them against all elements.
      */
     const allElements = Array.from(sandbox.querySelectorAll('*'));
     const whitelistSelector = this.silicate.filters.map(rule => rule.selector).join(',');
@@ -64,6 +64,7 @@ export class PurifierService {
         const blacklistedAttributes = Array.from(element.attributes)
           .map(attribute => attribute.name)
           .filter(attributeName => !rule.allowedAttributes.includes(attributeName));
+
         blacklistedAttributes.forEach(blacklistedAttributeName => {
           element.removeAttribute(blacklistedAttributeName);
         });
