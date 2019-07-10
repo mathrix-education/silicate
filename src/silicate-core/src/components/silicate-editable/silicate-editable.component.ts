@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
+  HostListener,
   Injector,
   Input,
   OnDestroy,
@@ -114,6 +115,16 @@ export class SilicateEditableComponent implements AfterViewInit, OnDestroy {
    */
   sync() {
     this.content = this.wrapper.nativeElement.innerHTML;
+  }
+
+  /**
+   * Catch the enter key down.
+   * @param $event The enter KeyboardEvent
+   */
+  @HostListener('keydown.enter', ['$event'])
+  onEnter($event: KeyboardEvent) {
+    $event.preventDefault();
+    // For now, that's all
   }
 
 
