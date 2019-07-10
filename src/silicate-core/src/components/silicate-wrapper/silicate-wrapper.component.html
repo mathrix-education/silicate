@@ -1,32 +1,41 @@
-<div
-  *ngIf="(wall.wall$ | async).length > 0; else empty"
-  class="wall"
-  cdkDropList
-  cdkDropListLockAxis="y"
-  fxFlex
-  fxLayout="column"
-  (cdkDropListDropped)="onDrag($event)"
-  [cdkDropListDisabled]="!silicate.editable">
-  <div *ngFor="let brick of (wall.wall$ | async); let i = index; trackBy: trackByFn"
-       cdkDrag
-       class="brick-container"
-       fxLayout="row"
-       fxLayoutAlign="center center"
-       fxLayoutGap="8px">
-    <mat-icon *ngIf="silicate.editable"
-              cdkDragHandle
-              fxFlex
-              class="drag-handle-icon">drag_indicator
-    </mat-icon>
+<ng-container *ngIf="!silicate.editable else editor">
+  <silicate-proxy
+    *ngFor="let brick of (wall.wall$ | async); let i = index;"
+    [index]="i"
+    fxFlex="grow">
+  </silicate-proxy>
+</ng-container>
 
-    <silicate-proxy [index]="i" fxFlex="grow"></silicate-proxy>
-  </div>
-</div>
+<ng-template #editor>
+  <div
+    *ngIf="(wall.wall$ | async).length > 0; else empty"
+    class="wall"
+    cdkDropList
+    cdkDropListLockAxis="y"
+    fxFlex
+    fxLayout="column"
+    (cdkDropListDropped)="onDrag($event)"
+    [cdkDropListDisabled]="!silicate.editable">
+    <div *ngFor="let brick of (wall.wall$ | async); let i = index; trackBy: trackByFn"
+         cdkDrag
+         class="brick-container"
+         fxLayout="row"
+         fxLayoutAlign="center center"
+         fxLayoutGap="8px">
+      <mat-icon *ngIf="silicate.editable"
+                cdkDragHandle
+                class="drag-handle-icon">drag_indicator
+      </mat-icon>
 
-<ng-template #empty>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <button mat-raised-button color="primary" (click)="begin()">Commencer</button>
+      <silicate-proxy [index]="i" fxFlex="grow"></silicate-proxy>
+    </div>
   </div>
+
+  <ng-template #empty>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" (click)="begin()">Commencer</button>
+    </div>
+  </ng-template>
+
+  <silicate-toolbar *ngIf="root"></silicate-toolbar>
 </ng-template>
-
-<silicate-toolbar *ngIf="root"></silicate-toolbar>

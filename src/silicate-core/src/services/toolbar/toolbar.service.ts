@@ -1,13 +1,13 @@
 import {Injectable, Injector} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {SilicateEditableComponent} from '../../components/silicate-editable/silicate-editable.component';
 import {SilicateService} from '../silicate/silicate.service';
+import {SilicateDirective} from '../../directives/silicate.directive';
 
 
 @Injectable()
 export class ToolbarService {
   show$ = new BehaviorSubject<boolean>(false);
-  component$ = new BehaviorSubject<SilicateEditableComponent>(null);
+  component$ = new BehaviorSubject<SilicateDirective>(null);
 
 
   constructor(
@@ -22,12 +22,12 @@ export class ToolbarService {
   }
 
 
-  show(component: SilicateEditableComponent) {
+  show(component: SilicateDirective) {
     if (this.silicate.toolbars.length === 0) {
       return;
     }
 
-    if (this.component$.value === null || this.component$.value.id !== component.id) {
+    if (this.component$.value === null || this.component$.value !== component) {
       this.component$.next(component);
     }
 
@@ -35,12 +35,12 @@ export class ToolbarService {
   }
 
 
-  hide(component: SilicateEditableComponent) {
+  hide(component: SilicateDirective) {
     if (this.silicate.toolbars.length === 0) {
       return;
     }
 
-    if (this.component$.value !== null && this.component$.value.id === component.id) {
+    if (this.component$.value !== null && this.component$.value === component) {
       this.component$.next(null);
       this.show$.next(false);
     }

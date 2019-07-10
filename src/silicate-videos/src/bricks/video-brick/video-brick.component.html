@@ -72,7 +72,7 @@
           <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
           <silicate-video-brick-anchor [(timestamp)]="data.summary[i].timestamp"></silicate-video-brick-anchor>
-          <silicate-editable [(content)]="data.summary[i].title" fxFlex="grow"></silicate-editable>
+          <span silicate fxFlex="grow" [(data)]="data.summary[i].title"></span>
           <mat-icon (click)="data.summary.splice(i, 1)" *ngIf="silicate.editable">delete</mat-icon>
         </div>
       </mat-card-content>

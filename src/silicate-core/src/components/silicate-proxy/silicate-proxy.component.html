@@ -1,26 +1,20 @@
-<div fxLayout="row"
-     fxLayoutAlign="center center"
-     fxLayoutGap="0px">
-  <div fxFlex="grow">
-    <ng-template #wrapper></ng-template>
-  </div>
+<ng-template #wrapper></ng-template>
 
-  <button *ngIf="silicate.editable"
-          class="proxy-menu-trigger"
-          mat-icon-button
-          [matMenuTriggerFor]="proxyMenu">
-    <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
+<button *ngIf="silicate.editable"
+        class="proxy-menu-trigger"
+        mat-icon-button
+        [matMenuTriggerFor]="proxyMenu">
+  <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
+</button>
+
+<mat-menu #proxyMenu="matMenu">
+  <button mat-menu-item (click)="wall.delete(index)">
+    Supprimer
   </button>
 
-  <mat-menu #proxyMenu="matMenu">
-    <button mat-menu-item (click)="wall.delete(index)">
-      Supprimer
-    </button>
-
-    <button mat-menu-item [matMenuTriggerFor]="swapMenu">Changer</button>
-    <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
-  </mat-menu>
-</div>
+  <button mat-menu-item [matMenuTriggerFor]="swapMenu">Changer</button>
+  <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
+</mat-menu>
 
 <mat-menu #swapMenu="matMenu">
   <mat-grid-list cols="2" rowHeight="48px">

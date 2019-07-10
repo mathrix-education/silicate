@@ -14,12 +14,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
 import {SilicateEssentialsModule} from '@mathrix/silicate-essentials';
-import {SilicateLatexModule} from '@mathrix/silicate-latex';
-import {SilicateVideosModule} from '@mathrix/silicate-videos';
 import {AppComponent} from './app.component';
 import {DebugComponent} from './components/debug/debug.component';
-import {SilicateEducationModule} from '@mathrix/silicate-education';
 import {ViewComponent} from './components/view/view.component';
+import {SilicateLatexModule} from '@mathrix/silicate-latex';
+import {SilicateVideosModule} from '@mathrix/silicate-videos';
+import {SilicateEducationModule} from '@mathrix/silicate-education';
 
 
 @NgModule({
@@ -39,10 +39,10 @@ import {ViewComponent} from './components/view/view.component';
     MatButtonModule,
     // Silicate
     SilicateCoreModule.withProviders([
+      ...SilicateEducationModule.providers(),
       ...SilicateEssentialsModule.providers(),
       ...SilicateLatexModule.providers(),
-      ...SilicateVideosModule.providers(),
-      ...SilicateEducationModule.providers()
+      ...SilicateVideosModule.providers()
     ]),
     SilicateEducationModule,
     SilicateEssentialsModule,

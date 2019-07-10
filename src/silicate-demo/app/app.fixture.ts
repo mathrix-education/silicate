@@ -1,13 +1,32 @@
-export const EDUCATION_FIXTURE = [
+export const FIXTURE = [
   {
     kind: 'title',
     heading: 'h2',
-    text: 'Ceci est un titre'
+    text: 'Ceci est un titre 1'
+  },
+  {
+    kind: 'title',
+    heading: 'h3',
+    text: 'Ceci est un titre 2'
+  },
+  {
+    kind: 'video',
+    type: 'youtube',
+    videoId: '9rkhji8eX3c',
+    summary: [
+      {
+        timestamp: 30,
+        title: 'Le bac de Filipi'
+      },
+      {
+        timestamp: 236,
+        title: 'Présentation des formations'
+      }
+    ]
   },
   {
     kind: 'pdf-viewer',
-    url: 'https://cdn.mathrix.fr/./s-sciences-ingenieur-2018-metropole-sujet-officiel.pdf',
-    uuid: 'f21e7ce8-a5e7-4cfa-b8ad-a925be75644c'
+    url: 'https://cdn.mathrix.fr/./s-sciences-ingenieur-2018-metropole-sujet-officiel.pdf'
   },
   {
     kind: 'container',
@@ -18,16 +37,13 @@ export const EDUCATION_FIXTURE = [
       {
         kind: 'text',
         text: 'Soit un triangle $ABC$, et deux points $D$ et $E$ des droites $(AB)$ et $(AC)$ de sorte que la droite' +
-          '$(DE)$ soit parallèle à la droite $(BC)$. On a alors :',
-        uuid: '5e0b9e88-3272-4f1c-968d-2a2d484350a3'
+          '$(DE)$ soit parallèle à la droite $(BC)$. On a alors :'
       },
       {
         kind: 'equation',
-        equation: '\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac{DE}{BC}',
-        uuid: '5e0b9e88-3272-4f1c-968d-2a4d484350a3'
+        equation: '\\frac{AD}{AB}=\\frac{AE}{AC}=\\frac{DE}{BC}'
       }
-    ],
-    uuid: 'f21e7ce8-a5e7-4cfa-b8ad-a564925be74c'
+    ]
   },
   {
     kind: 'block',
@@ -51,15 +67,13 @@ export const EDUCATION_FIXTURE = [
         [
           {
             kind: 'text',
-            text: 'Texte A',
-            uuid: '4655fd93-e8b8-4690-993e-4c23ef016e9a'
+            text: 'Texte A'
           }
         ],
         [
           {
             kind: 'text',
-            text: 'Texte B',
-            uuid: '667ee843-8ee8-4f7f-a822-590ff2cf35a8'
+            text: 'Texte B'
           }
         ]
       ],
@@ -67,19 +81,16 @@ export const EDUCATION_FIXTURE = [
         [
           {
             kind: 'text',
-            text: 'Texte C',
-            uuid: 'ea540fd4-5241-4c51-9f1c-e8939c3c7991'
+            text: 'Texte C'
           }
         ],
         [
           {
             kind: 'text',
-            text: 'Texte D',
-            uuid: '4b33ee1f-a7bb-4483-a0e3-7a8962ae1a00'
+            text: 'Texte D'
           }
         ]
       ]
-    ],
-    uuid: '7efb26ef-8496-408f-8104-18138e53d8ae'
+    ]
   }
 ];

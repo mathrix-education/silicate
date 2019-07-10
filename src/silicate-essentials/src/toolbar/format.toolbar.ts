@@ -1,7 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {SelectionService, SilicateCoreModule, SilicateEditableComponent} from '@mathrix/silicate-core';
+import {SelectionService, SilicateCoreModule, SilicateDirective} from '@mathrix/silicate-core';
 import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component';
 
 
@@ -18,23 +18,23 @@ export class FormatToolbar {
   }
 
 
-  bold($event, component: SilicateEditableComponent) {
+  bold($event, component: SilicateDirective) {
     this.selection.saveSelection();
     this.document.execCommand('bold', false);
-    component.sync();
+    component.onInput();
     this.selection.restoreSelection();
   }
 
 
-  italic($event, component: SilicateEditableComponent) {
+  italic($event, component: SilicateDirective) {
     this.selection.saveSelection();
     document.execCommand('italic', false);
-    component.sync();
+    component.onInput();
     this.selection.restoreSelection();
   }
 
 
-  link($event, component: SilicateEditableComponent) {
+  link($event, component: SilicateDirective) {
     this.selection.saveSelection();
     this.dialog
       .open(LinkDialogComponent, {
@@ -44,6 +44,6 @@ export class FormatToolbar {
         }
       })
       .afterClosed()
-      .subscribe(() => component.sync());
+      .subscribe(() => component.onInput());
   }
 }

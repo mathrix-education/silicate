@@ -1,5 +1,15 @@
 @import "../../../assets/variables";
 
+:host {
+  display: flex;
+  width: 100%;
+
+  ::ng-deep > :not(button):not(mat-menu) {
+    display: block;
+    flex-grow: 1;
+  }
+}
+
 .proxy-menu-trigger {
   color: $icon-color;
 }

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {SilicateEditableComponent} from '../components/silicate-editable/silicate-editable.component';
+import {SilicateDirective} from '../directives/silicate.directive';
 
 @Injectable()
 export class KeyboardHandler {
-  keydown($event: KeyboardEvent, source: SilicateEditableComponent) {
+  keydown($event: KeyboardEvent, source: SilicateDirective) {
     if ($event.key === 'Enter') {
       source.output.emit({
         eventName: 'keydown',

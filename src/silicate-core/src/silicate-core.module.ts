@@ -6,7 +6,6 @@ import {FormsModule} from '@angular/forms';
 import {MatButtonModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateBrickSelectorComponent} from './components/silicate-brick-selector/silicate-brick-selector.component';
-import {SilicateEditableComponent} from './components/silicate-editable/silicate-editable.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
@@ -15,6 +14,7 @@ import {KeyboardHandlerProvider, ToolbarHandlerProvider} from './providers/handl
 import {KeyboardHandler} from './handlers/keyboard.handler';
 import {ToolbarHandler} from './handlers/toolbar.handler';
 import {ToolbarService} from './services/toolbar/toolbar.service';
+import {SilicateDirective} from './directives/silicate.directive';
 
 
 @NgModule({
@@ -27,9 +27,9 @@ import {ToolbarService} from './services/toolbar/toolbar.service';
   declarations: [
     SilicateProxyComponent,
     SilicateWrapperComponent,
-    SilicateEditableComponent,
     SilicateToolbarComponent,
-    SilicateBrickSelectorComponent
+    SilicateBrickSelectorComponent,
+    SilicateDirective
   ],
   imports: [
     CommonModule,
@@ -43,8 +43,8 @@ import {ToolbarService} from './services/toolbar/toolbar.service';
     MatGridListModule
   ],
   exports: [
-    SilicateWrapperComponent,
-    SilicateEditableComponent
+    SilicateDirective,
+    SilicateWrapperComponent
   ]
 })
 export class SilicateCoreModule {

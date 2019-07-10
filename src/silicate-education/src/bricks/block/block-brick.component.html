@@ -2,19 +2,20 @@
 
 <silicate-wrapper fxFlex="grow" [(data)]="data.wall" [editable]="silicate.editable"></silicate-wrapper>
 
-<button
-  *ngIf="silicate.editable"
-  mat-button
-  mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>swap_horiz</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu">
+<ng-container *ngIf="silicate.editable">
   <button
-    *ngFor="let bv of blockBrickVariants"
-    mat-menu-item
-    [disabled]="data.variant === bv.variant"
-    (click)="onVariantChange(bv)">
-    {{ bv.name }}
+    mat-button
+    mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>swap_horiz</mat-icon>
   </button>
-</mat-menu>
+
+  <mat-menu #menu="matMenu">
+    <button
+      *ngFor="let bv of blockBrickVariants"
+      mat-menu-item
+      [disabled]="data.variant === bv.variant"
+      (click)="onVariantChange(bv)">
+      {{ bv.name }}
+    </button>
+  </mat-menu>
+</ng-container>

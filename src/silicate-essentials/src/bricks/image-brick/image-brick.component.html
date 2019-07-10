@@ -9,8 +9,6 @@
       [alt]="data.alt"
       [src]="data.src">
 
-    <figcaption>
-      <silicate-editable *ngIf="data.displayAlt" [(content)]="data.alt"></silicate-editable>
-    </figcaption>
+    <figcaption *ngIf="data.displayAlt" silicate [(data)]="data.alt"></figcaption>
   </figure>
 </div>

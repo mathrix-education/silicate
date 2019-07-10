@@ -124,7 +124,9 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     // [(data)] "artificial" two-way binding
     this.brickRef.instance.data = this.wall.get(this.index);
     this.dataChangeSubscription = this.brickRef.instance.dataChanged.subscribe((data) => {
-      this.wall.patch(this.index, data);
+      if (JSON.stringify(this.wall.get(this.index)) !== JSON.stringify(data)) {
+        this.wall.patch(this.index, data);
+      }
     });
   }
 }

@@ -1,7 +1,11 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {SelectionService, SilicateCoreModule, SilicateEditableComponent} from '@mathrix/silicate-core';
+import {
+  SelectionService,
+  SilicateCoreModule,
+  SilicateDirective
+} from '@mathrix/silicate-core';
 import * as katex from 'katex';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../dialogs/equation-dialog/equation-dialog.component';
@@ -25,7 +29,7 @@ export class InlineEquationHandler {
   }
 
 
-  private openEquationDialog(actualEquation, source: SilicateEditableComponent, equationElement) {
+  private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
     return this.dialog
       .open(EquationDialogComponent, {
         width: '800px',
@@ -43,12 +47,12 @@ export class InlineEquationHandler {
           this.renderer2.setProperty(equationElement, 'outerHTML', katex.renderToString(newEquation));
         }
 
-        source.sync();
+        source.onInput();
       });
   }
 
 
-  keydown($event: KeyboardEvent, source: SilicateEditableComponent) {
+  keydown($event: KeyboardEvent, source: SilicateDirective) {
     if ($event.key === '$') {
       $event.preventDefault();
 
@@ -60,7 +64,7 @@ export class InlineEquationHandler {
   }
 
 
-  click($event: any, source: SilicateEditableComponent) {
+  click($event: any, source: SilicateDirective) {
     const equationElement = $event.target.closest('span.katex');
 
     if (equationElement !== null) {

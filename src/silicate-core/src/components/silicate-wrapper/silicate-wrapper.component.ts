@@ -20,7 +20,6 @@ import {PurifierService} from '../../services/purifier/purifier.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 import {Wall} from '../../interfaces/wall';
-import {BaseBrickFactory} from '../../bricks/base-brick/base-brick.factory';
 
 
 @Component({

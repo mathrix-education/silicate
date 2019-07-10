@@ -1,21 +1,9 @@
-<h1 *ngIf="data.heading === 'h1'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h1>
-<h2 *ngIf="data.heading === 'h2'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h2>
-<h3 *ngIf="data.heading === 'h3'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h3>
-<h4 *ngIf="data.heading === 'h4'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h4>
-<h5 *ngIf="data.heading === 'h5'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h5>
-<h6 *ngIf="data.heading === 'h6'" fxFlex="grow">
-  <silicate-editable [(content)]="data.text"></silicate-editable>
-</h6>
+<h1 *ngIf="data.heading === 'h1'" silicate fxFlex="grow" [(data)]="data.text"></h1>
+<h2 *ngIf="data.heading === 'h2'" silicate fxFlex="grow" [(data)]="data.text"></h2>
+<h3 *ngIf="data.heading === 'h3'" silicate fxFlex="grow" [(data)]="data.text"></h3>
+<h4 *ngIf="data.heading === 'h4'" silicate fxFlex="grow" [(data)]="data.text"></h4>
+<h5 *ngIf="data.heading === 'h5'" silicate fxFlex="grow" [(data)]="data.text"></h5>
+<h6 *ngIf="data.heading === 'h6'" silicate fxFlex="grow" [(data)]="data.text"></h6>
 
 <button
   *ngIf="silicate.editable"

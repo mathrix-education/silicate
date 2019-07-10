@@ -1,10 +1,7 @@
 <ul>
-  <li *ngFor="let item of data.items; let i = index; trackBy: trackByFn">
-    <silicate-editable
-      (delete)="data.items.splice(i, 1)"
-      (enter)="onEnter($event, i)"
-      [(content)]="data.items[i]"
-      [placeholder]="'Texte...'">
-    </silicate-editable>
+  <li
+    *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
+    silicate
+    [(data)]="data.items[i]">
   </li>
 </ul>

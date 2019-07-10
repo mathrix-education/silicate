@@ -23,14 +23,14 @@ import {
   ImageBrickProvider,
   ListBrickProvider,
   TableBrickProvider,
-  TextBrickProvider, TitleBrickAllowedHeadingsProvider,
+  TextBrickProvider,
+  TitleBrickAllowedHeadingsProvider,
   TitleBrickProvider
 } from './providers/bricks.providers';
 import {BoldFilterProvider, ItalicFilterProvider, LinkFilterProvider} from './providers/filters.providers';
 import {OpenLinkDialogHandlerProvider} from './providers/handlers.providers';
 import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from './providers/toolbars.providers';
 import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
-import {TitleBrickAllowedHeadings} from './silicate-essentials.tokens';
 
 
 @NgModule({

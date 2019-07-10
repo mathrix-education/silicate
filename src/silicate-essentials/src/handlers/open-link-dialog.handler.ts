@@ -1,7 +1,6 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {SilicateEditableComponent} from '@mathrix/silicate-core';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {SilicateCoreModule, SilicateDirective} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
 import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component';
 
@@ -14,7 +13,7 @@ export class OpenLinkDialogHandler {
   }
 
 
-  invoke($event: Event | any, source: SilicateEditableComponent) {
+  invoke($event: Event | any, source: SilicateDirective) {
     const targetLink = $event.target.closest('a');
     if (targetLink !== null) {
       const link = {
@@ -30,7 +29,7 @@ export class OpenLinkDialogHandler {
         })
         .afterClosed()
         .pipe(first())
-        .subscribe(() => source.sync());
+        .subscribe(() => source.onInput());
     }
   }
 }

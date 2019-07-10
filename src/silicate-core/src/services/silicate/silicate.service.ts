@@ -5,13 +5,13 @@ import {Handler} from '../../interfaces/handler';
 import {Toolbar} from '../../interfaces/toolbar';
 import {BrickDeclarations, Filters, Handlers, Serializers, Toolbars} from '../../silicate-core.tokens';
 import {Serializer} from '../../interfaces/serializer';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Injectable()
 export class SilicateService {
   /** If the edition should be permitted */
-  editable = false;
-
+  editable$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     @Optional() @Inject(BrickDeclarations) public bricksDeclarations: BrickDeclaration[],
@@ -39,6 +39,16 @@ export class SilicateService {
 
     if (this.serializers === null) {
       this.serializers = [];
+    }
+  }
+
+  get editable() {
+    return this.editable$.value;
+  }
+
+  set editable(editable: boolean) {
+    if (this.editable !== editable) {
+      this.editable$.next(editable);
     }
   }
 }

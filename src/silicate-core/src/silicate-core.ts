@@ -12,9 +12,11 @@ export * from './interfaces/toolbar';
 export * from './interfaces/typed-value-provider';
 export * from './interfaces/wall';
 
+// Directives
+export * from './directives/silicate.directive';
+
 // Components
 export * from './components/silicate-wrapper/silicate-wrapper.component';
-export * from './components/silicate-editable/silicate-editable.component';
 
 // Services
 export * from './services/purifier/purifier.service';

@@ -1,7 +1,7 @@
 import {Component, QueryList, ViewChildren} from '@angular/core';
-import {BaseBrickComponent, SilicateEditableComponent} from '@mathrix/silicate-core';
-import {first} from 'rxjs/operators';
+import {BaseBrickComponent} from '@mathrix/silicate-core';
 import {ListBrick} from './list-brick';
+import {SilicateDirective} from '@mathrix/silicate-core';
 
 
 @Component({
@@ -10,7 +10,7 @@ import {ListBrick} from './list-brick';
   styleUrls: ['./list-brick.component.scss']
 })
 export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
-  @ViewChildren(SilicateEditableComponent) itemsEditableComponents: QueryList<SilicateEditableComponent>;
+  @ViewChildren(SilicateDirective) itemsEditableComponents: QueryList<SilicateDirective>;
 
 
   trackByFn(index: any, item: any) {
@@ -21,11 +21,11 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
   onEnter($event: KeyboardEvent, emittedFromIndex: number) {
     $event.preventDefault();
 
-    this.itemsEditableComponents.changes
-      .pipe(first())
-      .subscribe((items: QueryList<SilicateEditableComponent>) => {
-        setTimeout(() => items.toArray()[emittedFromIndex + 1].focus());
-      });
+    // this.itemsEditableComponents.changes
+    //   .pipe(first())
+    //   .subscribe((items: QueryList<SilicateDirective>) => {
+    //     setTimeout(() => items.toArray()[emittedFromIndex + 1].focus());
+    //   });
 
     this.data.items = this.data.items.splice(emittedFromIndex + 1, 0, '');
   }
