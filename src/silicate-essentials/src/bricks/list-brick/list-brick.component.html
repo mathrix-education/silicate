@@ -1,7 +1,43 @@
-<ul>
-  <li
-    *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
-    silicate
-    [(data)]="data.items[i]">
-  </li>
-</ul>
+<ng-container [ngSwitch]="data.type">
+  <ul *ngSwitchCase="'ul'" fxFlex="grow">
+    <li
+      *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
+      silicate
+      (output)="onOutput($event.$event, $event.eventName, i)"
+      [(data)]="data.items[i]">
+    </li>
+  </ul>
+
+  <ol *ngSwitchCase="'ol'" fxFlex="grow">
+    <li
+      *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
+      silicate
+      (output)="onOutput($event.$event, $event.eventName, i)"
+      [(data)]="data.items[i]">
+    </li>
+  </ol>
+</ng-container>
+
+<button
+  *ngIf="silicate.editable"
+  mat-button
+  mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>swap_horiz</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    [disabled]="data.type === 'ul'"
+    (click)="data.type = 'ul'">
+    <mat-icon>format_list_bulleted</mat-icon>
+    Liste non-ordonnée
+  </button>
+  <button
+    mat-menu-item
+    [disabled]="data.type === 'ol'"
+    (click)="data.type = 'ol'">
+    <mat-icon>format_list_numbered</mat-icon>
+    Liste non-ordonnée
+  </button>
+</mat-menu>

@@ -1,7 +1,6 @@
 import {Component, QueryList, ViewChildren} from '@angular/core';
-import {BaseBrickComponent} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateDirective, SilicateService} from '@mathrix/silicate-core';
 import {ListBrick} from './list-brick';
-import {SilicateDirective} from '@mathrix/silicate-core';
 
 
 @Component({
@@ -12,21 +11,28 @@ import {SilicateDirective} from '@mathrix/silicate-core';
 export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
   @ViewChildren(SilicateDirective) itemsEditableComponents: QueryList<SilicateDirective>;
 
+  constructor(public silicate: SilicateService) {
+    super();
+  }
+
 
   trackByFn(index: any, item: any) {
     return index;
   }
 
 
+  onOutput($event, eventName: string, ...args) {
+    if (eventName === 'keydown.Enter') {
+      this.onEnter($event, args[0]);
+    }
+  }
+
+
   onEnter($event: KeyboardEvent, emittedFromIndex: number) {
-    $event.preventDefault();
+    console.log('lol');
 
-    // this.itemsEditableComponents.changes
-    //   .pipe(first())
-    //   .subscribe((items: QueryList<SilicateDirective>) => {
-    //     setTimeout(() => items.toArray()[emittedFromIndex + 1].focus());
-    //   });
-
-    this.data.items = this.data.items.splice(emittedFromIndex + 1, 0, '');
+    const clone = JSON.parse(JSON.stringify(this.data.items));
+    clone.splice(emittedFromIndex + 1, 0, 'Entrez du texte');
+    this.data.items = clone;
   }
 }

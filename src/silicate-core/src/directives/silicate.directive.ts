@@ -37,6 +37,9 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   unlistenWrapperFocus: () => void;
   /** Un-listen the wrapper focus event. */
   unlistenWrapperBlur: () => void;
+  /** Un-listen provided global events */
+    // tslint:disable-next-line:variable-name
+  unlistenGlobalEvents_: (() => void)[] = [];
   /** Un-listen provided on-focus events */
   unlistenFocusEvents: (() => void)[] = [];
 
@@ -53,7 +56,13 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.contenteditable = this.silicate.editable;
-    this.editableSubscription = this.silicate.editable$.subscribe((editable) => this.contenteditable = editable);
+
+    this.editableSubscription = this.silicate.editable$.subscribe((editable) => {
+      this.unlistenGlobalEvents();
+      this.contenteditable = editable;
+      this.listenGlobalEvents();
+    });
+
     this.listenWrapperFocus();
     this.listenWrapperBlur();
   }
@@ -76,6 +85,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.editableSubscription.unsubscribe();
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
+    this.unlistenGlobalEvents();
   }
 
   /**
@@ -110,6 +120,14 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  private getTarget(handler: Handler): HTMLElement | 'document' | 'window' {
+    return (!handler.target || handler.target === 'self') ? this.elementRef.nativeElement : handler.target;
+  }
+
+  private getMethod(handler: Handler): string {
+    return handler.method ? handler.method : 'invoke';
+  }
+
   /**
    * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit the
    * event to the ToolbarService.
@@ -119,8 +137,9 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
       // (Re)Register on-focus events
       this.unlistenFocusEvents = [];
       this.silicate.handlers
+        .filter(handler => handler.whenFocused && handler.whenEditable === this.silicate.editable)
         .forEach((handler: Handler) => {
-          const target = (!handler.target || handler.target === 'self') ? this.elementRef.nativeElement : handler.target;
+          const target = this.getTarget(handler);
 
           const unlistenFocusEvent = this.renderer2.listen(target, handler.eventName, ($event) => {
             const service = this.injector.get(handler.service);
@@ -146,5 +165,32 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
         this.dataChange.emit(this.serialize());
       }
     });
+  }
+
+  /**
+   * Listen global events.
+   */
+  listenGlobalEvents() {
+    this.silicate.handlers
+      .filter(handler => !handler.whenFocused && handler.whenEditable === this.silicate.editable)
+      .forEach(handler => {
+        const unlistenGlobalEvent = this.renderer2.listen(this.getTarget(handler), handler.eventName, ($event) => {
+          const service = this.injector.get(handler.service);
+          const method = this.getMethod(handler);
+          service[method]($event, this);
+        });
+
+        this.unlistenGlobalEvents_.push(unlistenGlobalEvent);
+      });
+  }
+
+  /**
+   * Unlisten global events.
+   */
+  unlistenGlobalEvents() {
+    this.unlistenGlobalEvents_.forEach(e => e());
+  }
+
+  focus() {
   }
 }

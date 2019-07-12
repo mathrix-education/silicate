@@ -4,7 +4,6 @@ import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
-import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {SilicateBrickSelectorComponent} from './components/silicate-brick-selector/silicate-brick-selector.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
@@ -34,7 +33,6 @@ import {SilicateDirective} from './directives/silicate.directive';
   imports: [
     CommonModule,
     FormsModule,
-    ContenteditableModule,
     FlexLayoutModule,
     MatButtonModule,
     MatMenuModule,

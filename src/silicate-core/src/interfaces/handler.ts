@@ -2,8 +2,10 @@ import {Type} from '@angular/core';
 
 
 export interface Handler {
-  service: Type<any>;
-  method?: string;
+  whenEditable: boolean;
+  whenFocused: boolean;
   eventName: string;
-  target?: 'self' | 'document' | 'window';
+  target: 'self' | 'document' | 'window';
+  service: Type<any>;
+  method: string;
 }

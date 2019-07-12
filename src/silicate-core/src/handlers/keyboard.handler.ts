@@ -5,9 +5,10 @@ import {SilicateDirective} from '../directives/silicate.directive';
 export class KeyboardHandler {
   keydown($event: KeyboardEvent, source: SilicateDirective) {
     if ($event.key === 'Enter') {
+      $event.preventDefault();
       source.output.emit({
-        eventName: 'keydown',
-        event: $event
+        $event,
+        eventName: 'keydown.Enter'
       });
     }
   }

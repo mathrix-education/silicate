@@ -11,6 +11,7 @@ export class ListBrickFactory extends BaseBrickFactory<ListBrick> {
   make(): ListBrick {
     return this.withUuid({
       kind: 'list',
+      type: 'ul',
       items: [
         'Un premier item...',
         'Un second...'

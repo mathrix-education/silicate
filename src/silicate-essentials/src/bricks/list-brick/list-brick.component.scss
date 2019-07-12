@@ -1,5 +1,11 @@
-ul {
-  margin: 0;
-  padding: 0 0 0 32px;
-  line-height: 1.4;
+:host {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+
+  ul, ol {
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
 }

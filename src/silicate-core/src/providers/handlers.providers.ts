@@ -8,6 +8,9 @@ export const KeyboardHandlerProvider: TypedValueProvider<Handler> = {
   provide: Handlers,
   multi: true,
   useValue: {
+    whenFocused: true,
+    whenEditable: true,
+    target: 'self',
     eventName: 'keydown',
     service: KeyboardHandler,
     method: 'keydown'
@@ -18,6 +21,8 @@ export const ToolbarHandlerProvider: TypedValueProvider<Handler> = {
   provide: Handlers,
   multi: true,
   useValue: {
+    whenFocused: true,
+    whenEditable: true,
     target: 'document',
     eventName: 'selectionchange',
     service: ToolbarHandler,

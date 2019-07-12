@@ -23,9 +23,6 @@
     "type": "git",
     "url": "https://github.com/mathrix-education/silicate"
   },
-  "dependencies": {
-    "@ng-stack/contenteditable": "^1.0.1"
-  },
   "peerDependencies": {
     "@angular/common": "^8.0.1",
     "@angular/core": "^8.0.1",

@@ -10,6 +10,15 @@ export const FIXTURE = [
     text: 'Ceci est un titre 2'
   },
   {
+    kind: 'list',
+    type: 'ol',
+    items: [
+      'Hello world',
+      'Foo',
+      'Bar'
+    ]
+  },
+  {
     kind: 'video',
     type: 'youtube',
     videoId: '9rkhji8eX3c',
