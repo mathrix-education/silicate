@@ -10,6 +10,8 @@ import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.toke
   styleUrls: ['./title-brick.component.scss']
 })
 export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implements OnInit {
+  num: string;
+
   constructor(
     public silicate: SilicateService,
     @Inject(TitleBrickAllowedHeadings) public allowedHeadings: Heading[]) {
@@ -23,5 +25,9 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implemen
         + 'InjectionToken in @mathrix/silicate-essentials'
       );
     }
+  }
+
+  refreshNum() {
+
   }
 }

@@ -13,7 +13,6 @@ import {
   MatSelectModule
 } from '@angular/material';
 import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {ContenteditableModule} from '@ng-stack/contenteditable';
 import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
@@ -37,8 +36,6 @@ import {VideoBrickProvider} from './providers/bricks.providers';
     DragDropModule,
     // Flex Layouts
     FlexLayoutModule,
-    // Contenteditable
-    ContenteditableModule,
     // Silicate
     SilicateCoreModule
   ],

@@ -8,6 +8,7 @@ import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.toke
   providedIn: SilicateCoreModule
 })
 export class TitleBrickFactory extends BaseBrickFactory<TitleBrick> {
+
   constructor(@Inject(TitleBrickAllowedHeadings) private allowedHeadings: Heading[]) {
     super();
   }

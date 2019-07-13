@@ -1,9 +1,9 @@
-<h1 *ngIf="data.heading === 'h1'" silicate fxFlex="grow" [(data)]="data.text"></h1>
-<h2 *ngIf="data.heading === 'h2'" silicate fxFlex="grow" [(data)]="data.text"></h2>
-<h3 *ngIf="data.heading === 'h3'" silicate fxFlex="grow" [(data)]="data.text"></h3>
-<h4 *ngIf="data.heading === 'h4'" silicate fxFlex="grow" [(data)]="data.text"></h4>
-<h5 *ngIf="data.heading === 'h5'" silicate fxFlex="grow" [(data)]="data.text"></h5>
-<h6 *ngIf="data.heading === 'h6'" silicate fxFlex="grow" [(data)]="data.text"></h6>
+<h1 *ngIf="data.heading === 'h1'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h1>
+<h2 *ngIf="data.heading === 'h2'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h2>
+<h3 *ngIf="data.heading === 'h3'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h3>
+<h4 *ngIf="data.heading === 'h4'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h4>
+<h5 *ngIf="data.heading === 'h5'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h5>
+<h6 *ngIf="data.heading === 'h6'" silicate fxFlex="grow" [(data)]="data.text" [attr.data-num]="num"></h6>
 
 <button
   *ngIf="silicate.editable"
