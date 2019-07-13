@@ -23,6 +23,7 @@ export * from './services/purifier/purifier.service';
 export * from './services/selection/selection.service';
 export * from './services/silicate/silicate.service';
 export * from './services/toolbar/toolbar.service';
+export * from './services/wall/wall.service';
 
 // Modules
 export * from './silicate-core.module';
