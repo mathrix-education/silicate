@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {BaseBrickComponent} from '@mathrix/silicate-core';
+import {Component} from '@angular/core';
+import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {TableBrick} from './table-brick';
-import {SilicateService} from '@mathrix/silicate-core';
 
 
 @Component({
@@ -9,7 +8,7 @@ import {SilicateService} from '@mathrix/silicate-core';
   templateUrl: './table-brick.component.html',
   styleUrls: ['./table-brick.component.scss']
 })
-export class TableBrickComponent extends BaseBrickComponent<TableBrick> implements OnInit {
+export class TableBrickComponent extends BaseBrickComponent<TableBrick> {
   constructor(public silicate: SilicateService) {
     super();
   }
@@ -18,6 +17,7 @@ export class TableBrickComponent extends BaseBrickComponent<TableBrick> implemen
     return index;
   }
 
-  ngOnInit() {
+  focus(): void {
+    return;
   }
 }

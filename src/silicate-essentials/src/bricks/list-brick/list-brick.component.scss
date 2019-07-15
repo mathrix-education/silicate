@@ -7,5 +7,10 @@
   ul, ol {
     flex-grow: 1;
     box-sizing: border-box;
+
+    li[silicate][contenteditable=true]:empty:before {
+      content: 'Entrez du texte';
+      color: rgba(0, 0, 0, .54);
+    }
   }
 }

@@ -13,8 +13,7 @@ import {
 } from '@angular/core';
 import {Subscription} from 'rxjs';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {BrickDeclaration} from '../../interfaces/brick-declaration';
-import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
+import {Brick} from '../../interfaces/brick';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 
@@ -37,7 +36,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     private injector: Injector,
     private componentFactory: ComponentFactoryResolver,
     public silicate: SilicateService,
-    private brickResolver: BrickResolverService,
     public wall: WallService
   ) {
   }
@@ -48,7 +46,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   get icon() {
     try {
-      return this.brickResolver.resolve(this.kind).icon;
+      return this.silicate.resolve(this.kind).icon;
     } catch (e) {
       return 'settings';
     }
@@ -80,7 +78,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    * Swap the current brick with another
    * @param brickDeclaration The new brick declaration.
    */
-  swap(brickDeclaration: BrickDeclaration) {
+  swap(brickDeclaration: Brick) {
     const old = this.wall.get(this.index);
     const factory = this.injector.get(brickDeclaration.factory);
     const empty = factory.make();
@@ -97,7 +95,11 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   }
 
 
-  insert(brickDeclaration: BrickDeclaration) {
+  /**
+   * Append a new brick to this one.
+   * @param brickDeclaration The new brick declaration.
+   */
+  append(brickDeclaration: Brick) {
     const empty = this.injector.get(brickDeclaration.factory).make();
     this.wall.insert(this.index + 1, empty);
   }
@@ -117,9 +119,10 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
     // Inject the right brick in the wrapper
     const kind = this.wall.get(this.index).kind;
-    const component = this.brickResolver.resolve(kind).component;
+    const component = this.silicate.resolve(kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory, undefined, this.injector);
+    this.wall.setBrickReference(this.index, this.brickRef);
 
     // [(data)] "artificial" two-way binding
     this.brickRef.instance.data = this.wall.get(this.index);

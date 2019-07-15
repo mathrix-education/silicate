@@ -35,4 +35,8 @@ export class BlockBrickComponent extends BaseBrickComponent<BlockBrick> implemen
     this.data.variant = variant.variant;
     this.applyVariant();
   }
+
+  focus(): void {
+    return;
+  }
 }

@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import {v4 as uuid} from 'uuid';
 import {BaseBrick} from '../../bricks/base-brick/base-brick';
-import {BrickResolverService} from '../../services/brick-resolver/brick-resolver.service';
 import {PurifierService} from '../../services/purifier/purifier.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
@@ -27,7 +26,6 @@ import {Wall} from '../../interfaces/wall';
   templateUrl: './silicate-wrapper.component.html',
   styleUrls: ['./silicate-wrapper.component.scss'],
   providers: [
-    BrickResolverService,
     PurifierService,
     SilicateService,
     WallService

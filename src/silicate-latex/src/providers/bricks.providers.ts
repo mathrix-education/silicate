@@ -1,9 +1,9 @@
-import {BrickDeclaration, BrickDeclarations, TypedValueProvider} from '@mathrix/silicate-core';
+import {Brick, Bricks, TypedValueProvider} from '@mathrix/silicate-core';
 import {EquationBrickComponent} from '../bricks/equation-brick/equation-brick.component';
 import {EquationBrickFactory} from '../bricks/equation-brick/equation-brick.factory';
 
-export const EquationBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const EquationBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'equation',

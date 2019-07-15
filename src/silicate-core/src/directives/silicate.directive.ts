@@ -27,7 +27,6 @@ import {Subscription} from 'rxjs';
 export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   @HostBinding('attr.contenteditable') contenteditable = false;
 
-  @Output() output = new EventEmitter<any>();
   @Input() data: string;
   @Output() dataChange = new EventEmitter<string>();
 
@@ -54,6 +53,12 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   }
 
 
+  /**
+   * On initialization:
+   * 1. Synchronise the editable state withe the SilicateService, and subscribe to it;
+   * 2. Register global events;
+   * 3. Register on-focus events.
+   */
   ngOnInit(): void {
     this.contenteditable = this.silicate.editable;
 
@@ -67,6 +72,9 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.listenWrapperBlur();
   }
 
+  /**
+   * On change, synchronise the data by re-rendering.
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data) {
       const newSerializedData = changes.data.currentValue;
@@ -79,7 +87,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Un-listen all declared event listener to cleanly delete the component.
+   * On destroy,  un-listen all declared event listener to cleanly delete the component.
    */
   ngOnDestroy(): void {
     this.editableSubscription.unsubscribe();
@@ -113,6 +121,9 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', buffer);
   }
 
+  /**
+   * On input, synchronise the view with the data.
+   */
   @HostListener('input')
   onInput() {
     if (this.silicate.editable) {
@@ -120,10 +131,17 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+
+  /**
+   * Get the target of an event.
+   */
   private getTarget(handler: Handler): HTMLElement | 'document' | 'window' {
     return (!handler.target || handler.target === 'self') ? this.elementRef.nativeElement : handler.target;
   }
 
+  /**
+   * Get the method of an event.
+   */
   private getMethod(handler: Handler): string {
     return handler.method ? handler.method : 'invoke';
   }
@@ -191,6 +209,10 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.unlistenGlobalEvents_.forEach(e => e());
   }
 
+  /**
+   * Focus a the elementRef nativeElement.
+   */
   focus() {
+    this.elementRef.nativeElement.focus();
   }
 }

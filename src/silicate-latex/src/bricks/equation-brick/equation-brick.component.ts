@@ -47,4 +47,8 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
         }
       });
   }
+
+  focus(): void {
+    return;
+  }
 }

@@ -69,4 +69,8 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
     );
     this.renderer2.setStyle(this.titleContainerElementRef.nativeElement, 'color', this.variant.color);
   }
+
+  focus(): void {
+    return;
+  }
 }

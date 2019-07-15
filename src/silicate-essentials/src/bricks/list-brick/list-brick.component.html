@@ -3,7 +3,7 @@
     <li
       *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
       silicate
-      (output)="onOutput($event.$event, $event.eventName, i)"
+      (keydown.enter)="onEnter($event, i)"
       [(data)]="data.items[i]">
     </li>
   </ul>
@@ -12,7 +12,7 @@
     <li
       *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
       silicate
-      (output)="onOutput($event.$event, $event.eventName, i)"
+      (keydown.enter)="onEnter($event, i)"
       [(data)]="data.items[i]">
     </li>
   </ol>
@@ -26,6 +26,7 @@
 </button>
 
 <mat-menu #menu="matMenu">
+  <!--suppress TypeScriptValidateTypes -->
   <button
     mat-menu-item
     [disabled]="data.type === 'ul'"
@@ -33,11 +34,13 @@
     <mat-icon>format_list_bulleted</mat-icon>
     Liste non-ordonnée
   </button>
+
+  <!--suppress TypeScriptValidateTypes -->
   <button
     mat-menu-item
     [disabled]="data.type === 'ol'"
     (click)="data.type = 'ol'">
     <mat-icon>format_list_numbered</mat-icon>
-    Liste non-ordonnée
+    Liste ordonnée
   </button>
 </mat-menu>

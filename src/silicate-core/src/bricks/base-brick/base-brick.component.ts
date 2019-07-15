@@ -1,21 +1,28 @@
-import {DoCheck, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, DoCheck, EventEmitter, Input, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 
 
 /**
  * The base class for brick component.
  */
-export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements DoCheck {
-  @Input() editable = false;
-
+export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements AfterViewInit, DoCheck {
   /** [data] in binding */
   @Input() data: T;
   /** (data) out binding */
   @Output() dataChanged = new EventEmitter<T>();
 
+  /** Fired when the ngAfterViewInit is called */
+  protected afterViewInit$ = new EventEmitter();
+
   /** The previously checked data, JSON stringified. */
   private dataJSON: string = null;
 
+  /**
+   * AfterViewInit hook
+   */
+  ngAfterViewInit(): void {
+    this.afterViewInit$.emit();
+  }
 
   /**
    * We will only emit the change if the data objects are structurally different.
@@ -30,4 +37,10 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
 
     this.dataJSON = dataJSONChallenge;
   }
+
+
+  /**
+   * Define the behavior when the brick is focused (e.g. focus the right silicate directive for example).
+   */
+  abstract focus(): void;
 }

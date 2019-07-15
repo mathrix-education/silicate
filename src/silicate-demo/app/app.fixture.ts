@@ -1,5 +1,9 @@
 export const FIXTURE = [
   {
+    kind: 'text',
+    text: 'Text blabla'
+  },
+  {
     kind: 'title',
     heading: 'h2',
     text: 'Ceci est un titre 1'

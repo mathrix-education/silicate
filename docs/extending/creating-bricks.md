@@ -89,13 +89,11 @@ export class YourBrickComponent extends BaseBrickComponent<YourBrick> {
 
 
 ## Brick Template
-To build your brick template, there is a very **important component**: the `SilicateEditableComponent` (`<silicate-editable></silicate-editable>`). You can bind a string into it content, which will be editable by the final user.
+To build your brick template, there is a very **important directive**: the `SilicateDirective` (`<p silicate></p>`). You can bind a string into it content, which will be editable by the final user.
 
 Example of `your-brick.component.html`:
 ```html
-<p>
-  <silicate-editable [(content)]="this.data.content"></silicate-editable>
-</p>
+<p silicate [(data)]="this.data.content"></p>
 ```
 
 Note: The Silicate Editable has no style defined, so you are free to style it yourself.
@@ -106,10 +104,10 @@ In order to use your now brick, you have to load it using the multi-InjectionTok
 
 Example of `bricks.providers.ts`:
 ```typescript
-import {TypedValueProvider, BrickDeclaration, BrickDeclarations} from '@mathrix/core';
+import {TypedValueProvider, Brick, Bricks} from '@mathrix/silicate-core';
 
-export const YourBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const YourBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'your-kind',

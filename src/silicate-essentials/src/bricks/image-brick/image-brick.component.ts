@@ -38,4 +38,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
         }
       }));
   }
+
+  focus(): void {
+  }
 }

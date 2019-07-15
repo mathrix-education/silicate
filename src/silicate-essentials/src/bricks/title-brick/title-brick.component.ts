@@ -1,7 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {BaseBrickComponent, SilicateDirective, SilicateService, WallService} from '@mathrix/silicate-core';
 import {TitleBrick} from './title-brick';
 import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.tokens';
+import {TextBrickFactory} from '../text-brick/text-brick.factory';
 
 
 @Component({
@@ -10,10 +11,12 @@ import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.toke
   styleUrls: ['./title-brick.component.scss']
 })
 export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implements OnInit {
-  num: string;
+  @ViewChild(SilicateDirective, {static: false}) silicateTitle: SilicateDirective;
 
   constructor(
     public silicate: SilicateService,
+    private wall: WallService,
+    private textBrickFactory: TextBrickFactory,
     @Inject(TitleBrickAllowedHeadings) public allowedHeadings: Heading[]) {
     super();
   }
@@ -27,7 +30,17 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implemen
     }
   }
 
-  refreshNum() {
+  /**
+   * When pressing "enter" in a heading with SilicateDirective, create new TextBrick below.
+   */
+  onEnter($event: KeyboardEvent): void {
+    $event.preventDefault();
 
+    const index = this.wall.indexOf(this.data);
+    this.wall.insertAndFocus(index + 1, this.textBrickFactory.make());
+  }
+
+  focus(): void {
+    this.silicateTitle.focus();
   }
 }

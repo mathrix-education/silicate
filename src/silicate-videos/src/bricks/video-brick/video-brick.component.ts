@@ -13,10 +13,6 @@ import {VideoBrick} from './video-brick';
   styleUrls: ['./video-brick.component.scss']
 })
 export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
-  static readonly kind = 'video';
-  static readonly icon = 'movie';
-  static readonly displayName = 'Vidéo';
-
   @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
   @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;
 
@@ -56,5 +52,9 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
     }
 
     this.player.setTime(seconds);
+  }
+
+  focus(): void {
+    return;
   }
 }

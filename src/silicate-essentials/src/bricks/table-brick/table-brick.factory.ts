@@ -14,13 +14,13 @@ export class TableBrickFactory extends BaseBrickFactory<TableBrick> {
         [
           [
             this.withUuid({
-              kind: 'text',
+              kind: 'silicate',
               text: 'Texte 1'
             })
           ],
           [
             this.withUuid({
-              kind: 'text',
+              kind: 'silicate',
               text: 'Texte 2'
             })
           ]
@@ -28,13 +28,13 @@ export class TableBrickFactory extends BaseBrickFactory<TableBrick> {
         [
           [
             this.withUuid({
-              kind: 'text',
+              kind: 'silicate',
               text: 'Texte 1'
             })
           ],
           [
             this.withUuid({
-              kind: 'text',
+              kind: 'silicate',
               text: 'Texte 2'
             })
           ]

@@ -1,8 +1,5 @@
-.normal {
-  line-height: 1.6;
-}
-
-.secondary-title {
-  font-size: 24px;
-  text-align: center;
+/* paragraph placeholder */
+[silicate][contenteditable=true]:empty:before {
+  content: 'Entrez du texte';
+  color: rgba(0, 0, 0, .54);
 }

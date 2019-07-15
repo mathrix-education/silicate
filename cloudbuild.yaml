@@ -36,11 +36,11 @@ steps:
       - -c
       - |
         deploy/scripts/setup_registry.sh
-        deploy/scripts/publish.sh silicate-core $SHORT_SHA
-        deploy/scripts/publish.sh silicate-education $SHORT_SHA
-        deploy/scripts/publish.sh silicate-essentials $SHORT_SHA
-        deploy/scripts/publish.sh silicate-latex $SHORT_SHA
-        deploy/scripts/publish.sh silicate-videos $SHORT_SHA
+        deploy/scripts/publish.sh -p silicate-core -c $SHORT_SHA -t $TAG_NAME
+        deploy/scripts/publish.sh -p silicate-education -c $SHORT_SHA -t $TAG_NAME
+        deploy/scripts/publish.sh -p silicate-essentials -c $SHORT_SHA -t $TAG_NAME
+        deploy/scripts/publish.sh -p silicate-latex -c $SHORT_SHA -t $TAG_NAME
+        deploy/scripts/publish.sh -p silicate-videos -c $SHORT_SHA -t $TAG_NAME
 
 
   # Deploy demo

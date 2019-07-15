@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BrickDeclaration} from '../../interfaces/brick-declaration';
+import {Brick} from '../../interfaces/brick';
 import {SilicateService} from '../../services/silicate/silicate.service';
 
 
@@ -12,7 +12,7 @@ export class SilicateBrickSelectorComponent {
   @Input() icon: string = null;
   @Input() kind: string = null;
   @Input() label: string = null;
-  @Output() select = new EventEmitter<BrickDeclaration>();
+  @Output() select = new EventEmitter<Brick>();
 
   constructor(public silicate: SilicateService) {
   }

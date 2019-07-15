@@ -1,6 +1,7 @@
 import {Component, QueryList, ViewChildren} from '@angular/core';
 import {BaseBrickComponent, SilicateDirective, SilicateService} from '@mathrix/silicate-core';
 import {ListBrick} from './list-brick';
+import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -9,7 +10,7 @@ import {ListBrick} from './list-brick';
   styleUrls: ['./list-brick.component.scss']
 })
 export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
-  @ViewChildren(SilicateDirective) itemsEditableComponents: QueryList<SilicateDirective>;
+  @ViewChildren(SilicateDirective) silicateListItems: QueryList<SilicateDirective>;
 
   constructor(public silicate: SilicateService) {
     super();
@@ -21,18 +22,20 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
   }
 
 
-  onOutput($event, eventName: string, ...args) {
-    if (eventName === 'keydown.Enter') {
-      this.onEnter($event, args[0]);
-    }
-  }
-
-
   onEnter($event: KeyboardEvent, emittedFromIndex: number) {
-    console.log('lol');
+    $event.preventDefault();
 
     const clone = JSON.parse(JSON.stringify(this.data.items));
-    clone.splice(emittedFromIndex + 1, 0, 'Entrez du texte');
+    clone.splice(emittedFromIndex + 1, 0, '');
     this.data.items = clone;
+
+    this.silicateListItems.changes.pipe(first()).subscribe(() => {
+      this.silicateListItems.toArray()[emittedFromIndex + 1].focus();
+    });
+
+  }
+
+  focus(): void {
+    this.silicateListItems.first.focus();
   }
 }

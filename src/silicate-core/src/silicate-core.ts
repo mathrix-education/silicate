@@ -4,7 +4,7 @@ export * from './bricks/base-brick/base-brick.component';
 export * from './bricks/base-brick/base-brick.factory';
 
 // Interfaces
-export * from './interfaces/brick-declaration';
+export * from './interfaces/brick';
 export * from './interfaces/handler';
 export * from './interfaces/serializer';
 export * from './interfaces/filter';

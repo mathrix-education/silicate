@@ -1,7 +1,7 @@
 import {BaseBrick} from '../bricks/base-brick/base-brick';
 
 
-export interface BrickDeclaration<T extends BaseBrick = BaseBrick> {
+export interface Brick<T extends BaseBrick = BaseBrick> {
   kind: string;
   icon: string;
   name: string;

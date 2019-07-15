@@ -9,8 +9,7 @@ import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
 import {SilicateWrapperComponent} from './components/silicate-wrapper/silicate-wrapper.component';
 import {SilicateService} from './services/silicate/silicate.service';
-import {KeyboardHandlerProvider, ToolbarHandlerProvider} from './providers/handlers.providers';
-import {KeyboardHandler} from './handlers/keyboard.handler';
+import {ToolbarHandlerProvider} from './providers/handlers.providers';
 import {ToolbarHandler} from './handlers/toolbar.handler';
 import {ToolbarService} from './services/toolbar/toolbar.service';
 import {SilicateDirective} from './directives/silicate.directive';
@@ -20,7 +19,6 @@ import {SilicateDirective} from './directives/silicate.directive';
   providers: [
     SilicateService,
     ToolbarService,
-    KeyboardHandler,
     ToolbarHandler
   ],
   declarations: [
@@ -48,7 +46,6 @@ import {SilicateDirective} from './directives/silicate.directive';
 export class SilicateCoreModule {
   static providers(): Provider[] {
     return [
-      KeyboardHandlerProvider,
       ToolbarHandlerProvider
     ];
   }

@@ -1,4 +1,4 @@
-import {BrickDeclaration, BrickDeclarations, TypedValueProvider} from '@mathrix/silicate-core';
+import {Brick, Bricks, TypedValueProvider} from '@mathrix/silicate-core';
 import {ImageBrickComponent} from '../bricks/image-brick/image-brick.component';
 import {ImageBrickFactory} from '../bricks/image-brick/image-brick.factory';
 import {ListBrickComponent} from '../bricks/list-brick/list-brick.component';
@@ -14,8 +14,8 @@ import {Heading, TitleBrickAllowedHeadings} from '../silicate-essentials.tokens'
 /**
  * Bricks
  */
-export const TextBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const TextBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'text',
@@ -25,8 +25,8 @@ export const TextBrickProvider: TypedValueProvider<BrickDeclaration> = {
     factory: TextBrickFactory
   }
 };
-export const ImageBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const ImageBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'image',
@@ -36,8 +36,8 @@ export const ImageBrickProvider: TypedValueProvider<BrickDeclaration> = {
     factory: ImageBrickFactory
   }
 };
-export const ListBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const ListBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'list',
@@ -47,8 +47,8 @@ export const ListBrickProvider: TypedValueProvider<BrickDeclaration> = {
     factory: ListBrickFactory
   }
 };
-export const TitleBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const TitleBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'title',
@@ -58,8 +58,8 @@ export const TitleBrickProvider: TypedValueProvider<BrickDeclaration> = {
     factory: TitleBrickFactory
   }
 };
-export const TableBrickProvider: TypedValueProvider<BrickDeclaration> = {
-  provide: BrickDeclarations,
+export const TableBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
   multi: true,
   useValue: {
     kind: 'table',

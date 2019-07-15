@@ -13,7 +13,7 @@ export class BlockBrickFactory extends BaseBrickFactory<BlockBrick> {
       variant: 'reminder',
       wall: [
         {
-          kind: 'text',
+          kind: 'silicate',
           content: 'Texte...'
         }
       ]
