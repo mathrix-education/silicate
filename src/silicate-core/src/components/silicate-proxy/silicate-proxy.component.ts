@@ -68,9 +68,17 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    * Clear the proxy content.
    */
   clear() {
-    this.dataChangeSubscription.unsubscribe();
-    this.wrapper.clear(); // Remove any content in the wrapper
-    this.brickRef.destroy(); // Destroy the Brick reference if it exists.
+    if (this.dataChangeSubscription instanceof Subscription) {
+      this.dataChangeSubscription.unsubscribe();
+    }
+
+    if (this.wrapper instanceof ViewContainerRef) {
+      this.wrapper.clear(); // Remove any content in the wrapper
+    }
+
+    if (this.brickRef instanceof ComponentRef) {
+      this.brickRef.destroy(); // Destroy the Brick reference if it exists.
+    }
   }
 
 
