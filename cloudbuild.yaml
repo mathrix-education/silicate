@@ -62,8 +62,8 @@ steps:
     args:
       - '-c'
       - |
-        gcloud beta run deploy silicate-demo \
+        gcloud beta run deploy silicate \
           --image eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA \
-          --region us-central1
+          --region europe-west1
 images: ['eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']
