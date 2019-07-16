@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -10,42 +12,39 @@ import {
   ViewChild
 } from '@angular/core';
 import {VideoPlayer} from '../video-player';
+import {SilicateService} from '@mathrix/silicate-core';
+import {DOCUMENT} from '@angular/common';
 
 
+/** @dynamic */
 @Component({
   selector: 'silicate-youtube-player',
   templateUrl: './youtube-player.component.html',
   styleUrls: ['./youtube-player.component.scss']
 })
-export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
+export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges, VideoPlayer {
+  private readonly youtubeAPIUrl = 'https://www.youtube.com/iframe_api';
+
   @Input() videoId: string;
   @ViewChild('player', {static: true}) player: ElementRef<HTMLDivElement>;
   @Output() ready = new EventEmitter();
+
+  constructor(
+    private silicate: SilicateService,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+  }
 
   youtubePlayer: YT.Player;
 
 
   ngOnInit() {
-    if (typeof (YT) === 'undefined' || typeof (YT.Player) === 'undefined') {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
+    this.loadYoutubeAPI();
+  }
 
-    // @ts-ignore
-    window.onYouTubePlayerAPIReady = () => {
-      this.youtubePlayer = new YT.Player(this.player.nativeElement, {
-        videoId: this.videoId,
-        playerVars: {
-          modestbranding: YT.ModestBranding.Modest,
-          rel: YT.RelatedVideos.Hide
-        },
-        events: {
-          onReady: () => this.ready.emit()
-        }
-      });
-    };
+
+  ngAfterViewInit() {
+    this.createYoutubePlayer();
   }
 
 
@@ -53,6 +52,44 @@ export class YoutubePlayerComponent implements OnInit, OnChanges, VideoPlayer {
     if (this.youtubePlayer && changes.videoId) {
       this.youtubePlayer.cueVideoById(changes.videoId.currentValue as string);
     }
+  }
+
+  /**
+   * Load the YouTube API only once.
+   */
+  private loadYoutubeAPI() {
+    if (this.document.querySelector(`script[src="${this.youtubeAPIUrl}"]`) === null) {
+      const tag = this.document.createElement('script');
+      tag.src = this.youtubeAPIUrl;
+      const firstScriptTag = this.document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+  }
+
+  /**
+   * Create a YouTube player. Interval is required to avoid the window object use.
+   */
+  private createYoutubePlayer() {
+    const interval = setInterval(() => {
+      /*
+       * Since we cannot rely on:
+       * `window.onYouTubePlayerAPIReady`,
+       * we will wait  for the YouTube API to load.
+       */
+      if (typeof (YT) !== 'undefined' && typeof (YT.Player) !== 'undefined') {
+        this.youtubePlayer = new YT.Player(this.player.nativeElement, {
+          videoId: this.videoId,
+          playerVars: {
+            modestbranding: YT.ModestBranding.Modest,
+            rel: YT.RelatedVideos.Hide
+          },
+          events: {
+            onReady: () => this.ready.emit()
+          }
+        });
+        clearInterval(interval);
+      }
+    }, 100); // We check every 100ms
   }
 
 
