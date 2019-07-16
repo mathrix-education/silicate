@@ -18,6 +18,7 @@ import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-b
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from './players/youtube-player/youtube-player.component';
 import {VideoBrickProvider} from './providers/bricks.providers';
+import {SafePipeModule} from 'safe-pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {VideoBrickProvider} from './providers/bricks.providers';
     // Flex Layouts
     FlexLayoutModule,
     // Silicate
-    SilicateCoreModule
+    SilicateCoreModule,
+    SafePipeModule
   ],
   declarations: [
     VideoBrickComponent,

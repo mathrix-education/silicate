@@ -8,12 +8,13 @@ import {
   OnChanges,
   OnInit,
   Output,
+  PLATFORM_ID,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {VideoPlayer} from '../video-player';
 import {SilicateService} from '@mathrix/silicate-core';
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 
 
 /** @dynamic */
@@ -23,7 +24,10 @@ import {DOCUMENT} from '@angular/common';
   styleUrls: ['./youtube-player.component.scss']
 })
 export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges, VideoPlayer {
+  /** YouTube iframe API */
   private readonly youtubeAPIUrl = 'https://www.youtube.com/iframe_api';
+  /** If the platform is a browser */
+  public isPlatformBrowser = true;
 
   @Input() videoId: string;
   @ViewChild('player', {static: true}) player: ElementRef<HTMLDivElement>;
@@ -31,6 +35,7 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
 
   constructor(
     private silicate: SilicateService,
+    @Inject(PLATFORM_ID) private platformId: any,
     @Inject(DOCUMENT) private document: Document
   ) {
   }
@@ -39,12 +44,18 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
 
 
   ngOnInit() {
-    this.loadYoutubeAPI();
+    this.isPlatformBrowser = isPlatformBrowser(this.platformId);
+
+    if (this.isPlatformBrowser) {
+      this.loadYoutubeAPI();
+    }
   }
 
 
   ngAfterViewInit() {
-    this.createYoutubePlayer();
+    if (this.isPlatformBrowser) {
+      this.createYoutubePlayer();
+    }
   }
 
 

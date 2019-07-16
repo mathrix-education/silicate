@@ -1,1 +1,11 @@
-<div #player></div>
+<div #player *ngIf="isPlatformBrowser; else fallbackPlayer"></div>
+
+<!-- Fallback player in case of YouTube API cannot be loaded -->
+<ng-template #fallbackPlayer>
+  <iframe
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    [src]="'https://www.youtube.com/embed/' + videoId | safe: 'resourceUrl'">
+  </iframe>
+</ng-template>
