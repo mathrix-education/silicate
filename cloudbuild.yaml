@@ -4,6 +4,7 @@ steps:
     entrypoint: 'yarn'
     args: ['install']
 
+
   # Build silicate libraries and demo
   # ---------------------------------
   - id: 'ng:build'
@@ -20,6 +21,7 @@ steps:
         yarn run ng build silicate-latex
         yarn run ng build silicate-videos
         yarn run ng build silicate-demo --prod
+
 
   # Deploy libraries
   # ----------------
