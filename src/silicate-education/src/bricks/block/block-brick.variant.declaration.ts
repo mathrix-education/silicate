@@ -4,16 +4,16 @@ export const BlockBrickVariantDeclarations: BlockBrickVariant[] = [
   {
     variant: 'reminder',
     name: 'À retenir',
-    icon: 'info',
-    color: '#ffffff',
-    background: '#438a93'
-  },
-  {
-    variant: 'tip',
-    name: 'Conseil',
     icon: 'wb_incandescent',
     color: '#ffffff',
     background: '#64ad75'
+  },
+  {
+    variant: 'tip',
+    name: 'Astuce',
+    icon: 'info',
+    color: '#ffffff',
+    background: '#35465a'
   },
   {
     variant: 'trap',
