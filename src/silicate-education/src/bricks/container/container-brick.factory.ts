@@ -15,7 +15,7 @@ export class ContainerBrickFactory extends BaseBrickFactory<ContainerBrick> {
       suffix: '',
       wall: [
         {
-          kind: 'silicate',
+          kind: 'text',
           content: 'Texte...'
         }
       ]
