@@ -9,6 +9,35 @@
   padding-right: 4px;
   min-width: 32px;
 }
+
 .suffix {
   padding-left: 4px;
+}
+
+$green: #008989;
+$orange: #ff8f59;
+
+:host {
+  // green blocks
+  &.corollary, &.example, &.introduction, &.law, &.proposition, &.property, &.remark, &.theorem {
+    h3 ::ng-deep b {
+      color: $green;
+    }
+
+    .wrapper {
+      border-left-color: $green;
+    }
+  }
+
+
+  // orange blocks
+  &.definition {
+    h3, ::ng-deep b {
+      color: $orange;
+    }
+
+    .wrapper {
+      border-left-color: $orange;
+    }
+  }
 }

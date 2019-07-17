@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {ContainerBrick} from './container-brick';
 import {lcfirst, ucfirst} from '../../helpers/string.helper';
@@ -18,6 +18,7 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
   @ViewChild('title', {static: false}) titleElementRef: ElementRef<HTMLSpanElement>;
   @ViewChild('suffix', {static: false}) suffixElementRef: ElementRef<HTMLElement>;
 
+  @HostBinding('class') get style() { return this.data.variant; }
   title: string;
   variant: ContainerBrickVariant;
 
@@ -59,15 +60,7 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
 
   applyVariant() {
     this.data.variant = this.variant.variant;
-
     this.computeTitle();
-
-    this.renderer2.setStyle(
-      this.wrapperElementRef.nativeElement,
-      'border-left-color',
-      this.variant.color
-    );
-    this.renderer2.setStyle(this.titleContainerElementRef.nativeElement, 'color', this.variant.color);
   }
 
   focus(): void {
