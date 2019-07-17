@@ -90,7 +90,9 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    * On destroy,  un-listen all declared event listener to cleanly delete the component.
    */
   ngOnDestroy(): void {
-    this.editableSubscription.unsubscribe();
+    if (this.editableSubscription instanceof Subscription) {
+      this.editableSubscription.unsubscribe();
+    }
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
     this.unlistenGlobalEvents();

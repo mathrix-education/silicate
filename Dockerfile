@@ -1,14 +1,6 @@
 FROM node:11-alpine
 
-STOPSIGNAL SIGTERM
-
 WORKDIR /var/www
+COPY dist/ /var/www/dist/
 
-RUN apk add -U nginx bash
-
-COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY deploy/nginx/vhost.conf /etc/nginx/conf.d/default.conf
-COPY deploy/entrypoint.sh /entrypoint.sh
-COPY dist/silicate-demo /var/www
-
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ls -l /var/www && node /var/www/dist/server.js

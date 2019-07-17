@@ -6,7 +6,7 @@
   "projects": {
     "silicate-demo": {
       "root": "src/silicate-demo",
-      "sourceRoot": "src/silicate-demo",
+      "sourceRoot": "src/silicate-demo/src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -18,17 +18,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/silicate-demo",
-            "index": "src/silicate-demo/index.html",
-            "main": "src/silicate-demo/main.ts",
-            "polyfills": "src/silicate-demo/polyfills.ts",
+            "outputPath": "dist/browser",
+            "index": "src/silicate-demo/src/index.html",
+            "main": "src/silicate-demo/src/main.ts",
+            "polyfills": "src/silicate-demo/src/polyfills.ts",
             "tsConfig": "src/silicate-demo/tsconfig.app.json",
             "assets": [
-              "src/silicate-demo/favicon.ico",
-              "src/silicate-demo/assets"
+              "src/silicate-demo/src/favicon.ico",
+              "src/silicate-demo/src/assets"
             ],
             "styles": [
-              "src/silicate-demo/styles.scss"
+              "src/silicate-demo/src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -37,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/silicate-demo/environments/environment.ts",
-                  "with": "src/silicate-demo/environments/environment.prod.ts"
+                  "replace": "src/silicate-demo/src/environments/environment.ts",
+                  "with": "src/silicate-demo/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -71,22 +71,17 @@
             }
           }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "browserTarget": "silicate-demo:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/silicate-demo/tsconfig.app.json",
-              "src/silicate-demo/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "outputPath": "dist/server",
+            "main": "src/silicate-demo/src/main.server.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/silicate-demo/src/styles.scss"
+              ]
+            },
+            "tsConfig": "src/silicate-demo/tsconfig.server.json"
           }
         }
       }

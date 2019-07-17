@@ -1,0 +1,42 @@
+import 'zone.js/dist/zone-node';
+import 'reflect-metadata';
+import {enableProdMode} from '@angular/core';
+import * as express from 'express';
+import {ngExpressEngine} from '@nguniversal/express-engine';
+import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
+import {join} from 'path';
+
+enableProdMode();
+
+const app = express();
+
+const PORT = process.env.PORT || 4000;
+const DIST_FOLDER = join(process.cwd(), 'dist');
+
+// Relative path to the the main file
+const {AppServerModuleNgFactory, LAZY_MODULE_MAP} = require(`../../../dist/server/main`);
+
+app.engine('html', ngExpressEngine({
+  bootstrap: AppServerModuleNgFactory,
+  providers: [
+    provideModuleMap(LAZY_MODULE_MAP)
+  ]
+}));
+
+app.set('view engine', 'html');
+app.set('views', join(DIST_FOLDER, 'browser'));
+
+// Server static files from /browser
+app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
+  maxAge: '1y'
+}));
+
+// All regular routes use the Universal engine
+app.get('*', (req, res) => {
+  res.render('index', {req});
+});
+
+// Start up the Node server
+app.listen(PORT, () => {
+  console.log(`Node server listening on http://localhost:${PORT}`);
+});

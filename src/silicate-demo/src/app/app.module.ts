@@ -24,7 +24,7 @@ import {SilicateEducationModule} from '@mathrix/silicate-education';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'silicate'}),
     BrowserAnimationsModule,
     FormsModule,
     // Flex Layouts

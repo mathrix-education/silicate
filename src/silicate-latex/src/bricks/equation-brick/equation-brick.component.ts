@@ -1,9 +1,10 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Renderer2, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
+import * as katex from 'katex';
 
 
 @Component({
@@ -11,15 +12,35 @@ import {EquationBrick} from './equation-brick';
   templateUrl: './equation-brick.component.html',
   styleUrls: ['./equation-brick.component.scss']
 })
-export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements OnInit {
+export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements AfterViewInit {
+  @ViewChild('equation', {static: false}) equationElementRef: ElementRef<HTMLDivElement>;
+
   constructor(
+    private renderer2: Renderer2,
     private dialog: MatDialog,
     private silicate: SilicateService
   ) {
     super();
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
+    this.render();
+  }
+
+  /**
+   * Using Renderer2, render the LaTeX equation in display mode.
+   */
+  render(): void {
+    if (!this.equationElementRef) {
+      // Abort render if the equationElementRef is not initialized.
+      return;
+    }
+
+    this.renderer2.setProperty(
+      this.equationElementRef.nativeElement,
+      'outerHTML',
+      katex.renderToString(this.data.equation, {displayMode: true})
+    );
   }
 
   @HostListener('click')
@@ -44,10 +65,14 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
           this.data.equation = data.equation;
           this.data.description = data.description;
           this.ngDoCheck();
+          this.render();
         }
       });
   }
 
+  /**
+   * Focus brick implementation. In this context, we don't do anything.
+   */
   focus(): void {
     return;
   }

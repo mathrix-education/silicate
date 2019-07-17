@@ -1,5 +1,5 @@
 <figure fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="8px">
-  <ng-katex [equation]="data.equation" [options]="{displayMode: true}"></ng-katex>
+  <div #equation class="katex-display"></div>
 
   <figcaption *ngIf="data.description">
     {{ data.description }}

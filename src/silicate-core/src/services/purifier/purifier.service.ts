@@ -1,10 +1,15 @@
 import {Injectable, Renderer2} from '@angular/core';
 import {SilicateService} from '../silicate/silicate.service';
+import {PlatformService} from '../platform/platform.service';
 
 
 @Injectable()
 export class PurifierService {
-  constructor(private renderer2: Renderer2, private silicate: SilicateService) {
+  constructor(
+    private renderer2: Renderer2,
+    private silicate: SilicateService,
+    private platform: PlatformService
+  ) {
   }
 
 
@@ -24,7 +29,11 @@ export class PurifierService {
    * @see SilicateCoreFilters
    */
   purify(dirtyHTML: string) {
-    if (this.silicate.filters.length === 0) {
+    if (!this.platform.isBrowser) {
+      /*
+       * If the platform is not a browser, we cannot apply filters, since we highly depends of the
+       * Element.querySelectorAll method. A workaround is welcome.
+       */
       return dirtyHTML;
     }
 

@@ -1,4 +1,4 @@
-<div #player *ngIf="isPlatformBrowser; else fallbackPlayer"></div>
+<div #player *ngIf="platform.isBrowser; else fallbackPlayer"></div>
 
 <!-- Fallback player in case of YouTube API cannot be loaded -->
 <ng-template #fallbackPlayer>

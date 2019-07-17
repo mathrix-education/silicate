@@ -1,33 +1,68 @@
+options:
+  machineType: 'N1_HIGHCPU_8'
 steps:
   - id: 'yarn:install'
     name: 'node:11-alpine'
-    entrypoint: 'yarn'
-    args: ['install']
+    entrypoint: 'ash'
+    args:
+      - -c
+      - |
+        yarn install
+        rm -rf node_modules/@mathrix
 
 
   # Build silicate libraries and demo
   # ---------------------------------
-  - id: 'ng:build'
+  - id: 'ng:build:silicate-core'
     name: 'node:11-alpine'
     waitFor: ['yarn:install']
-    entrypoint: 'ash'
-    args:
-      - '-c'
-      - |
-        rm -rf node_modules/@mathrix
-        yarn run ng build silicate-core
-        yarn run ng build silicate-education
-        yarn run ng build silicate-essentials
-        yarn run ng build silicate-latex
-        yarn run ng build silicate-videos
-        yarn run ng build silicate-demo --prod
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', 'silicate-core']
+  - id: 'ng:build:silicate-education'
+    name: 'node:11-alpine'
+    waitFor: ['ng:build:silicate-core']
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', 'silicate-education']
+  - id: 'ng:build:silicate-essentials'
+    name: 'node:11-alpine'
+    waitFor: ['ng:build:silicate-core']
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', 'silicate-essentials']
+  - id: 'ng:build:silicate-latex'
+    name: 'node:11-alpine'
+    waitFor: ['ng:build:silicate-core']
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', 'silicate-latex']
+  - id: 'ng:build:silicate-videos'
+    name: 'node:11-alpine'
+    waitFor: ['ng:build:silicate-core']
+    entrypoint: 'yarn'
+    args: ['run', 'ng', 'build', 'silicate-videos']
+  - id: 'ng:build:browser'
+    name: 'node:11-alpine'
+    waitFor:
+      - 'ng:build:silicate-education'
+      - 'ng:build:silicate-essentials'
+      - 'ng:build:silicate-latex'
+      - 'ng:build:silicate-videos'
+    entrypoint: 'yarn'
+    args: ['run', 'build:browser']
+  - id: 'ng:build:server'
+    name: 'node:11-alpine'
+    waitFor:
+      - 'ng:build:silicate-education'
+      - 'ng:build:silicate-essentials'
+      - 'ng:build:silicate-latex'
+      - 'ng:build:silicate-videos'
+    entrypoint: 'yarn'
+    args: ['run', 'build:server']
 
 
-  # Deploy libraries
-  # ----------------
+  # Deploy libraries to verdaccio.mathrix.fr
+  # ----------------------------------------
   - id: 'gcloud:kms:decrypt'
     name: 'gcr.io/cloud-builders/gcloud'
-    waitFor: ['ng:build']
+    waitFor: ['ng:build:browser', 'ng:build:server']
     entrypoint: 'bash'
     args: ['deploy/scripts/decrypt.sh']
   - id: 'npm:publish'
@@ -45,8 +80,8 @@ steps:
         deploy/scripts/publish.sh -p silicate-videos -c $SHORT_SHA -t $TAG_NAME
 
 
-  # Deploy demo
-  # -----------
+  # Deploy demo to Cloud Run (https://silicate.mathrix.fr)
+  # ------------------------------------------------------
   - id: 'docker:build'
     waitFor: ['npm:publish']
     name: 'gcr.io/cloud-builders/docker'
@@ -64,7 +99,10 @@ steps:
     args:
       - '-c'
       - |
+        ls -l
+        ls -l dist/
         gcloud beta run deploy silicate \
+          --platform=managed \
           --image eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA \
           --region europe-west1
 images: ['eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']

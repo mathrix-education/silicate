@@ -19,6 +19,7 @@ export * from './directives/silicate.directive';
 export * from './components/silicate-wrapper/silicate-wrapper.component';
 
 // Services
+export * from './services/platform/platform.service';
 export * from './services/purifier/purifier.service';
 export * from './services/selection/selection.service';
 export * from './services/silicate/silicate.service';

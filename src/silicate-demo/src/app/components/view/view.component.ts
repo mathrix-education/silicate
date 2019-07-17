@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DemoService} from '../../services/demo.service';
-import {Wall} from '@mathrix/silicate-core';
 
 @Component({
   selector: 'app-view',

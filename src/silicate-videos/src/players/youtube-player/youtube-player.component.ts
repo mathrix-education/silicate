@@ -8,13 +8,12 @@ import {
   OnChanges,
   OnInit,
   Output,
-  PLATFORM_ID,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {VideoPlayer} from '../video-player';
-import {SilicateService} from '@mathrix/silicate-core';
-import {DOCUMENT, isPlatformBrowser} from '@angular/common';
+import {PlatformService, SilicateService} from '@mathrix/silicate-core';
+import {DOCUMENT} from '@angular/common';
 
 
 /** @dynamic */
@@ -26,16 +25,14 @@ import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges, VideoPlayer {
   /** YouTube iframe API */
   private readonly youtubeAPIUrl = 'https://www.youtube.com/iframe_api';
-  /** If the platform is a browser */
-  public isPlatformBrowser = true;
 
   @Input() videoId: string;
-  @ViewChild('player', {static: true}) player: ElementRef<HTMLDivElement>;
+  @ViewChild('player', {static: false}) player: ElementRef<HTMLDivElement>;
   @Output() ready = new EventEmitter();
 
   constructor(
     private silicate: SilicateService,
-    @Inject(PLATFORM_ID) private platformId: any,
+    public platform: PlatformService,
     @Inject(DOCUMENT) private document: Document
   ) {
   }
@@ -44,18 +41,12 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
 
 
   ngOnInit() {
-    this.isPlatformBrowser = isPlatformBrowser(this.platformId);
-
-    if (this.isPlatformBrowser) {
-      this.loadYoutubeAPI();
-    }
+    this.loadYoutubeAPI();
   }
 
 
   ngAfterViewInit() {
-    if (this.isPlatformBrowser) {
-      this.createYoutubePlayer();
-    }
+    this.createYoutubePlayer();
   }
 
 
@@ -69,6 +60,10 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
    * Load the YouTube API only once.
    */
   private loadYoutubeAPI() {
+    if (!this.platform.isBrowser) {
+      return;
+    }
+
     if (this.document.querySelector(`script[src="${this.youtubeAPIUrl}"]`) === null) {
       const tag = this.document.createElement('script');
       tag.src = this.youtubeAPIUrl;
@@ -81,6 +76,10 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
    * Create a YouTube player. Interval is required to avoid the window object use.
    */
   private createYoutubePlayer() {
+    if (!this.platform.isBrowser) {
+      return;
+    }
+
     const interval = setInterval(() => {
       /*
        * Since we cannot rely on:
