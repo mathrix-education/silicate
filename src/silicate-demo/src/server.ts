@@ -1,10 +1,11 @@
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 import {enableProdMode} from '@angular/core';
-import * as express from 'express';
 import {ngExpressEngine} from '@nguniversal/express-engine';
 import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
 import {join} from 'path';
+
+const express = require('express');
 
 enableProdMode();
 
@@ -31,9 +32,18 @@ app.get('*.*', express.static(join(DIST_FOLDER, 'browser'), {
   maxAge: '1y'
 }));
 
+const cache = {};
+
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
-  res.render('index', {req});
+  if (cache[req.url]) {
+    res.send(cache[req.url]);
+  } else {
+    res.render('index', {req}, (err, html) => {
+      cache[req.url] = html;
+      res.send(html);
+    });
+  }
 });
 
 // Start up the Node server
