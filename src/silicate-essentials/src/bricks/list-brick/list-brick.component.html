@@ -1,5 +1,5 @@
 <ng-container [ngSwitch]="data.type">
-  <ul *ngSwitchCase="'ul'" fxFlex="grow">
+  <ul *ngSwitchCase="'ul'">
     <li
       *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
       silicate
@@ -8,7 +8,7 @@
     </li>
   </ul>
 
-  <ol *ngSwitchCase="'ol'" fxFlex="grow">
+  <ol *ngSwitchCase="'ol'">
     <li
       *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
       silicate

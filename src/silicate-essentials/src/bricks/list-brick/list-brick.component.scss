@@ -1,5 +1,5 @@
 :host {
-  display: flex;
+  display: flex !important; // The important flag is useful here
   flex-direction: row;
   align-content: center;
   align-items: center;
@@ -13,4 +13,10 @@
       color: rgba(0, 0, 0, .54);
     }
   }
+}
+
+ul, li {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
