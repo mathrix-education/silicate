@@ -29,4 +29,76 @@
 .video-anchor-container {
   display: flex;
   cursor: pointer;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+// Flex css
+
+.video-container {
+  display: flex;
+  gap: 16px;
+}
+// gt.md
+@media screen and (min-width: 1280px) {
+  .video-container {
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .video-container {
+    flex-direction: column;
+  }
+}
+
+.video-inside {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.video-options {
+  @extend .column;
+  gap: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .video-container {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .video-options {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    max-width: 30%;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card {
+  margin: 0 0 16px 16px;
+}
+
+span {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
