@@ -1,6 +1,6 @@
 <mat-icon>{{ variant.icon }}</mat-icon>
 
-<silicate-wrapper fxFlex="grow" [(data)]="data.wall" [editable]="silicate.editable"></silicate-wrapper>
+<silicate-wrapper [(data)]="data.wall" [editable]="silicate.editable"></silicate-wrapper>
 
 <ng-container *ngIf="silicate.editable">
   <button

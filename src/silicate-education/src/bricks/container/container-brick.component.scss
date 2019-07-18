@@ -10,10 +10,6 @@
   min-width: 32px;
 }
 
-.suffix {
-  padding-left: 4px;
-}
-
 $green: #008989;
 $orange: #ff8f59;
 
@@ -40,4 +36,20 @@ $orange: #ff8f59;
       border-left-color: $orange;
     }
   }
+}
+
+// Flex CSS
+h3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+}
+
+.suffix {
+  padding-left: 4px;
+  // Flex
+  display: flex;
+  flex-grow: 1;
 }

@@ -1,5 +1,5 @@
 :host {
-  display: flex;
+  display: flex !important; // the important tag is useful here
   flex-direction: row;
   align-items: center;
   align-content: center;
@@ -14,4 +14,10 @@
       margin: 0;
     }
   }
+}
+
+silicate-wrapper {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
