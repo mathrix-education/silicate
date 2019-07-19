@@ -22,7 +22,7 @@ done
 
 DIST_DIR="${WORKSPACE_DIR}/node_modules/@mathrix/${project}"
 
-if [[ ! -z ${tag} ]]
+if [ ! -z ${tag} ]
 then
   # We will deploy a stable version
   npm publish node_modules/@mathrix/${project} --tag v${tag}
