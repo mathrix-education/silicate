@@ -15,7 +15,6 @@ import {FormsModule} from '@angular/forms';
     FormsModule,
     SafePipeModule,
     // FlexLayouts
-    FlexLayoutModule,
     // Angular Material
     MatButtonModule,
     MatFormFieldModule,
