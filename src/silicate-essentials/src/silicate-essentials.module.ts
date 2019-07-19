@@ -37,7 +37,6 @@ import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
   imports: [
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     // Material
     MatButtonModule,
     MatDialogModule,

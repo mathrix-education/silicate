@@ -32,15 +32,14 @@ import {KatexSerializer} from './serializers/katex-serializer';
   imports: [
     CommonModule,
     FormsModule,
-    FlexModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    KatexModule,
-    SilicateCoreModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    KatexModule,
+    SilicateCoreModule
   ]
 })
 export class SilicateLatexModule {

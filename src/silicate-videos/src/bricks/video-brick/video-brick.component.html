@@ -1,9 +1,5 @@
-<div
-  fxLayout.gt-md="row"
-  fxLayout.lt-sm="column"
-  fxLayoutAlign.gt-md="center center"
-  fxLayoutGap="16px">
-  <div fxFlex="grow">
+<div class="video-container">
+  <div class="video-inside">
     <div class="player-handler ratio ratio-16-9">
       <div *ngIf="loading" class="spinner-handler">
         <mat-spinner></mat-spinner>
@@ -24,16 +20,13 @@
     </div>
   </div>
 
-  <div fxFlex.gt-md="30%"
-       fxFlex.lt-sm="grow"
-       fxLayout="column"
-       fxLayoutGap="16px">
+  <div class="video-options">
     <mat-card *ngIf="silicate.editable">
       <mat-card-header>
         <mat-card-header>Options de la vidéo</mat-card-header>
       </mat-card-header>
 
-      <mat-card-content fxLayout="column">
+      <mat-card-content class="column">
         <mat-form-field>
           <mat-label>Source</mat-label>
           <mat-select [(value)]="data.type">
@@ -59,20 +52,15 @@
       <mat-card-content (cdkDropListDropped)="onDrag($event)"
                         [cdkDropListDisabled]="!silicate.editable"
                         cdkDropList
-                        fxLayout="column"
-                        fxLayoutGap="8px">
+                        class="column">
         <div (click)="setTime(data.summary[i].timestamp)"
              *ngFor="let s of data.summary; let i = index"
              cdkDrag
-             class="video-anchor-container"
-             fxFlex="grow"
-             fxLayout="row"
-             fxLayoutAlign="center center"
-             fxLayoutGap="16px">
+             class="video-anchor-container">
           <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
           <silicate-video-brick-anchor [(timestamp)]="data.summary[i].timestamp"></silicate-video-brick-anchor>
-          <span silicate fxFlex="grow" [(data)]="data.summary[i].title"></span>
+          <span silicate [(data)]="data.summary[i].title"></span>
           <mat-icon (click)="data.summary.splice(i, 1)" *ngIf="silicate.editable">delete</mat-icon>
         </div>
       </mat-card-content>

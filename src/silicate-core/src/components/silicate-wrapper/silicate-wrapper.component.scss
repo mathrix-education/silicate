@@ -15,3 +15,30 @@
   cursor: grab;
 }
 
+// Flex CSS
+silicate-proxy {
+  display: flex;
+  flex-grow: 1;
+}
+
+.wall {
+  display: flex;
+  flex-direction: column;
+}
+
+.wall-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.new-template {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

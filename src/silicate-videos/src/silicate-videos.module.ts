@@ -35,11 +35,9 @@ import {SafePipeModule} from 'safe-pipe';
     MatIconModule,
     MatButtonModule,
     DragDropModule,
-    // Flex Layouts
-    FlexLayoutModule,
+    SafePipeModule,
     // Silicate
-    SilicateCoreModule,
-    SafePipeModule
+    SilicateCoreModule
   ],
   declarations: [
     VideoBrickComponent,

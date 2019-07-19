@@ -31,7 +31,6 @@ import {SilicateDirective} from './directives/silicate.directive';
   imports: [
     CommonModule,
     FormsModule,
-    FlexLayoutModule,
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
