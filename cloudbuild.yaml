@@ -1,5 +1,5 @@
-options:
-  machineType: 'N1_HIGHCPU_8'
+#options:
+#  machineType: 'N1_HIGHCPU_8'
 steps:
   - id: 'yarn:install'
     name: 'node:11-alpine'
@@ -9,7 +9,6 @@ steps:
       - |
         yarn install
         rm -rf node_modules/@mathrix
-
 
   # Build silicate libraries and demo
   # ---------------------------------
@@ -38,31 +37,18 @@ steps:
     waitFor: ['ng:build:silicate-core']
     entrypoint: 'yarn'
     args: ['run', 'ng', 'build', 'silicate-videos']
-  - id: 'ng:build:browser'
-    name: 'node:11-alpine'
-    waitFor:
-      - 'ng:build:silicate-education'
-      - 'ng:build:silicate-essentials'
-      - 'ng:build:silicate-latex'
-      - 'ng:build:silicate-videos'
-    entrypoint: 'yarn'
-    args: ['run', 'build:browser']
-  - id: 'ng:build:server'
-    name: 'node:11-alpine'
-    waitFor:
-      - 'ng:build:silicate-education'
-      - 'ng:build:silicate-essentials'
-      - 'ng:build:silicate-latex'
-      - 'ng:build:silicate-videos'
-    entrypoint: 'yarn'
-    args: ['run', 'build:server']
 
 
   # Deploy libraries to verdaccio.mathrix.fr
   # ----------------------------------------
   - id: 'gcloud:kms:decrypt'
     name: 'gcr.io/cloud-builders/gcloud'
-    waitFor: ['ng:build:browser', 'ng:build:server']
+    # waitFor: ['ng:build:browser', 'ng:build:server']
+    waitFor:
+      - 'ng:build:silicate-education'
+      - 'ng:build:silicate-essentials'
+      - 'ng:build:silicate-latex'
+      - 'ng:build:silicate-videos'
     entrypoint: 'bash'
     args: ['deploy/scripts/decrypt.sh']
   - id: 'npm:publish'
@@ -78,32 +64,4 @@ steps:
         deploy/scripts/publish.sh -p silicate-essentials -c $SHORT_SHA -t $TAG_NAME
         deploy/scripts/publish.sh -p silicate-latex -c $SHORT_SHA -t $TAG_NAME
         deploy/scripts/publish.sh -p silicate-videos -c $SHORT_SHA -t $TAG_NAME
-
-
-  # Deploy demo to Cloud Run (https://silicate.mathrix.fr)
-  # ------------------------------------------------------
-  - id: 'docker:build'
-    waitFor: ['npm:publish']
-    name: 'gcr.io/cloud-builders/docker'
-    args: ['build',
-           '-t', 'eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA',
-           '.']
-  - id: 'docker:push'
-    waitFor: ['docker:build']
-    name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']
-  - id: 'cloud-run:deploy'
-    waitFor: ['docker:push']
-    name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        ls -l
-        ls -l dist/
-        gcloud beta run deploy silicate \
-          --platform=managed \
-          --image eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA \
-          --region europe-west1
-images: ['eu.gcr.io/$PROJECT_ID/silicate-demo:$SHORT_SHA']
 tags: ['silicate', 'demo']
