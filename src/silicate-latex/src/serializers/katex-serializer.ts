@@ -15,6 +15,10 @@ export class KatexSerializer implements Serializer {
    * @param str The brick content.
    */
   render(str: string): string {
+    if (!str) {
+      return '';
+    }
+
     const segments = str.split('$');
     let output = '';
 
