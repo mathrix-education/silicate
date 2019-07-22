@@ -40,7 +40,11 @@ export class InlineEquationHandler {
           this.renderer2.removeChild(equationElement.parentNode, equationElement);
         } else if (data !== undefined && data.equation) {
           const newEquation = data.equation;
-          this.renderer2.setProperty(equationElement, 'outerHTML', katex.renderToString(newEquation));
+          this.renderer2.setProperty(
+            equationElement,
+            'outerHTML',
+            katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"')
+          );
         }
 
         source.onInput();

@@ -44,23 +44,20 @@
 
     <mat-form-field>
       <mat-label>Équation</mat-label>
-      <label>
         <textarea cdkAutosizeMinRows="1"
                   cdkTextareaAutosize
+                  cdkFocusInitial
                   matInput
                   placeholder="f(x) = x^2"
                   (focus)="equationFormFieldFocused = true"
                   (blur)="equationFormFieldFocused = false"
                   [(ngModel)]="data.equation">
         </textarea>
-      </label>
     </mat-form-field>
 
     <mat-form-field *ngIf="data.enableDescription">
       <mat-label>Description</mat-label>
-      <label>
         <input matInput placeholder="Email" [(ngModel)]="data.description">
-      </label>
     </mat-form-field>
 
     <figure>
@@ -74,6 +71,6 @@
 
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="{equation: 'delete'}">Supprimer</button>
-  <button mat-button (click)="dialogRef.close()">Annuler</button>
-  <button mat-button [mat-dialog-close]="data">Sauvegarder</button>
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-button color="primary" [mat-dialog-close]="data">Sauvegarder</button>
 </div>

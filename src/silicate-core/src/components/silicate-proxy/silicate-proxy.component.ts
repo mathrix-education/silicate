@@ -83,27 +83,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
 
   /**
-   * Swap the current brick with another
-   * @param brickDeclaration The new brick declaration.
-   */
-  swap(brickDeclaration: Brick) {
-    const old = this.wall.get(this.index);
-    const factory = this.injector.get(brickDeclaration.factory);
-    const empty = factory.make();
-
-    // UX: copy the old properties to the new brick instance if they exist
-    Object.keys(old).forEach(k => {
-      if (k !== 'kind' && empty.hasOwnProperty(k)) {
-        empty[k] = old[k];
-      }
-    });
-
-    this.wall.patch(this.index, empty);
-    this.render();
-  }
-
-
-  /**
    * Append a new brick to this one.
    * @param brickDeclaration The new brick declaration.
    */

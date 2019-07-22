@@ -12,22 +12,7 @@
     Supprimer
   </button>
 
-  <button mat-menu-item [matMenuTriggerFor]="swapMenu">Changer</button>
   <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
-</mat-menu>
-
-<mat-menu #swapMenu="matMenu">
-  <mat-grid-list cols="2" rowHeight="48px">
-    <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
-      <button
-        mat-menu-item
-        (click)="swap(brick)"
-        [disabled]="kind === brick.kind">
-        <mat-icon>{{ brick.icon }}</mat-icon>
-        {{ brick.name }}
-      </button>
-    </mat-grid-tile>
-  </mat-grid-list>
 </mat-menu>
 
 <mat-menu #appendMenu="matMenu">
