@@ -34,7 +34,6 @@ export class KatexSerializer implements Serializer {
     });
 
     this.platform.browser(() => {
-      console.log('callback', this);
       /*
        * We can only do our .katex-display => .katex trick if we are in a browser, since we highly rely on the
        * sandbox.querySelectorAll method. A workaround might be possible with the help of some regex, but for now it is
