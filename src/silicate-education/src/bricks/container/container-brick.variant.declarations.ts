@@ -54,5 +54,17 @@ export const ContainerBrickVariantDeclarations: ContainerBrickVariant[] = [
     title: 'Théorème',
     prefix: true,
     suffix: true
+  },
+  {
+    variant: 'reciprocal',
+    title: 'Réciproque',
+    prefix: false,
+    suffix: true
+  },
+  {
+    variant: 'problematic',
+    title: 'Problématique',
+    prefix: true,
+    suffix: true
   }
 ];

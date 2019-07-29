@@ -15,7 +15,7 @@ $orange: #ff8f59;
 
 :host {
   // green blocks
-  &.corollary, &.example, &.introduction, &.law, &.proposition, &.property, &.remark, &.theorem {
+  &.corollary, &.example, &.introduction, &.law, &.proposition, &.property, &.remark, &.theorem, &.reciprocal, &.problematic {
     h3 ::ng-deep b {
       color: $green;
     }
