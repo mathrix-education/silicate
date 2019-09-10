@@ -1,4 +1,12 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Renderer2, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
 import {first} from 'rxjs/operators';
@@ -17,6 +25,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
 
   constructor(
     private renderer2: Renderer2,
+    private cd: ChangeDetectorRef,
     private dialog: MatDialog,
     private silicate: SilicateService
   ) {
@@ -38,9 +47,10 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
 
     this.renderer2.setProperty(
       this.equationElementRef.nativeElement,
-      'outerHTML',
+      'innerHTML',
       katex.renderToString(this.data.equation, {displayMode: true})
     );
+    this.cd.detectChanges();
   }
 
   @HostListener('click')
@@ -64,8 +74,8 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
         if (data !== undefined && data.equation !== '') {
           this.data.equation = data.equation;
           this.data.description = data.description;
-          this.ngDoCheck();
           this.render();
+          this.ngDoCheck();
         }
       });
   }
