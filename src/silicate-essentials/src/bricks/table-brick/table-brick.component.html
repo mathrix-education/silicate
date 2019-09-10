@@ -1,5 +1,37 @@
 <table cellpadding="0">
+  <tr *ngIf="silicate.editable">
+    <td></td>
+    <td *ngFor="let cell of data.matrix[0]; let j = index; trackBy: trackBy">
+      <button mat-icon-button [matMenuTriggerFor]="tableMenu" [matMenuTriggerData]="{column: j}">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="j === 0" (click)="moveColumn(j, j - 1)">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="j === data.matrix[0].length - 1" (click)="moveColumn(j, j + 1)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="data.matrix[0].length === 1" (click)="deleteColumn(j)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
   <tr *ngFor="let row of data.matrix; let i = index; trackBy: trackBy">
+    <td *ngIf="silicate.editable" class="table-options">
+      <button mat-icon-button [matMenuTriggerFor]="tableMenu" [matMenuTriggerData]="{row: i}">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="i === 0" (click)="moveRow(i, i - 1)">
+        <mat-icon>expand_less</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="i === data.matrix.length - 1" (click)="moveRow(i, i + 1)">
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      <button mat-icon-button [disabled]="data.matrix.length === 1" (click)="deleteRow(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+
     <td *ngFor="let cell of data.matrix[i]; let j = index; trackBy: trackBy">
       <silicate-wrapper
         [editable]="silicate.editable"
@@ -8,3 +40,17 @@
     </td>
   </tr>
 </table>
+
+<mat-menu #tableMenu="matMenu">
+  <ng-template matMenuContent let-column="column" let-row="row">
+    <ng-container *ngIf="column !== undefined">
+      <button mat-menu-item (click)="addColumn(column)">Ajouter une colonne à gauche</button>
+      <button mat-menu-item (click)="addColumn(column + 1)">Ajouter une colonne à droite</button>
+    </ng-container>
+
+    <ng-container *ngIf="row !== undefined">
+      <button mat-menu-item (click)="addRow(row)">Ajouter une ligne au-dessus</button>
+      <button mat-menu-item (click)="addRow(row + 1)">Ajouter une ligne en-dessous</button>
+    </ng-container>
+  </ng-template>
+</mat-menu>
