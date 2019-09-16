@@ -1,7 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {Component, ElementRef, Inject, Renderer2} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {SelectionService} from '@mathrix/silicate-core';
+import {SelectionService} from '@mathrix-education/silicate-core';
 
 
 /** @dynamic */

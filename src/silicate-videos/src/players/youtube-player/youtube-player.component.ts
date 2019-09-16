@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {VideoPlayer} from '../video-player';
-import {PlatformService, SilicateService} from '@mathrix/silicate-core';
+import {PlatformService, SilicateService} from '@mathrix-education/silicate-core';
 import {DOCUMENT} from '@angular/common';
 
 

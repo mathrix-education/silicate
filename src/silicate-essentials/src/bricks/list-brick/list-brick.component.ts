@@ -1,5 +1,5 @@
 import {Component, QueryList, ViewChildren} from '@angular/core';
-import {BaseBrickComponent, SilicateDirective, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateDirective, SilicateService} from '@mathrix-education/silicate-core';
 import {ListBrick} from './list-brick';
 import {first} from 'rxjs/operators';
 

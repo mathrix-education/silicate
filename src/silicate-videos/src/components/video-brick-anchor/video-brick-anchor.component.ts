@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SilicateService} from '@mathrix/silicate-core';
+import {SilicateService} from '@mathrix-education/silicate-core';
 
 
 @Component({

@@ -1,4 +1,4 @@
-import {Handler, Handlers, TypedValueProvider} from '@mathrix/silicate-core';
+import {Handler, Handlers, TypedValueProvider} from '@mathrix-education/silicate-core';
 import {InlineEquationHandler} from '../handlers/inline-equation.handler';
 
 export const KeydownEquationHandlerProvider: TypedValueProvider<Handler> = {

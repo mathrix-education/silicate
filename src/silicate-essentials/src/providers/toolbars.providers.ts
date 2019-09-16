@@ -1,5 +1,5 @@
 import {ValueProvider} from '@angular/core';
-import {Toolbars} from '@mathrix/silicate-core';
+import {Toolbars} from '@mathrix-education/silicate-core';
 import {FormatToolbar} from '../toolbar/format.toolbar';
 
 export const BoldToolbarProvider: ValueProvider = {

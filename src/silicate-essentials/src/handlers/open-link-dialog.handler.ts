@@ -1,6 +1,6 @@
 import {ElementRef, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {SilicateCoreModule, SilicateDirective} from '@mathrix/silicate-core';
+import {SilicateCoreModule, SilicateDirective} from '@mathrix-education/silicate-core';
 import {first} from 'rxjs/operators';
 import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component';
 

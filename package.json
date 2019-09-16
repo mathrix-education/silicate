@@ -9,14 +9,6 @@
     "serve:ssr": "node dist/server.js"
   },
   "private": true,
-  "workspaces": [
-    "src/silicate-core",
-    "src/silicate-demo",
-    "src/silicate-education",
-    "src/silicate-essentials",
-    "src/silicate-latex",
-    "src/silicate-videos"
-  ],
   "dependencies": {
     "@angular/animations": "^8.1.1",
     "@angular/cdk": "^8.1.1",

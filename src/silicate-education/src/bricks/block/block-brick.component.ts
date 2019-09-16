@@ -1,7 +1,7 @@
 import {Component, ElementRef, Inject, OnInit, Renderer2} from '@angular/core';
 import {BlockBrickVariant} from './block-brick.variant';
 import {BlockBrickVariants} from '../../silicate-education.tokens';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {BlockBrick} from './block-brick';
 
 @Component({

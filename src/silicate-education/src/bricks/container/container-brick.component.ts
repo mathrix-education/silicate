@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, HostBinding, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {ContainerBrick} from './container-brick';
 import {lcfirst, ucfirst} from '../../helpers/string.helper';
 import {ContainerBrickVariants} from '../../silicate-education.tokens';

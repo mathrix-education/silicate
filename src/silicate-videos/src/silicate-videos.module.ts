@@ -11,7 +11,7 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule
 } from '@angular/material';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';
