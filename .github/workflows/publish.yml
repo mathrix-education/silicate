@@ -23,11 +23,19 @@ jobs:
         run: npm install
       - name: Build and publish
         run: |
-          if [[ ${{ matrix.lib }} != "silicate-core" ]]; then
+          if [[ "${{ matrix.lib }}" != "silicate-core" ]]; then
             npm run ng build silicate-core
           fi
+
           npm run ng build ${{ matrix.lib }}
           cd dist/${{ matrix.lib }}
+
+          if [[ "${{ github.ref }}" != "master" ]]; then
+            VERSION_SUFFIX=${{ github.ref }}-${"${{ github.sha }}":0:7} # Get the first 7 characters of the commit sha.
+            jq '.version = .version + "-${VERSION_SHA}"' package.json > package.json.tmp
+            mv package.json.tmp package.json
+          fi
+
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
