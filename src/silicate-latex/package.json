@@ -11,7 +11,7 @@
   ],
   "homepage": "silicate.mathrix.fr",
   "bugs": {
-    "url": "https://github.com/mathrix-education/mtx-silicate",
+    "url": "https://github.com/mathrix-education/silicate",
     "email": "mathieu@mathrix.fr"
   },
   "license": "UNLICENSED",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/mathrix-education/mtx-silicate"
+    "url": "ssh://git@github.com/mathrix-education/silicate"
   },
   "dependencies": {
     "extract-math": "^1.0.3",
