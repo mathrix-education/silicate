@@ -3,7 +3,8 @@ on: [push]  # Always
 jobs:
   build:
     strategy:
-      lib: [silicate-essentials, silicate-education, silicate-latex, silicate-videos]
+      matrix:
+        lib: [silicate-essentials, silicate-education, silicate-latex, silicate-videos]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
