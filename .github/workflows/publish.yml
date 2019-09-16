@@ -20,14 +20,11 @@ jobs:
           node-version: 12.x
       - name: Install
         run: npm install
-      - name: Build @mathrix-education/silicate-core
-        if: matrix.lib != 'silicate-core'
-        run: |
-          npm run ng build silicate-core
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
       - name: Build and publish
         run: |
+          if [[ ${{ matrix.lib }} != "silicate-core" ]]; then
+            npm run ng build silicate-core
+          fi
           npm run ng build ${{ matrix.lib }}
           cd dist/${{ matrix.lib }}
           npm publish
