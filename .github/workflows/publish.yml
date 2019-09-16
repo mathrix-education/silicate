@@ -21,7 +21,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Build @mathrix-education/silicate-core
-        if: mathrix.lib != 'silicate-core'
+        if: matrix.lib != 'silicate-core'
         run: |
           npm run ng build silicate-core
         env:
