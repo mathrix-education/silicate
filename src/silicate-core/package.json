@@ -1,6 +1,6 @@
 {
-  "name": "@mathrix/silicate-core",
-  "version": "0.9.0",
+  "name": "@mathrix-education/silicate-core",
+  "version": "1.0.0-prepublish",
   "description": "Base package of Silicate Editor.",
   "keywords": [
     "silicate",
@@ -30,6 +30,6 @@
     "@angular/cdk": "^8.0.0"
   },
   "publishConfig": {
-    "registry": "https://verdaccio.mathrix.fr"
+    "registry": "https://npm.pkg.github.com"
   }
 }

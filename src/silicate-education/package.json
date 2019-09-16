@@ -1,6 +1,6 @@
 {
-  "name": "@mathrix/silicate-education",
-  "version": "0.9.0",
+  "name": "@mathrix-education/silicate-education",
+  "version": "1.0.0-prepublish",
   "description": "Provide Block, Container and PDF Viewer Bricks for Mathrix Education.",
   "keywords": [
     "silicate",
@@ -33,6 +33,6 @@
     "@angular/cdk": "^8.0.0"
   },
   "publishConfig": {
-    "registry": "https://verdaccio.mathrix.fr"
+    "registry": "https://npm.pkg.github.com"
   }
 }

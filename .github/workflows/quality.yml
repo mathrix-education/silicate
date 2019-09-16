@@ -1,0 +1,31 @@
+name: Quality assesment
+on: [push]  # Always
+jobs:
+  lint:
+    name: Lint with tslint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v1
+      - name: Setup Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install
+        run: npm install
+      - name: Lint
+        run: npm run ng lint
+  test:
+    name: Test with jest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v1
+      - name: Setup Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install
+        run: npm install
+      - name: Lint
+        run: npm run ng test

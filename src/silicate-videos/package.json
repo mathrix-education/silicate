@@ -1,6 +1,6 @@
 {
-  "name": "@mathrix/silicate-videos",
-  "version": "0.9.0",
+  "name": "@mathrix-education/silicate-videos",
+  "version": "1.0.0-prepublish",
   "description": "Provide the Video Brick which supports YouTube and Vimeo players.",
   "keywords": [
     "silicate",
@@ -41,6 +41,6 @@
     "@angular/cdk": "^8.0.0"
   },
   "publishConfig": {
-    "registry": "https://verdaccio.mathrix.fr"
+    "registry": "https://npm.pkg.github.com"
   }
 }
