@@ -4,7 +4,12 @@ jobs:
   build:
     strategy:
       matrix:
-        lib: [silicate-essentials, silicate-education, silicate-latex, silicate-videos]
+        lib:
+          - silicate-core
+          - silicate-essentials
+          - silicate-education
+          - silicate-latex
+          - silicate-videos
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -16,20 +21,15 @@ jobs:
       - name: Install
         run: npm install
       - name: Build @mathrix-education/silicate-core
+        if: mathrix.lib != 'silicate-core'
         run: |
           npm run ng build silicate-core
-          if [ -n git diff --name-only HEAD~1 HEAD | grep src/silicate-core/composer.json ]; then
-            cd dist/silicate-core
-            npm publish
-          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
       - name: Build and publish
         run: |
-          if [ -n git diff --name-only HEAD~1 HEAD | grep src/${{ matrix.lib }}/composer.json ]; then
-            npm run ng build ${{ matrix.lib }}
-            cd dist/${{ matrix.lib }}
-            npm publish
-          fi
+          npm run ng build ${{ matrix.lib }}
+          cd dist/${{ matrix.lib }}
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
