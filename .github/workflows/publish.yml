@@ -30,9 +30,14 @@ jobs:
           npm run ng build ${{ matrix.lib }}
           cd dist/${{ matrix.lib }}
 
-          if [[ "${{ github.ref }}" != "master" ]]; then
-            VERSION_SUFFIX=${{ github.ref }}-${"${{ github.sha }}":0:7} # Get the first 7 characters of the commit sha.
-            jq '.version = .version + "-${VERSION_SHA}"' package.json > package.json.tmp
+          BRANCH=echo "${{ github.ref }}" | sed "s|${PREFIX}||g" | sed "s|\/|-|g"
+          SHA="${{ github.sha }}"
+          SHORT_SHA=${SHA:0:7}
+          BUILD="${BRANCH}-${SHORT_SHA}"
+
+          if [[ "${BRANCH}" != "master" ]]; then
+            BRANCH=
+            jq '.version = .version + "-${BUILD}"' package.json > package.json.tmp
             mv package.json.tmp package.json
           fi
 
