@@ -30,7 +30,7 @@ jobs:
           npm run ng build ${{ matrix.lib }}
           cd dist/${{ matrix.lib }}
 
-          BRANCH=echo "${{ github.ref }}" | sed "s|${PREFIX}||g" | sed "s|\/|-|g"
+          BRANCH=echo "${{ github.ref }}" | sed "s|refs/heads/||g" | sed "s|\/|-|g"
           SHA="${{ github.sha }}"
           SHORT_SHA=${SHA:0:7}
           BUILD="${BRANCH}-${SHORT_SHA}"
