@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../node_modules/@mathrix/silicate-videos",
+  "dest": "../../dist/silicate-videos",
   "deleteDestPath": true,
   "lib": {
     "entryFile": "./src/silicate-videos.ts"

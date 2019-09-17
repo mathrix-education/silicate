@@ -1,7 +1,6 @@
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CommonModule} from '@angular/common';
 import {NgModule, Provider} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule,
@@ -12,7 +11,7 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule
 } from '@angular/material';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {VideoBrickComponent} from './bricks/video-brick/video-brick.component';
 import {VideoBrickAnchorComponent} from './components/video-brick-anchor/video-brick-anchor.component';
 import {VimeoPlayerComponent} from './players/vimeo-player/vimeo-player.component';

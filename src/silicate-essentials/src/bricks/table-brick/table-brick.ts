@@ -1,4 +1,4 @@
-import {BaseBrick, Wall} from '@mathrix/silicate-core';
+import {BaseBrick, Wall} from '@mathrix-education/silicate-core';
 
 export interface TableBrick extends BaseBrick {
   kind: 'table';

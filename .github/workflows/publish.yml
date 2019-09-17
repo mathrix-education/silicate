@@ -1,0 +1,46 @@
+name: Publish
+on: [push]  # Always
+jobs:
+  build:
+    strategy:
+      matrix:
+        lib:
+          - silicate-core
+          - silicate-essentials
+          - silicate-education
+          - silicate-latex
+          - silicate-videos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v1
+      - name: Setup Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Install
+        run: npm install
+      - name: Build and publish
+        run: |
+          if [[ "${{ matrix.lib }}" != "silicate-core" ]]; then
+            npm run ng build silicate-core
+          fi
+
+          npm run ng build ${{ matrix.lib }}
+          cd dist/${{ matrix.lib }}
+
+          REF="${{ github.ref }}"
+          BRANCH=$(echo "${REF}" | sed "s|refs/heads/||g" | sed "s|\/|-|g")
+          SHA="${{ github.sha }}"
+          SHORT_SHA=${SHA:0:7}
+          BUILD="${BRANCH}-${SHORT_SHA}"
+
+          if [[ "${BRANCH}" != "master" ]]; then
+            jq ".version = .version + \"-${BUILD}\"" package.json > package.json.tmp
+            mv package.json.tmp package.json
+          fi
+
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.REGISTRY_TOKEN }}

@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {BaseBrickFactory, SilicateCoreModule} from '@mathrix/silicate-core';
+import {BaseBrickFactory, SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {TitleBrick} from './title-brick';
 import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.tokens';
 

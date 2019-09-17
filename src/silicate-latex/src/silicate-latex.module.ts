@@ -10,7 +10,7 @@ import {
   MatIconModule,
   MatInputModule
 } from '@angular/material';
-import {Serializers, SilicateCoreModule} from '@mathrix/silicate-core';
+import {Serializers, SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {KatexModule} from 'ng-katex';
 import {EquationBrickComponent} from './bricks/equation-brick/equation-brick.component';
 import {EquationDialogComponent} from './dialogs/equation-dialog/equation-dialog.component';

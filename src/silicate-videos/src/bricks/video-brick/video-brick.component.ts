@@ -1,6 +1,6 @@
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, ViewChild} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {VideoPlayer} from '../../players/video-player';
 import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';

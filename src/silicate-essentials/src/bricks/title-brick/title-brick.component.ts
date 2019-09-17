@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {BaseBrickComponent, SilicateDirective, SilicateService, WallService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateDirective, SilicateService, WallService} from '@mathrix-education/silicate-core';
 import {TitleBrick} from './title-brick';
 import {Heading, TitleBrickAllowedHeadings} from '../../silicate-essentials.tokens';
 import {TextBrickFactory} from '../text-brick/text-brick.factory';

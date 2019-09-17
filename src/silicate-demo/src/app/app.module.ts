@@ -12,14 +12,14 @@ import {
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
-import {SilicateEssentialsModule} from '@mathrix/silicate-essentials';
+import {SilicateCoreModule} from '@mathrix-education/silicate-core';
+import {SilicateEssentialsModule} from '@mathrix-education/silicate-essentials';
 import {AppComponent} from './app.component';
 import {DebugComponent} from './components/debug/debug.component';
 import {ViewComponent} from './components/view/view.component';
-import {SilicateLatexModule} from '@mathrix/silicate-latex';
-import {SilicateVideosModule} from '@mathrix/silicate-videos';
-import {SilicateEducationModule} from '@mathrix/silicate-education';
+import {SilicateLatexModule} from '@mathrix-education/silicate-latex';
+import {SilicateVideosModule} from '@mathrix-education/silicate-videos';
+import {SilicateEducationModule} from '@mathrix-education/silicate-education';
 
 
 @NgModule({

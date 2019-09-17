@@ -1,4 +1,4 @@
-import {BaseBrick} from '@mathrix/silicate-core';
+import {BaseBrick} from '@mathrix-education/silicate-core';
 
 
 export interface VideoBrick extends BaseBrick {

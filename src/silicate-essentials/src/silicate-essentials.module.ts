@@ -12,7 +12,7 @@ import {
   MatMenuModule,
   MatSelectModule
 } from '@angular/material';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
 import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
 import {TextBrickComponent} from './bricks/text-brick/text-brick.component';

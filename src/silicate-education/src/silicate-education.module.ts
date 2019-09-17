@@ -1,6 +1,6 @@
 import {NgModule, Provider} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SilicateCoreModule} from '@mathrix/silicate-core';
+import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {SilicateEducationBricks} from './silicate-education.bricks';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatMenuModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';

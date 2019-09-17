@@ -18,6 +18,38 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@mathrix-education/silicate-core": [
+        "dist/silicate-core"
+      ],
+      "@mathrix-education/silicate-core/*": [
+        "dist/silicate-core/*"
+      ],
+      "@mathrix-education/silicate-education": [
+        "dist/silicate-education"
+      ],
+      "@mathrix-education/silicate-education/*": [
+        "dist/silicate-education/*"
+      ],
+      "@mathrix-education/silicate-essentials": [
+        "dist/silicate-essentials"
+      ],
+      "@mathrix-education/silicate-essentials/*": [
+        "dist/silicate-essentials/*"
+      ],
+      "@mathrix-education/silicate-latex": [
+        "dist/silicate-latex"
+      ],
+      "@mathrix-education/silicate-latex/*": [
+        "dist/silicate-latex/*"
+      ],
+      "@mathrix-education/silicate-videos": [
+        "dist/silicate-videos"
+      ],
+      "@mathrix-education/silicate-videos/*": [
+        "dist/silicate-videos/*"
+      ]
+    }
   }
 }
