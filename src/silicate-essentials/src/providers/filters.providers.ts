@@ -1,4 +1,4 @@
-import {Filter, Filters, TypedValueProvider} from '@mathrix/silicate-core';
+import {Filter, Filters, TypedValueProvider} from '@mathrix-education/silicate-core';
 
 export const BoldFilterProvider: TypedValueProvider<Filter> = {
   provide: Filters,

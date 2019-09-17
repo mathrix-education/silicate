@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {BaseBrickComponent, SilicateDirective, WallService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateDirective, WallService} from '@mathrix-education/silicate-core';
 import {TextBrick} from './text-brick';
 import {TextBrickFactory} from './text-brick.factory';
 import {first} from 'rxjs/operators';

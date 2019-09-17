@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {PDFViewerBrick} from './pdf-viewer-brick';
 
 

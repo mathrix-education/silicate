@@ -1,4 +1,4 @@
-import {PlatformService, Serializer} from '@mathrix/silicate-core';
+import {PlatformService, Serializer} from '@mathrix-education/silicate-core';
 import * as katex from 'katex';
 import {Injectable, Renderer2, RendererFactory2} from '@angular/core';
 

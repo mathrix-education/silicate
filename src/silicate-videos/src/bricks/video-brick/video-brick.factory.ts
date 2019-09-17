@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BaseBrickFactory, SilicateCoreModule} from '@mathrix/silicate-core';
+import {BaseBrickFactory, SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {VideoBrick} from './video-brick';
 
 

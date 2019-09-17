@@ -8,7 +8,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {BaseBrickComponent, SilicateService} from '@mathrix/silicate-core';
+import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';

@@ -1,4 +1,4 @@
-import {Brick, Bricks, TypedValueProvider} from '@mathrix/silicate-core';
+import {Brick, Bricks, TypedValueProvider} from '@mathrix-education/silicate-core';
 import {BlockBrickComponent} from '../bricks/block/block-brick.component';
 import {BlockBrickFactory} from '../bricks/block/block-brick.factory';
 import {ContainerBrickComponent} from '../bricks/container/container-brick.component';
