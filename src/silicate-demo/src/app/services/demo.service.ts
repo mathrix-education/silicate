@@ -7,5 +7,5 @@ import {FIXTURE} from '../app.fixture';
 })
 export class DemoService {
   editable = true;
-  data: Wall = FIXTURE;
+  data: Wall = [];
 }

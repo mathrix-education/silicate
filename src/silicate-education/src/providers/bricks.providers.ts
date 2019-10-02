@@ -12,7 +12,7 @@ export const BlockBrickProvider: TypedValueProvider<Brick> = {
   useValue: {
     kind: 'block',
     icon: 'dashboard',
-    name: 'Bloc',
+    name: 'Piège, remarque...',
     component: BlockBrickComponent,
     factory: BlockBrickFactory
   }
@@ -23,7 +23,7 @@ export const ContainerBrickProvider: TypedValueProvider<Brick> = {
   useValue: {
     kind: 'container',
     icon: 'dashboard',
-    name: 'Containeur',
+    name: 'Définition, exemple...',
     component: ContainerBrickComponent,
     factory: ContainerBrickFactory
   }
