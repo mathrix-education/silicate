@@ -26,7 +26,7 @@
 
   <ng-template #empty>
     <div class="new-template">
-      <button mat-raised-button color="primary" (click)="begin()">Commencer</button>
+      <silicate-brick-selector [label]="'Commencer'" (select)="begin($event)"></silicate-brick-selector>
     </div>
   </ng-template>
 

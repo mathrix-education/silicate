@@ -56,6 +56,12 @@ export const ContainerBrickVariantDeclarations: ContainerBrickVariant[] = [
     suffix: true
   },
   {
+    variant: 'step',
+    title: 'Étape',
+    prefix: true,
+    suffix: true
+  },
+  {
     variant: 'reciprocal',
     title: 'Réciproque',
     prefix: false,

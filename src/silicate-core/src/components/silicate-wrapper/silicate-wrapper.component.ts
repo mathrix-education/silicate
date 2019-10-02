@@ -19,6 +19,7 @@ import {PurifierService} from '../../services/purifier/purifier.service';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 import {Wall} from '../../interfaces/wall';
+import {Brick} from '../../interfaces/brick';
 
 
 @Component({
@@ -101,9 +102,8 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   /**
    * Allow to fill the empty wall.
    */
-  begin(): void {
-    const factoryClass = this.silicate.bricksDeclarations[0].factory;
-    const factory = this.injector.get(factoryClass);
+  begin(brick: Brick): void {
+    const factory = this.injector.get(brick.factory);
 
     this.wall.wall$.next([
       factory.make()
