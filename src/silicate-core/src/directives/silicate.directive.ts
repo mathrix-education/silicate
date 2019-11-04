@@ -4,6 +4,7 @@ import {
   EventEmitter,
   HostBinding,
   HostListener,
+  Inject,
   Injector,
   Input,
   OnChanges,
@@ -19,7 +20,9 @@ import {ToolbarService} from '../services/toolbar/toolbar.service';
 import {PurifierService} from '../services/purifier/purifier.service';
 import {Handler} from '../interfaces/handler';
 import {Subscription} from 'rxjs';
+import {DOCUMENT} from '@angular/common';
 
+/** @dynamic */
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: '[silicate]'
@@ -42,13 +45,17 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   /** Un-listen provided on-focus events */
   unlistenFocusEvents: (() => void)[] = [];
 
+  /** call this function to remove paste event listener */
+  private unlistenPasteListener: () => void;
+
   constructor(
     public elementRef: ElementRef<HTMLElement>,
     private renderer2: Renderer2,
     public silicate: SilicateService,
     private toolbar: ToolbarService,
     private purifier: PurifierService,
-    private injector: Injector
+    private injector: Injector,
+    @Inject(DOCUMENT) private document: Document
   ) {
   }
 
@@ -70,6 +77,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
 
     this.listenWrapperFocus();
     this.listenWrapperBlur();
+    this.listenPasteEvent();
   }
 
   /**
@@ -96,6 +104,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.unlistenWrapperFocus();
     this.unlistenWrapperBlur();
     this.unlistenGlobalEvents();
+    this.unlistenPasteListener();
   }
 
   /**
@@ -216,5 +225,19 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    */
   focus() {
     this.elementRef.nativeElement.focus();
+  }
+
+  /**
+   * Listen to paste event and paste only plain text
+   */
+  private listenPasteEvent() {
+    this.unlistenPasteListener = this.renderer2.listen(this.elementRef.nativeElement, 'paste', (event) => {
+      event.preventDefault();
+
+      let plainText = (event.originalEvent || event).clipboardData.getData('text/plain');
+      plainText = plainText.replace('\n', ' ');
+      this.document.execCommand('insertHTML', false, plainText);
+    });
+
   }
 }
