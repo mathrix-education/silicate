@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
+    "build:libs": "ng build silicate-core && ng build silicate-essentials && ng build silicate-latex && ng build silicate-videos && ng build silicate-education",
     "build:browser": "ng build silicate-demo --prod",
     "build:server": "ng run silicate-demo:server && webpack --config src/silicate-demo/webpack.server.config.js",
     "build:ssr": "yarn run build:browser && yarn run build:server",
