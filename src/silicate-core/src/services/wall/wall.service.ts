@@ -13,7 +13,9 @@ export class WallService {
   /** Fired when the bricks references are updated */
   brickReferences$ = new EventEmitter<number>();
   /** The wall, which contains the bricks data. */
-  wall$ = new BehaviorSubject<Wall>([]);
+  private wallSubject = new BehaviorSubject<Wall>([]);
+  /** The wall as observable */
+  wall$ = this.wallSubject.asObservable();
 
 
   /**
@@ -22,7 +24,7 @@ export class WallService {
    * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
    */
   get wall(): Wall {
-    return JSON.parse(JSON.stringify(this.wall$.value));
+    return this.deepCopy(this.wallSubject.value);
   }
 
 
@@ -52,7 +54,7 @@ export class WallService {
   insert(index: number, brick: BaseBrick) {
     const wall = this.wall;
     wall.splice(index, 0, brick);
-    this.wall$.next(wall);
+    this.create(wall);
     return this;
   }
 
@@ -71,6 +73,16 @@ export class WallService {
     return this.insert(index, brick);
   }
 
+  /**
+   * Push a new wall instance
+   */
+  create(wall: Wall) {
+    // if walls are different, push a deep copy of wall
+    if (JSON.stringify(this.wall) !== JSON.stringify(wall)) {
+      this.wallSubject.next(this.deepCopy(wall));
+    }
+  }
+
 
   /**
    * Edit a brick at a given index.import {Wall} from '../../silicate-core.types';
@@ -80,7 +92,7 @@ export class WallService {
   patch(index: number, brick: BaseBrick) {
     const wall = this.wall;
     wall[index] = brick;
-    this.wall$.next(wall);
+    this.create(wall);
     return this;
   }
 
@@ -92,7 +104,7 @@ export class WallService {
   delete(index: number) {
     const wall = this.wall;
     wall.splice(index, 1);
-    this.wall$.next(wall);
+    this.create(wall);
     return this;
   }
 
@@ -112,5 +124,12 @@ export class WallService {
   setBrickReference(index: number, brickReference: ComponentRef<BaseBrickComponent>): void {
     this.brickReferences[index] = brickReference;
     this.brickReferences$.emit(index);
+  }
+
+  /**
+   * Create a deep copy of wall object
+   */
+  private deepCopy(wall: Wall): Wall {
+    return JSON.parse(JSON.stringify(wall));
   }
 }

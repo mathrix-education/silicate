@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Description</mat-label>
+      <mat-label>Légende</mat-label>
       <label>
         <input [(ngModel)]="data.alt"
                matInput
@@ -22,12 +22,11 @@
     </mat-form-field>
 
     <mat-checkbox [(ngModel)]="data.displayAlt">
-      Afficher la description en dessous de l'image
+      Afficher la légende
     </mat-checkbox>
   </div>
 </div>
 
-<div mat-dialog-actions>
-  <button (click)="dialogRef.close()" mat-button>Fermer</button>
+<div mat-dialog-actions align="end">
   <button [mat-dialog-close]="data" mat-button>Sauvegarder</button>
 </div>

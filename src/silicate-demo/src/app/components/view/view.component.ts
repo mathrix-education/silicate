@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DemoService} from '../../services/demo.service';
+import {Wall} from '../../../../../silicate-core/src/interfaces/wall';
 
 @Component({
   selector: 'app-view',
@@ -11,5 +12,9 @@ export class ViewComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  wallChange(wall: Wall) {
+    console.log('data change', wall);
   }
 }

@@ -9,7 +9,7 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
   /** [data] in binding */
   @Input() data: T;
   /** (data) out binding */
-  @Output() dataChanged = new EventEmitter<T>();
+  @Output() dataChange = new EventEmitter<T>();
 
   /** Fired when the ngAfterViewInit is called */
   protected afterViewInit$ = new EventEmitter();
@@ -30,9 +30,8 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
    */
   ngDoCheck() {
     const dataJSONChallenge = JSON.stringify(this.data);
-
     if (dataJSONChallenge !== null && this.dataJSON !== dataJSONChallenge) {
-      this.dataChanged.emit(this.data);
+      this.dataChange.emit(this.data);
     }
 
     this.dataJSON = dataJSONChallenge;
