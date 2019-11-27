@@ -1,27 +1,28 @@
 <ng-template #wrapper></ng-template>
 
-<button *ngIf="silicate.editable"
-        class="proxy-menu-trigger"
-        mat-icon-button
-        [matMenuTriggerFor]="proxyMenu">
-  <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
-</button>
-
-<mat-menu #proxyMenu="matMenu">
-  <button mat-menu-item (click)="wall.delete(index)">
-    Supprimer
+<ng-container *ngIf="silicate.editable">
+  <button class="proxy-menu-trigger"
+          mat-icon-button
+          [matMenuTriggerFor]="proxyMenu">
+    <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
   </button>
 
-  <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
-</mat-menu>
+  <mat-menu #proxyMenu="matMenu">
+    <button mat-menu-item (click)="wall.delete(index)">
+      Supprimer
+    </button>
 
-<mat-menu #appendMenu="matMenu">
-  <mat-grid-list cols="2" rowHeight="48px">
-    <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
-      <button mat-menu-item (click)="append(brick)">
-        <mat-icon>{{ brick.icon }}</mat-icon>
-        {{ brick.name }}
-      </button>
-    </mat-grid-tile>
-  </mat-grid-list>
-</mat-menu>
+    <button mat-menu-item [matMenuTriggerFor]="appendMenu">Ajouter en-dessous</button>
+  </mat-menu>
+
+  <mat-menu #appendMenu="matMenu">
+    <mat-grid-list cols="2" rowHeight="48px">
+      <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
+        <button mat-menu-item (click)="append(brick)">
+          <mat-icon>{{ brick.icon }}</mat-icon>
+          {{ brick.name }}
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-menu>
+</ng-container>
