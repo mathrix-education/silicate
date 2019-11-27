@@ -8,6 +8,7 @@
     <silicate-wrapper
       [editable]="demo.editable"
       [(data)]="demo.data"
+      (dataChange)="wallChange($event)"
       fxFlex="grow">
     </silicate-wrapper>
   </mat-card-content>

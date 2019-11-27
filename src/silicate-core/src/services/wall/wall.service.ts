@@ -24,7 +24,7 @@ export class WallService {
    * @link https://medium.com/@gamshan001/javascript-deep-copy-for-array-and-object-97e3d4bc401a
    */
   get wall(): Wall {
-    return JSON.parse(JSON.stringify(this.wallSubject.value));
+    return this.deepCopy(this.wallSubject.value);
   }
 
 
@@ -77,7 +77,10 @@ export class WallService {
    * Push a new wall instance
    */
   create(wall: Wall) {
-    this.wallSubject.next(wall);
+    // if walls are different, push a deep copy of wall
+    if (JSON.stringify(this.wall) !== JSON.stringify(wall)) {
+      this.wallSubject.next(this.deepCopy(wall));
+    }
   }
 
 
@@ -121,5 +124,12 @@ export class WallService {
   setBrickReference(index: number, brickReference: ComponentRef<BaseBrickComponent>): void {
     this.brickReferences[index] = brickReference;
     this.brickReferences$.emit(index);
+  }
+
+  /**
+   * Create a deep copy of wall object
+   */
+  private deepCopy(wall: Wall): Wall {
+    return JSON.parse(JSON.stringify(wall));
   }
 }
