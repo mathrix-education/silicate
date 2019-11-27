@@ -69,7 +69,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     });
 
     // Push initial data to the Silicate Service
-    this.wall.wall$.next(this.data);
+    this.wall.create(this.data);
 
     // (data) Output
     this.wall.wall$.subscribe((newData: Wall) => {
@@ -82,7 +82,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data) {
       const newWall = (changes.data.currentValue as any) as Wall;
-      this.wall.wall$.next(newWall);
+      this.wall.create(newWall);
     }
 
     if (changes.editable) {
@@ -105,7 +105,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   begin(brick: Brick): void {
     const factory = this.injector.get(brick.factory);
 
-    this.wall.wall$.next([
+    this.wall.create([
       factory.make()
     ]);
   }
@@ -122,7 +122,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
      */
     const wall = this.wall.wall;
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
-    this.wall.wall$.next(wall);
+    this.wall.create(wall);
   }
 
 
