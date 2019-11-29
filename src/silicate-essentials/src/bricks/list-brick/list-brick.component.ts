@@ -35,6 +35,11 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
 
   }
 
+  changeDataType(type: 'ol' | 'ul') {
+    this.data.type = type;
+    this.dataChange.emit();
+  }
+
   focus(): void {
     this.silicateListItems.first.focus();
   }

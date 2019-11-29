@@ -43,7 +43,7 @@
       *ngFor="let heading of allowedHeadings; let i = index"
       mat-menu-item
       [disabled]="data.heading === heading"
-      (click)="data.heading = heading">
+      (click)="changeHeading(heading)">
       Titre {{ i + 1 }}
     </button>
   </mat-menu>

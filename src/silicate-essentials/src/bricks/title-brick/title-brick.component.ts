@@ -40,6 +40,11 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implemen
     this.wall.insertAndFocus(index + 1, this.textBrickFactory.make());
   }
 
+  changeHeading(heading: Heading) {
+    this.data.heading = heading;
+    this.dataChange.emit();
+  }
+
   focus(): void {
     this.silicateTitle.focus();
   }

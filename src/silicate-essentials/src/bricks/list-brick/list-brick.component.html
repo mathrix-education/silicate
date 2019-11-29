@@ -30,7 +30,7 @@
     <button
       mat-menu-item
       [disabled]="data.type === 'ul'"
-      (click)="data.type = 'ul'">
+      (click)="changeDataType('ul')">
       <mat-icon>format_list_bulleted</mat-icon>
       Liste non-ordonnée
     </button>
@@ -39,7 +39,7 @@
     <button
       mat-menu-item
       [disabled]="data.type === 'ol'"
-      (click)="data.type = 'ol'">
+      (click)="changeDataType('ol')">
       <mat-icon>format_list_numbered</mat-icon>
       Liste ordonnée
     </button>
