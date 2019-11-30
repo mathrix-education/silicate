@@ -34,7 +34,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
       .subscribe((data => {
         if (data) {
           this.data = data;
-          this.ngDoCheck();
+          super.ngDoCheck();
         }
       }));
   }
