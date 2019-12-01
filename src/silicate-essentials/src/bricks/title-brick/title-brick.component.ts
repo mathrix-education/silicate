@@ -42,7 +42,7 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implemen
 
   changeHeading(heading: Heading) {
     this.data.heading = heading;
-    this.dataChange.emit();
+    this.dataChange.emit(this.data);
   }
 
   focus(): void {
