@@ -80,7 +80,9 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     // (data) Output
     this.wall.wall$.subscribe((newData: Wall) => {
       this.data = newData;
-      this.dataChange.emit(newData);
+      if (this.editable) {
+        this.dataChange.emit(newData);
+      }
     });
   }
 
