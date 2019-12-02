@@ -20,3 +20,9 @@ ul, li {
   box-sizing: border-box;
   max-width: 100%;
 }
+
+
+.grid {
+  display: grid;
+  grid-template-columns: auto 40px;
+}

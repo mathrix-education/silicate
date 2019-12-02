@@ -21,10 +21,21 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
     return index;
   }
 
+  removeItem(index: number) {
+    if (this.data.items.length > 1) {
+      this.data.items.splice(index, 1);
+      this.dataChange.emit(this.data);
+    }
+  }
+
 
   onEnter($event: KeyboardEvent, emittedFromIndex: number) {
     $event.preventDefault();
+    this.addItem(emittedFromIndex);
 
+  }
+
+  addItem(emittedFromIndex: number) {
     const clone = JSON.parse(JSON.stringify(this.data.items));
     clone.splice(emittedFromIndex + 1, 0, '');
     this.data.items = clone;
@@ -32,7 +43,6 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
     this.silicateListItems.changes.pipe(first()).subscribe(() => {
       this.silicateListItems.toArray()[emittedFromIndex + 1].focus();
     });
-
   }
 
   changeDataType(type: 'ol' | 'ul') {
