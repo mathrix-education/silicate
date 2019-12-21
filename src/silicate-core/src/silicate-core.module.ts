@@ -1,9 +1,7 @@
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {CommonModule} from '@angular/common';
 import {ModuleWithProviders, NgModule, Provider} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {MatButtonModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
 import {SilicateBrickSelectorComponent} from './components/silicate-brick-selector/silicate-brick-selector.component';
 import {SilicateProxyComponent} from './components/silicate-proxy/silicate-proxy.component';
 import {SilicateToolbarComponent} from './components/silicate-toolbar/silicate-toolbar.component';
@@ -13,6 +11,10 @@ import {ToolbarHandlerProvider} from './providers/handlers.providers';
 import {ToolbarHandler} from './handlers/toolbar.handler';
 import {ToolbarService} from './services/toolbar/toolbar.service';
 import {SilicateDirective} from './directives/silicate.directive';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({

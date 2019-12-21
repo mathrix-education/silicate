@@ -26,17 +26,16 @@
   },
   "dependencies": {
     "extract-math": "^1.0.3",
-    "katex": "^0.10.0",
-    "ng-katex": "^1.2.1"
+    "katex": "^0.10.0"
   },
   "devDependencies": {
     "@types/katex": "^0.10.1"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/material": "^8.0.0",
-    "@angular/cdk": "^8.0.0"
+    "@angular/common": "^9.0.0-rc.6",
+    "@angular/core": "^9.0.0-rc.6",
+    "@angular/material": "^9.0.0-rc.6",
+    "@angular/cdk": "^9.0.0-rc.6"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

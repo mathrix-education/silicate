@@ -7,12 +7,12 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
 import * as katex from 'katex';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({

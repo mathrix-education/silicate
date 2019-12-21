@@ -1,15 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {NgModule, Provider} from '@angular/core';
-import {FlexModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule
-} from '@angular/material';
+
 import {Serializers, SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {KatexModule} from 'ng-katex';
 import {EquationBrickComponent} from './bricks/equation-brick/equation-brick.component';
@@ -18,12 +10,21 @@ import {EquationBrickProvider} from './providers/bricks.providers';
 import {KatexFilterProvider} from './providers/filters.providers';
 import {ClickEquationHandlerProvider, KeydownEquationHandlerProvider} from './providers/handlers.providers';
 import {KatexSerializer} from './serializers/katex-serializer';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {KatexComponent} from './katex/ng-katex.component';
 
 
 @NgModule({
   declarations: [
     EquationBrickComponent,
-    EquationDialogComponent
+    EquationDialogComponent,
+    KatexComponent
   ],
   entryComponents: [
     EquationBrickComponent,
@@ -38,7 +39,7 @@ import {KatexSerializer} from './serializers/katex-serializer';
     MatDialogModule,
     MatGridListModule,
     MatExpansionModule,
-    KatexModule,
+    MatFormFieldModule,
     SilicateCoreModule
   ]
 })

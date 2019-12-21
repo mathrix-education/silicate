@@ -1,8 +1,8 @@
 import {Component, ElementRef, Inject, Renderer2} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DOCUMENT} from '@angular/common';
 import {LATEX_SYMBOLS} from './equation-dialog.symbols';
 import {LATEX_SNIPPETS} from './equation-dialog.snippets';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 
 /** @dynamic */

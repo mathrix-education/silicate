@@ -3,7 +3,11 @@
   "dest": "../../dist/silicate-education",
   "deleteDestPath": true,
   "lib": {
-    "entryFile": "src/silicate-education.ts"
+    "entryFile": "src/silicate-education.ts",
+    "umdModuleIds": {
+      "@mathrix-education/silicate-core": "@mathrix-education/silicate-core",
+      "safe-pipe": "safe-pipe"
+    }
   },
   "whitelistedNonPeerDependencies": [
     "safe-pipe"
