@@ -44,3 +44,4 @@ testem.log
 Thumbs.db
 
 deploy/registry/verdaccio.mathrix.fr.txt
+/src/silicate-demo/node_modules/

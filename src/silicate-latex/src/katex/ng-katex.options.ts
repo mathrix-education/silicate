@@ -1,4 +1,4 @@
-export type KatexOptions = {
+export interface KatexOptions  {
   displayMode?: boolean;
   throwOnError?: boolean;
   errorColor?: string;
