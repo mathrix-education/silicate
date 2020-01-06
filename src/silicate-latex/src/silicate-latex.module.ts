@@ -17,8 +17,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {KatexComponent} from './katex/ng-katex.component';
-import {KatexDirective} from "./katex/ng-katex.directive";
-import {KatexService} from "./katex/ng-katex.service";
+import {KatexDirective} from './katex/ng-katex.directive';
+import {KatexService} from './katex/ng-katex.service';
 
 
 @NgModule({

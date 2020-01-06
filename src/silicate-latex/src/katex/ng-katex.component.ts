@@ -2,10 +2,11 @@ import {Component, Input,} from '@angular/core';
 import {KatexOptions} from 'katex';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'ng-katex',
   template: `
-    <span [katex]="equation"
-          [katex-options]="options">
+    <span [equation]="equation"
+          [options]="options">
     </span>
   `,
 })

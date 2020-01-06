@@ -5,8 +5,8 @@ import {
   Input, OnChanges,
   Output,
 } from '@angular/core';
-import * as ko from './ng-katex.options';
 import {KatexService} from './ng-katex.service';
+import {KatexOptions} from './ng-katex.options';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -14,10 +14,10 @@ import {KatexService} from './ng-katex.service';
 })
 export class KatexDirective implements OnChanges {
 
-  @Input('katex') equation: string;
-  @Input('katex-options') options: ko.KatexOptions;
+  @Input('equation') equation: string;
+  @Input() options: KatexOptions;
 
-  @Output() onError = new EventEmitter<any>();
+  @Output() error = new EventEmitter<any>();
 
   constructor(private el: ElementRef,
               private katexService: KatexService) {}
@@ -26,7 +26,7 @@ export class KatexDirective implements OnChanges {
     try {
       this.katexService.render(this.equation, this.el, this.options);
     } catch (e) {
-      this.onError.emit(e);
+      this.error.emit(e);
     }
   }
 
