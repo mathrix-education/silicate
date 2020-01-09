@@ -15,7 +15,7 @@
             <button
               mat-raised-button
               (mousedown)="applySnippet($event, s)">
-              <ng-katex [equation]="s" [options]="{displayMode: true}"></ng-katex>
+              <silicate-katex [equation]="s" [options]="{displayMode: true}"></silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -35,7 +35,7 @@
             <button
               mat-raised-button
               (mousedown)="applySnippet($event, s)">
-              <ng-katex [equation]="s" [options]="{displayMode: true}"></ng-katex>
+              <silicate-katex [equation]="s" [options]="{displayMode: true}"></silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -61,7 +61,7 @@
     </mat-form-field>
 
     <figure>
-      <ng-katex [equation]="data.equation" [options]="{displayMode: true}"></ng-katex>
+      <silicate-katex [equation]="data.equation" [options]="{displayMode: true}"></silicate-katex>
       <figcaption>
         {{ data.description }}
       </figcaption>
