@@ -11,7 +11,7 @@ import {TextBrickFactory} from '../text-brick/text-brick.factory';
   styleUrls: ['./title-brick.component.scss']
 })
 export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implements OnInit {
-  @ViewChild(SilicateDirective, {static: false}) silicateTitle: SilicateDirective;
+  @ViewChild(SilicateDirective) silicateTitle: SilicateDirective;
 
   constructor(
     public silicate: SilicateService,

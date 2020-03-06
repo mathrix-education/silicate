@@ -1,6 +1,6 @@
 {
   "name": "@mathrix-education/silicate-latex",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Provide the LaTeX features, based on KaTeX library.",
   "keywords": [
     "silicate",
@@ -29,7 +29,7 @@
     "katex": "^0.11.1"
   },
   "devDependencies": {
-    "@types/katex": "0.11.0"
+    "@types/katex": "^0.11"
   },
   "peerDependencies": {
     "@angular/common": "^9.0.0",

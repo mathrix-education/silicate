@@ -27,7 +27,7 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
   private readonly youtubeAPIUrl = 'https://www.youtube.com/iframe_api';
 
   @Input() videoId: string;
-  @ViewChild('player', {static: false}) player: ElementRef<HTMLDivElement>;
+  @ViewChild('player') player: ElementRef<HTMLDivElement>;
   @Output() ready = new EventEmitter();
 
   constructor(

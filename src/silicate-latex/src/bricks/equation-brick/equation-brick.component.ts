@@ -21,7 +21,7 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./equation-brick.component.scss']
 })
 export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements AfterViewInit {
-  @ViewChild('equation', {static: false}) equationElementRef: ElementRef<HTMLDivElement>;
+  @ViewChild('equation') equationElementRef: ElementRef<HTMLDivElement>;
 
   constructor(
     private renderer2: Renderer2,

@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "baseUrl": "./",
     "module": "commonjs",
     "types": [
       "node"
@@ -12,6 +11,10 @@
       "dom"
     ]
   },
+  "files": [
+    "src/main.server.ts",
+    "src/server.ts"
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"
