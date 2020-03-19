@@ -5,6 +5,8 @@ import {ContainerBrickComponent} from '../bricks/container/container-brick.compo
 import {ContainerBrickFactory} from '../bricks/container/container-brick.factory';
 import {PDFViewerBrickComponent} from '../bricks/pdf-viewer/pdf-viewer-brick.component';
 import {PDFViewerBrickFactory} from '../bricks/pdf-viewer/pdf-viewer-brick.factory';
+import {QuestionBrickComponent} from '../bricks/question/question-brick.component';
+import {QuestionBrickFactory} from '../bricks/question/question-brick-factory.service';
 
 export const BlockBrickProvider: TypedValueProvider<Brick> = {
   provide: Bricks,
@@ -37,5 +39,17 @@ export const PDFViewerBrickProvider: TypedValueProvider<Brick> = {
     name: 'PDF',
     component: PDFViewerBrickComponent,
     factory: PDFViewerBrickFactory
+  }
+};
+
+export const QuestionBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
+  multi: true,
+  useValue: {
+    kind: 'question',
+    icon: 'live_help',
+    name: 'Question',
+    component: QuestionBrickComponent,
+    factory: QuestionBrickFactory
   }
 };

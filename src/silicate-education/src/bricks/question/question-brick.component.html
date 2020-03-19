@@ -1,0 +1,28 @@
+<mat-expansion-panel [expanded]="true">
+  <silicate-wrapper [(data)]="data.statement" [editable]="silicate.editable"></silicate-wrapper>
+</mat-expansion-panel>
+
+
+<mat-accordion>
+  <mat-expansion-panel *ngIf="data?.children?.length>0"
+                       [expanded]="true">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>Questions intermédiaires</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <silicate-wrapper [(data)]="data.children" [editable]="silicate.editable"></silicate-wrapper>
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel *ngIf="data.state.correction && data.explanations?.content?.length>0">
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>Correction</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <silicate-wrapper [(data)]="data.explanations.content" [editable]="silicate.editable"></silicate-wrapper>
+
+  </mat-expansion-panel>
+</mat-accordion>

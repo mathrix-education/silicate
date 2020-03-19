@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DemoService} from '../../services/demo.service';
+import {demoInit} from './demo-init';
 
 
 @Component({
