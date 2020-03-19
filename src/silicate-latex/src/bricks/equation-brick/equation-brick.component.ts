@@ -71,7 +71,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       .afterClosed()
       .pipe(first())
       .subscribe((data) => {
-        if (data !== undefined && data.equation !== '') {
+        if (data?.equation !== '') {
           this.data.equation = data.equation;
           this.data.description = data.description;
           this.render();
