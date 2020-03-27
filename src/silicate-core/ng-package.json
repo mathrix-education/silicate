@@ -3,7 +3,10 @@
   "dest": "../../dist/silicate-core",
   "deleteDestPath": true,
   "lib": {
-    "entryFile": "src/silicate-core.ts"
+    "entryFile": "src/silicate-core.ts",
+    "umdModuleIds": {
+      "uuid": "uuid"
+    }
   },
   "whitelistedNonPeerDependencies": [
     "@ng-stack/contenteditable"

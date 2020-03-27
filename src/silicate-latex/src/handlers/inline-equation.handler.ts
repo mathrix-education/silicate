@@ -1,10 +1,10 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {PlatformService, SelectionService, SilicateCoreModule, SilicateDirective} from '@mathrix-education/silicate-core';
 import * as katex from 'katex';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../dialogs/equation-dialog/equation-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 /** @dynamic */

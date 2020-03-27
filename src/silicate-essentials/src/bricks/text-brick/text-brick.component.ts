@@ -11,7 +11,7 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./text-brick.component.scss']
 })
 export class TextBrickComponent extends BaseBrickComponent<TextBrick> {
-  @ViewChild(SilicateDirective, {static: false}) paragraph: SilicateDirective;
+  @ViewChild(SilicateDirective) paragraph: SilicateDirective;
 
   constructor(private wall: WallService, private textBrickFactory: TextBrickFactory) {
     super();

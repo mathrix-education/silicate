@@ -69,7 +69,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   /**
    * Clear the proxy content.
    */
-  clear() {
+  private clear() {
     if (this.dataChangeSubscription instanceof Subscription) {
       this.dataChangeSubscription.unsubscribe();
     }

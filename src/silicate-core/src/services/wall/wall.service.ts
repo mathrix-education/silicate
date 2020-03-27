@@ -8,10 +8,12 @@ import {first} from 'rxjs/operators';
 
 @Injectable()
 export class WallService {
+  /** A counter to generate unique bricks ids */
+  private counterId = 0;
   /** The brick components references */
   private brickReferences: ComponentRef<BaseBrickComponent>[] = [];
   /** Fired when the bricks references are updated */
-  brickReferences$ = new EventEmitter<number>();
+  private brickReferences$ = new EventEmitter<number>();
   /** The wall, which contains the bricks data. */
   private wallSubject = new BehaviorSubject<Wall>([]);
   /** The wall as observable */

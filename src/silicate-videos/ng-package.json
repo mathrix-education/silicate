@@ -3,7 +3,12 @@
   "dest": "../../dist/silicate-videos",
   "deleteDestPath": true,
   "lib": {
-    "entryFile": "./src/silicate-videos.ts"
+    "entryFile": "./src/silicate-videos.ts",
+    "umdModuleIds": {
+      "@mathrix-education/silicate-core": "@mathrix-education/silicate-core",
+      "@vimeo/player": "@vimeo/player",
+      "safe-pipe": "safe-pipe"
+    }
   },
   "whitelistedNonPeerDependencies": [
     "@vimeo/player",

@@ -5,7 +5,8 @@
   "lib": {
     "entryFile": "src/silicate-latex.ts",
     "umdModuleIds": {
-      "katex": "katex"
+      "katex": "katex",
+      "@mathrix-education/silicate-core": "@mathrix-education/silicate-core"
     }
   },
   "whitelistedNonPeerDependencies": [
