@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DemoService} from '../../services/demo.service';
 
-
 @Component({
   selector: 'app-debug',
   templateUrl: './debug.component.html',

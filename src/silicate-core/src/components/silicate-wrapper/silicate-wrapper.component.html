@@ -1,24 +1,27 @@
 <ng-container *ngIf="!silicate.editable else editor">
   <silicate-proxy
     *ngFor="let brick of (wall.wall$ | async); let i = index;"
-    [index]="i">
+    [index]="i"
+    class="silicate-wall-item">
   </silicate-proxy>
 </ng-container>
 
 <ng-template #editor>
   <div
     *ngIf="(wall.wall$ | async).length > 0; else empty"
-    class="wall"
+    class="wall silicate-wall"
     cdkDropList
     cdkDropListLockAxis="y"
     (cdkDropListDropped)="onDrag($event)"
     [cdkDropListDisabled]="!silicate.editable">
+    <!-- silicate-wall-item class is used to be selected outside this component -->
     <div *ngFor="let brick of (wall.wall$ | async); let i = index; trackBy: trackByFn"
          cdkDrag
-         class="brick-container wall-item">
+         class="brick-container wall-item silicate-wall-item">
       <mat-icon *ngIf="silicate.editable"
                 cdkDragHandle
-                class="drag-handle-icon">drag_indicator</mat-icon>
+                class="drag-handle-icon">drag_indicator
+      </mat-icon>
 
       <silicate-proxy [index]="i"></silicate-proxy>
     </div>

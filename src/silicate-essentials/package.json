@@ -1,6 +1,6 @@
 {
   "name": "@mathrix-education/silicate-essentials",
-  "version": "1.0.3",
+  "version": "1.2.0",
   "description": "Provide Text, Image, Title and List Bricks.",
   "keywords": [
     "silicate",
@@ -24,10 +24,10 @@
     "url": "ssh://git@github.com/mathrix-education/silicate"
   },
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/material": "^8.0.0",
-    "@angular/cdk": "^8.0.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/material": "^9.0.0",
+    "@angular/cdk": "^9.0.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

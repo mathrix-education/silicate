@@ -39,3 +39,4 @@ export const PDFViewerBrickProvider: TypedValueProvider<Brick> = {
     factory: PDFViewerBrickFactory
   }
 };
+

@@ -4,16 +4,13 @@ import {AppModule} from './app.module';
 import {AppComponent} from './app.component';
 import {ModuleMapLoaderModule} from '@nguniversal/module-map-ngfactory-loader';
 import {FlexLayoutServerModule} from '@angular/flex-layout/server';
-import {KatexModule} from 'ng-katex';
-
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
     ModuleMapLoaderModule,
     ServerTransferStateModule,
-    FlexLayoutServerModule,
-    KatexModule
+    FlexLayoutServerModule
   ],
   bootstrap: [AppComponent]
 })

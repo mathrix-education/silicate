@@ -3,6 +3,9 @@
   "dest": "../../dist/silicate-essentials",
   "deleteDestPath": true,
   "lib": {
+    "umdModuleIds": {
+      "@mathrix-education/silicate-core": "@mathrix-education/silicate-core"
+    },
     "entryFile": "src/silicate-essentials.ts"
   }
 }

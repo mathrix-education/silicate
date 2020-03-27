@@ -30,6 +30,7 @@ export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implem
    */
   ngDoCheck() {
     const dataJSONChallenge = JSON.stringify(this.data);
+
     if (dataJSONChallenge !== null && this.dataJSON !== dataJSONChallenge) {
       this.dataChange.emit(this.data);
     }

@@ -34,8 +34,7 @@ import {Brick} from '../../interfaces/brick';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit {
-  /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
-  @HostBinding('attr.data-silicate-root') @Input() root = true;
+
   /** If the edition is enabled. */
   @Input() editable = false;
 
@@ -43,6 +42,13 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   @Input() data: Wall = [];
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
 
+  /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
+  @HostBinding('attr.data-silicate-root') @Input() root = true;
+
+  /** Add silicate-wall class to detect it's a wall on editable mode */
+  @HostBinding('class.silicate-wall') get fn() {
+    return !this.editable;
+  }
 
   constructor(
     private injector: Injector,
@@ -74,7 +80,9 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     // (data) Output
     this.wall.wall$.subscribe((newData: Wall) => {
       this.data = newData;
-      this.dataChange.emit(newData);
+      if (this.editable) {
+        this.dataChange.emit(newData);
+      }
     });
   }
 

@@ -11,7 +11,7 @@ import {TextBrickFactory} from '../text-brick/text-brick.factory';
   styleUrls: ['./title-brick.component.scss']
 })
 export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implements OnInit {
-  @ViewChild(SilicateDirective, {static: false}) silicateTitle: SilicateDirective;
+  @ViewChild(SilicateDirective) silicateTitle: SilicateDirective;
 
   constructor(
     public silicate: SilicateService,
@@ -38,6 +38,11 @@ export class TitleBrickComponent extends BaseBrickComponent<TitleBrick> implemen
 
     const index = this.wall.indexOf(this.data);
     this.wall.insertAndFocus(index + 1, this.textBrickFactory.make());
+  }
+
+  changeHeading(heading: Heading) {
+    this.data.heading = heading;
+    this.dataChange.emit(this.data);
   }
 
   focus(): void {

@@ -20,14 +20,26 @@ export const ContainerBrickVariantDeclarations: ContainerBrickVariant[] = [
     suffix: true
   },
   {
+    variant: 'demonstration',
+    title: 'Démontration',
+    prefix: true,
+    suffix: true
+  },
+  {
+    variant: 'lemma',
+    title: 'Lemme',
+    prefix: true,
+    suffix: true
+  },
+  {
     variant: 'introduction',
     title: 'Introduction',
     prefix: true,
     suffix: true
   },
   {
-    variant: 'law',
-    title: 'Loi',
+    variant: 'property',
+    title: 'Propriété',
     prefix: true,
     suffix: true
   },
@@ -38,8 +50,8 @@ export const ContainerBrickVariantDeclarations: ContainerBrickVariant[] = [
     suffix: true
   },
   {
-    variant: 'property',
-    title: 'Propriété',
+    variant: 'law',
+    title: 'Loi',
     prefix: true,
     suffix: true
   },

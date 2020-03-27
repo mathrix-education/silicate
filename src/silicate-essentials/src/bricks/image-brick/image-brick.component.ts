@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {first} from 'rxjs/operators';
 import {ImageDialogComponent} from '../../dialogs/image-dialog/image-dialog.component';
 import {ImageBrick} from './image-brick';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
       .subscribe((data => {
         if (data) {
           this.data = data;
-          this.ngDoCheck();
+          super.ngDoCheck();
         }
       }));
   }

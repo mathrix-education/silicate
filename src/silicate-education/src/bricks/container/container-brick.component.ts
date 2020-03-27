@@ -12,11 +12,11 @@ import {ContainerBrickVariant} from './container-brick.variant';
   styleUrls: ['./container-brick.component.scss']
 })
 export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> implements OnInit, AfterViewInit {
-  @ViewChild('wrapper', {static: false}) wrapperElementRef: ElementRef<HTMLDivElement>;
-  @ViewChild('titleContainer', {static: false}) titleContainerElementRef: ElementRef<HTMLHeadingElement>;
-  @ViewChild('prefix', {static: false}) prefixElementRef: ElementRef<HTMLElement>;
-  @ViewChild('title', {static: false}) titleElementRef: ElementRef<HTMLSpanElement>;
-  @ViewChild('suffix', {static: false}) suffixElementRef: ElementRef<HTMLElement>;
+  @ViewChild('wrapper') wrapperElementRef: ElementRef<HTMLDivElement>;
+  @ViewChild('titleContainer') titleContainerElementRef: ElementRef<HTMLHeadingElement>;
+  @ViewChild('prefix') prefixElementRef: ElementRef<HTMLElement>;
+  @ViewChild('title') titleElementRef: ElementRef<HTMLSpanElement>;
+  @ViewChild('suffix') suffixElementRef: ElementRef<HTMLElement>;
 
   @HostBinding('class') get style() { return this.data.variant; }
   title: string;

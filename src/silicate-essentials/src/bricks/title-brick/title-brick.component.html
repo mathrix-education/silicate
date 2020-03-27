@@ -31,19 +31,20 @@
   </h6>
 </ng-container>
 
-<button
-  *ngIf="silicate.editable"
-  mat-button
-  mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>swap_horiz</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu">
+<ng-container *ngIf="silicate.editable">
   <button
-    *ngFor="let heading of allowedHeadings; let i = index"
-    mat-menu-item
-    [disabled]="data.heading === heading"
-    (click)="data.heading = heading">
-    Titre {{ i + 1 }}
+    mat-button
+    mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>swap_horiz</mat-icon>
   </button>
-</mat-menu>
+
+  <mat-menu #menu="matMenu">
+    <button
+      *ngFor="let heading of allowedHeadings; let i = index"
+      mat-menu-item
+      [disabled]="data.heading === heading"
+      (click)="changeHeading(heading)">
+      Titre {{ i + 1 }}
+    </button>
+  </mat-menu>
+</ng-container>

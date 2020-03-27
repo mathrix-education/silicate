@@ -7,12 +7,12 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
 import {EquationBrick} from './equation-brick';
 import * as katex from 'katex';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -21,7 +21,7 @@ import * as katex from 'katex';
   styleUrls: ['./equation-brick.component.scss']
 })
 export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements AfterViewInit {
-  @ViewChild('equation', {static: false}) equationElementRef: ElementRef<HTMLDivElement>;
+  @ViewChild('equation') equationElementRef: ElementRef<HTMLDivElement>;
 
   constructor(
     private renderer2: Renderer2,
@@ -71,7 +71,7 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       .afterClosed()
       .pipe(first())
       .subscribe((data) => {
-        if (data !== undefined && data.equation !== '') {
+        if (data?.equation !== '') {
           this.data.equation = data.equation;
           this.data.description = data.description;
           this.render();

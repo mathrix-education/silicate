@@ -1,8 +1,8 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
 import {SelectionService, SilicateCoreModule, SilicateDirective} from '@mathrix-education/silicate-core';
 import {LinkDialogComponent} from '../dialogs/link-dialog/link-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 /** @dynamic */

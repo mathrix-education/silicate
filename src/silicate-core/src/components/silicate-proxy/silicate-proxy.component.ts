@@ -7,6 +7,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Renderer2,
   Type,
   ViewChild,
   ViewContainerRef
@@ -35,6 +36,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   constructor(
     private injector: Injector,
     private componentFactory: ComponentFactoryResolver,
+    private renderer2: Renderer2,
     public silicate: SilicateService,
     public wall: WallService
   ) {
@@ -67,7 +69,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   /**
    * Clear the proxy content.
    */
-  clear() {
+  private clear() {
     if (this.dataChangeSubscription instanceof Subscription) {
       this.dataChangeSubscription.unsubscribe();
     }
@@ -117,5 +119,10 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
       .subscribe((data) => {
         this.wall.patch(this.index, data);
       });
+
+    // useful to identify wall items
+    if (this.silicate.editable) {
+      this.renderer2.addClass(this.brickRef.location.nativeElement, 'silicate-wall-item');
+    }
   }
 }

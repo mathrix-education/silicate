@@ -1,17 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule, Provider} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatMenuModule,
-  MatSelectModule
-} from '@angular/material';
 import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {ImageBrickComponent} from './bricks/image-brick/image-brick.component';
 import {ListBrickComponent} from './bricks/list-brick/list-brick.component';
@@ -31,6 +20,14 @@ import {BoldFilterProvider, ItalicFilterProvider, LinkFilterProvider} from './pr
 import {OpenLinkDialogHandlerProvider} from './providers/handlers.providers';
 import {BoldToolbarProvider, ItalicToolbarProvider, LinkToolbarProvider} from './providers/toolbars.providers';
 import {TableBrickComponent} from './bricks/table-brick/table-brick.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({

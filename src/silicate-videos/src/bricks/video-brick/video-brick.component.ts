@@ -13,8 +13,8 @@ import {VideoBrick} from './video-brick';
   styleUrls: ['./video-brick.component.scss']
 })
 export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
-  @ViewChild(VimeoPlayerComponent, {static: false}) vimeoPlayer;
-  @ViewChild(YoutubePlayerComponent, {static: false}) youtubePlayer;
+  @ViewChild(VimeoPlayerComponent) vimeoPlayer;
+  @ViewChild(YoutubePlayerComponent) youtubePlayer;
 
   loading = true;
 

@@ -1,46 +1,60 @@
 <ng-container [ngSwitch]="data.type">
-  <ul *ngSwitchCase="'ul'">
-    <li
-      *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
-      silicate
-      (keydown.enter)="onEnter($event, i)"
-      [(data)]="data.items[i]">
-    </li>
+  <ul *ngSwitchCase="'ul'" [class.grid]="silicate.editable">
+    <ng-content *ngTemplateOutlet="listElement"></ng-content>
   </ul>
 
-  <ol *ngSwitchCase="'ol'">
-    <li
-      *ngFor="let item of data.items; let i = index; trackBy: trackByFn"
-      silicate
-      (keydown.enter)="onEnter($event, i)"
-      [(data)]="data.items[i]">
-    </li>
+  <ol *ngSwitchCase="'ol'" [class.grid]="silicate.editable">
+    <ng-content *ngTemplateOutlet="listElement"></ng-content>
   </ol>
 </ng-container>
 
-<button
-  *ngIf="silicate.editable"
-  mat-button
-  mat-icon-button [matMenuTriggerFor]="menu">
-  <mat-icon>swap_horiz</mat-icon>
-</button>
-
-<mat-menu #menu="matMenu">
-  <!--suppress TypeScriptValidateTypes -->
+<ng-container *ngIf="silicate.editable">
   <button
-    mat-menu-item
-    [disabled]="data.type === 'ul'"
-    (click)="data.type = 'ul'">
-    <mat-icon>format_list_bulleted</mat-icon>
-    Liste non-ordonnée
+    mat-button
+    mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>swap_horiz</mat-icon>
   </button>
 
-  <!--suppress TypeScriptValidateTypes -->
-  <button
-    mat-menu-item
-    [disabled]="data.type === 'ol'"
-    (click)="data.type = 'ol'">
-    <mat-icon>format_list_numbered</mat-icon>
-    Liste ordonnée
+  <mat-menu #menu="matMenu">
+    <!--suppress TypeScriptValidateTypes -->
+    <button
+      mat-menu-item
+      [disabled]="data.type === 'ul'"
+      (click)="changeDataType('ul')">
+      <mat-icon>format_list_bulleted</mat-icon>
+      Liste non-ordonnée
+    </button>
+
+    <!--suppress TypeScriptValidateTypes -->
+    <button
+      mat-menu-item
+      [disabled]="data.type === 'ol'"
+      (click)="changeDataType('ol')">
+      <mat-icon>format_list_numbered</mat-icon>
+      Liste ordonnée
+    </button>
+  </mat-menu>
+</ng-container>
+
+<!-- list element -->
+<ng-template #listElement>
+  <ng-container *ngFor="let item of data.items; let i = index; trackBy: trackByFn">
+    <li
+      silicate
+      (keydown.enter)="onEnter($event, i)"
+      [(data)]="data.items[i]">
+    </li>
+
+    <button mat-icon-button *ngIf="silicate.editable"
+            (click)="removeItem(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </ng-container>
+
+  <!-- last row : add new line -->
+  <span></span> <!-- do not remove, useful for grid -->
+  <button mat-icon-button *ngIf="silicate.editable"
+          (click)="addItem(data.items.length -1)">
+    <mat-icon>add</mat-icon>
   </button>
-</mat-menu>
+</ng-template>
