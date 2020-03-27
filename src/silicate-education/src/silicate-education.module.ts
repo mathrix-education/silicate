@@ -2,7 +2,7 @@ import {NgModule, Provider} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {SilicateEducationBricks} from './silicate-education.bricks';
-import {BlockBrickProvider, ContainerBrickProvider, PDFViewerBrickProvider, QuestionBrickProvider} from './providers/bricks.providers';
+import {BlockBrickProvider, ContainerBrickProvider, PDFViewerBrickProvider} from './providers/bricks.providers';
 import {BlockBrickVariantsProvider, ContainerBrickVariantsProvider} from './providers/variants.providers';
 import {SafePipeModule} from 'safe-pipe';
 import {FormsModule} from '@angular/forms';
@@ -39,7 +39,6 @@ export class SilicateEducationModule {
       BlockBrickProvider,
       ContainerBrickProvider,
       PDFViewerBrickProvider,
-      QuestionBrickProvider,
       // Variants
       BlockBrickVariantsProvider,
       ContainerBrickVariantsProvider
