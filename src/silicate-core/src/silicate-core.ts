@@ -29,3 +29,6 @@ export * from './services/wall/wall.service';
 // Modules
 export * from './silicate-core.module';
 export * from './silicate-core.tokens';
+
+// Helpers
+export {stripWall} from './helpers/strip-brick.helper'
