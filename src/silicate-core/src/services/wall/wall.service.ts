@@ -8,6 +8,8 @@ import {first} from 'rxjs/operators';
 
 @Injectable()
 export class WallService {
+  /** A counter to generate unique bricks ids */
+  private counterId = 0;
   /** The brick components references */
   private brickReferences: ComponentRef<BaseBrickComponent>[] = [];
   /** Fired when the bricks references are updated */
