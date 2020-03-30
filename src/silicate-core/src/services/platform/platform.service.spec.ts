@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PlatformService } from './platform.service';
+import {PlatformService} from './platform.service';
 
 describe('PlatformService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PlatformService = TestBed.get(PlatformService);
+    const service: PlatformService = TestBed.inject(PlatformService);
     expect(service).toBeTruthy();
   });
 });

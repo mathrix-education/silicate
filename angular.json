@@ -104,6 +104,9 @@
             "project": "src/silicate-core/ng-package.json"
           }
         },
+        "test": {
+          "builder": "@angular-builders/jest:run"
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
@@ -225,14 +228,6 @@
           "options": {
             "tsConfig": "src/silicate-education/tsconfig.lib.json",
             "project": "src/silicate-education/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/silicate-education/src/test.ts",
-            "tsConfig": "src/silicate-education/tsconfig.spec.json",
-            "karmaConfig": "src/silicate-education/karma.conf.js"
           }
         },
         "lint": {
