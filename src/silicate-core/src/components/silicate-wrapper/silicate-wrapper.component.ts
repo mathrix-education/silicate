@@ -8,7 +8,7 @@ import {
   HostBinding,
   Injector,
   Input,
-  OnChanges,
+  OnChanges, OnDestroy,
   OnInit,
   Output,
   SimpleChanges
@@ -20,6 +20,7 @@ import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 import {Wall} from '../../interfaces/wall';
 import {Brick} from '../../interfaces/brick';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -33,11 +34,10 @@ import {Brick} from '../../interfaces/brick';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit {
+export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   /** If the edition is enabled. */
   @Input() editable = false;
-
   // [(data)] two-way binding
   @Input() data: Wall = [];
   @Output() dataChange = new EventEmitter<BaseBrick[]>();
@@ -49,6 +49,9 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   @HostBinding('class.silicate-wall') get fn() {
     return !this.editable;
   }
+
+  /** An internal subscription to be deleted */
+  private sub1: Subscription;
 
   constructor(
     private injector: Injector,
@@ -78,7 +81,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     this.wall.create(this.data);
 
     // (data) Output
-    this.wall.wall$.subscribe((newData: Wall) => {
+    this.sub1 = this.wall.wall$.subscribe((newData: Wall) => {
       this.data = newData;
       if (this.editable) {
         this.dataChange.emit(newData);
@@ -146,5 +149,9 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
    */
   trackByFn(index: any, brick: BaseBrick) {
     return brick.uuid;
+  }
+
+  ngOnDestroy(): void {
+    this.sub1.unsubscribe();
   }
 }
