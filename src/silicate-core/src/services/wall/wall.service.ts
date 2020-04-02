@@ -8,8 +8,6 @@ import {first} from 'rxjs/operators';
 
 @Injectable()
 export class WallService {
-  /** A counter to generate unique bricks ids */
-  private counterId = 0;
   /** The brick components references */
   private brickReferences: ComponentRef<BaseBrickComponent>[] = [];
   /** Fired when the bricks references are updated */
@@ -29,7 +27,6 @@ export class WallService {
     return this.deepCopy(this.wallSubject.value);
   }
 
-
   /**
    * Get the brick at a given index.
    * @param index The brick index.
@@ -38,7 +35,6 @@ export class WallService {
     return this.wall[index];
   }
 
-
   /**
    * Get the index of a given brick, based on a uuid research.
    * @param brick the brick to find
@@ -46,7 +42,6 @@ export class WallService {
   indexOf(brick: BaseBrick): number {
     return this.wall.findIndex(b => b.uuid === brick.uuid);
   }
-
 
   /**
    * Insert a brick at a given index.
