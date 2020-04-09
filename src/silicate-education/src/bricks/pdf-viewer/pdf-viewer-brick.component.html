@@ -5,11 +5,11 @@
 <button
   mat-raised-button
   color="primary"
-  (click)="data.state.viewerOpen = !data.state.viewerOpen">
-  {{ data.state.viewerOpen ? texts.close : texts.open }}
+  (click)="viewerOpen = !viewerOpen">
+  {{ viewerOpen ? texts.close : texts.open }}
 </button>
 
-<embed *ngIf="data.state.viewerOpen"
+<embed *ngIf="viewerOpen"
        frameborder="0"
        webkitallowfullscreen
        mozallowfullscreen

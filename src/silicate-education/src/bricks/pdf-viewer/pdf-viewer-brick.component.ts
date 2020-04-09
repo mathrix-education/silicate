@@ -14,6 +14,8 @@ export class PDFViewerBrickComponent extends BaseBrickComponent<PDFViewerBrick> 
     close: 'Fermer le document'
   };
 
+  viewerOpen = false;
+
   constructor(public silicate: SilicateService) {
     super();
   }

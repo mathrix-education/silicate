@@ -57,7 +57,7 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     private injector: Injector,
     private cd: ChangeDetectorRef,
     public silicate: SilicateService,
-    public wall: WallService
+    public wall: WallService,
   ) {
   }
 
@@ -89,7 +89,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     });
   }
 
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data) {
       const newWall = (changes.data.currentValue as any) as Wall;
@@ -104,7 +103,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
       this.silicate.editable = changes.editable.currentValue;
     }
   }
-
 
   ngAfterViewInit() {
     this.cd.detectChanges();
@@ -121,7 +119,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     ]);
   }
 
-
   /**
    * Material CDK Drag'n'Drop handler.
    * @see https://material.angular.io/cdk/drag-drop/overview
@@ -135,7 +132,6 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
     moveItemInArray(wall, $event.previousIndex, $event.currentIndex);
     this.wall.create(wall);
   }
-
 
   /**
    * We need to track brick changes using their UUID for two main reasons:
