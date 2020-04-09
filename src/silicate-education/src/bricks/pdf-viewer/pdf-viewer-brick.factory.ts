@@ -9,10 +9,7 @@ export class PDFViewerBrickFactory extends BaseBrickFactory<PDFViewerBrick> {
   make(): PDFViewerBrick {
     return this.withUuid({
       kind: 'pdf-viewer',
-      url: 'http://www.orimi.com/pdf-test.pdf',
-      state: {
-        viewerOpen: true
-      }
+      url: 'http://www.orimi.com/pdf-test.pdf'
     });
   }
 }
