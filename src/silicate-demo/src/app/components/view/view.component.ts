@@ -5,13 +5,11 @@ import {Wall} from '../../../../../silicate-core/src/interfaces/wall';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
 })
-export class ViewComponent implements OnInit {
-  constructor(public demo: DemoService) {
-  }
 
-  ngOnInit() {
+export class ViewComponent {
+
+  constructor(public demo: DemoService) {
   }
 
   wallChange(wall: Wall) {

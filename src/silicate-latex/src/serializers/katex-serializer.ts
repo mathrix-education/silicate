@@ -59,8 +59,8 @@ export class KatexSerializer implements Serializer {
   }
 
   /**
-   * Serialize Katex-rendered equations
-   * @param str The raw HTML
+   * Serialize Katex-rendered equations.
+   * @param str The raw HTML.
    */
   serialize(str: string): string {
     // We do not even need to analyse non-katex content or if we a re in a non-browser context.
@@ -83,4 +83,5 @@ export class KatexSerializer implements Serializer {
 
     return output;
   }
+
 }

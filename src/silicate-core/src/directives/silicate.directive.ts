@@ -21,6 +21,7 @@ import {PurifierService} from '../services/purifier/purifier.service';
 import {Handler} from '../interfaces/handler';
 import {Subscription} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
+import * as katex from 'katex';
 
 /** @dynamic */
 @Directive({
@@ -236,8 +237,12 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
 
       let plainText = (event.originalEvent || event).clipboardData.getData('text/plain');
       plainText = plainText.replace('\n', ' ');
+
+      this.silicate.serializers.forEach((serializer: Serializer) => {
+        plainText = serializer.render(plainText);
+      });
+
       this.document.execCommand('insertHTML', false, plainText);
     });
-
   }
 }

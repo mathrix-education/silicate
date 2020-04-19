@@ -15,7 +15,6 @@ describe('strip-brick', () => {
       c: []
     }];
     stripWall(simpleCaseWall);
-    console.log(simpleCaseWall);
     expect(JSON.parse(JSON.stringify(simpleStrippedCaseExpect))).toEqual(JSON.parse(JSON.stringify(simpleCaseWall)));
   });
 

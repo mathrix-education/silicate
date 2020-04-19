@@ -24,7 +24,7 @@ export class EquationDialogComponent {
     public dialogRef: MatDialogRef<EquationDialogComponent>,
     @Inject(DOCUMENT) private document: Document,
     @Inject(MatDialogRef) private matDialogRef,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: { equation: string, description: string, enableDescription: boolean }
   ) {
   }
 

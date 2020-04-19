@@ -1,6 +1,11 @@
 import {DOCUMENT} from '@angular/common';
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
-import {PlatformService, SelectionService, SilicateCoreModule, SilicateDirective} from '@mathrix-education/silicate-core';
+import {
+  PlatformService,
+  SelectionService,
+  SilicateCoreModule,
+  SilicateDirective
+} from '@mathrix-education/silicate-core';
 import * as katex from 'katex';
 import {first} from 'rxjs/operators';
 import {EquationDialogComponent} from '../dialogs/equation-dialog/equation-dialog.component';
@@ -36,9 +41,9 @@ export class InlineEquationHandler {
       .afterClosed()
       .pipe(first())
       .subscribe((data) => {
-        if (data === undefined && actualEquation === '') {
+        if (data === undefined) {
           this.renderer2.removeChild(equationElement.parentNode, equationElement);
-        } else if (data !== undefined && data.equation) {
+        } else if (data.equation) {
           const newEquation = data.equation;
           this.renderer2.setProperty(
             equationElement,
