@@ -57,7 +57,7 @@
 
     <mat-form-field *ngIf="data.enableDescription">
       <mat-label>Description</mat-label>
-        <input matInput placeholder="Description" [(ngModel)]="data.description">
+        <input matInput placeholder="Description" spellcheck="true" [(ngModel)]="data.description">
     </mat-form-field>
 
     <figure>

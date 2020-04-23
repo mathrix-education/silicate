@@ -131,6 +131,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     });
 
     this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', buffer);
+    this.renderer2.setProperty(this.elementRef.nativeElement, 'spellcheck', true);
   }
 
   /**

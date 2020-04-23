@@ -1,5 +1,5 @@
 name: Publish
-on: [push]  # Always
+on: [push,tags]
 jobs:
   build:
     strategy:
