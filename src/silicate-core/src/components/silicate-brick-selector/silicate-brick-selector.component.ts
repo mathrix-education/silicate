@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Brick} from '../../interfaces/brick';
 import {SilicateService} from '../../services/silicate/silicate.service';
 
@@ -9,11 +9,23 @@ import {SilicateService} from '../../services/silicate/silicate.service';
   styleUrls: ['./silicate-brick-selector.component.scss']
 })
 export class SilicateBrickSelectorComponent {
+  @Input() whitelist: string[];
   @Input() icon: string = null;
   @Input() kind: string = null;
   @Input() label: string = null;
   @Output() select = new EventEmitter<Brick>();
 
   constructor(public silicate: SilicateService) {
+  }
+
+  /**
+   * Return the allowed bricks inside the current brick.
+   */
+  get allowed(): Brick[] {
+    if (this.whitelist === undefined) {
+      return this.silicate.bricksDeclarations;
+    } else {
+      return this.whitelist.map((kind: string) => this.silicate.resolve(kind));
+    }
   }
 }

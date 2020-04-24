@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {DemoService} from '../../services/demo.service';
 import {Wall} from '../../../../../silicate-core/src/interfaces/wall';
 

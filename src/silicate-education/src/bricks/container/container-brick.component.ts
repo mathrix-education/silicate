@@ -23,7 +23,6 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
   variant: ContainerBrickVariant;
 
   constructor(
-    private renderer2: Renderer2,
     public silicate: SilicateService,
     @Inject(ContainerBrickVariants) public containerBrickVariants: ContainerBrickVariant[]
   ) {
