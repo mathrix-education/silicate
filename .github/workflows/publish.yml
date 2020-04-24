@@ -1,5 +1,11 @@
 name: Publish
-on: [push,tags]
+on:
+  push:
+    branches:
+      - master         # Push events on master branch
+      - dev
+    tags:
+      - v*.*
 jobs:
   build:
     strategy:
