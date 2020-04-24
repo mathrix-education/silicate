@@ -17,7 +17,7 @@
 
   <mat-menu #appendMenu="matMenu">
     <mat-grid-list cols="2" rowHeight="48px">
-      <mat-grid-tile *ngFor="let brick of silicate.bricksDeclarations">
+      <mat-grid-tile *ngFor="let brick of allowed">
         <button mat-menu-item (click)="append(brick)">
           <mat-icon>{{ brick.icon }}</mat-icon>
           {{ brick.name }}

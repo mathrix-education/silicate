@@ -25,6 +25,9 @@ import {WallService} from '../../services/wall/wall.service';
   styleUrls: ['./silicate-proxy.component.scss']
 })
 export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComponent> implements OnInit, OnDestroy {
+  /** A whitelist of bricks. */
+  @Input() whitelist: string[];
+  /** The index of the silicate wrapper */
   @Input() index: number;
   @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
 
@@ -33,20 +36,25 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   dataChangeSubscription: Subscription;
 
 
-  constructor(
-    private injector: Injector,
-    private componentFactory: ComponentFactoryResolver,
-    private renderer2: Renderer2,
-    public silicate: SilicateService,
-    public wall: WallService
-  ) {
+  constructor(private injector: Injector,
+              private componentFactory: ComponentFactoryResolver,
+              private renderer2: Renderer2,
+              public silicate: SilicateService,
+              public wall: WallService) {
   }
 
-  get kind() {
+
+  /**
+   * Return the brick kind.
+   */
+  get kind(): string {
     return this.wall.get(this.index).kind;
   }
 
-  get icon() {
+  /**
+   * Return the brick icon.
+   */
+  get icon(): string {
     try {
       return this.silicate.resolve(this.kind).icon;
     } catch (e) {
@@ -54,12 +62,21 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
+  /**
+   * Return the allowed bricks inside the current brick.
+   */
+  get allowed(): Brick[] {
+    if (this.whitelist === undefined) {
+      return this.silicate.bricksDeclarations;
+    } else {
+      return this.whitelist.map((kind: string) => this.silicate.resolve(kind));
+    }
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initialized = true;
     this.render();
   }
-
 
   ngOnDestroy(): void {
     this.clear();
