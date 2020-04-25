@@ -1,18 +1,9 @@
-<mat-menu #brickType="matMenu">
   <mat-grid-list cols="2" rowHeight="48px">
     <mat-grid-tile *ngFor="let brick of allowed">
-      <button
-        mat-menu-item
-        (click)="select.emit(brick)"
-        [disabled]="kind === brick.kind">
+      <button mat-menu-item
+              (click)="select.emit(brick)">
         <mat-icon>{{ brick.icon }}</mat-icon>
         {{ brick.name }}
       </button>
     </mat-grid-tile>
   </mat-grid-list>
-</mat-menu>
-
-<button [matMenuTriggerFor]="brickType" mat-icon-button>
-  <mat-icon>{{ icon }}</mat-icon>
-  {{ label }}
-</button>

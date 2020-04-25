@@ -43,7 +43,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
               public wall: WallService) {
   }
 
-
   /**
    * Return the brick kind.
    */
@@ -62,26 +61,10 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
-  /**
-   * Return the allowed bricks inside the current brick.
-   */
-  get allowed(): Brick[] {
-    if (this.whitelist === undefined) {
-      return this.silicate.bricksDeclarations;
-    } else {
-      return this.whitelist.map((kind: string) => this.silicate.resolve(kind));
-    }
-  }
-
   ngOnInit(): void {
     this.initialized = true;
     this.render();
   }
-
-  ngOnDestroy(): void {
-    this.clear();
-  }
-
 
   /**
    * Clear the proxy content.
@@ -100,7 +83,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
-
   /**
    * Append a new brick to this one.
    * @param brickDeclaration The new brick declaration.
@@ -109,7 +91,6 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const empty = this.injector.get(brickDeclaration.factory).make();
     this.wall.insert(this.index + 1, empty);
   }
-
 
   /**
    * Render the Brick in the proxy.
@@ -142,4 +123,9 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
       this.renderer2.addClass(this.brickRef.location.nativeElement, 'silicate-wall-item');
     }
   }
+
+  ngOnDestroy(): void {
+    this.clear();
+  }
+
 }
