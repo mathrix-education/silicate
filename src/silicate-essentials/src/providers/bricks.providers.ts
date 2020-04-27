@@ -10,6 +10,8 @@ import {TitleBrickFactory} from '../bricks/title-brick/title-brick.factory';
 import {TableBrickComponent} from '../bricks/table-brick/table-brick.component';
 import {TableBrickFactory} from '../bricks/table-brick/table-brick.factory';
 import {Heading, TitleBrickAllowedHeadings} from '../silicate-essentials.tokens';
+import {ColumnsBrickComponent} from '../bricks/columns-brick/columns-brick.component';
+import {ColumnsBrickFactory} from '../bricks/columns-brick/columns-brick.factory';
 
 /**
  * Bricks
@@ -69,6 +71,19 @@ export const TableBrickProvider: TypedValueProvider<Brick> = {
     factory: TableBrickFactory
   }
 };
+
+export const ColumnsBrickProvider: TypedValueProvider<Brick> = {
+  provide: Bricks,
+  multi: true,
+  useValue: {
+    kind: 'columns',
+    icon: 'view_column',
+    name: 'Colonnes',
+    component: ColumnsBrickComponent,
+    factory: ColumnsBrickFactory
+  }
+};
+
 export const TitleBrickAllowedHeadingsProvider: TypedValueProvider<Heading[]> = {
   provide: TitleBrickAllowedHeadings,
   useValue: ['h2', 'h3']
