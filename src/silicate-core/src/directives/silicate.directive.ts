@@ -243,6 +243,8 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
         plainText = serializer.render(plainText);
       });
 
+      plainText = this.purifier.purify(plainText);
+
       this.document.execCommand('insertHTML', false, plainText);
     });
   }
