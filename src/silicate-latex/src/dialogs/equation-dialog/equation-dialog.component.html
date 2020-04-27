@@ -2,7 +2,9 @@
 <div mat-dialog-content>
   <div class="form-content">
     <mat-accordion>
-      <mat-expansion-panel [expanded]="false">
+      <mat-expansion-panel
+        [expanded]="false"
+        (afterExpand)="focusEquation()">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Symboles et sigles
@@ -11,18 +13,20 @@
 
         <mat-grid-list cols="9">
           <mat-grid-tile
-            *ngFor="let s of symbols">
+            *ngFor="let symbol of symbols">
             <button
               mat-raised-button
-              (mousedown)="applySnippet($event, s)">
-              <silicate-katex [equation]="s" [options]="{displayMode: true}"></silicate-katex>
+              (mousedown)="applySnippet($event, symbol)">
+              <silicate-katex [equation]="symbol" [options]="{displayMode: true}"></silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
       </mat-expansion-panel>
 
 
-      <mat-expansion-panel [expanded]="false">
+      <mat-expansion-panel
+        [expanded]="false"
+        (afterExpand)="focusEquation()">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Expressions
@@ -31,11 +35,11 @@
 
         <mat-grid-list cols="7">
           <mat-grid-tile
-            *ngFor="let s of snippets">
+            *ngFor="let snippet of snippets">
             <button
               mat-raised-button
-              (mousedown)="applySnippet($event, s)">
-              <silicate-katex [equation]="s" [options]="{displayMode: true}"></silicate-katex>
+              (mousedown)="applySnippet($event, snippet)">
+              <silicate-katex [equation]="snippet" [options]="{displayMode: true}"></silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -43,21 +47,23 @@
     </mat-accordion>
 
     <mat-form-field>
-      <mat-label>Équation</mat-label>
-        <textarea cdkAutosizeMinRows="1"
-                  cdkTextareaAutosize
-                  cdkFocusInitial
-                  matInput
-                  placeholder="f(x) = x^2"
-                  (focus)="equationFormFieldFocused = true"
-                  (blur)="equationFormFieldFocused = false"
-                  [(ngModel)]="data.equation">
+      <textarea
+          #equation
+          cdkAutosizeMinRows="1"
+          cdkTextareaAutosize
+          cdkFocusInitial
+          matInput
+          placeholder="f(x) = x^2"
+          (blur)="equationFormFieldFocused = false"
+          (focus)="equationFormFieldFocused = true"
+          [(ngModel)]="data.equation">
         </textarea>
+      <mat-label>Équation</mat-label>
     </mat-form-field>
 
     <mat-form-field *ngIf="data.enableDescription">
       <mat-label>Description</mat-label>
-        <input matInput placeholder="Description" spellcheck="true" [(ngModel)]="data.description">
+      <input matInput placeholder="Description" spellcheck="true" [(ngModel)]="data.description">
     </mat-form-field>
 
     <figure>

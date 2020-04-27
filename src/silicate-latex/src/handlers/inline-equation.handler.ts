@@ -29,7 +29,12 @@ export class InlineEquationHandler {
     this.renderer2 = rendererFactory.createRenderer(null, null);
   }
 
-
+  /**
+   * Open the equation.
+   * @param actualEquation The actual equation.
+   * @param source  The source directive.
+   * @param equationElement The equation element.
+   */
   private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
     return this.dialog
       .open(EquationDialogComponent, {
@@ -56,7 +61,6 @@ export class InlineEquationHandler {
       });
   }
 
-
   /**
    * On "dollar" ('$') keydown, we will create a temporary element which will be later replaced by the equation.
    * @param $event The keyboard event.
@@ -74,7 +78,6 @@ export class InlineEquationHandler {
       });
     }
   }
-
 
   /**
    * On click on a equation element, we will open the equation editor.

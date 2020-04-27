@@ -1,0 +1,15 @@
+<silicate-wrapper [(data)]="data.content" [editable]="silicate.editable"></silicate-wrapper>
+
+<ng-container *ngIf="silicate.editable">
+  <button
+    mat-button
+    mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>swap_horiz</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="changeColumnNumbers(2)">2 colonnes</button>
+
+    <button mat-menu-item (click)="changeColumnNumbers(3)">3 colonnes</button>
+  </mat-menu>
+</ng-container>
