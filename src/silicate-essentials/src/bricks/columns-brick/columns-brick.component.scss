@@ -1,0 +1,28 @@
+@media only screen and (min-width: 600px) {
+/* For desktop: */
+:host {
+  display: flex!important;
+}
+
+silicate-wrapper {
+  flex-grow: 1;
+}
+
+:host ::ng-deep .silicate-wall {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+// 2 columns configuration
+:host.columns-2 ::ng-deep .silicate-wall > .silicate-wall-item {
+  flex: 0 50%;
+}
+
+// 3 columns configuration
+:host.columns-3 ::ng-deep .silicate-wall > .silicate-wall-item {
+  flex: 0 33.3%;
+}
+
+}

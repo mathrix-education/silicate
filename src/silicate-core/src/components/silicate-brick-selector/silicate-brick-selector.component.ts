@@ -10,9 +10,6 @@ import {SilicateService} from '../../services/silicate/silicate.service';
 })
 export class SilicateBrickSelectorComponent {
   @Input() whitelist: string[];
-  @Input() icon: string = null;
-  @Input() kind: string = null;
-  @Input() label: string = null;
   @Output() select = new EventEmitter<Brick>();
 
   constructor(public silicate: SilicateService) {
@@ -28,4 +25,5 @@ export class SilicateBrickSelectorComponent {
       return this.whitelist.map((kind: string) => this.silicate.resolve(kind));
     }
   }
+
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Inject, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostListener, Inject, Renderer2, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {LATEX_SYMBOLS} from './equation-dialog.symbols';
 import {LATEX_SNIPPETS} from './equation-dialog.snippets';
@@ -12,11 +12,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./equation-dialog.component.scss']
 })
 export class EquationDialogComponent {
+
+  @ViewChild('equation') equation;
   elementRef: ElementRef<HTMLElement> = null;
   equationFormFieldFocused = false;
   symbols = LATEX_SYMBOLS;
   snippets = LATEX_SNIPPETS;
-  /** the last key pressed */
+  /** The last key pressed. */
   private KeyPressed: string;
 
   constructor(
@@ -58,6 +60,10 @@ export class EquationDialogComponent {
       this.document.execCommand('insertText', false, latexSnippet);
     }
     // TODO: Insert the snippet at the end
+  }
+
+  focusEquation() {
+    this.equation.nativeElement.focus();
   }
 
   delete() {

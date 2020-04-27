@@ -16,13 +16,8 @@
   </mat-menu>
 
   <mat-menu #appendMenu="matMenu">
-    <mat-grid-list cols="2" rowHeight="48px">
-      <mat-grid-tile *ngFor="let brick of allowed">
-        <button mat-menu-item (click)="append(brick)">
-          <mat-icon>{{ brick.icon }}</mat-icon>
-          {{ brick.name }}
-        </button>
-      </mat-grid-tile>
-    </mat-grid-list>
+    <silicate-brick-selector [whitelist]="whitelist"
+                             (select)="append($event)">
+    </silicate-brick-selector>
   </mat-menu>
 </ng-container>

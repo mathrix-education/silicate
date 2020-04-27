@@ -28,6 +28,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
+import {ColumnsBrickComponent} from './bricks/columns-brick/columns-brick.component';
+import {ColumnsBrickProvider} from './bricks/columns-brick/columns-brick.provider';
 
 
 @NgModule({
@@ -47,15 +49,17 @@ import {MatSelectModule} from '@angular/material/select';
     SilicateCoreModule
   ],
   declarations: [
+    ColumnsBrickComponent,
     ImageBrickComponent,
     ListBrickComponent,
     TextBrickComponent,
     TitleBrickComponent,
     ImageDialogComponent,
     LinkDialogComponent,
-    TableBrickComponent
+    TableBrickComponent,
   ],
   entryComponents: [
+    ColumnsBrickComponent,
     ImageBrickComponent,
     ListBrickComponent,
     TextBrickComponent,
@@ -69,6 +73,7 @@ export class SilicateEssentialsModule {
   static providers(): Provider[] {
     return [
       // Bricks
+      ColumnsBrickProvider,
       TextBrickProvider,
       ImageBrickProvider,
       TitleBrickProvider,
