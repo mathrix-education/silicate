@@ -9,6 +9,7 @@ import {TitleBrickComponent} from './bricks/title-brick/title-brick.component';
 import {ImageDialogComponent} from './dialogs/image-dialog/image-dialog.component';
 import {LinkDialogComponent} from './dialogs/link-dialog/link-dialog.component';
 import {
+  ColumnsBrickProvider,
   ImageBrickProvider,
   ListBrickProvider,
   TableBrickProvider,
@@ -29,7 +30,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {ColumnsBrickComponent} from './bricks/columns-brick/columns-brick.component';
-import {ColumnsBrickProvider} from './bricks/columns-brick/columns-brick.provider';
 
 
 @NgModule({
