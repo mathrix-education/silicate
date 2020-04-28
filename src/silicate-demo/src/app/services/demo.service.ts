@@ -6,5 +6,9 @@ import {Wall} from '@mathrix-education/silicate-core';
 })
 export class DemoService {
   editable = true;
-  data: Wall = [];
+  data: Wall = [{
+      uuid: '72df73fc-20eb-48c4-a3bd-62c4594511b7',
+      kind: 'text',
+      text: ''
+    }];
 }

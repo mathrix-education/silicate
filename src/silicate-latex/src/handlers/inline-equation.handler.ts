@@ -24,7 +24,7 @@ export class InlineEquationHandler {
     private dialog: MatDialog,
     private platform: PlatformService,
     private selection: SelectionService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
   ) {
     this.renderer2 = rendererFactory.createRenderer(null, null);
   }
@@ -36,28 +36,35 @@ export class InlineEquationHandler {
    * @param equationElement The equation element.
    */
   private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
-    return this.dialog
-      .open(EquationDialogComponent, {
+    const caretPosition = this.selection.caretPosition(source.elementRef.nativeElement);
+    const nativeElement = source.elementRef.nativeElement;
+    return this.dialog.open(EquationDialogComponent,
+      {
         width: '800px',
         data: {
           equation: actualEquation
         }
-      })
-      .afterClosed()
-      .pipe(first())
+      }).afterClosed().pipe(first())
       .subscribe((data) => {
-        if (data === undefined) {
-          this.renderer2.removeChild(equationElement.parentNode, equationElement);
-        } else if (data.equation) {
+        if (data !== undefined && data.equation !== '') {
           const newEquation = data.equation;
+          const renderedEquation = katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"');
           this.renderer2.setProperty(
             equationElement,
             'outerHTML',
-            katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"')
+            renderedEquation
           );
         }
+        source.data = source.serialize();
+        console.log(source.data);
+        source.data = source.data.replace('<span id="katex-tmp"></span>', ''); // TODO: replace with a  removeChild...
+        source.data = `${source.data} `;
+        source.render(source.data);
 
-        source.onInput();
+
+        const afterNode = nativeElement.childNodes[nativeElement.childNodes.length - 1]
+        this.selection.setAfter(afterNode, 0);
+
       });
   }
 
@@ -92,4 +99,5 @@ export class InlineEquationHandler {
       this.openEquationDialog(equation, source, equationElement);
     }
   }
+
 }

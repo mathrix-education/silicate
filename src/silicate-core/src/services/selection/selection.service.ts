@@ -22,7 +22,7 @@ export class SelectionService {
    * @param callback The callback to execute on the selection.
    * @param returns The default return value of the callback, if document.selection() is not available.
    */
-  private selection(callback, returns = null) {
+  selection(callback, returns = null) {
     const selection = this.document.getSelection();
 
     if (!selection) {
@@ -31,6 +31,17 @@ export class SelectionService {
       return callback(selection);
     }
   }
+
+   caretPosition(element) {
+    let caretOffset: number;
+     const range = this.document.getSelection().getRangeAt(0);
+     const preCaretRange = range.cloneRange();
+      preCaretRange.selectNodeContents(element);
+      preCaretRange.setEnd(range.endContainer, range.endOffset);
+      caretOffset = preCaretRange.toString().length;
+    return caretOffset;
+  }
+
 
 
   /**
@@ -48,7 +59,7 @@ export class SelectionService {
   /**
    * Check whether there is a saved selection.
    */
-  hasSavedSelection() {
+  hasSavedSelection(): boolean {
     return this.savedSelection !== null;
   }
 
@@ -56,8 +67,8 @@ export class SelectionService {
   /**
    * Restore the saved selection, if it exists.
    */
-  restoreSelection() {
-    if (this.savedSelection !== null) {
+  restoreSelection(): void {
+    if (this.hasSavedSelection()) {
       this.selection((selection) => {
         selection.removeAllRanges();
         selection.addRange(this.savedSelection);
@@ -71,7 +82,7 @@ export class SelectionService {
    * Check if the selection is inside a given element.
    * @param elementRef The element reference.
    */
-  isSelectionInside(elementRef: ElementRef<HTMLElement> | any) {
+  isSelectionInside(elementRef: ElementRef<HTMLElement> | any): boolean {
     return this.selection((selection) => {
       return elementRef.nativeElement.contains(selection.anchorNode)
         && elementRef.nativeElement.contains(selection.focusNode);
@@ -82,7 +93,7 @@ export class SelectionService {
   /**
    * Check if the selection is collapsed (has a zero-length).
    */
-  isSelectionCollapsed() {
+  isSelectionCollapsed(): boolean {
     return this.selection((selection) => {
       return selection.isCollapsed;
     }, false);
@@ -98,7 +109,13 @@ export class SelectionService {
     }, false);
   }
 
-  setAfter(node: Node, offset: number = 0) {
+  /**
+   *
+   * @param node The node.
+   * @param offset The ofset inside the node.
+   * @param collapse If collapse is enabled.
+   */
+  setAfter(node: Node, offset: number = 0, collapse = false) {
     const range = this.document.createRange();
     range.setStart(node, offset);
     range.setEnd(node, offset);
