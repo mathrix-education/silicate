@@ -12,8 +12,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./equation-dialog.component.scss']
 })
 export class EquationDialogComponent {
-  es
-
   @ViewChild('equation') equation;
   elementRef: ElementRef<HTMLElement> = null;
   equationFormFieldFocused = false;

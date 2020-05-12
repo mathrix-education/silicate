@@ -12,10 +12,8 @@ import {ElementRef, Inject, Injectable} from '@angular/core';
 export class SelectionService {
   private savedSelection;
 
-
   constructor(@Inject(DOCUMENT) private document: Document) {
   }
-
 
   /**
    * Safely interact with the selection.
@@ -31,18 +29,6 @@ export class SelectionService {
       return callback(selection);
     }
   }
-
-   caretPosition(element) {
-    let caretOffset: number;
-     const range = this.document.getSelection().getRangeAt(0);
-     const preCaretRange = range.cloneRange();
-      preCaretRange.selectNodeContents(element);
-      preCaretRange.setEnd(range.endContainer, range.endOffset);
-      caretOffset = preCaretRange.toString().length;
-    return caretOffset;
-  }
-
-
 
   /**
    * Save the current selection.

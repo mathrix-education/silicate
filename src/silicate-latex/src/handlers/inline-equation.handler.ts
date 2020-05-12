@@ -36,7 +36,6 @@ export class InlineEquationHandler {
    * @param equationElement The equation element.
    */
   private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
-    const caretPosition = this.selection.caretPosition(source.elementRef.nativeElement);
     const nativeElement = source.elementRef.nativeElement;
     return this.dialog.open(EquationDialogComponent,
       {
