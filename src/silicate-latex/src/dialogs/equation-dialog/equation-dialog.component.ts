@@ -12,7 +12,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./equation-dialog.component.scss']
 })
 export class EquationDialogComponent {
-
   @ViewChild('equation') equation;
   elementRef: ElementRef<HTMLElement> = null;
   equationFormFieldFocused = false;
@@ -32,12 +31,14 @@ export class EquationDialogComponent {
 
   /**
    * listen to keydown event, if the Shift key is currently pressed, do nothing, else, close the dialog on Enter.
+   * If Escape, prevent default, (material default escape close without data).
    * @param event The keyboard event
    */
   @HostListener('keydown', ['$event'])
   keydown(event: KeyboardEvent) {
-    if (event.key === 'Enter' && (this.KeyPressed !== 'Shift')) {
+    if (event.key === 'Enter' && this.KeyPressed !== 'Shift' || event.key === 'Escape') {
       event.preventDefault();
+      event.stopPropagation();
       this.matDialogRef.close(this.data);
     }
     this.KeyPressed = event.key;

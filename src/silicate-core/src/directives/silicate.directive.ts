@@ -21,7 +21,6 @@ import {PurifierService} from '../services/purifier/purifier.service';
 import {Handler} from '../interfaces/handler';
 import {Subscription} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
-import * as katex from 'katex';
 
 /** @dynamic */
 @Directive({
@@ -34,20 +33,20 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   @Input() data: string;
   @Output() dataChange = new EventEmitter<string>();
 
-  /** The subscription ti SilicateService.editable$ */
+  /** The subscription to SilicateService.editable$ */
   private editableSubscription: Subscription;
   /** Un-listen the wrapper focus event. */
   unlistenWrapperFocus: () => void;
   /** Un-listen the wrapper focus event. */
   unlistenWrapperBlur: () => void;
-  /** Un-listen provided global events */
+  /** Un-listen provided global events. */
     // tslint:disable-next-line:variable-name
   unlistenGlobalEvents_: (() => void)[] = [];
-  /** Un-listen provided on-focus events */
+  /** Un-listen provided on-focus events. */
   unlistenFocusEvents: (() => void)[] = [];
-
   /** call this function to remove paste event listener */
   private unlistenPasteListener: () => void;
+
 
   constructor(
     public elementRef: ElementRef<HTMLElement>,
@@ -59,7 +58,6 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     @Inject(DOCUMENT) private document: Document
   ) {
   }
-
 
   /**
    * On initialization:
@@ -88,7 +86,6 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     if (changes.data) {
       const newSerializedData = changes.data.currentValue;
       const actualSerializedData = this.serialize();
-
       if (newSerializedData !== actualSerializedData) {
         this.render(newSerializedData);
       }
@@ -108,17 +105,24 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
     this.unlistenPasteListener();
   }
 
+
   /**
    * Serialize the innerHTML of the element to its JSON form.
    */
-  serialize() {
-    let buffer = this.elementRef.nativeElement.innerHTML;
+  serialize(): string {
+    return this.serializeThrough(this.elementRef.nativeElement.innerHTML);
+  }
 
-    this.silicate.serializers.forEach((serializer: Serializer) => {
-      buffer = serializer.serialize(buffer);
-    });
+  /**
+   * Serialize the input through all the serializer.
+   * @param input The input.
+   */
+  private serializeThrough(input) {
+    return this.silicate.serializers.reduce((buffer: string, serializer: Serializer) => serializer.serialize(buffer), input);
+  }
 
-    return buffer;
+  private renderThrough(input: string) {
+    return this.silicate.serializers.reduce((buffer: string, serializer: Serializer) => serializer.render(buffer), input);
   }
 
   /**
@@ -126,11 +130,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    * @param buffer The serialized HTML string.
    */
   render(buffer: string) {
-    this.silicate.serializers.forEach((serializer: Serializer) => {
-      buffer = serializer.render(buffer);
-    });
-
-    this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', buffer);
+    this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', this.renderThrough(buffer));
     this.renderer2.setProperty(this.elementRef.nativeElement, 'spellcheck', true);
   }
 
@@ -143,7 +143,6 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
       this.dataChange.emit(this.serialize());
     }
   }
-
 
   /**
    * Get the target of an event.
@@ -160,8 +159,8 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   /**
-   * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit the
-   * event to the ToolbarService.
+   * Listen on the #wrapper focus event. Then, create an document-wide event listener to handle selection change and transmit
+   * the event to the ToolbarService.
    */
   listenWrapperFocus() {
     this.unlistenWrapperFocus = this.renderer2.listen(this.elementRef.nativeElement, 'focus', () => {
@@ -237,15 +236,14 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
       event.preventDefault();
 
       let plainText = (event.originalEvent || event).clipboardData.getData('text/plain');
+
       plainText = plainText.replace('\n', ' ');
-
-      this.silicate.serializers.forEach((serializer: Serializer) => {
-        plainText = serializer.render(plainText);
-      });
-
+      plainText = this.serializeThrough(plainText);
       plainText = this.purifier.purify(plainText);
 
       this.document.execCommand('insertHTML', false, plainText);
     });
   }
+
+
 }
