@@ -12,7 +12,7 @@ export class ViewComponent {
   constructor(public demo: DemoService) {
   }
 
-  wallChange(wall: Wall) {
+  wallChange(wall: Wall): void {
     console.log('data change', wall);
   }
 }
