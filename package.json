@@ -6,8 +6,8 @@
     "build:libs": "ng build silicate-core && ng build silicate-essentials && ng build silicate-latex && ng build silicate-videos && ng build silicate-education",
     "build:browser": "ng build silicate-demo --prod",
     "build:server": "ng run silicate-demo:server && webpack --config src/silicate-demo/webpack.server.config.js",
-    "build:ssr": "ng run build:browser && ng run build:server",
-    "serve:ssr": "node dist/server.js"
+    "serve:ssr": "node dist/server.js",
+    "serve:demo": "ng serve silicate-demo"
   },
   "private": true,
   "dependencies": {
