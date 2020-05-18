@@ -55,7 +55,6 @@ export class InlineEquationHandler {
           );
         }
         source.data = source.serialize();
-        console.log(source.data);
         source.data = source.data.replace('<span id="katex-tmp"></span>', ''); // TODO: replace with a  removeChild...
         source.data = `${source.data} `;
         source.render(source.data);
