@@ -13,6 +13,6 @@ export class ViewComponent {
   }
 
   wallChange(wall: Wall) {
-    // console.log('data change', wall);
+    console.log('data change', wall);
   }
 }
