@@ -5,10 +5,12 @@ import {Wall} from '@mathrix-education/silicate-core';
   providedIn: 'root'
 })
 export class DemoService {
-  editable = true;
+  editable = false;
   data: Wall = [{
-      uuid: '72df73fc-20eb-48c4-a3bd-62c4594511b7',
-      kind: 'text',
-      text: ''
-    }];
+    uuid: '1477050e-bd14-49ba-a8e5-131954cd3fb6',
+    kind: 'image',
+    src: 'https://placehold.it/300x120',
+    alt: 'Texte alternatif',
+    displayAlt: true
+  }];
 }
