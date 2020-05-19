@@ -3,6 +3,7 @@ img {
   margin: auto;
   display: block;
 }
+
 figcaption {
   margin-top: 8px;
   text-align: center;
@@ -12,9 +13,30 @@ figure {
   margin-left: 0;
   margin-right: 0;
 }
+
 div {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+}
+
+.image-fullscreen {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  background: rgba(0, 0, 0, 0.32); // same as material cdk-overlay-dark-backdrop
+
+  figure {
+    img {
+      max-width: min(1200px, 90vw);
+      max-height: 90vh;
+    }
+  }
 }

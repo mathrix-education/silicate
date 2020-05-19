@@ -1,14 +1,33 @@
 <div>
   <ng-container *ngIf="!data.src">
-    <button (click)="openDialog()" color="primary" mat-flat-button>Choisir l'image</button>
+    <button (click)="openDialogOrFullscreen()" color="primary" mat-flat-button>Choisir l'image</button>
   </ng-container>
 
   <figure>
-    <img (click)="openDialog()"
+    <img (click)="openDialogOrFullscreen()"
+         *ngIf="data.src"
+         [alt]="data.alt"
+         [src]="data.src">
+
+    <figcaption *ngIf="data.displayAlt" silicate [(data)]="data.alt"></figcaption>
+  </figure>
+</div>
+
+
+<div
+  *ngIf="fullscreen"
+  class="image-fullscreen"
+  (click)="openDialogOrFullscreen()">
+
+  <figure>
+    <img
       *ngIf="data.src"
       [alt]="data.alt"
       [src]="data.src">
 
-    <figcaption *ngIf="data.displayAlt" silicate [(data)]="data.alt"></figcaption>
+    <figcaption
+      *ngIf="data.displayAlt">
+      {{data.alt}}
+    </figcaption>
   </figure>
 </div>

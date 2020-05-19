@@ -12,15 +12,21 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./image-brick.component.scss']
 })
 export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
+  /** If the image is displayed in fullscreen. */
+  fullscreen = false;
+
   constructor(
     private silicate: SilicateService,
     private matDialog: MatDialog) {
     super();
   }
 
-
-  openDialog() {
+  /**
+   * Open the edit dialog or fullscreen according to the edit mode.
+   */
+  openDialogOrFullscreen() {
     if (!this.silicate.editable) {
+      this.fullscreen = !this.fullscreen;
       return;
     }
 
