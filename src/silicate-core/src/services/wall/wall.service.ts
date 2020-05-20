@@ -16,7 +16,8 @@ export class WallService {
   private wallSubject = new BehaviorSubject<Wall>([]);
   /** The wall as observable */
   wall$ = this.wallSubject.asObservable();
-
+  /** The cut brick */
+  cutBrick: BaseBrick = null;
 
   /**
    * Get a copy of the wall$ BehaviorSubject. Since the structure of a brick is relatively free, we cannot make any assumption of its

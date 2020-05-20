@@ -17,6 +17,7 @@ import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
 import {Brick} from '../../interfaces/brick';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
               private componentFactory: ComponentFactoryResolver,
               private renderer2: Renderer2,
               public silicate: SilicateService,
+              private snackBar: MatSnackBar,
               public wall: WallService) {
   }
 
@@ -69,7 +71,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   /**
    * Clear the proxy content.
    */
-  private clear() {
+  private clear(): void {
     if (this.dataChangeSubscription instanceof Subscription) {
       this.dataChangeSubscription.unsubscribe();
     }
@@ -124,8 +126,25 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
+  /**
+   * Cut the current brick.
+   */
+  cut(): void {
+    const wall = this.wall.get(this.index);
+    this.wall.cutBrick = JSON.parse(JSON.stringify(wall));
+    this.wall.delete(this.index);
+    this.snackBar.open('Brique copiée', null, {duration: 2000});
+  }
+
+  /**
+   * Paste bellow.
+   */
+  pasteBellow(): void {
+    this.wall.insert(this.index + 1, this.wall.cutBrick);
+    this.wall.cutBrick = null;
+  }
+
   ngOnDestroy(): void {
     this.clear();
   }
-
 }

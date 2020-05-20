@@ -5,7 +5,7 @@ import {Wall} from '@mathrix-education/silicate-core';
   providedIn: 'root'
 })
 export class DemoService {
-  editable = false;
+  editable = true;
   data: Wall = [{
     uuid: '1477050e-bd14-49ba-a8e5-131954cd3fb6',
     kind: 'image',

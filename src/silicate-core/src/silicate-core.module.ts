@@ -15,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     FormsModule,
     MatButtonModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatIconModule,
     DragDropModule,
     MatGridListModule
