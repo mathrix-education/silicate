@@ -19,7 +19,6 @@ import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {recursiveReplace} from '../../helper/recursive-replace';
-import {error} from "ng-packagr/lib/utils/log";
 
 
 @Component({
