@@ -47,11 +47,11 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
   /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
   @HostBinding('attr.data-silicate-root') @Input() root = true;
 
+
   /** Add silicate-wall class to detect it's a wall on editable mode */
   @HostBinding('class.silicate-wall') get fn() {
     return !this.editable;
   }
-
   /** An internal subscription to be deleted */
   private sub1: Subscription;
 

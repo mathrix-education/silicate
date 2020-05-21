@@ -8,7 +8,7 @@ import {BaseBrick} from './base-brick';
  */
 export abstract class BaseBrickFactory<T = BaseBrick> {
   protected withUuid(data) {
-    return {...{uuid: uuid()}, ...data};
+    return {...data, uuid: uuid()};
   }
 
 

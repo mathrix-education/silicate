@@ -3,6 +3,7 @@
 <ng-container *ngIf="silicate.editable">
   <button class="proxy-menu-trigger"
           mat-icon-button
+          (click)="checkClipboard()"
           [matMenuTriggerFor]="proxyMenu">
     <mat-icon class="proxy-menu-icon">more_vert</mat-icon>
   </button>
@@ -11,13 +12,16 @@
     <button mat-menu-item (click)="wall.delete(index)">
       Supprimer
     </button>
-    <button *ngIf="wall.cutBrick === null" mat-menu-item (click)="cut()">
-      Couper
+
+    <button mat-menu-item (click)="copy()">
+      Copier
     </button>
 
-    <button *ngIf="wall.cutBrick !== null"
-            (click)="pasteBellow()"
-            mat-menu-item>
+
+    <button
+      *ngIf="brickPasted"
+      (click)="pasteBellow()"
+      mat-menu-item>
       Coller en dessous
     </button>
 
