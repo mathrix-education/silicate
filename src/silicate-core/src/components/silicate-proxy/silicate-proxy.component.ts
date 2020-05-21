@@ -18,6 +18,8 @@ import {Brick} from '../../interfaces/brick';
 import {SilicateService} from '../../services/silicate/silicate.service';
 import {WallService} from '../../services/wall/wall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {recursiveReplace} from '../../helper/recursive-replace';
+import {error} from "ng-packagr/lib/utils/log";
 
 
 @Component({
@@ -26,16 +28,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./silicate-proxy.component.scss']
 })
 export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComponent> implements OnInit, OnDestroy {
-  /** A whitelist of bricks. */
-  @Input() whitelist: string[];
-  /** The index of the silicate wrapper */
-  @Input() index: number;
-  @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
 
-  initialized = false;
-  brickRef: ComponentRef<T>;
-  dataChangeSubscription: Subscription;
-
+  /** A prefix used for copy paste. */
+  private readonly prefix = '*SILICATE*';
 
   constructor(private injector: Injector,
               private componentFactory: ComponentFactoryResolver,
@@ -62,6 +57,19 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
       return 'settings';
     }
   }
+
+  /** A whitelist of bricks. */
+  @Input() whitelist: string[];
+  /** The index of the silicate wrapper */
+  @Input() index: number;
+  @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
+
+  initialized = false;
+  brickRef: ComponentRef<T>;
+  dataChangeSubscription: Subscription;
+
+  brickPasted = false;
+
 
   ngOnInit(): void {
     this.initialized = true;
@@ -129,19 +137,43 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   /**
    * Cut the current brick.
    */
-  cut(): void {
+  copy(): void {
     const wall = this.wall.get(this.index);
-    this.wall.cutBrick = JSON.parse(JSON.stringify(wall));
-    this.wall.delete(this.index);
-    this.snackBar.open('Brique copiée', null, {duration: 2000});
+    navigator.clipboard.writeText(`${this.prefix}${JSON.stringify(wall)}`).then(
+      () => {
+        this.brickPasted = true;
+        this.snackBar.open('Brique copiée dans le presse papier', null, {duration: 2000});
+      }
+    );
   }
 
   /**
    * Paste bellow.
    */
   pasteBellow(): void {
-    this.wall.insert(this.index + 1, this.wall.cutBrick);
-    this.wall.cutBrick = null;
+    navigator.clipboard.readText().then((clipText) => {
+      let brick;
+      try {
+        clipText = clipText.replace(this.prefix, '');
+        brick = JSON.parse(clipText);
+        brick = recursiveReplace(brick);
+      } catch (e) {
+        return;
+      }
+
+      navigator.clipboard.writeText('').then(() => {
+        this.wall.insert(this.index + 1, brick);
+      });
+    });
+  }
+
+  /**
+   * Check the clipboard.
+   */
+  checkClipboard(): void {
+    navigator.clipboard.readText().then((clipText) => {
+      this.brickPasted = clipText.includes(this.prefix);
+    });
   }
 
   ngOnDestroy(): void {
