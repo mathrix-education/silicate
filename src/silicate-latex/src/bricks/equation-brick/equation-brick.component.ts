@@ -41,15 +41,18 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
    */
   render(): void {
     if (!this.equationElementRef) {
-      // Abort render if the equationElementRef is not initialized.
-      return;
+      return;// Abort render if the equationElementRef is not initialized.
     }
 
-    this.renderer2.setProperty(
-      this.equationElementRef.nativeElement,
-      'innerHTML',
-      katex.renderToString(this.data.equation, {displayMode: true})
-    );
+    try {
+      this.renderer2.setProperty(
+        this.equationElementRef.nativeElement,
+        'innerHTML',
+        katex.renderToString(this.data.equation, {displayMode: true})
+      );
+    } catch (e) {
+      throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);
+    }
     this.cd.detectChanges();
   }
 
