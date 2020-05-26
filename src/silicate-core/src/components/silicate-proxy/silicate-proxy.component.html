@@ -13,13 +13,15 @@
       Supprimer
     </button>
 
-    <button mat-menu-item (click)="copy()">
-      Copier
+    <button
+      [disabled]="!clipBoardEnabled"
+      mat-menu-item (click)="copy()">
+      Copier{{!clipBoardEnabled ? '(désactivé)' : ''}}
     </button>
 
 
     <button
-      *ngIf="brickPasted"
+      *ngIf="brickCopied && clipBoardEnabled"
       (click)="pasteBellow()"
       mat-menu-item>
       Coller en dessous

@@ -30,13 +30,28 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   /** A prefix used for copy paste. */
   private readonly prefix = '*SILICATE*';
+  /** A whitelist of bricks. */
+  @Input() whitelist: string[];
+  /** The index of the silicate wrapper */
+  @Input() index: number;
+  @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
+  /** The brick reference. */
+  brickRef: ComponentRef<T>;
+  /** The datachange subscription */
+  dataChangeSubscription: Subscription;
+  /** If the brick is copied.  */
+  brickCopied = false;
+  /** If the clipboard is enabled. */
+  clipBoardEnabled = true;
 
-  constructor(private injector: Injector,
-              private componentFactory: ComponentFactoryResolver,
-              private renderer2: Renderer2,
-              public silicate: SilicateService,
-              private snackBar: MatSnackBar,
-              public wall: WallService) {
+  constructor(
+    private injector: Injector,
+    private componentFactory: ComponentFactoryResolver,
+    private renderer2: Renderer2,
+    public silicate: SilicateService,
+    private snackBar: MatSnackBar,
+    public wall: WallService,
+  ) {
   }
 
   /**
@@ -57,21 +72,8 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     }
   }
 
-  /** A whitelist of bricks. */
-  @Input() whitelist: string[];
-  /** The index of the silicate wrapper */
-  @Input() index: number;
-  @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
-
-  initialized = false;
-  brickRef: ComponentRef<T>;
-  dataChangeSubscription: Subscription;
-
-  brickPasted = false;
-
 
   ngOnInit(): void {
-    this.initialized = true;
     this.render();
   }
 
@@ -104,10 +106,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
   /**
    * Render the Brick in the proxy.
    */
-  render() {
-    if (!this.initialized) {
-      return; // Do not render if not initialized
-    }
+  private render(): void {
 
     if (this.brickRef) {
       this.clear(); // Clear before rendering
@@ -140,7 +139,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const wall = this.wall.get(this.index);
     navigator.clipboard.writeText(`${this.prefix}${JSON.stringify(wall)}`).then(
       () => {
-        this.brickPasted = true;
+        this.brickCopied = true;
         this.snackBar.open('Brique copiée dans le presse papier', null, {duration: 2000});
       }
     );
@@ -170,9 +169,17 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
    * Check the clipboard.
    */
   checkClipboard(): void {
-    navigator.clipboard.readText().then((clipText) => {
-      this.brickPasted = clipText.includes(this.prefix);
-    });
+    if (!this.clipBoardEnabled) {
+      return;
+    }
+
+    try {
+      navigator.clipboard.readText().then((clipText) => {
+        this.brickCopied = clipText.includes(this.prefix);
+      });
+    } catch (e) {
+      this.clipBoardEnabled = false;
+    }
   }
 
   ngOnDestroy(): void {
