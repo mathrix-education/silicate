@@ -1,22 +1,22 @@
 <div #wrapper class="wrapper">
   <h3 #titleContainer>
     <span
-      #prefix
-      *ngIf="silicate.editable || data.prefix"
-      class="prefix"
-      silicate
-      [data]="data.prefix"
-      (dataChange)="onPrefixChange($event)">
+        #prefix
+        *ngIf="silicate.editable || data.prefix"
+        class="prefix"
+        silicate
+        [data]="data.prefix"
+        (dataChange)="onPrefixChange($event)">
     </span>
 
     <span>{{ title }}</span>
 
     <span
-      #suffix
-      *ngIf="silicate.editable || data.suffix"
-      class="suffix"
-      silicate
-      [(data)]="data.suffix">
+        #suffix
+        *ngIf="silicate.editable || data.suffix"
+        class="suffix"
+        silicate
+        [(data)]="data.suffix">
     </span>
 
     <ng-container *ngIf="silicate.editable">
@@ -39,5 +39,9 @@
     </ng-container>
   </h3>
 
-  <silicate-wrapper [(data)]="data.wall" [editable]="silicate.editable"></silicate-wrapper>
+  <silicate-wrapper
+    [(data)]="data.wall"
+    [editable]="silicate.editable"
+    [whitelist]="['text']">
+  </silicate-wrapper>
 </div>
