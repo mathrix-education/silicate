@@ -1,7 +1,11 @@
-<figure>
+<figure *ngIf="renderSucceed else renderErrorTemplate">
   <div #equation class="katex-display"></div>
 
   <figcaption *ngIf="data.description">
     {{ data.description }}
   </figcaption>
 </figure>
+
+<ng-template #renderErrorTemplate>
+  <div>Oups, cette equation ne s'affiche pas correctement...</div>
+</ng-template>

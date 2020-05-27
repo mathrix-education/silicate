@@ -18,10 +18,13 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'silicate-equation-brick',
   templateUrl: './equation-brick.component.html',
-  styleUrls: ['./equation-brick.component.scss']
+  styleUrls: ['./equation-brick.component.scss'],
 })
 export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> implements AfterViewInit {
+  /** The viewchild equation element ref. */
   @ViewChild('equation') equationElementRef: ElementRef<HTMLDivElement>;
+  /** If the brick render has succeded. */
+  renderSucceed = true;
 
   constructor(
     private renderer2: Renderer2,
@@ -40,10 +43,6 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
    * Using Renderer2, render the LaTeX equation in display mode.
    */
   render(): void {
-    if (!this.equationElementRef) {
-      return;// Abort render if the equationElementRef is not initialized.
-    }
-
     try {
       this.renderer2.setProperty(
         this.equationElementRef.nativeElement,
@@ -51,8 +50,8 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
         katex.renderToString(this.data.equation, {displayMode: true})
       );
     } catch (e) {
-      throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);
-    }
+      this.renderSucceed = false;
+      throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);    }
     this.cd.detectChanges();
   }
 
