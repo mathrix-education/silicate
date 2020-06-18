@@ -4,7 +4,6 @@ import {LATEX_SYMBOLS} from './equation-dialog.symbols';
 import {LATEX_SNIPPETS} from './equation-dialog.snippets';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-
 /** @dynamic */
 @Component({
   selector: 'silicate-equation-dialog',
@@ -17,7 +16,7 @@ export class EquationDialogComponent {
   readonly symbols = LATEX_SYMBOLS;
   readonly snippets = LATEX_SNIPPETS;
   /** The last key pressed. */
-  private KeyPressed: string;
+  private keyPressed: string;
   /** The original equation, used with close without saving. */
   private readonly originalData = JSON.parse(JSON.stringify(this.data));
 
@@ -36,14 +35,14 @@ export class EquationDialogComponent {
    */
   @HostListener('keydown', ['$event'])
   keydown(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && this.KeyPressed !== 'Shift') {
+    if (event.key === 'Enter' && this.keyPressed !== 'Shift') {
       event.preventDefault();
       event.stopPropagation();
       this.dialogRef.close(this.data);
     } else if (event.key === 'Escape') {
       this.closeWithoutSaving();
     }
-    this.KeyPressed = event.key;
+    this.keyPressed = event.key;
   }
 
   /**
@@ -52,7 +51,7 @@ export class EquationDialogComponent {
   @HostListener('keyup', ['$event'])
   keyup(event: KeyboardEvent): void {
     if (event.key === 'Shift') {
-      this.KeyPressed = null;
+      this.keyPressed = null;
     }
   }
 

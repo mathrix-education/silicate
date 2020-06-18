@@ -38,8 +38,8 @@ export class SilicateWrapperComponent implements OnInit, OnChanges, AfterViewIni
 
   /** If the edition is enabled. */
   @Input() editable = false;
-  /** A brick kind whitelist. */
-  @Input() whitelist: string[];
+  /** A brick kind allowist. */
+  @Input() allowist: string[];
   /** Two-way binding data. */
   @Input() data: Wall = [];
   @Output() dataChange = new EventEmitter<BaseBrick[]>();

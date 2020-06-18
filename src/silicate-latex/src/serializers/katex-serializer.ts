@@ -21,14 +21,14 @@ export class KatexSerializer implements Serializer {
 
     const segments = str.split('$');
     let output = '';
-
     segments.forEach((segment: string, index: number) => {
       if (index % 2 === 0) {
         output += segment;
       } else {
         // Unescape the '<' and '>' chars since the were escape by the DOM parser and may be math symbols
         segment = segment.replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>');
+          .replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
         output += katex.renderToString(segment, {displayMode: this.platform.isBrowser});
       }
     });
