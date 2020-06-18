@@ -32,8 +32,9 @@
   </mat-menu>
 
   <mat-menu #appendMenu="matMenu">
-    <silicate-brick-selector [whitelist]="whitelist"
-                             (select)="append($event)">
+    <silicate-brick-selector
+      [allowlist]="allowlist"
+      (select)="append($event)">
     </silicate-brick-selector>
   </mat-menu>
 </ng-container>

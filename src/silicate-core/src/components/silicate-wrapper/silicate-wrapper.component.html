@@ -1,7 +1,7 @@
 <ng-container *ngIf="!silicate.editable else editor">
   <silicate-proxy *ngFor="let brick of (wall.wall$ | async); let i = index;"
                   [index]="i"
-                  [whitelist]="whitelist"
+                  [allowlist]="allowlist"
                   class="silicate-wall-item">
   </silicate-proxy>
 </ng-container>
@@ -22,7 +22,7 @@
                 class="drag-handle-icon">drag_indicator
       </mat-icon>
 
-      <silicate-proxy [whitelist]="whitelist" [index]="i"></silicate-proxy>
+      <silicate-proxy [allowlist]="allowlist" [index]="i"></silicate-proxy>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
 
 <mat-menu #brickType="matMenu">
   <silicate-brick-selector
-          [whitelist]="whitelist"
-          (select)="begin($event)">
+    [allowlist]="allowlist"
+    (select)="begin($event)">
   </silicate-brick-selector>
 </mat-menu>
