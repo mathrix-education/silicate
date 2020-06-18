@@ -30,8 +30,8 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
 
   /** A prefix used for copy paste. */
   private readonly prefix = '*SILICATE*';
-  /** An allowist of bricks. */
-  @Input() allowist: string[];
+  /** An allowlist of bricks. */
+  @Input() allowlist: string[];
   /** The index of the silicate wrapper */
   @Input() index: number;
   @ViewChild('wrapper', {read: ViewContainerRef, static: true}) wrapper: ViewContainerRef;
