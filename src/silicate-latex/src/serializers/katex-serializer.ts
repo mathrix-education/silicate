@@ -29,7 +29,7 @@ export class KatexSerializer implements Serializer {
         segment = segment.replace(/&lt;/g, '<')
           .replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-        output += katex.renderToString(segment, {displayMode: this.platform.isBrowser});
+        output += katex.renderToString(segment, {displayMode: this.platform.isBrowser, output: 'html'});
       }
     });
 

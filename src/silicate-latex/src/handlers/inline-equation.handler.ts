@@ -47,7 +47,7 @@ export class InlineEquationHandler {
       .subscribe((data) => {
         if (data !== undefined && data.equation !== '') {
           const newEquation = data.equation;
-          const renderedEquation = katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"');
+          const renderedEquation = katex.renderToString(newEquation, {output: 'html'}).replace('class="katex"', 'class="katex" contenteditable="false"');
           this.renderer2.setProperty(
             equationElement,
             'outerHTML',
