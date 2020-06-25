@@ -11,7 +11,7 @@ export class EquationBrickFactory extends BaseBrickFactory<EquationBrick> {
     return this.withUuid({
       kind: 'equation',
       equation: 'f(x) = x^2',
-      description: 'Fonction carrée'
+      description: ''
     });
   }
 }

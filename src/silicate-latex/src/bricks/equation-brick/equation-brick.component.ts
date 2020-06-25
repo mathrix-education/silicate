@@ -47,11 +47,12 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       this.renderer2.setProperty(
         this.equationElementRef.nativeElement,
         'innerHTML',
-        katex.renderToString(this.data.equation, {displayMode: true})
+        katex.renderToString(this.data.equation, {displayMode: true, output: 'html'})
       );
     } catch (e) {
       this.renderSucceed = false;
-      throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);    }
+      throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);
+    }
     this.cd.detectChanges();
   }
 
