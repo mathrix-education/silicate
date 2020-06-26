@@ -19,6 +19,8 @@ export class EquationDialogComponent {
   private keyPressed: string;
   /** The original equation, used with close without saving. */
   private readonly originalData = JSON.parse(JSON.stringify(this.data));
+  /** If the equation has errors. */
+  hasError = true;
 
   constructor(
     private readonly renderer2: Renderer2,
@@ -35,6 +37,7 @@ export class EquationDialogComponent {
    */
   @HostListener('keydown', ['$event'])
   keydown(event: KeyboardEvent): void {
+    this.hasError = false;
     if (event.key === 'Enter' && this.keyPressed !== 'Shift') {
       event.preventDefault();
       event.stopPropagation();
@@ -59,6 +62,7 @@ export class EquationDialogComponent {
     if (this.equationFormFieldFocused) {
       $event.preventDefault();
       this.document.execCommand('insertText', false, latexSnippet);
+      this.hasError = false;
     }
     // TODO: Insert the snippet at the end
   }

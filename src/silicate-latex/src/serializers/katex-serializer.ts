@@ -6,7 +6,10 @@ import {Injectable, Renderer2, RendererFactory2} from '@angular/core';
 export class KatexSerializer implements Serializer {
   private renderer2: Renderer2;
 
-  constructor(rendererFactory: RendererFactory2, private platform: PlatformService) {
+  constructor(
+    rendererFactory: RendererFactory2,
+    private platform: PlatformService,
+  ) {
     this.renderer2 = rendererFactory.createRenderer(null, null);
   }
 
@@ -19,17 +22,19 @@ export class KatexSerializer implements Serializer {
       return '';
     }
 
-    const segments = str.split('$');
     let output = '';
+    const segments = str.split('$');
+
     segments.forEach((segment: string, index: number) => {
       if (index % 2 === 0) {
         output += segment;
       } else {
-        // Unescape the '<' and '>' chars since the were escape by the DOM parser and may be math symbols
+        // Unescape the '<' and '>' and '&' chars since the were escape by the DOM parser and may be math symbols
         segment = segment.replace(/&lt;/g, '<')
           .replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-
-        output += katex.renderToString(segment, {displayMode: this.platform.isBrowser, output: 'html'});
+        output += katex.renderToString(segment, {
+          displayMode: this.platform.isBrowser,
+        });
       }
     });
 
@@ -64,12 +69,13 @@ export class KatexSerializer implements Serializer {
    */
   serialize(str: string): string {
     // We do not even need to analyse non-katex content or if we a re in a non-browser context.
-    if (str.indexOf('katex') === -1 || !this.platform.isBrowser) {
+    if (!str.includes('katex') || !this.platform.isBrowser) {
       return str;
     }
 
     const sandbox: HTMLDivElement = this.renderer2.createElement('div');
     this.renderer2.setProperty(sandbox, 'innerHTML', str);
+
 
     // Now, we revert every katex HTML to their inline latex equation form ($equation$)
     sandbox.querySelectorAll('.katex').forEach((katexElement: HTMLElement) => {

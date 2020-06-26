@@ -47,7 +47,10 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       this.renderer2.setProperty(
         this.equationElementRef.nativeElement,
         'innerHTML',
-        katex.renderToString(this.data.equation, {displayMode: true, output: 'html'})
+        katex.renderToString(this.data.equation, {
+          displayMode: true,
+          output: this.silicate.editable ? 'htmlAndMathml' : 'html'
+        })
       );
     } catch (e) {
       this.renderSucceed = false;

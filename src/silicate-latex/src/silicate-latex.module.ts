@@ -17,15 +17,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {KatexComponent} from './katex/katex.component';
-import {KatexDirective} from './katex/katex.directive';
-
 
 @NgModule({
   declarations: [
     EquationBrickComponent,
     EquationDialogComponent,
     KatexComponent,
-    KatexDirective
   ],
   entryComponents: [
     EquationBrickComponent,
@@ -41,7 +38,7 @@ import {KatexDirective} from './katex/katex.directive';
     MatGridListModule,
     MatExpansionModule,
     MatFormFieldModule,
-    SilicateCoreModule
+    SilicateCoreModule,
   ]
 })
 export class SilicateLatexModule {

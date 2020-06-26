@@ -37,6 +37,7 @@ export class InlineEquationHandler {
    */
   private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
     const nativeElement = source.elementRef.nativeElement;
+
     return this.dialog.open(EquationDialogComponent,
       {
         width: '800px',
@@ -54,6 +55,7 @@ export class InlineEquationHandler {
             renderedEquation
           );
         }
+
         source.data = source.serialize();
         source.data = source.data.replace('<span id="katex-tmp"></span>', ''); // TODO: replace with a  removeChild...
         source.data = `${source.data} `;
