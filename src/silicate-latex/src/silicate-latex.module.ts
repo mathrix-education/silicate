@@ -39,7 +39,6 @@ import {KatexComponent} from './katex/katex.component';
     MatExpansionModule,
     MatFormFieldModule,
     SilicateCoreModule,
-    MatTooltipModule,
   ]
 })
 export class SilicateLatexModule {
