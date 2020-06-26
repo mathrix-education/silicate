@@ -39,10 +39,8 @@
 <!-- list element -->
 <ng-template #listElement>
   <ng-container *ngFor="let item of data.items; let i = index; trackBy: trackByFn">
-    <li
-      silicate
-      (keydown.enter)="onEnter($event, i)"
-      [(data)]="data.items[i]">
+    <li>
+      <p silicate [(data)]="data.items[i]" (keydown.enter)="onEnter($event, i)"></p>
     </li>
 
     <button mat-icon-button *ngIf="silicate.editable"
