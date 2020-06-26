@@ -1,17 +1,27 @@
-import {Component, Input} from '@angular/core';
-import {KatexOptions} from 'katex';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {KatexOptions, render} from 'katex';
 
 @Component({
-  selector: 'silicate-katex',
-  template: `
-    <span silicateKatex [equation]="equation"
-          [options]="options">
-    </span>
-  `,
+  selector: 'silicate-katex[equation]',
+  template: ``,
 })
-export class KatexComponent {
-
+export class KatexComponent implements OnChanges {
+  /** The latex equation. */
   @Input() equation: string;
+  /** The katex options. */
   @Input() options?: KatexOptions;
+  /** Emit when equation is not valid. */
+  @Output() error = new EventEmitter();
 
+  constructor(private el: ElementRef) {
+  }
+
+  ngOnChanges(): void {
+    try {
+      render(this.equation, this.el.nativeElement, this.options);
+    } catch (e) {
+      console.error(e);
+      this.error.emit();
+    }
+  }
 }

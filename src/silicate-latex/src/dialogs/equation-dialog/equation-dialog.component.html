@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Éditeur d'équation</h1>
+<h1 mat-dialog-title>Éditeur LaTeX</h1>
 <div mat-dialog-content>
   <div class="form-content">
     <mat-accordion>
@@ -17,7 +17,10 @@
             <button
               mat-raised-button
               (mousedown)="applySnippet($event, symbol)">
-              <silicate-katex [equation]="symbol" [options]="{displayMode: true}"></silicate-katex>
+              <silicate-katex
+                [equation]="symbol"
+                [options]="{displayMode: true}">
+              </silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -39,7 +42,10 @@
             <button
               mat-raised-button
               (mousedown)="applySnippet($event, snippet)">
-              <silicate-katex [equation]="snippet" [options]="{displayMode: true}"></silicate-katex>
+              <silicate-katex
+                [equation]="snippet"
+                [options]="{displayMode: true}">
+              </silicate-katex>
             </button>
           </mat-grid-tile>
         </mat-grid-list>
@@ -47,6 +53,7 @@
     </mat-accordion>
 
     <mat-form-field>
+      <mat-label>Équation</mat-label>
       <textarea
           #equation
           cdkAutosizeMinRows="1"
@@ -58,7 +65,6 @@
           (focus)="equationFormFieldFocused = true"
           [(ngModel)]="data.equation">
         </textarea>
-      <mat-label>Équation</mat-label>
     </mat-form-field>
 
     <mat-form-field *ngIf="data.enableDescription">
@@ -67,7 +73,11 @@
     </mat-form-field>
 
     <figure>
-      <silicate-katex [equation]="data.equation" [options]="{displayMode: true}"></silicate-katex>
+      <silicate-katex
+        [equation]="data.equation"
+        [options]="{displayMode: true}"
+        (error)="hasError = true">
+      </silicate-katex>
       <figcaption>
         {{ data.description }}
       </figcaption>
@@ -78,5 +88,10 @@
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="undefined">Supprimer</button>
   <button mat-button (click)="closeWithoutSaving()">Annuler</button>
-  <button mat-button color="primary" [mat-dialog-close]="data">Sauvegarder</button>
+  <button mat-button
+          color="primary"
+          matTooltip=""
+          [disabled]="hasError"
+          [mat-dialog-close]="data">Sauvegarder
+  </button>
 </div>
