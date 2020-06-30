@@ -6,11 +6,11 @@ import {Wall} from '@mathrix-education/silicate-core';
 })
 export class DemoService {
   editable = true;
-  data: Wall = [{
-    uuid: '1477050e-bd14-49ba-a8e5-131954cd3fb6',
-    kind: 'image',
-    src: 'https://placehold.it/300x120',
-    alt: 'Texte alternatif',
-    displayAlt: true
-  }];
+  data: Wall = [
+    {
+      kind: 'text',
+      text: '',
+      uuid: 'ee6afa01-af9d-42d4-bbdc-98e44c3d52ec'
+    }
+  ];
 }

@@ -46,6 +46,8 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
   unlistenFocusEvents: (() => void)[] = [];
   /** call this function to remove paste event listener */
   private unlistenPasteListener: () => void;
+  /** If the silicate update shall be enabled */
+  updateEnabled = true;
 
 
   constructor(
@@ -117,11 +119,11 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    * Serialize the input through all the serializer.
    * @param input The input.
    */
-  private serializeThrough(input) {
+  private serializeThrough(input): string {
     return this.silicate.serializers.reduce((buffer: string, serializer: Serializer) => serializer.serialize(buffer), input);
   }
 
-  private renderThrough(input: string) {
+  private renderThrough(input: string): string {
     return this.silicate.serializers.reduce((buffer: string, serializer: Serializer) => serializer.render(buffer), input);
   }
 
@@ -129,7 +131,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    * Render a serialized HTML string into the element.
    * @param buffer The serialized HTML string.
    */
-  render(buffer: string) {
+  render(buffer: string): void {
     this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', this.renderThrough(buffer));
     this.renderer2.setProperty(this.elementRef.nativeElement, 'spellcheck', true);
   }
@@ -138,8 +140,8 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
    * On input, synchronise the view with the data.
    */
   @HostListener('input')
-  onInput() {
-    if (this.silicate.editable) {
+  onInput(): void {
+    if (this.silicate.editable && this.updateEnabled) {
       this.dataChange.emit(this.serialize());
     }
   }
@@ -191,7 +193,7 @@ export class SilicateDirective implements OnInit, OnChanges, OnDestroy {
       this.toolbar.hide(this);
       this.unlistenFocusEvents.forEach(e => e());
 
-      if (this.silicate.editable) {
+      if (this.silicate.editable && this.updateEnabled) {
         this.dataChange.emit(this.serialize());
       }
     });

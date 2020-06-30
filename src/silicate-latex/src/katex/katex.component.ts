@@ -21,7 +21,7 @@ export class KatexComponent implements OnChanges {
       render(this.equation, this.el.nativeElement, this.options);
     } catch (e) {
       // tslint:disable-next-line:no-console
-      console.info(e);
+      console.warn(e);
       this.error.emit();
     }
   }

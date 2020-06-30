@@ -37,16 +37,16 @@ export class InlineEquationHandler {
    */
   private openEquationDialog(actualEquation, source: SilicateDirective, equationElement): void {
     const nativeElement = source.elementRef.nativeElement;
-
     this.dialog.open(EquationDialogComponent,
       {
         width: '800px',
         data: {
           equation: actualEquation
         }
-      }).afterClosed().pipe(first())
+      }).afterClosed()
       .subscribe((data) => {
-        if (data !== undefined && data.equation !== '') {
+        source.updateEnabled = true;
+        if (data !== undefined) {
           const newEquation = data.equation;
           const renderedEquation = katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"');
           this.renderer2.setProperty(
@@ -54,17 +54,23 @@ export class InlineEquationHandler {
             'outerHTML',
             renderedEquation
           );
+        } else {
+          // this.renderer2.removeChild(equationElement.parentElement, equationElement);
+          equationElement.parentElement.removeChild(equationElement);
+        }
+        source.data = source.serialize().replace('<span id="katex-tmp"></span>', ''); // TODO: replace with a  removeChild...;
+
+        if (data !== undefined) {
+          source.data = `${source.data} `;
         }
 
-        source.data = source.serialize();
-        source.data = source.data.replace('<span id="katex-tmp"></span>', ''); // TODO: replace with a  removeChild...
-        source.data = `${source.data} `;
         source.render(source.data);
+        source.dataChange.emit(source.data);
 
-
-        const afterNode = nativeElement.childNodes[nativeElement.childNodes.length - 1]
-        this.selection.setAfter(afterNode, 0);
-
+        if (data !== undefined) {
+          const afterNode = nativeElement.childNodes[nativeElement.childNodes.length - 1]
+          this.selection.setAfter(afterNode, 0);
+        }
       });
   }
 
@@ -78,6 +84,7 @@ export class InlineEquationHandler {
       $event.preventDefault();
 
       this.platform.browser(() => {
+        source.updateEnabled = false;
         this.document.execCommand('insertHTML', false, '<span id="katex-tmp"></span>');
         const katexTmpElement = this.document.querySelector('#katex-tmp');
         this.openEquationDialog('', source, katexTmpElement);

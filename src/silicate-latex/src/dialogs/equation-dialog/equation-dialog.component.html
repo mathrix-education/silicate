@@ -87,6 +87,7 @@
 
 <div mat-dialog-actions>
   <button
+    *ngIf="!displayDeleteButton"
     mat-button
     [mat-dialog-close]="undefined">
     Supprimer
