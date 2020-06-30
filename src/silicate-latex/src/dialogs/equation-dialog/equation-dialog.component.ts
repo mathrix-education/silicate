@@ -26,7 +26,7 @@ export class EquationDialogComponent {
     private readonly renderer2: Renderer2,
     public readonly dialogRef: MatDialogRef<EquationDialogComponent>,
     @Inject(DOCUMENT) private readonly document: Document,
-    @Inject(MAT_DIALOG_DATA) public data: { equation: string, description: string, enableDescription: boolean }
+    @Inject(MAT_DIALOG_DATA) public data: { equation: string, description: string, enableDescription: boolean },
   ) {
   }
 
