@@ -28,7 +28,6 @@ export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
     }
   }
 
-
   onEnter($event: KeyboardEvent, emittedFromIndex: number) {
     $event.preventDefault();
     this.addItem(emittedFromIndex);

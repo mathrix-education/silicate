@@ -21,6 +21,8 @@ export class EquationDialogComponent {
   private readonly originalData = JSON.parse(JSON.stringify(this.data));
   /** If the equation has errors. */
   hasError = true;
+  /** If the delete button shall be displayed: if the equation is a new one, or if the equation is called from a latex brick. */
+  displayDeleteButton = (this.data.equation === '') || this.data.enableDescription === true;
 
   constructor(
     private readonly renderer2: Renderer2,
@@ -43,6 +45,8 @@ export class EquationDialogComponent {
       event.stopPropagation();
       this.dialogRef.close(this.data);
     } else if (event.key === 'Escape') {
+      event.stopPropagation();
+      event.preventDefault();
       this.closeWithoutSaving();
     }
     this.keyPressed = event.key;
@@ -75,6 +79,6 @@ export class EquationDialogComponent {
    * Close without saving.
    */
   closeWithoutSaving(): void {
-    this.dialogRef.close(this.originalData);
+    this.dialogRef.close(this.data.equation !== '' ? this.originalData : undefined);
   }
 }
