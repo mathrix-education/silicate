@@ -35,10 +35,10 @@ export class InlineEquationHandler {
    * @param source  The source directive.
    * @param equationElement The equation element.
    */
-  private openEquationDialog(actualEquation, source: SilicateDirective, equationElement) {
+  private openEquationDialog(actualEquation, source: SilicateDirective, equationElement): void {
     const nativeElement = source.elementRef.nativeElement;
 
-    return this.dialog.open(EquationDialogComponent,
+    this.dialog.open(EquationDialogComponent,
       {
         width: '800px',
         data: {
@@ -48,7 +48,7 @@ export class InlineEquationHandler {
       .subscribe((data) => {
         if (data !== undefined && data.equation !== '') {
           const newEquation = data.equation;
-          const renderedEquation = katex.renderToString(newEquation, {output: 'html'}).replace('class="katex"', 'class="katex" contenteditable="false"');
+          const renderedEquation = katex.renderToString(newEquation).replace('class="katex"', 'class="katex" contenteditable="false"');
           this.renderer2.setProperty(
             equationElement,
             'outerHTML',
@@ -73,14 +73,13 @@ export class InlineEquationHandler {
    * @param $event The keyboard event.
    * @param source The source SilicateDirective.
    */
-  keydown($event: KeyboardEvent, source: SilicateDirective) {
+  keydown($event: KeyboardEvent, source: SilicateDirective): void {
     if ($event.key === '$') {
       $event.preventDefault();
 
       this.platform.browser(() => {
         this.document.execCommand('insertHTML', false, '<span id="katex-tmp"></span>');
         const katexTmpElement = this.document.querySelector('#katex-tmp');
-
         this.openEquationDialog('', source, katexTmpElement);
       });
     }
@@ -91,7 +90,7 @@ export class InlineEquationHandler {
    * @param $event The mouse event.
    * @param source The source SilicateDirective.
    */
-  click($event: any & MouseEvent, source: SilicateDirective) {
+  click($event: any & MouseEvent, source: SilicateDirective): void {
     const equationElement = $event.target.closest('span.katex');
 
     if (equationElement !== null && this.platform.isBrowser) {

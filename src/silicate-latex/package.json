@@ -1,6 +1,6 @@
 {
   "name": "@mathrix-education/silicate-latex",
-"version": "1.13.3",
+"version": "1.13.4",
   "description": "Provide the LaTeX features, based on KaTeX library.",
   "keywords": [
     "silicate",

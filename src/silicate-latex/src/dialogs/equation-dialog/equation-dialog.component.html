@@ -86,12 +86,21 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="undefined">Supprimer</button>
-  <button mat-button (click)="closeWithoutSaving()">Annuler</button>
-  <button mat-button
-          color="primary"
-          matTooltip=""
-          [disabled]="hasError"
-          [mat-dialog-close]="data">Sauvegarder
+  <button
+    mat-button
+    [mat-dialog-close]="undefined">
+    Supprimer
+  </button>
+
+  <button
+    mat-button
+    (click)="closeWithoutSaving()">Annuler
+  </button>
+
+  <button
+    mat-button
+    color="primary"
+    [disabled]="hasError || data.equation === ''"
+    [mat-dialog-close]="data">Sauvegarder
   </button>
 </div>
