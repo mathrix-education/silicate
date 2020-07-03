@@ -4,6 +4,7 @@ on:
     branches:
       - master         # Push events on master branch
       - dev
+      - angular-10
     tags:
       - v*.*
 jobs:

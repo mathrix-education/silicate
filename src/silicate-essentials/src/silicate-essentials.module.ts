@@ -58,16 +58,6 @@ import {ColumnsBrickComponent} from './bricks/columns-brick/columns-brick.compon
     LinkDialogComponent,
     TableBrickComponent,
   ],
-  entryComponents: [
-    ColumnsBrickComponent,
-    ImageBrickComponent,
-    ListBrickComponent,
-    TextBrickComponent,
-    TitleBrickComponent,
-    ImageDialogComponent,
-    LinkDialogComponent,
-    TableBrickComponent
-  ]
 })
 export class SilicateEssentialsModule {
   static providers(): Provider[] {

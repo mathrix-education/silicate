@@ -53,7 +53,7 @@ export class SilicateCoreModule {
     ];
   }
 
-  static withProviders(providers: Provider[]): ModuleWithProviders {
+  static withProviders(providers: Provider[]): ModuleWithProviders<SilicateCoreModule> {
     return {
       ngModule: SilicateCoreModule,
       providers: [

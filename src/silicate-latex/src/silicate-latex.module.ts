@@ -24,10 +24,6 @@ import {KatexComponent} from './katex/katex.component';
     EquationDialogComponent,
     KatexComponent,
   ],
-  entryComponents: [
-    EquationBrickComponent,
-    EquationDialogComponent
-  ],
   imports: [
     CommonModule,
     FormsModule,
