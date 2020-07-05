@@ -1,16 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
-import {BaseBrick} from '../../bricks/base-brick/base-brick';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Wall} from '../../interfaces/wall';
 
 
@@ -23,8 +11,4 @@ import {Wall} from '../../interfaces/wall';
 export class SilicateWrapperComponent {
   /** Two-way binding data. */
   @Input() data: Wall = [];
-  @Output() dataChange = new EventEmitter<BaseBrick[]>();
-
-  /** If the wrapper is the root one. Should be false for bricks which hold a wrapper. */
-  @HostBinding('attr.data-silicate-root') @Input() root = true;
 }

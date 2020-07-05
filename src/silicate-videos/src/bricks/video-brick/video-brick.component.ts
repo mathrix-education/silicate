@@ -1,6 +1,5 @@
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {Component, ViewChild} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
+import {BaseBrickComponent} from '@mathrix-education/silicate-core';
 import {VideoPlayer} from '../../players/video-player';
 import {VimeoPlayerComponent} from '../../players/vimeo-player/vimeo-player.component';
 import {YoutubePlayerComponent} from '../../players/youtube-player/youtube-player.component';
@@ -18,12 +17,6 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
 
   loading = true;
 
-
-  constructor(public silicate: SilicateService) {
-    super();
-  }
-
-
   get player(): VideoPlayer {
     switch (this.data.type) {
       case 'vimeo':
@@ -35,26 +28,7 @@ export class VideoBrickComponent extends BaseBrickComponent<VideoBrick> {
     }
   }
 
-
-  addAnchor() {
-    this.data.summary.push({timestamp: 0, title: 'Nouvelle ancre'});
-  }
-
-
-  onDrag($event: CdkDragDrop<any>) {
-    moveItemInArray(this.data.summary, $event.previousIndex, $event.currentIndex);
-  }
-
-
   setTime(seconds: number): void {
-    if (this.silicate.editable) {
-      return;
-    }
-
     this.player.setTime(seconds);
-  }
-
-  focus(): void {
-    return;
   }
 }

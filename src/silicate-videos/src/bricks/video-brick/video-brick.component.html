@@ -21,57 +21,22 @@
   </div>
 
   <div class="video-options">
-    <mat-card *ngIf="silicate.editable">
-      <mat-card-header>
-        <mat-card-header>Options de la vidéo</mat-card-header>
-      </mat-card-header>
-
-      <mat-card-content class="column">
-        <mat-form-field>
-          <mat-label>Source</mat-label>
-          <mat-select [(value)]="data.type">
-            <mat-option value="youtube">YouTube</mat-option>
-            <mat-option value="vimeo">Vimeo</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-label>Identifiant</mat-label>
-          <label>
-            <input [(ngModel)]="data.videoId" matInput>
-          </label>
-        </mat-form-field>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card *ngIf="silicate.editable || data.summary.length > 0">
+    <mat-card *ngIf="data.summary.length > 0">
       <mat-card-header>
         <mat-card-title>Sommaire</mat-card-title>
       </mat-card-header>
 
-      <mat-card-content (cdkDropListDropped)="onDrag($event)"
-                        [cdkDropListDisabled]="!silicate.editable"
-                        cdkDropList
-                        class="column">
+      <mat-card-content class="column">
         <div (click)="setTime(data.summary[i].timestamp)"
              *ngFor="let s of data.summary; let i = index"
              cdkDrag
              class="video-anchor-container">
-          <mat-icon *ngIf="silicate.editable" cdkDragHandle>drag_indicator</mat-icon>
           <mat-icon>play_circle_filled</mat-icon>
           <silicate-video-brick-anchor [(timestamp)]="data.summary[i].timestamp"></silicate-video-brick-anchor>
-          <span silicate [(data)]="data.summary[i].title"></span>
-          <mat-icon (click)="data.summary.splice(i, 1)" *ngIf="silicate.editable">delete</mat-icon>
+          <!--          <span silicate [data]="data.summary[i].title"></span>-->
+          <!--TODO-->
         </div>
       </mat-card-content>
-
-      <mat-card-actions *ngIf="silicate.editable">
-        <button (click)="addAnchor()"
-                color="primary"
-                mat-flat-button>
-          Ajouter une ancre
-        </button>
-      </mat-card-actions>
     </mat-card>
   </div>
 </div>

@@ -7,13 +7,13 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output, PLATFORM_ID,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {VideoPlayer} from '../video-player';
-import {PlatformService, SilicateService} from '@mathrix-education/silicate-core';
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT, isPlatformServer} from '@angular/common';
+import {PlatformService} from "@mathrix-education/silicate-core";
 
 
 /** @dynamic */
@@ -31,7 +31,6 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
   @Output() ready = new EventEmitter();
 
   constructor(
-    private silicate: SilicateService,
     public platform: PlatformService,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -60,7 +59,7 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
    * Load the YouTube API only once.
    */
   private loadYoutubeAPI() {
-    if (!this.platform.isBrowser) {
+    if (this.platform.isServer) {
       return;
     }
 
@@ -76,7 +75,7 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
    * Create a YouTube player. Interval is required to avoid the window object use.
    */
   private createYoutubePlayer() {
-    if (!this.platform.isBrowser) {
+    if (this.platform.isServer) {
       return;
     }
 
@@ -106,7 +105,6 @@ export class YoutubePlayerComponent implements OnInit, AfterViewInit, OnChanges,
   play(): void {
     this.youtubePlayer.playVideo();
   }
-
 
   setTime(seconds: number): void {
     this.youtubePlayer.seekTo(seconds, true);

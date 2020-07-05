@@ -1,9 +1,7 @@
-import {NgModule, Provider} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SilicateCoreModule} from '@mathrix-education/silicate-core';
 import {SilicateEducationBricks} from './silicate-education.bricks';
-import {BlockBrickProvider, ContainerBrickProvider, PDFViewerBrickProvider} from './providers/bricks.providers';
-import {BlockBrickVariantsProvider, ContainerBrickVariantsProvider} from './providers/variants.providers';
 import {SafePipeModule} from 'safe-pipe';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -32,15 +30,4 @@ import {MatExpansionModule} from '@angular/material/expansion';
   declarations: [...SilicateEducationBricks],
 })
 export class SilicateEducationModule {
-  static providers(): Provider[] {
-    return [
-      // Bricks
-      BlockBrickProvider,
-      ContainerBrickProvider,
-      PDFViewerBrickProvider,
-      // Variants
-      BlockBrickVariantsProvider,
-      ContainerBrickVariantsProvider
-    ];
-  }
 }

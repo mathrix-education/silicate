@@ -12,6 +12,10 @@ export * from './interfaces/wall';
 // Components
 export * from './components/silicate-wrapper/silicate-wrapper.component';
 
+// Services
+export * from './services/platform.service'
+
 // Modules
 export * from './silicate-core.module';
+
 export * from './silicate-core.tokens';

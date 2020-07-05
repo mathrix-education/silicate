@@ -36,12 +36,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
     // Silicate
-    SilicateCoreModule.withProviders([
-      ...SilicateEducationModule.providers(),
-      ...SilicateEssentialsModule.providers(),
-      ...SilicateLatexModule.providers(),
-      ...SilicateVideosModule.providers()
-    ]),
+    SilicateCoreModule,
     SilicateEducationModule,
     SilicateEssentialsModule,
     SilicateLatexModule,

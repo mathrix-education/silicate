@@ -1,7 +1,6 @@
-import {Component, QueryList, ViewChildren} from '@angular/core';
-import {BaseBrickComponent, SilicateDirective, SilicateService} from '@mathrix-education/silicate-core';
+import {Component} from '@angular/core';
+import {BaseBrickComponent} from '@mathrix-education/silicate-core';
 import {ListBrick} from './list-brick';
-import {first} from 'rxjs/operators';
 
 
 @Component({
@@ -10,46 +9,4 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./list-brick.component.scss']
 })
 export class ListBrickComponent extends BaseBrickComponent<ListBrick> {
-  @ViewChildren(SilicateDirective) silicateListItems: QueryList<SilicateDirective>;
-
-  constructor(public silicate: SilicateService) {
-    super();
-  }
-
-
-  trackByFn(index: any, item: any) {
-    return index;
-  }
-
-  removeItem(index: number) {
-    if (this.data.items.length > 1) {
-      this.data.items.splice(index, 1);
-      this.dataChange.emit(this.data);
-    }
-  }
-
-  onEnter($event: KeyboardEvent, emittedFromIndex: number) {
-    $event.preventDefault();
-    this.addItem(emittedFromIndex);
-
-  }
-
-  addItem(emittedFromIndex: number) {
-    const clone = JSON.parse(JSON.stringify(this.data.items));
-    clone.splice(emittedFromIndex + 1, 0, '');
-    this.data.items = clone;
-
-    this.silicateListItems.changes.pipe(first()).subscribe(() => {
-      this.silicateListItems.toArray()[emittedFromIndex + 1].focus();
-    });
-  }
-
-  changeDataType(type: 'ol' | 'ul') {
-    this.data.type = type;
-    this.dataChange.emit(this.data);
-  }
-
-  focus(): void {
-    this.silicateListItems.first.focus();
-  }
 }

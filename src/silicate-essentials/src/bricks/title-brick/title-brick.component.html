@@ -1,50 +1,31 @@
 <ng-container [ngSwitch]="data.heading">
   <h1 *ngSwitchCase="'h1'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h1>
+
   <h2 *ngSwitchCase="'h2'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h2>
+
   <h3 *ngSwitchCase="'h3'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h3>
+
   <h4 *ngSwitchCase="'h4'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h4>
+
   <h5 *ngSwitchCase="'h5'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h5>
+
   <h6 *ngSwitchCase="'h6'"
       silicate
-      (keydown.enter)="onEnter($event)"
-      [(data)]="data.text">
+      [data]="data.text">
   </h6>
-</ng-container>
-
-<ng-container *ngIf="silicate.editable">
-  <button
-    mat-button
-    mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>swap_horiz</mat-icon>
-  </button>
-
-  <mat-menu #menu="matMenu">
-    <button
-      *ngFor="let heading of allowedHeadings; let i = index"
-      mat-menu-item
-      [disabled]="data.heading === heading"
-      (click)="changeHeading(heading)">
-      Titre {{ i + 1 }}
-    </button>
-  </mat-menu>
 </ng-container>

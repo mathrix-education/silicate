@@ -1,18 +1,7 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  HostListener,
-  Renderer2,
-  ViewChild
-} from '@angular/core';
-import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
-import {first} from 'rxjs/operators';
-import {EquationDialogComponent} from '../../dialogs/equation-dialog/equation-dialog.component';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild} from '@angular/core';
+import {BaseBrickComponent} from '@mathrix-education/silicate-core';
 import {EquationBrick} from './equation-brick';
-import * as katex from 'katex';
-import {MatDialog} from '@angular/material/dialog';
+import {renderToString} from 'katex';
 
 
 @Component({
@@ -29,8 +18,6 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
   constructor(
     private renderer2: Renderer2,
     private cd: ChangeDetectorRef,
-    private dialog: MatDialog,
-    private silicate: SilicateService
   ) {
     super();
   }
@@ -47,46 +34,12 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       this.renderer2.setProperty(
         this.equationElementRef.nativeElement,
         'innerHTML',
-        katex.renderToString(this.data.equation, {displayMode: true})
+        renderToString(this.data.equation, {displayMode: true, output: 'html'})
       );
     } catch (e) {
       this.renderSucceed = false;
       throw new Error(`Incorrect latex with uuid ${this.data.uuid}`);
     }
     this.cd.detectChanges();
-  }
-
-  @HostListener('click')
-  openEquationDialog() {
-    if (!this.silicate.editable) {
-      return;
-    }
-
-    this.dialog
-      .open(EquationDialogComponent, {
-        width: '800px',
-        data: {
-          equation: this.data.equation,
-          description: this.data.description,
-          enableDescription: true
-        }
-      })
-      .afterClosed()
-      .pipe(first())
-      .subscribe((data) => {
-        if (data?.equation !== '') {
-          this.data.equation = data.equation;
-          this.data.description = data.description;
-          this.render();
-          this.ngDoCheck();
-        }
-      });
-  }
-
-  /**
-   * Focus brick implementation. In this context, we don't do anything.
-   */
-  focus(): void {
-    return;
   }
 }

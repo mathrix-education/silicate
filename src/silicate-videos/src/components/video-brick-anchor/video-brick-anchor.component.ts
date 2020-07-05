@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SilicateService} from '@mathrix-education/silicate-core';
 
 
 @Component({
@@ -16,10 +15,6 @@ export class VideoBrickAnchorComponent implements OnInit {
     minutesStr: null,
     secondsStr: null
   };
-
-
-  constructor(public silicate: SilicateService) {
-  }
 
 
   get minutesStr() {
