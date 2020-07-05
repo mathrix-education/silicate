@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostBinding, Inject, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostBinding, Inject, OnInit, ViewChild} from '@angular/core';
 import {BaseBrickComponent, SilicateService} from '@mathrix-education/silicate-core';
 import {ContainerBrick} from './container-brick';
 import {lcfirst, ucfirst} from '../../helpers/string.helper';
@@ -13,10 +13,6 @@ import {ContainerBrickVariant} from './container-brick.variant';
 })
 export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> implements OnInit, AfterViewInit {
   @ViewChild('wrapper') wrapperElementRef: ElementRef<HTMLDivElement>;
-  @ViewChild('titleContainer') titleContainerElementRef: ElementRef<HTMLHeadingElement>;
-  @ViewChild('prefix') prefixElementRef: ElementRef<HTMLElement>;
-  @ViewChild('title') titleElementRef: ElementRef<HTMLSpanElement>;
-  @ViewChild('suffix') suffixElementRef: ElementRef<HTMLElement>;
 
   @HostBinding('class') get style() { return this.data.variant; }
   title: string;
@@ -38,10 +34,7 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
     this.applyVariant();
   }
 
-  onPrefixChange($event: string) {
-    this.data.prefix = $event;
-    this.computeTitle();
-  }
+
 
   computeTitle() {
     if (this.data.prefix === '') {
@@ -60,9 +53,5 @@ export class ContainerBrickComponent extends BaseBrickComponent<ContainerBrick> 
   applyVariant() {
     this.data.variant = this.variant.variant;
     this.computeTitle();
-  }
-
-  focus(): void {
-    return;
   }
 }
