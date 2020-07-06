@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Wall} from '../../interfaces/wall';
 
 
@@ -8,7 +8,7 @@ import {Wall} from '../../interfaces/wall';
   styleUrls: ['./silicate-wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SilicateWrapperComponent {
+export class SilicateWrapperComponent  {
   /** Two-way binding data. */
   @Input() data: Wall = [];
 }

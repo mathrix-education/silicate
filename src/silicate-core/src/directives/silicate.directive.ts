@@ -1,4 +1,14 @@
-import {Directive, ElementRef, Inject, Input, OnInit, Optional, Renderer2} from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Optional,
+  Renderer2,
+  SimpleChanges
+} from '@angular/core';
 import {Renderer} from '../interfaces/renderer';
 import {Renderers} from '../silicate-core.tokens';
 
@@ -7,7 +17,7 @@ import {Renderers} from '../silicate-core.tokens';
   // tslint:disable-next-line:directive-selector
   selector: '[silicate]'
 })
-export class SilicateDirective implements OnInit {
+export class SilicateDirective implements OnChanges {
   @Input() data: string;
 
   constructor(
@@ -17,7 +27,10 @@ export class SilicateDirective implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
+  /**
+   * On change, synchronise the data by re-rendering.
+   */
+  ngOnChanges(changes: SimpleChanges): void {
     this.render(this.data);
   }
 
