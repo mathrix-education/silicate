@@ -4,7 +4,7 @@ export * from './bricks/base-brick/base-brick.component';
 
 // Interfaces
 export * from './interfaces/brick';
-export * from './interfaces/serializer';
+export * from './interfaces/renderer';
 export * from './interfaces/toolbar';
 export * from './interfaces/typed-value-provider';
 export * from './interfaces/wall';

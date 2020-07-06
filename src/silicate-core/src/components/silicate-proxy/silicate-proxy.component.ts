@@ -13,8 +13,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {BaseBrickComponent} from '../../bricks/base-brick/base-brick.component';
-import {Bricks} from "../../silicate-core.tokens";
-import {Brick} from "../../interfaces/brick";
+import {Bricks} from '../../silicate-core.tokens';
+import {Brick} from '../../interfaces/brick';
 
 
 @Component({
@@ -61,6 +61,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
     const component = this.resolve(this.data.kind).component;
     const factory: ComponentFactory<T> = this.componentFactory.resolveComponentFactory<T>(component as Type<T>);
     this.brickRef = this.wrapper.createComponent(factory, undefined, this.injector);
+    this.brickRef.instance.data = this.data;
   }
 
   ngOnDestroy(): void {

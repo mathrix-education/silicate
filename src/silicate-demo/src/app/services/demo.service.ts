@@ -9,7 +9,7 @@ export class DemoService {
   data: Wall = [
     {
       kind: 'text',
-      text: '',
+      text: 'TEST RENDER TEXT $a+b$',
       uuid: 'ee6afa01-af9d-42d4-bbdc-98e44c3d52ec'
     }
   ];

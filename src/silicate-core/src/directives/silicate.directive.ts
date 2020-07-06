@@ -1,4 +1,6 @@
-import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Directive, ElementRef, Inject, Input, OnInit, Optional, Renderer2} from '@angular/core';
+import {Renderer} from '../interfaces/renderer';
+import {Renderers} from '../silicate-core.tokens';
 
 /** @dynamic */
 @Directive({
@@ -6,23 +8,26 @@ import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
   selector: '[silicate]'
 })
 export class SilicateDirective implements OnInit {
-
   @Input() data: string;
 
   constructor(
     public elementRef: ElementRef<HTMLElement>,
     private renderer2: Renderer2,
+    @Optional() @Inject(Renderers) public renderers: Renderer[]
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.render(this.data);
   }
 
 
+  /**
+   * Render the input through the different renderers.
+   * @param input The input.
+   */
   private renderThrough(input: string): string {
-    return;
-    // return this.silicate.serializers.reduce((buffer: string, serializer: Serializer) => serializer.render(buffer), input);
+    return this.renderers.reduce((buffer: string, renderer: Renderer) => renderer.render(buffer), input);
   }
 
   /**
@@ -30,7 +35,6 @@ export class SilicateDirective implements OnInit {
    * @param buffer The serialized HTML string.
    */
   render(buffer: string): void {
-    // this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', this.renderThrough(buffer));
-    // TODO
+    this.renderer2.setProperty(this.elementRef.nativeElement, 'innerHTML', this.renderThrough(buffer));
   }
 }
