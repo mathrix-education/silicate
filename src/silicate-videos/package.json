@@ -32,10 +32,10 @@
     "@types/vimeo__player": "^2.6.2"
   },
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/material":"^9.0.0",
-    "@angular/cdk": "^9.0.0"
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0",
+    "@angular/material":"^10.0.0",
+    "@angular/cdk": "^10.0.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
