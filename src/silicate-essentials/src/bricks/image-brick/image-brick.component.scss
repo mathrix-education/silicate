@@ -1,17 +1,27 @@
+
+:host {
+  max-width: 100%;
+}
+
 img {
   max-width: 100%;
   margin: auto;
   display: block;
+  background-color: white;
 }
 
 figcaption {
   margin-top: 8px;
   text-align: center;
+  background-color: white;
+  max-width: 90vw;
+  overflow-wrap: break-word;
 }
 
 figure {
   margin-left: 0;
   margin-right: 0;
+  max-width: 100%;
 }
 
 div {
