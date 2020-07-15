@@ -24,7 +24,7 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   /**
    * Open the edit dialog or fullscreen according to the edit mode.
    */
-  openDialogOrFullscreen() {
+  openDialogOrFullscreen():void {
     if (!this.silicate.editable) {
       this.fullscreen = !this.fullscreen;
       return;
