@@ -1,6 +1,6 @@
 {
   "name": "@mathrix-education/silicate-videos",
-"version": "1.13.5",
+"version": "1.13.8",
   "description": "Provide the Video Brick which supports YouTube and Vimeo players.",
   "keywords": [
     "silicate",

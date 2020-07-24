@@ -1,14 +1,15 @@
 <mat-card fxFlex="grow">
-    <mat-card-header>
-        <mat-card-title>Éditeur</mat-card-title>
-        <mat-card-subtitle>Voici Silicate !</mat-card-subtitle>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>Éditeur</mat-card-title>
+    <mat-card-subtitle>Voici Silicate !</mat-card-subtitle>
+  </mat-card-header>
 
-    <mat-card-content>
-        <silicate-wrapper [editable]="demo.editable"
-                          [(data)]="demo.data"
-                          (dataChange)="wallChange($event)"
-                          fxFlex="grow">
-        </silicate-wrapper>
-    </mat-card-content>
+  <mat-card-content>
+    <silicate-wrapper
+      [editable]="demo.editable"
+      [(data)]="demo.data"
+      (dataChange)="wallChange($event)"
+      fxFlex="grow">
+    </silicate-wrapper>
+  </mat-card-content>
 </mat-card>

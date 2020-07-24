@@ -18,6 +18,20 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {Route, RouterModule, Routes} from '@angular/router';
+import {DebugViewComponent} from './components/debug-view/debug-view.component';
+
+
+const routes: Routes = [
+  {
+    path: '',
+    component: DebugViewComponent,
+  },
+  {
+    path: 'view',
+    component: ViewComponent,
+  }
+];
 
 
 @NgModule({
@@ -46,11 +60,13 @@ import {MatButtonModule} from '@angular/material/button';
     SilicateEssentialsModule,
     SilicateLatexModule,
     SilicateVideosModule,
-    SilicateCoreModule
+    SilicateCoreModule,
+    RouterModule.forRoot(routes),
   ],
   declarations: [
     AppComponent,
     DebugComponent,
+    DebugViewComponent,
     ViewComponent
   ],
   bootstrap: [AppComponent]

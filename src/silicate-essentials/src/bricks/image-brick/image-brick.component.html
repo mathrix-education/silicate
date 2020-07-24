@@ -4,12 +4,15 @@
   </ng-container>
 
   <figure>
-    <img (click)="openDialogOrFullscreen()"
-         *ngIf="data.src"
-         [alt]="data.alt"
-         [src]="data.src">
+    <img
+      *ngIf="data.src"
+      [alt]="data.alt"
+      [src]="data.src"
+      (click)="openDialogOrFullscreen()">
 
-    <figcaption *ngIf="data.displayAlt" silicate [(data)]="data.alt"></figcaption>
+    <figcaption *ngIf="data.displayAlt">
+      <p silicate [(data)]="data.alt"></p>
+    </figcaption>
   </figure>
 </div>
 
@@ -25,9 +28,8 @@
       [alt]="data.alt"
       [src]="data.src">
 
-    <figcaption
-      *ngIf="data.displayAlt">
-      {{data.alt}}
+    <figcaption *ngIf="data.displayAlt">
+      <p silicate [data]="data.alt"></p>
     </figcaption>
   </figure>
 </div>
