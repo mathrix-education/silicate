@@ -42,7 +42,8 @@ export class InlineEquationHandler {
         width: '800px',
         data: {
           equation: actualEquation
-        }
+        },
+        disableClose: true,
       }).afterClosed()
       .subscribe((data) => {
         source.updateEnabled = true;

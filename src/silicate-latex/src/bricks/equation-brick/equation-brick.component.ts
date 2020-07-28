@@ -62,14 +62,15 @@ export class EquationBrickComponent extends BaseBrickComponent<EquationBrick> im
       return;
     }
 
-    this.dialog
-      .open(EquationDialogComponent, {
+    this.dialog.open(EquationDialogComponent,
+      {
         width: '800px',
         data: {
           equation: this.data.equation,
           description: this.data.description,
           enableDescription: true
-        }
+        },
+        disableClose: true,
       })
       .afterClosed()
       .pipe(first())
