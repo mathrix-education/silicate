@@ -30,6 +30,8 @@ export class EquationDialogComponent {
     @Inject(DOCUMENT) private readonly document: Document,
     @Inject(MAT_DIALOG_DATA) public data: { equation: string, description: string, enableDescription: boolean },
   ) {
+    // Close without saving when clicking in the backdrop (backdrop is disabled by default)
+    this.dialogRef.backdropClick().subscribe(() => this.closeWithoutSaving());
   }
 
   /**
