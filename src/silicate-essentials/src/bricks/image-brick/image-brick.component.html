@@ -8,6 +8,7 @@
       *ngIf="data.src"
       [alt]="data.alt"
       [src]="data.src"
+      [style.width.px]="maxWidth"
       (click)="openDialogOrFullscreen()">
 
     <figcaption *ngIf="data.displayAlt">

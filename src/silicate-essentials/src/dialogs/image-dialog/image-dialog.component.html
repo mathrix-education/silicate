@@ -3,23 +3,37 @@
   <div class="form-content">
     <mat-form-field>
       <mat-label>URL de l'image</mat-label>
-      <label>
-        <input [(ngModel)]="data.src"
-               matInput
-               placeholder="https://placehold.it/400x150"
-               type="url">
-      </label>
+      <input [(ngModel)]="data.src"
+             matInput
+             placeholder="https://placehold.it/400x150"
+             type="url">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Légende</mat-label>
-      <label>
-        <input [(ngModel)]="data.alt"
-               matInput
-               spellcheck="true"
-               placeholder="Description"
-               type="text">
-      </label>
+      <input
+        matInput
+        [(ngModel)]="data.alt"
+        spellcheck="true"
+        placeholder="Description"
+        type="text">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Taille maximale (optionnel)</mat-label>
+
+      <div class="width-field">
+        <mat-select [(ngModel)]="data.maxWidth">
+          <mat-option
+            *ngFor="let option of resizeOptions"
+            [value]="option">
+            {{option}} px
+          </mat-option>
+        </mat-select>
+
+        <mat-icon *ngIf="data.maxWidth!==undefined" (click)="deleteMaxWidth()">delete</mat-icon>
+      </div>
     </mat-form-field>
 
     <mat-checkbox [(ngModel)]="data.displayAlt">
