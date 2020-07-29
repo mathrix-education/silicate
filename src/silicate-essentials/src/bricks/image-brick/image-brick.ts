@@ -6,4 +6,5 @@ export interface ImageBrick extends BaseBrick {
   src: string;
   alt: string;
   displayAlt: boolean;
+  maxWidth?: number;
 }

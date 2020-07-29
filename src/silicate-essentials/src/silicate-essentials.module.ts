@@ -46,7 +46,7 @@ import {ColumnsBrickComponent} from './bricks/columns-brick/columns-brick.compon
     MatMenuModule,
     MatSelectModule,
     // Silicate
-    SilicateCoreModule
+    SilicateCoreModule,
   ],
   declarations: [
     ColumnsBrickComponent,

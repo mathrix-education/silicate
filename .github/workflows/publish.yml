@@ -2,10 +2,10 @@ name: Publish
 on:
   push:
     branches:
-      - master         # Push events on master branch
-      - dev
-    tags:
-      - v*.*
+      - main         # Push events on main branch
+    # - dev
+#    tags:
+#      - v*.*
 jobs:
   build:
     strategy:
@@ -42,7 +42,7 @@ jobs:
           SHORT_SHA=${SHA:0:7}
           BUILD="${BRANCH}-${SHORT_SHA}"
 
-          if [[ "${BRANCH}" != "master" ]]; then
+          if [[ "${BRANCH}" != "main" ]]; then
             jq ".version = .version + \"-${BUILD}\"" package.json > package.json.tmp
             mv package.json.tmp package.json
           fi

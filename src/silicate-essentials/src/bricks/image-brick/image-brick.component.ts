@@ -24,14 +24,14 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
   /**
    * Open the edit dialog or fullscreen according to the edit mode.
    */
-  openDialogOrFullscreen():void {
+  openDialogOrFullscreen(): void {
     if (!this.silicate.editable) {
       this.fullscreen = !this.fullscreen;
       return;
     }
 
-    this.matDialog
-      .open(ImageDialogComponent, {
+    this.matDialog.open(ImageDialogComponent,
+      {
         width: '500px',
         data: {...this.data}
       })
@@ -43,6 +43,13 @@ export class ImageBrickComponent extends BaseBrickComponent<ImageBrick> {
           super.ngDoCheck();
         }
       }));
+  }
+
+  /**
+   * Return the max with style.
+   */
+  get maxWidth(): number {
+    return this.data.maxWidth ?? null;
   }
 
   focus(): void {
