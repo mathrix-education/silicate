@@ -1,6 +1,6 @@
 {
   "name": "@mathrix-education/silicate-core",
-  "version": "1.14.1",
+  "version": "1.14.2",
   "description": "Base package of Silicate Editor.",
   "keywords": [
     "silicate",
@@ -19,6 +19,16 @@
     "email": "mathieu@mathrix.fr",
     "url": "https://www.linkedin.com/in/mathieu-bour"
   },
+  "contributors": [
+    {
+      "name": "Dimitri Bret",
+      "email": "dimitri@mathrix.fr"
+    },
+    {
+      "name": "Julien Schneider",
+      "email": "julien@mathrix.fr"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com/mathrix-education/silicate"

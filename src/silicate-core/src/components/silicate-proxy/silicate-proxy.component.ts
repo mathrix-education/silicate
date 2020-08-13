@@ -156,6 +156,7 @@ export class SilicateProxyComponent<T extends BaseBrickComponent = BaseBrickComp
         brick = JSON.parse(clipText);
         brick = recursiveReplace(brick);
       } catch (e) {
+        console.warn(e);
         return;
       }
 
