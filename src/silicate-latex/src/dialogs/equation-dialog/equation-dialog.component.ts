@@ -12,7 +12,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class EquationDialogComponent {
   @ViewChild('equation') equation;
-  equationFormFieldFocused = false;
   readonly symbols = LATEX_SYMBOLS;
   readonly snippets = LATEX_SNIPPETS;
   /** The last key pressed. */
@@ -65,12 +64,10 @@ export class EquationDialogComponent {
   }
 
   applySnippet($event: MouseEvent, latexSnippet: string): void {
-    if (this.equationFormFieldFocused) {
-      $event.preventDefault();
-      this.document.execCommand('insertText', false, latexSnippet);
-      this.hasError = false;
-    }
-    // TODO: Insert the snippet at the end
+    $event.preventDefault();
+    this.focusEquation();
+    this.document.execCommand('insertText', false, latexSnippet);
+    this.hasError = false;
   }
 
   focusEquation(): void {
