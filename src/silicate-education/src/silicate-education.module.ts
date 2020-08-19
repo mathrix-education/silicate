@@ -30,7 +30,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule
   ],
   declarations: [...SilicateEducationBricks],
-  entryComponents: [...SilicateEducationBricks]
 })
 export class SilicateEducationModule {
   static providers(): Provider[] {
