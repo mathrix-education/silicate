@@ -42,9 +42,6 @@ import {MatIconModule} from '@angular/material/icon';
     VimeoPlayerComponent,
     YoutubePlayerComponent
   ],
-  entryComponents: [
-    VideoBrickComponent
-  ]
 })
 export class SilicateVideosModule {
   static providers(): Provider[] {

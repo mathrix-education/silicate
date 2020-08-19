@@ -10,9 +10,7 @@
     }
   },
   "whitelistedNonPeerDependencies": [
-    "extract-math",
     "katex",
-    "ng-katex",
     "@types/katex"
   ]
 }

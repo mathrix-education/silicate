@@ -1,10 +1,14 @@
-import {AfterViewInit, DoCheck, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, EventEmitter, Input, Output} from '@angular/core';
 import {BaseBrick} from './base-brick';
 
 
 /**
  * The base class for brick component.
  */
+@Component({
+  template:'./app-base-brick-component.html',
+
+})
 export abstract class BaseBrickComponent<T extends BaseBrick = BaseBrick> implements AfterViewInit, DoCheck {
   /** [data] in binding */
   @Input() data: T;
